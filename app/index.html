@@ -137,6 +137,7 @@
     </div>
   </div>
   <div class="hbtns">
+    <button class="icon-btn" onclick="openReminders()" title="Recordatorios">🔔</button>
     <button class="icon-btn" onclick="openData()" title="Datos">⚙︎</button>
   </div>
 </header>
@@ -266,6 +267,14 @@ const defaultState = {
   posts: [],         // {id, title, type, date, status, views, saves, comments, caption}
   creators: [],      // {id, handle, niche, followers, lastComment, response}
   engLog: {},        // { 'YYYY-MM-DD': count }
+  seeded: false,     // si ya se cargaron datos iniciales
+  reminders: {       // horarios de la rutina diaria (HH:MM)
+    enabled: false,
+    publish: '09:00',
+    respond: '11:00',
+    engage:  '17:00',
+    logday:  '20:00',
+  },
 };
 
 let S = load();
@@ -706,7 +715,9 @@ function openData(){
   showModal(`
     <h2>Datos y respaldo</h2>
     <p class="muted" style="margin-bottom:14px">Todo se guarda solo en este dispositivo. Exporta un respaldo regularmente para no perder nada.</p>
-    <button class="btn" onclick="exportData()">⬇ Exportar respaldo (JSON)</button>
+    <button class="btn" onclick="loadSeed()">✦ Cargar datos iniciales (posts + creadores)</button>
+    <p class="mini" style="text-align:left;margin:6px 2px 16px">Carga tus 6 posts publicados, el baseline (22 seg · 9,597 vistas) y ~40 creadores sugeridos. No borra lo que ya tengas.</p>
+    <button class="btn ghost" onclick="exportData()">⬇ Exportar respaldo (JSON)</button>
     <button class="btn ghost" onclick="document.getElementById('importFile').click()">⬆ Importar respaldo</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
     <div class="fld" style="margin-top:18px"><label>Fecha de inicio del plan</label><input type="date" id="s_start" value="${S.start}" onchange="S.start=this.value;save();render()"></div>
@@ -728,7 +739,134 @@ function importData(e){
 }
 function resetData(){ if(!confirm('Esto borra TODO. ¿Seguro?'))return; if(!confirm('Última confirmación. ¿Borrar todo?'))return; localStorage.removeItem(KEY); S=load(); closeModal(); render(); toast('Datos borrados'); }
 
+/* ============================================================
+   DATOS INICIALES (de tu cuenta real y tu lista de creadores)
+   ============================================================ */
+const SEED = {
+  baseline: { date: todayStr(), followers:22, views:9597, engagement:null, saves:null, comments:0, responded:null, note:'Baseline — datos actuales de la cuenta' },
+  posts: [
+    {title:'LUCKY — portada/reel', type:'reel', status:'published', date:'2026-06-10', views:326, saves:0, comments:0, caption:'A Film by HERA'},
+    {title:'Caballo / polvo — reel', type:'reel', status:'published', date:'2026-06-06', views:202, saves:0, comments:0, caption:''},
+    {title:'Retrato en roca (torso)', type:'image', status:'published', date:'2026-05-30', views:5725, saves:0, comments:0, caption:'Top performer ⭐'},
+    {title:'Retrato húmedo — close up', type:'carousel', status:'published', date:'2026-05-28', views:0, saves:0, comments:0, caption:''},
+    {title:'Silueta caballo / atardecer', type:'reel', status:'published', date:'2026-05-27', views:0, saves:0, comments:0, caption:''},
+    {title:'Camisa blanca / corbata roja', type:'reel', status:'published', date:'2026-05-26', views:0, saves:0, comments:0, caption:''},
+  ],
+  // Lista inicial de tu documento. Verifica cada cuenta en Instagram antes de comentar.
+  creators: [
+    ['@mattsoria','Fotógrafo conceptual'],['@brandon_breault','Fotógrafo conceptual'],['@soren_blakemiller','Fotógrafo conceptual'],
+    ['@lucidhoto','Fotógrafo conceptual'],['@brandonli_photography','Fotógrafo conceptual'],['@matthewlloydsmith','Fotógrafo conceptual'],
+    ['@javierflores.photo','Fotógrafo conceptual'],['@davidhunterphoto','Fotógrafo conceptual'],['@paulmsardelis','Fotógrafo conceptual'],
+    ['@oliverstrauss','Fotógrafo conceptual'],
+    ['@thisiscoelevated','Curador / editorial'],['@artconcept__','Curador / editorial'],['@visualfashionart','Curador / editorial'],
+    ['@conceptualcreative','Curador / editorial'],['@editorialfashion.concept','Curador / editorial'],['@fashionconceptart','Curador / editorial'],
+    ['@darkaesthetic_','Curador / editorial'],['@editorialfashionmag','Curador / editorial'],['@fashionvisuals.','Curador / editorial'],
+    ['@moodboard.inspo','Curador / editorial'],
+    ['@a24','Cineasta'],['@arthouse.cinema','Cineasta'],['@cinematic.visuals','Cineasta'],['@filmfashion_','Cineasta'],
+    ['@cinephile.aesthetics','Cineasta'],['@slowcinema','Cineasta'],['@filmpoetry_','Cineasta'],['@cinematography.daily','Cineasta'],
+    ['@darkcinema','Cineasta'],
+    ['@surrealart.daily','Arte surreal'],['@digitalart.collective','Arte surreal'],['@conceptualart_','Arte surreal'],
+    ['@darkestheticart','Arte surreal'],['@surrealism.art','Arte surreal'],['@artconceptual','Arte surreal'],['@visualstorytelling','Arte surreal'],
+    ['@menstyle.blog','Moda menswear'],['@mensfashionjournal','Moda menswear'],['@malefashionaddict','Moda menswear'],
+    ['@mensgrooming.tips','Moda menswear'],['@thepacman82','Moda menswear'],
+  ],
+};
+function loadSeed(){
+  if(S.seeded && !confirm('Ya cargaste los datos iniciales. ¿Cargarlos otra vez? (no borra lo que tengas, solo añade los que falten)')) return;
+  // baseline log si no hay ninguno ese día
+  if(!S.logs.some(l=>l.date===SEED.baseline.date)){ S.logs.push({...SEED.baseline}); sortLogs(); }
+  // posts (evita duplicar por título)
+  SEED.posts.forEach(p=>{ if(!S.posts.some(x=>x.title===p.title)) S.posts.push({...p, id:'p'+Date.now()+Math.random().toString(36).slice(2,6)}); });
+  // creators (evita duplicar por handle)
+  SEED.creators.forEach(([h,n])=>{ if(!S.creators.some(c=>c.handle===h)) S.creators.push({id:'c'+Date.now()+Math.random().toString(36).slice(2,6), handle:h, niche:n, followers:0, lastComment:'', response:''}); });
+  S.seeded=true; save(); closeModal(); render(); toast('Datos iniciales cargados ✓');
+}
+
+/* ============================================================
+   RECORDATORIOS / ALARMAS
+   - Notificaciones del navegador (mientras la app está abierta)
+   - Descarga de alarmas al calendario del teléfono (.ics) = lo fiable
+   ============================================================ */
+const REM_DEFS = [
+  {key:'publish', emoji:'🔴', label:'Publicar post', desc:'Sube tu reel del día'},
+  {key:'respond', emoji:'💬', label:'Responder comentarios', desc:'Contesta el 100%'},
+  {key:'engage',  emoji:'👥', label:'Comentar 5 creadores', desc:'Construye comunidad'},
+  {key:'logday',  emoji:'📝', label:'Registrar el día', desc:'Anota tus métricas'},
+];
+function openReminders(){
+  const r=S.reminders;
+  const notifState = (typeof Notification!=='undefined') ? Notification.permission : 'unsupported';
+  showModal(`
+    <h2>Recordatorios diarios</h2>
+    <p class="muted" style="margin-bottom:14px">Define tu rutina. Dos formas de recibir alarmas:</p>
+    ${REM_DEFS.map(d=>`
+      <div class="fld">
+        <label>${d.emoji} ${d.label} — <span style="text-transform:none;color:var(--dimmer)">${d.desc}</span></label>
+        <input type="time" id="rem_${d.key}" value="${r[d.key]}">
+      </div>`).join('')}
+    <button class="btn" onclick="saveReminders()">Guardar horarios</button>
+
+    <div class="section-title" style="margin-top:22px">📅 Alarmas en tu teléfono (recomendado)</div>
+    <p class="muted" style="margin-bottom:10px">Descarga las alarmas a tu calendario. Suenan aunque la app esté cerrada. Se repiten cada día.</p>
+    <button class="btn ghost" onclick="downloadICS()">⬇ Descargar alarmas (.ics)</button>
+
+    <div class="section-title" style="margin-top:22px">🔔 Notificaciones del navegador</div>
+    <p class="muted" style="margin-bottom:10px">Avisos mientras tengas la app abierta hoy. Estado: <b>${notifState==='granted'?'activadas':notifState==='denied'?'bloqueadas':notifState==='unsupported'?'no soportadas':'sin activar'}</b>.</p>
+    <button class="btn ghost" onclick="enableNotifs()">Activar avisos de hoy</button>
+
+    <button class="btn ghost" onclick="closeModal()" style="margin-top:18px">Cerrar</button>`);
+}
+function saveReminders(){
+  REM_DEFS.forEach(d=>{ S.reminders[d.key]=$('rem_'+d.key).value || S.reminders[d.key]; });
+  save(); toast('Horarios guardados ✓');
+  if(Notification && Notification.permission==='granted') scheduleTodayNotifs();
+}
+function enableNotifs(){
+  if(typeof Notification==='undefined'){toast('Tu navegador no soporta avisos');return;}
+  Notification.requestPermission().then(p=>{
+    if(p==='granted'){ S.reminders.enabled=true; save(); scheduleTodayNotifs(); toast('Avisos activados ✓'); }
+    else toast('Permiso denegado');
+  });
+}
+let _notifTimers=[];
+function scheduleTodayNotifs(){
+  _notifTimers.forEach(t=>clearTimeout(t)); _notifTimers=[];
+  const now=new Date();
+  REM_DEFS.forEach(d=>{
+    const [h,m]=S.reminders[d.key].split(':').map(Number);
+    const when=new Date(); when.setHours(h,m,0,0);
+    const delay=when-now;
+    if(delay>0 && delay<86400000){
+      _notifTimers.push(setTimeout(()=>{ try{new Notification('EYEHERA · '+d.label,{body:d.desc});}catch(e){} }, delay));
+    }
+  });
+}
+function pad(n){return String(n).padStart(2,'0');}
+function downloadICS(){
+  const r=S.reminders;
+  let ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//EYEHERA//Control Center//ES\r\nCALSCALE:GREGORIAN\r\nX-WR-CALNAME:EYEHERA - Rutina diaria\r\n';
+  REM_DEFS.forEach((d,i)=>{
+    const [h,m]=r[d.key].split(':');
+    const today=new Date(); const dt=`${today.getFullYear()}${pad(today.getMonth()+1)}${pad(today.getDate())}T${h}${m}00`;
+    ics+='BEGIN:VEVENT\r\n';
+    ics+=`UID:eyehera-${d.key}-${Date.now()}@control.local\r\n`;
+    ics+=`DTSTART:${dt}\r\nDURATION:PT15M\r\n`;
+    ics+='RRULE:FREQ=DAILY\r\n';
+    ics+=`SUMMARY:${d.emoji} EYEHERA - ${d.label}\r\n`;
+    ics+=`DESCRIPTION:${d.desc}\r\n`;
+    ics+='BEGIN:VALARM\r\nTRIGGER:-PT0M\r\nACTION:DISPLAY\r\n';
+    ics+=`DESCRIPTION:EYEHERA - ${d.label}\r\nEND:VALARM\r\n`;
+    ics+='END:VEVENT\r\n';
+  });
+  ics+='END:VCALENDAR\r\n';
+  const blob=new Blob([ics],{type:'text/calendar'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='eyehera-rutina.ics'; a.click();
+  toast('Alarmas descargadas ✓ Ábrelas para añadirlas');
+}
+
 /* init */
+if(S.reminders && S.reminders.enabled && typeof Notification!=='undefined' && Notification.permission==='granted') scheduleTodayNotifs();
 render();
 </script>
 </body>
