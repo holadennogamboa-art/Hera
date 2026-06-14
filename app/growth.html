@@ -47,6 +47,15 @@ nav{position:fixed;bottom:0;left:0;right:0;background:#0a0a0a;border-top:1px sol
 .modal h2{margin-bottom:10px;font-size:16px}
 .toggle{display:flex;align-items:center;gap:8px;padding:10px;background:#1c1c1c;border:1px solid #262626;border-radius:6px;margin:6px 0;cursor:pointer}
 .toggle input{width:16px;height:16px}
+.accordion{border:1px solid #262626;border-radius:8px;margin:6px 0;background:#141414;overflow:hidden}
+.accordion-header{padding:12px;background:#1c1c1c;border-bottom:1px solid #262626;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:13px}
+.accordion-header.open{background:#262626;border-bottom:0}
+.accordion-content{padding:12px;display:none;background:#141414;font-size:12px}
+.accordion-content.open{display:block}
+.accordion-content .script{background:#0a0a0a;padding:10px;border-radius:6px;margin:6px 0;font-size:11px}
+.caption-option{margin:8px 0;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a;border-radius:4px}
+.caption-option strong{display:block;color:#c9a96a;margin-bottom:4px}
+.caption-option p{font-size:11px;line-height:1.4;margin:4px 0}
 </style>
 </head>
 <body>
@@ -270,6 +279,202 @@ nav{position:fixed;bottom:0;left:0;right:0;background:#0a0a0a;border-top:1px sol
 </div>
 </div>
 
+<!-- CAMPAIGN TAB -->
+<div id="campaign" class="tab">
+<div class="card" style="background:linear-gradient(135deg, #c9a96a20, #262626);border:1px solid #c9a96a40;margin-bottom:16px">
+<div style="font-size:16px;font-weight:700;color:#c9a96a">EL VERANO MUERE JOVEN</div>
+<div style="font-size:12px;color:#c9a96a;margin:4px 0">Summer Dies Young · Campaña de temporada · Verano 2026</div>
+<div style="font-size:11px;color:#8a8a8a;margin:8px 0;line-height:1.4">Inspirada en "Estoy Amándote Tan Fuerte" — TRISTÁN!, Guitarricadelafuente</div>
+</div>
+
+<!-- ESTRATEGIA -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📍 Estrategia de publicación</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="margin:8px 0;color:#c9a96a;font-weight:600">Secuencia de lanzamiento:</p>
+<p style="margin:6px 0;font-size:11px">• <strong>Reel:</strong> Viernes 12:00 CET (apertura de temporada)</p>
+<p style="margin:6px 0;font-size:11px">• <strong>Carrusel:</strong> Domingo 19:30 CET (cuando audiencia lee historias)</p>
+<p style="margin:8px 0;color:#8a8a8a;font-size:11px;border-top:1px solid #262626;padding-top:8px"><strong>Tácticas:</strong></p>
+<p style="margin:4px 0;font-size:11px">✓ Fijar (pin) ambos posts al perfil durante todo el verano</p>
+<p style="margin:4px 0;font-size:11px">✓ Crear highlight "VERANO" con stories (no caducan a 24h)</p>
+<p style="margin:4px 0;font-size:11px">✓ El Capítulo I es la siembra: si funciona, capítulos heredan paleta y tipografía</p>
+</div>
+</div>
+
+<!-- CAPTIONS -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>✍️ Captions (4 opciones)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div class="caption-option">
+<strong>A · Corto ES (impacto)</strong>
+<p>el verano muere joven. ámalo más fuerte. capítulo I — una historia de @theeyeofhera ♪ Estoy Amándote Tan Fuerte — TRISTÁN!, Guitarricadelafuente</p>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('el verano muere joven. ámalo más fuerte. capítulo I — una historia de @theeyeofhera ♪ Estoy Amándote Tan Fuerte — TRISTÁN!, Guitarricadelafuente')">Copiar</button>
+</div>
+
+<div class="caption-option">
+<strong>B · Corto EN</strong>
+<p>summer dies young. love it harder. chapter I — a story by @theeyeofhera</p>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('summer dies young. love it harder. chapter I — a story by @theeyeofhera')">Copiar</button>
+</div>
+
+<div class="caption-option">
+<strong>C · Largo ES (editorial)</strong>
+<p>Hay veranos que se miden en meses y veranos que se miden en lo que tarda un vilano en tocar el suelo. Esta historia va del segundo: un verano bello, breve, irrepetible. Por eso se ama más fuerte. EL VERANO MUERE JOVEN · capítulo I Basada en "Estoy Amándote Tan Fuerte" de TRISTÁN! y Guitarricadelafuente. Escucha con sonido. Producción visual: @theeyeofhera · HERA — Hybrid Visual Architecture</p>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('Hay veranos que se miden en meses y veranos que se miden en lo que tarda un vilano en tocar el suelo. Esta historia va del segundo: un verano bello, breve, irrepetible. Por eso se ama más fuerte. EL VERANO MUERE JOVEN · capítulo I Basada en \"Estoy Amándote Tan Fuerte\" de TRISTÁN! y Guitarricadelafuente. Escucha con sonido. Producción visual: @theeyeofhera · HERA — Hybrid Visual Architecture')">Copiar</button>
+</div>
+
+<div class="caption-option">
+<strong>D · Bilingüe ES/EN</strong>
+<p>el verano muere joven. ámalo más fuerte. summer dies young. love it harder. capítulo I / chapter I — @theeyeofhera ♪ TRISTÁN!, Guitarricadelafuente — Estoy Amándote Tan Fuerte</p>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('el verano muere joven. ámalo más fuerte. summer dies young. love it harder. capítulo I / chapter I — @theeyeofhera ♪ TRISTÁN!, Guitarricadelafuente — Estoy Amándote Tan Fuerte')">Copiar</button>
+</div>
+</div>
+</div>
+
+<!-- HASHTAGS -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🏷️ Hashtags</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="margin:8px 0;color:#c9a96a;font-weight:600">Set Principal (caption):</p>
+<div class="script">#ElVeranoMuereJoven #SummerDiesYoung #HERA #theeyeofhera #HybridVisualArchitecture #historiavisual #visualstory #cinematic #filmlook #cortometraje #verano2026 #summer2026 #dientedeleon #dandelion #moodfilm #editorial #reels</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('#ElVeranoMuereJoven #SummerDiesYoung #HERA #theeyeofhera #HybridVisualArchitecture #historiavisual #visualstory #cinematic #filmlook #cortometraje #verano2026 #summer2026 #dientedeleon #dandelion #moodfilm #editorial #reels')">Copiar Principal</button>
+
+<p style="margin:12px 0 8px;color:#c9a96a;font-weight:600">Set Nicho (primer comentario):</p>
+<div class="script">#Guitarricadelafuente #TRISTAN #EstoyAmandoteTanFuerte #indieespanol #spanishindie #fashionfilm #visualpoetry #analogmood #a24vibes</div>
+<button class="btn" style="width:auto;padding:6px 10px;font-size:10px;margin-top:4px" onclick="copy('#Guitarricadelafuente #TRISTAN #EstoyAmandoteTanFuerte #indieespanol #spanishindie #fashionfilm #visualpoetry #analogmood #a24vibes')">Copiar Nicho</button>
+</div>
+</div>
+
+<!-- STORIES -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📖 Stories (3 frames)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px;border-left:3px solid #c9a96a">
+<p style="color:#c9a96a;font-weight:600">Frame 1 · Teaser (día antes del reel)</p>
+<p style="font-size:11px;margin:6px 0">Clip de las semillas al viento (sin título), con canción de fondo + sticker "mañana empieza el verano". El misterio es el gancho.</p>
+</div>
+
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px;border-left:3px solid #c9a96a">
+<p style="color:#c9a96a;font-weight:600">Frame 2 · Historia (día del carrusel)</p>
+<p style="font-size:11px;margin:6px 0">Cenital del chico en la hierba + caja de preguntas: "¿qué harías distinto si supieras que este verano no vuelve?"</p>
+</div>
+
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px;border-left:3px solid #c9a96a">
+<p style="color:#c9a96a;font-weight:600">Frame 3 · CTA</p>
+<p style="font-size:11px;margin:6px 0">Portada del carrusel + sticker de enlace + texto: "la historia completa, en el feed. capítulo I ya disponible."</p>
+</div>
+</div>
+</div>
+
+<!-- AUDIO -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🎵 Audio & Sincronía</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="margin:8px 0;color:#c9a96a;font-weight:600">Audio oficial:</p>
+<p style="font-size:12px;margin:6px 0;font-weight:600">"Estoy Amándote Tan Fuerte" — TRISTÁN!, Guitarricadelafuente</p>
+<p style="font-size:11px;color:#8a8a8a;margin:8px 0">• Añade desde selector de audio de Instagram (no incrustada)</p>
+<p style="font-size:11px;color:#8a8a8a;margin:4px 0">• Post aparecerá en página del audio → descubrimiento</p>
+<p style="font-size:11px;color:#8a8a8a;margin:4px 0">• Sincronía sugerida: estribillo entra cuando se forma logo HERA (≈18s)</p>
+<p style="font-size:11px;color:#8a8a8a;margin:4px 0">• Comprueba si tiene insignia de "tendencia" antes de publicar</p>
+</div>
+</div>
+
+<!-- CARRUSEL -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>🎬 Orden del carrusel (6 imgs + reel)</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div style="display:grid;gap:8px">
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">01_portada.jpg</strong><br>Cenital en la hierba, título completo</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">02_soplo.jpg</strong><br>Diente de león intacto</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">03_semillas.jpg</strong><br>Las semillas en el viento</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">04_nota.jpg</strong><br>Nota de concepto: "todo lo que vuela, cae"</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">05_hera.jpg</strong><br>Logo HERA en vilanos, marco de cine</p>
+<p style="font-size:11px;padding:8px;background:#0a0a0a;border-left:3px solid #c9a96a"><strong style="color:#c9a96a">06_cierre.jpg</strong><br>Créditos y CTA</p>
+</div>
+<p style="font-size:11px;color:#8a8a8a;margin-top:10px;border-top:1px solid #262626;padding-top:8px">📹 Reel separado: 00_reel_teaser.mp4 (27s, 4:5) — no lo metas en el carrusel</p>
+</div>
+</div>
+
+<!-- CRONOGRAMA -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📅 Cronograma & Horarios</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px">
+<p style="color:#c9a96a;font-weight:600;margin-bottom:6px">REEL: Viernes</p>
+<p style="font-size:12px;font-weight:700">12:00–13:00 CET</p>
+<p style="font-size:11px;color:#8a8a8a">Scroll mediodía, mejor ventana para apertura de temporada</p>
+</div>
+
+<div style="margin:8px 0;padding:10px;background:#0a0a0a;border-radius:6px">
+<p style="color:#c9a96a;font-weight:600;margin-bottom:6px">CARRUSEL: Domingo</p>
+<p style="font-size:12px;font-weight:700">19:00–21:00 CET</p>
+<p style="font-size:11px;color:#8a8a8a">Audiencia lee historias por tarde-noche</p>
+</div>
+
+<p style="font-size:11px;color:#8a8a8a;margin-top:10px;padding-top:10px;border-top:1px solid #262626">Evita: madrugada y primera hora mañana (a menos Insights muestre audiencia americana)</p>
+</div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>✅ Checklist de publicación</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<div style="margin-top:10px">
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Elegir caption (A, B, C o D)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Copiar hashtags (Principal + Nicho)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Preparar 6 imágenes carrusel + reel</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Reel: sincronía estribillo (≈18s)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Crear stories 3 frames (teaser, historia, CTA)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>VIERNES: Publicar reel 12:00-13:00 CET</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>VIERNES: Crear highlight "VERANO"</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>DOMINGO: Publicar carrusel 19:00-21:00 CET</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Fijar (pin) reel al perfil</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Fijar (pin) carrusel al perfil</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Responder comentarios primeras 2h</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Monitorear audiencia con Insights</span></div>
+</div>
+</div>
+</div>
+
+<!-- NOTAS INTERNAS -->
+<div class="accordion">
+<div class="accordion-header" onclick="toggleAccordion(this)">
+<span>📝 Notas internas</span>
+<span>▼</span>
+</div>
+<div class="accordion-content">
+<p style="font-size:11px;margin:6px 0"><strong>Cuenta:</strong> @theeyeofhera (sin colaboradores en este capítulo)</p>
+<p style="font-size:11px;margin:6px 0"><strong>Voz:</strong> HERA — arquitectura visual, precisa, minúsculas, sin exclamaciones</p>
+<p style="font-size:11px;margin:6px 0"><strong>Resolución:</strong> Master clips en 1280x720 — para impresiones grandes, regenerar desde proyecto original</p>
+<p style="font-size:11px;margin:6px 0"><strong>Objetivo:</strong> Feed marcado por la campaña todo el verano. Reel abre temporada, carrusel la fija como bandera visual.</p>
+</div>
+</div>
+</div>
+
 <!-- MODALS -->
 <div id="modal" class="modal">
 <div class="modal-content" id="modal-content"></div>
@@ -281,6 +486,7 @@ nav{position:fixed;bottom:0;left:0;right:0;background:#0a0a0a;border-top:1px sol
 <button class="nav-btn" onclick="tab('plan')">📋 Plan</button>
 <button class="nav-btn" onclick="tab('engagement')">💬 Engagement</button>
 <button class="nav-btn" onclick="tab('accounts')">👥 Cuentas</button>
+<button class="nav-btn" onclick="tab('campaign')">📸 Campaña</button>
 </nav>
 
 <script>
@@ -297,6 +503,8 @@ function openModal(id){const content={caption1:'<h2>POST 1: Foto del modelo</h2>
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 function toggleTask(el){el.classList.toggle('done');el.querySelector('input').checked=!el.querySelector('input').checked}
 function copyText(id){const t=document.getElementById(id).textContent;navigator.clipboard?.writeText(t).then(()=>{alert('Copiado ✓')})}
+function toggleAccordion(header){const content=header.nextElementSibling;const isOpen=content.classList.contains('open');document.querySelectorAll('.accordion-content.open').forEach(c=>{c.classList.remove('open');c.previousElementSibling.classList.remove('open')});if(!isOpen){content.classList.add('open');header.classList.add('open')}}
+function copy(text){navigator.clipboard?.writeText(text).then(()=>{alert('✓ Copiado al portapapeles')})}
 DATA=load();render()
 </script>
 </body>
