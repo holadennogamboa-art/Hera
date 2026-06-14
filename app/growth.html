@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EYEHERA Growth">
+<meta name="theme-color" content="#0a0a0a">
+<title>EYEHERA Growth Toolkit</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html,body{height:100%;width:100%;overflow:hidden}body{background:#0a0a0a;color:#f2f2f2;font-family:system-ui,sans-serif;font-size:14px;display:flex;flex-direction:column}
+.header{background:#141414;border-bottom:1px solid #262626;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:18px;font-weight:700}
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px 16px 80px}
+.tab{display:none}.tab.active{display:block}
+.card{background:#141414;border:1px solid #262626;border-radius:10px;padding:12px;margin:8px 0}
+.stat{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #262626}.stat:last-child{border:0}
+.stat-val{font-size:20px;font-weight:700;color:#c9a96a}
+.btn{width:100%;padding:12px;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;margin:6px 0;background:#262626;color:#f2f2f2}
+.btn-gold{background:#c9a96a;color:#1a1408}
+.checkbox{width:100%;text-align:left;padding:10px;border:1px solid #262626;border-radius:8px;margin:6px 0;display:flex;align-items:center;background:#141414;cursor:pointer}
+.checkbox input{margin-right:10px;width:16px;height:16px;cursor:pointer}
+.checkbox.done{background:#262626;opacity:0.6}
+.task-day{margin:16px 0;padding:12px;border-left:3px solid #c9a96a;background:#141414}
+.task-day .time{font-size:12px;color:#8a8a8a;text-transform:uppercase;font-weight:600}
+.task-day .title{font-size:14px;font-weight:600;margin:6px 0}
+input[type=number]{width:100%;padding:8px;margin:6px 0;background:#1c1c1c;border:1px solid #262626;color:#f2f2f2;border-radius:6px;font-size:13px}
+label{display:block;font-size:11px;color:#8a8a8a;margin:10px 0 4px;text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+.section{font-size:12px;color:#8a8a8a;text-transform:uppercase;letter-spacing:0.08em;margin:14px 0 8px;font-weight:600}
+.account{padding:8px 0;border-bottom:1px solid #262626;display:flex;justify-content:space-between;align-items:center;font-size:12px}.account:last-child{border:0}
+.handle{color:#c9a96a;font-weight:600}
+.category{color:#8a8a8a;font-size:11px}
+textarea{width:100%;padding:8px;margin:6px 0;background:#1c1c1c;border:1px solid #262626;color:#f2f2f2;border-radius:6px;font-size:12px;font-family:inherit;min-height:60px}
+.script{background:#1c1c1c;padding:10px;border-radius:6px;border-left:2px solid #c9a96a;margin:6px 0;font-size:12px;white-space:pre-wrap;font-family:monospace}
+.copy-btn{font-size:11px;color:#c9a96a;background:none;border:none;cursor:pointer;padding:4px;margin-top:4px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#0a0a0a;border-top:1px solid #262626;display:flex;width:100%}
+.nav-btn{flex:1;padding:10px;background:none;border:none;color:#8a8a8a;font-size:11px;cursor:pointer;text-align:center}
+.nav-btn.active{color:#c9a96a}
+.progress-bar{width:100%;height:6px;background:#262626;border-radius:4px;margin:6px 0}
+.progress-fill{height:100%;background:#c9a96a;border-radius:4px;transition:width 0.3s}
+.meta{color:#8a8a8a;font-size:11px;margin-top:4px}
+.empty{text-align:center;color:#5a5a5a;padding:20px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:999;align-items:flex-end;justify-content:center}
+.modal.open{display:flex}
+.modal-content{background:#141414;width:100%;max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;border-radius:18px 18px 0 0}
+.modal h2{margin-bottom:10px;font-size:16px}
+.toggle{display:flex;align-items:center;gap:8px;padding:10px;background:#1c1c1c;border:1px solid #262626;border-radius:6px;margin:6px 0;cursor:pointer}
+.toggle input{width:16px;height:16px}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>👁 EYEHERA Growth</h1>
+<span style="font-size:11px;color:#8a8a8a">Toolkit Execution</span>
+</div>
+
+<div class="content">
+<!-- METRICS TAB -->
+<div id="metrics" class="tab active">
+<div class="card">
+<div class="stat"><span>Seguidores</span><span class="stat-val" id="mf">22</span></div>
+<div class="stat"><span>Vistas (30d)</span><span class="stat-val" id="mv">9597</span></div>
+<div class="stat"><span>Reproducciones</span><span class="stat-val" id="mr">12157</span></div>
+<div class="stat"><span>Cuentas alcanzadas</span><span class="stat-val" id="ma">4219</span></div>
+</div>
+
+<div class="section">Semana 1 - Objetivos</div>
+<div class="card">
+<div class="stat"><span>Followers (meta: 500-1500)</span><span class="stat-val" id="wf">0</span></div>
+<div class="progress-bar"><div class="progress-fill" id="pfill" style="width:0%"></div></div>
+<div class="meta" id="pmeta">0 / 1000</div>
+</div>
+
+<div class="card">
+<div class="stat"><span>Engagement (meta: 5-15%)</span><span class="stat-val" id="meng">0%</span></div>
+<div class="stat"><span>Comentarios dejados (meta: 100+)</span><span class="stat-val" id="mcom">0</span></div>
+<div class="stat"><span>DMs enviados (meta: 20+)</span><span class="stat-val" id="mdms">0</span></div>
+<div class="stat"><span>Respuestas DM (meta: 90%+)</span><span class="stat-val" id="mresp">0%</span></div>
+</div>
+
+<div class="section">Actualizar métricas</div>
+<div class="card">
+<label>Seguidores actuales</label><input type="number" id="in_f" value="22">
+<label>Vistas (30d)</label><input type="number" id="in_v" value="9597">
+<label>Reproducciones</label><input type="number" id="in_r" value="12157">
+<label>Engagement %</label><input type="number" id="in_e" step="0.1" value="0">
+<button class="btn btn-gold" onclick="updateMetrics()">Guardar</button>
+</div>
+</div>
+
+<!-- PLAN TAB -->
+<div id="plan" class="tab">
+<div class="task-day">
+<div class="time">DÍA 1 - MAÑANA (6-8 AM)</div>
+<div class="title">📱 POST 1: Foto del modelo</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Publicar foto (6-8 AM)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Responder comentarios (primeras 2h)</span></div>
+<button class="btn" onclick="openModal('caption1')">Ver caption</button>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 1 - TARDE (5-7 PM)</div>
+<div class="title">💬 ENGAGEMENT: 15 comentarios</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Comenta en @mattsoria</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Comenta en @brandon_breault</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Comenta en 13 cuentas más</span></div>
+<button class="btn" onclick="openModal('comments')">Ver scripts de comentarios</button>
+<button class="btn" onclick="openModal('accounts')">Ver cuentas a targetear</button>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 2 - MAÑANA (9 AM)</div>
+<div class="title">🖼 POST 2: Carrusel editorial</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Publicar carrusel (9 AM)</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><span>Responder comentarios</span></div>
+<button class="btn" onclick="openModal('caption2')">Ver caption</button>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 2 - TARDE (5-7 PM)</div>
+<div class="title">📨 DMs: 5 fotógrafos</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>DM a @thisiscoelevated</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>DM a @brandon_breault</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>DM a 3 cuentas más</span></div>
+<button class="btn" onclick="openModal('dms')">Ver scripts DM</button>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 3 - MAÑANA (8 AM)</div>
+<div class="title">🎬 POST 3: The Worlds reel</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Publicar The Worlds</span></div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>Responder comentarios</span></div>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 3 - TARDE (5-7 PM)</div>
+<div class="title">💬 ENGAGEMENT: 20 comentarios</div>
+<div class="checkbox" onclick="toggleTask(this)"><input type="checkbox"><span>20 comentarios en cuentas nuevas</span></div>
+</div>
+
+<div class="task-day">
+<div class="time">DÍA 4-7</div>
+<div class="title">📋 Continúa el plan (leer documento completo)</div>
+<button class="btn" onclick="openModal('fullplan')">Plan completo DÍA 4-7</button>
+</div>
+</div>
+
+<!-- ENGAGEMENT TAB -->
+<div id="engagement" class="tab">
+<div class="section">Hoy - Contador de tareas</div>
+<div class="card">
+<div class="stat"><span>Comentarios dejados</span><span class="stat-val" id="ecom">0</span></div>
+<div class="stat"><span>Meta: 30 comentarios/día</span><span style="font-size:12px;color:#8a8a8a">En el plan agresivo</span></div>
+<input type="number" id="comentarios_count" value="0" placeholder="Cuántos dejaste hoy">
+<button class="btn" onclick="updateEng()">+1</button>
+</div>
+
+<div class="card">
+<div class="stat"><span>DMs enviados</span><span class="stat-val" id="edms">0</span></div>
+<input type="number" id="dms_count" value="0">
+<button class="btn" onclick="updateDMS()">+1</button>
+</div>
+
+<div class="card">
+<div class="stat"><span>Respuestas DM recibidas</span><span class="stat-val" id="eresp">0</span></div>
+<input type="number" id="resp_count" value="0">
+<button class="btn" onclick="updateResp()">+1</button>
+</div>
+
+<div class="section">Scripts de comentarios rápidos</div>
+<div class="card">
+<div class="toggle" onclick="copyText('script1')">
+<span>✓</span>
+<span style="flex:1">the way you've framed the negative space...</span>
+</div>
+<div class="script" id="script1">the way you've framed the negative space here is incredible. the subject becomes secondary to the environment itself. this is where fashion photography becomes art.</div>
+
+<div class="toggle" onclick="copyText('script2')">
+<span>✓</span>
+<span style="flex:1">the color grading in this is so restrained...</span>
+</div>
+<div class="script" id="script2">the color grading in this is so restrained—everything breathes. how long did you spend getting the palette exactly right?</div>
+
+<div class="toggle" onclick="copyText('script3')">
+<span>✓</span>
+<span style="flex:1">this feels like a frame from a film...</span>
+</div>
+<div class="script" id="script3">this feels like a frame from a film i haven't seen yet. the stillness of it. there's so much quiet power here.</div>
+
+<div class="toggle" onclick="copyText('script4')">
+<span>✓</span>
+<span style="flex:1">the composition draws the eye exactly...</span>
+</div>
+<div class="script" id="script4">the composition draws the eye exactly where you want it. nothing is accidental here. you can feel the intentionality.</div>
+
+<div class="toggle" onclick="copyText('script5')">
+<span>✓</span>
+<span style="flex:1">the juxtaposition between the subject...</span>
+</div>
+<div class="script" id="script5">the juxtaposition between the subject and the landscape is haunting. it's fashion but it doesn't feel like fashion—it feels like cinema.</div>
+
+<button class="btn" onclick="openModal('allcomments')">Ver todos los 30 scripts</button>
+</div>
+</div>
+
+<!-- ACCOUNTS TAB -->
+<div id="accounts" class="tab">
+<div class="section">Categoría A: Fotógrafos conceptuales (10-100k)</div>
+<div class="card">
+<div class="account"><span class="handle">@mattsoria</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@brandon_breault</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@soren_blakemiller</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@lucidhoto</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@brandonli_photography</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@matthewlloydsmith</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@javierflores.photo</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@davidhunterphoto</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@paulmsardelis</span><span class="category">Fotos</span></div>
+<div class="account"><span class="handle">@oliverstrauss</span><span class="category">Fotos</span></div>
+</div>
+
+<div class="section">Categoría B: Curadores editorial (15-200k)</div>
+<div class="card">
+<div class="account"><span class="handle">@thisiscoelevated</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@artconcept__</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@visualfashionart</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@conceptualcreative</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@editorialfashion.concept</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@fashionconceptart</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@darkaesthetic_</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@editorialfashionmag</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@fashionvisuals.</span><span class="category">Curator</span></div>
+<div class="account"><span class="handle">@moodboard.inspo</span><span class="category">Curator</span></div>
+</div>
+
+<div class="section">Categoría C: Cine/A24 (20-300k)</div>
+<div class="card">
+<div class="account"><span class="handle">@a24</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@arthouse.cinema</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@cinematic.visuals</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@filmfashion_</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@cinephile.aesthetics</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@slowcinema</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@filmpoetry_</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@cinematography.daily</span><span class="category">Cine</span></div>
+<div class="account"><span class="handle">@darkcinema</span><span class="category">Cine</span></div>
+</div>
+
+<div class="section">Categoría D: Arte surreal (5-100k)</div>
+<div class="card">
+<div class="account"><span class="handle">@surrealart.daily</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@digitalart.collective</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@conceptualart_</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@darkestheticart</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@surrealism.art</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@artconceptual</span><span class="category">Arte</span></div>
+<div class="account"><span class="handle">@visualstorytelling</span><span class="category">Arte</span></div>
+</div>
+
+<div class="section">Categoría E: Fashion especial (10-150k)</div>
+<div class="card">
+<div class="account"><span class="handle">@fashionphotography.daily</span><span class="category">Fashion</span></div>
+<div class="account"><span class="handle">@editorialfashionphoto</span><span class="category">Fashion</span></div>
+<div class="account"><span class="handle">@fashionphotog</span><span class="category">Fashion</span></div>
+<div class="account"><span class="handle">@portraiture.lab</span><span class="category">Fashion</span></div>
+<div class="account"><span class="handle">@menstyle.blog</span><span class="category">Menswear</span></div>
+<div class="account"><span class="handle">@mensfashionjournal</span><span class="category">Menswear</span></div>
+<div class="account"><span class="handle">@thepacman82</span><span class="category">Menswear</span></div>
+</div>
+</div>
+
+<!-- MODALS -->
+<div id="modal" class="modal">
+<div class="modal-content" id="modal-content"></div>
+</div>
+</div>
+
+<nav>
+<button class="nav-btn active" onclick="tab('metrics')">📊 Métricas</button>
+<button class="nav-btn" onclick="tab('plan')">📋 Plan</button>
+<button class="nav-btn" onclick="tab('engagement')">💬 Engagement</button>
+<button class="nav-btn" onclick="tab('accounts')">👥 Cuentas</button>
+</nav>
+
+<script>
+let DATA={metrics:{f:22,v:9597,r:12157,a:4219,e:0,wf:0,mcom:0,mdms:0,mresp:0},tasks:{}};
+function load(){const d=localStorage.getItem('GDATA');return d?JSON.parse(d):DATA}
+function save(){localStorage.setItem('GDATA',JSON.stringify(DATA))}
+function tab(t){document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');document.querySelector(`[onclick="tab('${t}')"]`).classList.add('active');window.scrollTo(0,0)}
+function updateMetrics(){DATA.metrics.f=+document.getElementById('in_f').value;DATA.metrics.v=+document.getElementById('in_v').value;DATA.metrics.r=+document.getElementById('in_r').value;DATA.metrics.e=+document.getElementById('in_e').value;save();render()}
+function updateEng(){DATA.metrics.mcom++;save();render()}
+function updateDMS(){DATA.metrics.mdms++;save();render()}
+function updateResp(){DATA.metrics.mresp=+((DATA.metrics.mresp||0)+1);save();render()}
+function render(){document.getElementById('mf').textContent=DATA.metrics.f;document.getElementById('mv').textContent=DATA.metrics.v;document.getElementById('mr').textContent=DATA.metrics.r;document.getElementById('ma').textContent=DATA.metrics.a;document.getElementById('meng').textContent=DATA.metrics.e+'%';document.getElementById('mcom').textContent=DATA.metrics.mcom;document.getElementById('mdms').textContent=DATA.metrics.mdms;document.getElementById('ecom').textContent=DATA.metrics.mcom;document.getElementById('edms').textContent=DATA.metrics.mdms;const pct=Math.min(100,(DATA.metrics.wf/1000)*100);document.getElementById('pfill').style.width=pct+'%';document.getElementById('pmeta').textContent=DATA.metrics.wf+' / 1000'}
+function openModal(id){const content={caption1:'<h2>POST 1: Foto del modelo</h2><p style="font-size:12px;color:#8a8a8a;margin:8px 0">Imagen: Portrait con lienzo blanco en desierto</p><div class="script">the frame is the portal.\nthe subject becomes the landscape.\nthe landscape becomes the subject.\n\nwhat do you see when you look? 👁\n\nfirst chapter of something bigger.\n\n#theeyeofhera #fashionphotography #editorialfashion \n#surrealart #a24style #cinematicfashion</div><p style="font-size:11px;color:#8a8a8a;margin-top:8px">Hashtags: #conceptualfashion #fashionfilm #visualartist #mensfashion #artdirection</p>',caption2:'<h2>POST 2: Carrusel editorial</h2><div class="script">behind the worlds.\nthe process becomes the portrait.\nthe portrait becomes the obsession.\n\n4 frames. 1 vision. infinite interpretations.\n\nwhat\'s the thread connecting them? 👁</div>',comments:'<h2>30 Scripts de comentarios</h2><div style="font-size:12px;margin:8px 0"><strong>GRUPO 1: ENGAGEMENT GENUINO</strong><div class="script" style="margin:6px 0;font-size:11px">the way you\'ve framed the negative space here is incredible. the subject becomes secondary to the environment itself. this is where fashion photography becomes art.</div><div class="script" style="margin:6px 0;font-size:11px">the color grading in this is so restrained—everything breathes. how long did you spend getting the palette exactly right?</div><div class="script" style="margin:6px 0;font-size:11px">this feels like a frame from a film i haven\'t seen yet. the stillness of it. there\'s so much quiet power here.</div></div><button class="btn" onclick="closeModal()">Cerrar</button>',dms:'<h2>Scripts DM personalizables</h2><strong>Para fotógrafos:</strong><div class="script">hey [name],\n\nsaw your latest work on [describe element].\nthe way you\'re thinking about negative space is exactly where i\'m heading.\n\njust launched visual project mixing editorial fashion + surreal direction.\n\n@eyeofhera if interested.\n\ncheers!</div><strong>Para curadores:</strong><div class="script">hi [name],\n\nyour curation style is unmatched.\njust started a body of work (@eyeofhera)—fashion photography meets surreal cinema.\n\nwould be honored to be featured.\n\n[name]</div><button class="btn" onclick="closeModal()">Cerrar</button>',accounts:'<h2>50+ Cuentas a targetear</h2><p style="font-size:11px;color:#8a8a8a;margin:8px 0">Scroll por categorías en la pestaña Cuentas</p><button class="btn" onclick="closeModal()">Ir a Cuentas</button>',allcomments:'<h2>30 Scripts (muestra parcial)</h2><p style="font-size:11px;margin:8px 0">En la pestaña Engagement tienes acceso a todos los scripts rápidos. Copiar y modificar para cada cuenta.</p><button class="btn" onclick="closeModal()">Cerrar</button>',fullplan:'<h2>Plan Completo DÍA 4-7</h2><p style="font-size:12px;margin:8px 0"><strong>DÍA 4:</strong> POST carrusel Joshua Trees + 30 comentarios engagement masivo</p><p style="font-size:12px;margin:8px 0"><strong>DÍA 5:</strong> Stories live (15-20 min) + DMs fase 2 (5 cuentas)</p><p style="font-size:12px;margin:8px 0"><strong>DÍA 6:</strong> POST The Witness reel + Teaser capítulo 3 + DMs a 3 cuentas grandes</p><p style="font-size:12px;margin:8px 0"><strong>DÍA 7:</strong> POST Manifesto/Philosophy + Engagement final (15 comentarios)</p><p style="font-size:11px;color:#8a8a8a;margin-top:12px;font-weight:600">OBJETIVO SEMANA 1: 500-1500 nuevos followers, 5-10 colaboraciones en conversación</p><button class="btn" onclick="closeModal()">Cerrar</button>'};document.getElementById('modal-content').innerHTML=content[id]||'';document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function toggleTask(el){el.classList.toggle('done');el.querySelector('input').checked=!el.querySelector('input').checked}
+function copyText(id){const t=document.getElementById(id).textContent;navigator.clipboard?.writeText(t).then(()=>{alert('Copiado ✓')})}
+DATA=load();render()
+</script>
+</body>
+</html>
