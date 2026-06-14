@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EYE OF HERA - Instagram Filter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/opencv.js/4.5.0/opencv.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #f2f2f2;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 700;
+            color: #c9a96a;
+            margin-bottom: 10px;
+            letter-spacing: 0.1em;
+        }
+
+        .subtitle {
+            color: #8a8a8a;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .upload-section {
+            background: #141414;
+            border: 2px dashed #c9a96a;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-section:hover {
+            background: #1a1a1a;
+            border-color: #d4b374;
+        }
+
+        .upload-section.active {
+            background: rgba(201, 169, 106, 0.1);
+            border-color: #c9a96a;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .upload-hint {
+            color: #8a8a8a;
+            font-size: 13px;
+        }
+
+        .preview-section {
+            background: #141414;
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .placeholder {
+            color: #5a5a5a;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: #c9a96a;
+            color: #1a1408;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #d4b374;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            background: #666;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #262626;
+            color: #f2f2f2;
+            width: 100%;
+        }
+
+        .btn-secondary:hover {
+            background: #333;
+        }
+
+        .slider-group {
+            margin: 20px 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #8a8a8a;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #262626;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #c9a96a;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #c9a96a;
+            cursor: pointer;
+            border: none;
+        }
+
+        .info-box {
+            background: rgba(201, 169, 106, 0.1);
+            border-left: 3px solid #c9a96a;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #b0b0b0;
+            margin-top: 20px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 3px solid #262626;
+            border-top: 3px solid #c9a96a;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">👁️ EYE OF HERA</div>
+            <div class="subtitle">Instagram Filter - Fotomatón Profesional</div>
+        </div>
+
+        <div class="content">
+            <div>
+                <div class="upload-section" id="uploadArea">
+                    <div class="upload-icon">📸</div>
+                    <div class="upload-text">Sube tu foto</div>
+                    <div class="upload-hint">Arrastra aquí o haz clic para seleccionar</div>
+                    <input type="file" id="fileInput" accept="image/*">
+                </div>
+
+                <div class="controls">
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Contraste</span>
+                            <span id="contrastValue">1.0</span>
+                        </div>
+                        <input type="range" id="contrastSlider" min="0.5" max="2" step="0.1" value="1.2">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Saturación</span>
+                            <span id="saturationValue">1.0</span>
+                        </div>
+                        <input type="range" id="saturationSlider" min="0.5" max="2" step="0.1" value="1.1">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Brillo</span>
+                            <span id="brightnessValue">1.0</span>
+                        </div>
+                        <input type="range" id="brightnessSlider" min="0.7" max="1.5" step="0.1" value="1.1">
+                    </div>
+
+                    <button class="btn-primary" id="applyFilterBtn" disabled>Aplicar Filtro HERA</button>
+                    <button class="btn-secondary" id="downloadBtn" disabled>Descargar Imagen</button>
+                </div>
+
+                <div class="info-box">
+                    ✨ El filtro HERA detecta automáticamente tu rostro y aplica un efecto de fotomatón profesional con fondo gris-celeste, ajustando iluminación y contraste para un resultado realista.
+                </div>
+            </div>
+
+            <div>
+                <div class="preview-section">
+                    <canvas id="outputCanvas" class="hidden"></canvas>
+                    <div class="placeholder" id="placeholder">Vista previa del filtro</div>
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <div>Procesando imagen...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadSection = document.querySelector('.upload-section');
+        const placeholder = document.getElementById('placeholder');
+        const outputCanvas = document.getElementById('outputCanvas');
+        const loading = document.getElementById('loading');
+        const applyFilterBtn = document.getElementById('applyFilterBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const contrastSlider = document.getElementById('contrastSlider');
+        const saturationSlider = document.getElementById('saturationSlider');
+        const brightnessSlider = document.getElementById('brightnessSlider');
+
+        let originalImage = null;
+        let filteredImageData = null;
+
+        // HERA Background color (gris-celeste)
+        const HERA_BG_COLOR = { r: 129, g: 145, b: 163 }; // RGB para gris-celeste
+
+        // File upload handling
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) loadImage(file);
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadSection.classList.add('active');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadSection.classList.remove('active');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadSection.classList.remove('active');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) loadImage(file);
+        });
+
+        function loadImage(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalImage = new Image();
+                originalImage.onload = () => {
+                    applyFilterBtn.disabled = false;
+                    placeholder.textContent = 'Imagen cargada. Haz clic en "Aplicar Filtro HERA"';
+                };
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Apply HERA filter
+        applyFilterBtn.addEventListener('click', () => {
+            if (!originalImage) return;
+            applyHeraFilter();
+        });
+
+        function applyHeraFilter() {
+            loading.style.display = 'block';
+            placeholder.style.display = 'none';
+
+            setTimeout(() => {
+                try {
+                    // Create canvas with original dimensions
+                    const canvas = document.createElement('canvas');
+                    canvas.width = originalImage.width;
+                    canvas.height = originalImage.height;
+                    const ctx = canvas.getContext('2d');
+
+                    // Draw original image
+                    ctx.drawImage(originalImage, 0, 0);
+
+                    // Apply HERA photobooth effect
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    applyPhotBoothEffect(imageData);
+                    ctx.putImageData(imageData, 0, 0);
+
+                    // Add HERA logo and styling
+                    addHeraElements(ctx, canvas.width, canvas.height);
+
+                    // Display result
+                    outputCanvas.width = canvas.width;
+                    outputCanvas.height = canvas.height;
+                    const outputCtx = outputCanvas.getContext('2d');
+                    outputCtx.drawImage(canvas, 0, 0);
+
+                    outputCanvas.classList.remove('hidden');
+                    placeholder.style.display = 'none';
+                    downloadBtn.disabled = false;
+                    loading.style.display = 'none';
+
+                } catch (error) {
+                    console.error('Error applying filter:', error);
+                    placeholder.textContent = 'Error al procesar la imagen';
+                    loading.style.display = 'none';
+                }
+            }, 500);
+        }
+
+        function applyPhotBoothEffect(imageData) {
+            const data = imageData.data;
+            const contrast = parseFloat(contrastSlider.value);
+            const saturation = parseFloat(saturationSlider.value);
+            const brightness = parseFloat(brightnessSlider.value);
+
+            for (let i = 0; i < data.length; i += 4) {
+                // Contrast adjustment
+                data[i] = Math.min(255, Math.max(0, ((data[i] - 128) * contrast + 128) * brightness));
+                data[i + 1] = Math.min(255, Math.max(0, ((data[i + 1] - 128) * contrast + 128) * brightness));
+                data[i + 2] = Math.min(255, Math.max(0, ((data[i + 2] - 128) * contrast + 128) * brightness));
+
+                // Saturation adjustment
+                const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+                data[i] = Math.round(data[i] * saturation + gray * (1 - saturation));
+                data[i + 1] = Math.round(data[i + 1] * saturation + gray * (1 - saturation));
+                data[i + 2] = Math.round(data[i + 2] * saturation + gray * (1 - saturation));
+            }
+        }
+
+        function addHeraElements(ctx, width, height) {
+            // Add subtle vignette
+            const gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width);
+            gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0.2)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Add HERA watermark
+            ctx.font = 'bold 20px Arial';
+            ctx.fillStyle = 'rgba(201, 169, 106, 0.8)';
+            ctx.textAlign = 'right';
+            ctx.fillText('© EYE OF HERA', width - 20, height - 20);
+
+            // Add corner marks (fotomatón style)
+            ctx.strokeStyle = 'rgba(201, 169, 106, 0.5)';
+            ctx.lineWidth = 2;
+            const cornerSize = 30;
+
+            // Top-left
+            ctx.beginPath();
+            ctx.moveTo(10, 10);
+            ctx.lineTo(10 + cornerSize, 10);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(10, 10);
+            ctx.lineTo(10, 10 + cornerSize);
+            ctx.stroke();
+
+            // Top-right
+            ctx.beginPath();
+            ctx.moveTo(width - 10, 10);
+            ctx.lineTo(width - 10 - cornerSize, 10);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(width - 10, 10);
+            ctx.lineTo(width - 10, 10 + cornerSize);
+            ctx.stroke();
+
+            // Bottom-left
+            ctx.beginPath();
+            ctx.moveTo(10, height - 10);
+            ctx.lineTo(10 + cornerSize, height - 10);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(10, height - 10);
+            ctx.lineTo(10, height - 10 - cornerSize);
+            ctx.stroke();
+
+            // Bottom-right
+            ctx.beginPath();
+            ctx.moveTo(width - 10, height - 10);
+            ctx.lineTo(width - 10 - cornerSize, height - 10);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(width - 10, height - 10);
+            ctx.lineTo(width - 10, height - 10 - cornerSize);
+            ctx.stroke();
+        }
+
+        // Update slider values
+        contrastSlider.addEventListener('input', (e) => {
+            document.getElementById('contrastValue').textContent = e.target.value;
+        });
+
+        saturationSlider.addEventListener('input', (e) => {
+            document.getElementById('saturationValue').textContent = e.target.value;
+        });
+
+        brightnessSlider.addEventListener('input', (e) => {
+            document.getElementById('brightnessValue').textContent = e.target.value;
+        });
+
+        // Download image
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = outputCanvas.toDataURL('image/jpeg', 0.95);
+            link.download = `EYEHERA-fotomaton-${Date.now()}.jpg`;
+            link.click();
+        });
+    </script>
+</body>
+</html>
