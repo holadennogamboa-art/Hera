@@ -49,6 +49,19 @@ nav button.active { color: #c9a96a; }
 .list-item-title { font-weight: 600; font-size: 14px; }
 .list-item-sub { font-size: 12px; color: #8a8a8a; margin-top: 2px; }
 .btn-delete { background: none; border: none; color: #e06a5c; font-size: 18px; cursor: pointer; padding: 4px 8px; }
+.task-list { display: flex; flex-direction: column; gap: 8px; }
+.task-item { display: flex; gap: 10px; padding: 10px; background: #1c1c1c; border-radius: 8px; align-items: flex-start; }
+.task-checkbox { width: 20px; height: 20px; margin-top: 2px; cursor: pointer; accent-color: #c9a96a; }
+.task-content { flex: 1; }
+.task-title { font-weight: 600; font-size: 14px; }
+.task-meta { font-size: 12px; color: #8a8a8a; margin-top: 4px; }
+.task-priority { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-right: 4px; }
+.priority-high { background: rgba(224, 106, 92, 0.3); color: #e06a5c; }
+.priority-medium { background: rgba(201, 169, 106, 0.3); color: #c9a96a; }
+.priority-low { background: rgba(100, 150, 100, 0.3); color: #90d090; }
+.task-delete { background: none; border: none; color: #e06a5c; cursor: pointer; padding: 4px 8px; font-size: 16px; }
+.empty { text-align: center; color: #5a5a5a; padding: 30px 20px; }
+textarea { resize: vertical; min-height: 80px; }
 </style>
 </head>
 <body>
@@ -58,87 +71,206 @@ nav button.active { color: #c9a96a; }
 <div class="subtitle">Control Center</div>
 </header>
 
-<div id="tab-home" class="tab active">
+<!-- TAB: HOY -->
+<div id="tab-today" class="tab active">
+<div class="section-title">📋 Checklist de hoy</div>
+<div class="card">
+<div id="today-tasks" class="task-list"></div>
+<button class="btn btn-dark" onclick="openModal('task-modal')">+ Agregar tarea</button>
+</div>
+
+<div class="section-title">📧 Emails (hoy)</div>
 <div class="card">
 <div class="stat-row">
-<div class="stat-label">Seguidores</div>
-<div class="stat-value" id="stat-followers">0</div>
+<div class="stat-label">Enviados</div>
+<div class="stat-value" id="today-emails-sent">0</div>
 </div>
 <div class="stat-row">
-<div class="stat-label">Vistas (30d)</div>
-<div class="stat-value" id="stat-views">0</div>
+<div class="stat-label">Respuestas</div>
+<div class="stat-value" id="today-emails-replies">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Tasa de respuesta</div>
+<div class="stat-value" id="today-email-rate">0%</div>
+</div>
+</div>
+<button class="btn btn-dark" onclick="openModal('email-modal')">+ Registrar email</button>
+
+<div class="section-title">🎯 Instagram (hoy)</div>
+<div class="card">
+<div class="stat-row">
+<div class="stat-label">Posts publicados</div>
+<div class="stat-value" id="today-ig-posts">0</div>
 </div>
 <div class="stat-row">
 <div class="stat-label">Engagement</div>
-<div class="stat-value" id="stat-engagement">0%</div>
+<div class="stat-value" id="today-ig-engagement">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Nuevos seguidores</div>
+<div class="stat-value" id="today-ig-followers">0</div>
+</div>
+</div>
+<button class="btn btn-dark" onclick="openModal('instagram-modal')">+ Registrar Instagram</button>
+</div>
+
+<!-- TAB: ESTA SEMANA -->
+<div id="tab-week" class="tab">
+<div class="section-title">🎁 Demos & Clientes</div>
+<div class="card">
+<div id="week-demos" class="task-list"></div>
+<button class="btn btn-dark" onclick="openModal('demo-modal')">+ Nueva demo</button>
+</div>
+
+<div class="section-title">📧 Emails (esta semana)</div>
+<div class="card">
+<div class="stat-row">
+<div class="stat-label">Enviados</div>
+<div class="stat-value" id="week-emails-sent">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Respuestas</div>
+<div class="stat-value" id="week-emails-replies">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Tasa</div>
+<div class="stat-value" id="week-email-rate">0%</div>
 </div>
 </div>
 
-<div class="section-title">Acciones rápidas</div>
-<button class="btn btn-gold" onclick="openModal('log-modal')">+ Registrar día</button>
+<div class="section-title">🎬 Contenido (semana)</div>
+<div class="card">
+<div id="week-posts" class="task-list"></div>
 <button class="btn btn-dark" onclick="openModal('post-modal')">+ Nuevo post</button>
-<button class="btn btn-dark" onclick="openModal('creator-modal')">+ Creador</button>
+</div>
 </div>
 
-<div id="tab-tracker" class="tab">
-<div class="section-title">Historial de registros</div>
-<div id="logs-list" class="card"></div>
+<!-- TAB: MENSUAL -->
+<div id="tab-month" class="tab">
+<div class="section-title">📊 Métricas de Instagram</div>
+<div class="card">
+<div class="stat-row">
+<div class="stat-label">Seguidores</div>
+<div class="stat-value" id="month-followers">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Vistas (30d)</div>
+<div class="stat-value" id="month-views">0</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Engagement</div>
+<div class="stat-value" id="month-engagement">0%</div>
+</div>
+<div class="stat-row">
+<div class="stat-label">Posts publicados</div>
+<div class="stat-value" id="month-posts">0</div>
+</div>
+</div>
+<button class="btn btn-gold" onclick="openModal('monthly-ig-modal')">+ Registrar métricas</button>
+
+<div class="section-title">📈 Resumen mensual</div>
+<div class="card">
+<div id="monthly-summary" class="task-list"></div>
 </div>
 
-<div id="tab-posts" class="tab">
-<div class="section-title">Mis posts</div>
-<div id="posts-list" class="card"></div>
-</div>
-
-<div id="tab-creators" class="tab">
-<div class="section-title">Creadores (<span id="creator-count">0</span>/100)</div>
-<div id="creators-list" class="card"></div>
-</div>
-
-<div id="tab-settings" class="tab">
-<div class="section-title">Datos y respaldo</div>
+<div class="section-title">💼 Datos y respaldo</div>
 <div class="card">
 <button class="btn btn-dark" onclick="exportData()">⬇ Exportar datos</button>
 <button class="btn btn-dark" onclick="document.getElementById('import-file').click()">⬆ Importar datos</button>
 <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
-<button class="btn btn-gold" onclick="loadSeedData()">✦ Cargar datos iniciales</button>
 </div>
 </div>
 </div>
 
 <nav>
-<button class="active" onclick="switchTab(0)"><span class="nav-icon">◎</span><span>Hoy</span></button>
-<button onclick="switchTab(1)"><span class="nav-icon">📈</span><span>Tracker</span></button>
-<button onclick="switchTab(2)"><span class="nav-icon">🎬</span><span>Posts</span></button>
-<button onclick="switchTab(3)"><span class="nav-icon">👥</span><span>Creators</span></button>
-<button onclick="switchTab(4)"><span class="nav-icon">⚙️</span><span>Datos</span></button>
+<button class="active" onclick="switchTab(0)"><span class="nav-icon">📋</span><span>Hoy</span></button>
+<button onclick="switchTab(1)"><span class="nav-icon">📅</span><span>Semana</span></button>
+<button onclick="switchTab(2)"><span class="nav-icon">📊</span><span>Mensual</span></button>
 </nav>
 
-<!-- LOG MODAL -->
-<div id="log-modal" class="modal">
+<!-- TASK MODAL -->
+<div id="task-modal" class="modal">
 <div class="modal-content">
-<h2>Registrar día</h2>
+<h2>Nueva tarea</h2>
+<label>Descripción</label>
+<input id="task-desc" placeholder="Ej: Responder comentarios">
+<label>Prioridad</label>
+<select id="task-priority">
+<option value="high">🔴 Alta</option>
+<option value="medium">🟡 Media</option>
+<option value="low">🟢 Baja</option>
+</select>
 <label>Fecha</label>
-<input type="date" id="log-date">
-<label>Seguidores</label>
-<input type="number" id="log-followers" placeholder="22">
-<label>Vistas (30 días)</label>
-<input type="number" id="log-views" placeholder="9597">
-<label>Engagement %</label>
-<input type="number" step="0.1" id="log-engagement" placeholder="6.2">
-<label>Comentarios</label>
-<input type="number" id="log-comments" placeholder="0">
+<input type="date" id="task-date">
+<button class="btn btn-gold" onclick="saveTask()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('task-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- EMAIL MODAL -->
+<div id="email-modal" class="modal">
+<div class="modal-content">
+<h2>Registrar email</h2>
+<label>Destinatario (nombre/empresa)</label>
+<input id="email-recipient" placeholder="Empresa XYZ">
+<label>Asunto</label>
+<input id="email-subject" placeholder="Propuesta de colaboración">
+<label>Respondió</label>
+<select id="email-replied">
+<option value="no">No</option>
+<option value="yes">Sí</option>
+</select>
+<label>Fecha</label>
+<input type="date" id="email-date">
 <label>Nota (opcional)</label>
-<input id="log-note" placeholder="Publiqué reel">
-<button class="btn btn-gold" onclick="saveLog()">Guardar</button>
-<button class="btn btn-dark" onclick="closeModal('log-modal')">Cancelar</button>
+<input id="email-note" placeholder="Propuesta A/B testing">
+<button class="btn btn-gold" onclick="saveEmail()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('email-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- INSTAGRAM MODAL -->
+<div id="instagram-modal" class="modal">
+<div class="modal-content">
+<h2>Registrar Instagram (hoy)</h2>
+<label>Posts publicados</label>
+<input type="number" id="ig-posts" placeholder="1">
+<label>Engagement (comentarios + likes)</label>
+<input type="number" id="ig-engagement" placeholder="15">
+<label>Nuevos seguidores</label>
+<input type="number" id="ig-followers" placeholder="5">
+<label>Nota (opcional)</label>
+<input id="ig-note" placeholder="Publiqué reel a las 9 AM">
+<button class="btn btn-gold" onclick="saveInstagramDay()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('instagram-modal')">Cancelar</button>
+</div>
+</div>
+
+<!-- DEMO MODAL -->
+<div id="demo-modal" class="modal">
+<div class="modal-content">
+<h2>Nueva demo de Hera</h2>
+<label>Cliente / Empresa</label>
+<input id="demo-client" placeholder="Tech Startup XYZ">
+<label>Fecha y hora</label>
+<input type="datetime-local" id="demo-datetime">
+<label>Estado</label>
+<select id="demo-status">
+<option value="scheduled">📅 Programada</option>
+<option value="completed">✓ Completada</option>
+<option value="cancelled">✗ Cancelada</option>
+</select>
+<label>Notas</label>
+<textarea id="demo-notes" placeholder="Presentar: growth loops, metrics..."></textarea>
+<button class="btn btn-gold" onclick="saveDemo()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('demo-modal')">Cancelar</button>
 </div>
 </div>
 
 <!-- POST MODAL -->
 <div id="post-modal" class="modal">
 <div class="modal-content">
-<h2>Nuevo post</h2>
+<h2>Nuevo post (semana)</h2>
 <label>Título</label>
 <input id="post-title" placeholder="LUCKY — reel">
 <label>Tipo</label>
@@ -147,46 +279,54 @@ nav button.active { color: #c9a96a; }
 <option value="image">📷 Imagen</option>
 <option value="carousel">🖼 Carrusel</option>
 </select>
-<label>Fecha</label>
+<label>Fecha planeada</label>
 <input type="date" id="post-date">
-<label>Vistas</label>
-<input type="number" id="post-views" placeholder="326">
-<label>Saves</label>
-<input type="number" id="post-saves" placeholder="0">
-<label>Comentarios</label>
-<input type="number" id="post-comments" placeholder="0">
+<label>Estado</label>
+<select id="post-status">
+<option value="draft">✏ Borrador</option>
+<option value="scheduled">📅 Programado</option>
+<option value="published">📤 Publicado</option>
+</select>
 <button class="btn btn-gold" onclick="savePost()">Guardar</button>
 <button class="btn btn-dark" onclick="closeModal('post-modal')">Cancelar</button>
 </div>
 </div>
 
-<!-- CREATOR MODAL -->
-<div id="creator-modal" class="modal">
+<!-- MONTHLY IG MODAL -->
+<div id="monthly-ig-modal" class="modal">
 <div class="modal-content">
-<h2>Añadir creador</h2>
-<label>@usuario</label>
-<input id="creator-handle" placeholder="@mattsoria">
-<label>Nicho</label>
-<select id="creator-niche">
-<option>Fotógrafo conceptual</option>
-<option>Curador / editorial</option>
-<option>Cineasta</option>
-<option>Arte surreal</option>
-<option>Moda menswear</option>
-<option>Otro</option>
-</select>
-<label>Seguidores (aprox)</label>
-<input type="number" id="creator-followers" placeholder="15000">
-<button class="btn btn-gold" onclick="saveCreator()">Guardar</button>
-<button class="btn btn-dark" onclick="closeModal('creator-modal')">Cancelar</button>
+<h2>Métricas mensuales de Instagram</h2>
+<label>Fecha</label>
+<input type="month" id="monthly-date">
+<label>Seguidores</label>
+<input type="number" id="monthly-followers" placeholder="1500">
+<label>Vistas (30 días)</label>
+<input type="number" id="monthly-views" placeholder="25000">
+<label>Engagement %</label>
+<input type="number" step="0.1" id="monthly-engagement" placeholder="5.2">
+<label>Posts publicados</label>
+<input type="number" id="monthly-posts" placeholder="6">
+<button class="btn btn-gold" onclick="saveMonthlyIG()">Guardar</button>
+<button class="btn btn-dark" onclick="closeModal('monthly-ig-modal')">Cancelar</button>
 </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const KEY = 'eyehera_data_v2';
-let DATA = { logs: [], posts: [], creators: [] };
+const KEY = 'hera_control_v3';
+let DATA = {
+  tasks: [],
+  emails: [],
+  instagram: [],
+  demos: [],
+  posts: [],
+  monthly: []
+};
+
+function getToday() { return new Date().toISOString().split('T')[0]; }
+function getThisWeek() { const d = new Date(); const start = new Date(d.setDate(d.getDate() - d.getDay())); return start.toISOString().split('T')[0]; }
+function getThisMonth() { return new Date().toISOString().slice(0, 7); }
 
 function load() {
   try { const d = localStorage.getItem(KEY); return d ? JSON.parse(d) : DATA; } catch(e) { return DATA; }
@@ -214,75 +354,149 @@ function switchTab(n) {
   if (tabs[n]) tabs[n].classList.add('active');
 }
 
-function saveLog() {
-  const date = document.getElementById('log-date').value || new Date().toISOString().split('T')[0];
-  DATA.logs.push({
-    date,
-    followers: +document.getElementById('log-followers').value || 0,
-    views: +document.getElementById('log-views').value || 0,
-    engagement: +document.getElementById('log-engagement').value || 0,
-    comments: +document.getElementById('log-comments').value || 0,
-    note: document.getElementById('log-note').value
+function saveTask() {
+  const desc = document.getElementById('task-desc').value;
+  if (!desc) { toast('Escribe la tarea'); return; }
+  DATA.tasks.push({
+    id: Date.now(),
+    desc,
+    priority: document.getElementById('task-priority').value,
+    date: document.getElementById('task-date').value || getToday(),
+    completed: false
   });
-  DATA.logs.sort((a, b) => b.date.localeCompare(a.date));
   save();
-  closeModal('log-modal');
-  document.getElementById('log-date').value = '';
-  document.getElementById('log-followers').value = '';
-  document.getElementById('log-views').value = '';
-  document.getElementById('log-engagement').value = '';
-  document.getElementById('log-comments').value = '';
-  document.getElementById('log-note').value = '';
-  toast('✓ Día registrado');
+  closeModal('task-modal');
+  document.getElementById('task-desc').value = '';
+  document.getElementById('task-date').value = '';
+  toast('✓ Tarea añadida');
+}
+
+function toggleTask(id) {
+  const t = DATA.tasks.find(x => x.id === id);
+  if (t) t.completed = !t.completed;
+  save();
+}
+
+function deleteTask(id) {
+  DATA.tasks = DATA.tasks.filter(t => t.id !== id);
+  save();
+}
+
+function saveEmail() {
+  const recipient = document.getElementById('email-recipient').value;
+  if (!recipient) { toast('Escribe el destinatario'); return; }
+  DATA.emails.push({
+    id: Date.now(),
+    recipient,
+    subject: document.getElementById('email-subject').value,
+    replied: document.getElementById('email-replied').value === 'yes',
+    date: document.getElementById('email-date').value || getToday(),
+    note: document.getElementById('email-note').value
+  });
+  save();
+  closeModal('email-modal');
+  document.getElementById('email-recipient').value = '';
+  document.getElementById('email-subject').value = '';
+  document.getElementById('email-note').value = '';
+  toast('✓ Email registrado');
+}
+
+function deleteEmail(id) {
+  DATA.emails = DATA.emails.filter(e => e.id !== id);
+  save();
+}
+
+function saveInstagramDay() {
+  DATA.instagram.push({
+    id: Date.now(),
+    date: getToday(),
+    posts: +document.getElementById('ig-posts').value || 0,
+    engagement: +document.getElementById('ig-engagement').value || 0,
+    newFollowers: +document.getElementById('ig-followers').value || 0,
+    note: document.getElementById('ig-note').value
+  });
+  save();
+  closeModal('instagram-modal');
+  document.getElementById('ig-posts').value = '';
+  document.getElementById('ig-engagement').value = '';
+  document.getElementById('ig-followers').value = '';
+  document.getElementById('ig-note').value = '';
+  toast('✓ Instagram registrado');
+}
+
+function saveDemo() {
+  const client = document.getElementById('demo-client').value;
+  if (!client) { toast('Escribe el cliente'); return; }
+  DATA.demos.push({
+    id: Date.now(),
+    client,
+    datetime: document.getElementById('demo-datetime').value,
+    status: document.getElementById('demo-status').value,
+    notes: document.getElementById('demo-notes').value
+  });
+  save();
+  closeModal('demo-modal');
+  document.getElementById('demo-client').value = '';
+  document.getElementById('demo-datetime').value = '';
+  document.getElementById('demo-notes').value = '';
+  toast('✓ Demo añadida');
+}
+
+function deleteDemo(id) {
+  DATA.demos = DATA.demos.filter(d => d.id !== id);
+  save();
 }
 
 function savePost() {
+  const title = document.getElementById('post-title').value;
+  if (!title) { toast('Escribe el título'); return; }
   DATA.posts.push({
     id: Date.now(),
-    title: document.getElementById('post-title').value,
+    title,
     type: document.getElementById('post-type').value,
     date: document.getElementById('post-date').value,
-    views: +document.getElementById('post-views').value || 0,
-    saves: +document.getElementById('post-saves').value || 0,
-    comments: +document.getElementById('post-comments').value || 0
+    status: document.getElementById('post-status').value
   });
   save();
   closeModal('post-modal');
   document.getElementById('post-title').value = '';
-  document.getElementById('post-views').value = '';
-  document.getElementById('post-saves').value = '';
-  document.getElementById('post-comments').value = '';
-  toast('✓ Post guardado');
+  document.getElementById('post-date').value = '';
+  toast('✓ Post añadido');
 }
 
-function saveCreator() {
-  const h = document.getElementById('creator-handle').value;
-  if (!h) { toast('Pon @usuario'); return; }
-  DATA.creators.push({
+function deletePost(id) {
+  DATA.posts = DATA.posts.filter(p => p.id !== id);
+  save();
+}
+
+function saveMonthlyIG() {
+  const month = document.getElementById('monthly-date').value;
+  if (!month) { toast('Selecciona el mes'); return; }
+  DATA.monthly.push({
     id: Date.now(),
-    handle: h,
-    niche: document.getElementById('creator-niche').value,
-    followers: +document.getElementById('creator-followers').value || 0
+    month,
+    followers: +document.getElementById('monthly-followers').value || 0,
+    views: +document.getElementById('monthly-views').value || 0,
+    engagement: +document.getElementById('monthly-engagement').value || 0,
+    posts: +document.getElementById('monthly-posts').value || 0
   });
   save();
-  closeModal('creator-modal');
-  document.getElementById('creator-handle').value = '';
-  document.getElementById('creator-followers').value = '';
-  toast('✓ Creador guardado');
+  closeModal('monthly-ig-modal');
+  document.getElementById('monthly-followers').value = '';
+  document.getElementById('monthly-views').value = '';
+  document.getElementById('monthly-engagement').value = '';
+  document.getElementById('monthly-posts').value = '';
+  toast('✓ Métricas guardadas');
 }
-
-function deleteLog(date) { DATA.logs = DATA.logs.filter(l => l.date !== date); save(); }
-function deletePost(id) { DATA.posts = DATA.posts.filter(p => p.id !== id); save(); }
-function deleteCreator(id) { DATA.creators = DATA.creators.filter(c => c.id !== id); save(); }
 
 function exportData() {
   const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'eyehera-backup.json';
+  a.download = 'hera-backup.json';
   a.click();
-  toast('✓ Descargado');
+  toast('✓ Datos descargados');
 }
 
 function importData(e) {
@@ -293,39 +507,123 @@ function importData(e) {
   r.readAsText(f);
 }
 
-function loadSeedData() {
-  if (confirm('¿Cargar datos iniciales? (22 seg, 9,597 vistas)')) {
-    const today = new Date().toISOString().split('T')[0];
-    DATA.logs.push({ date: today, followers: 22, views: 9597, engagement: 0, comments: 0, note: 'Baseline' });
-    ['@mattsoria', '@brandon_breault', '@soren_blakemiller', '@lucidhoto', '@brandonli_photography', '@matthewlloydsmith', '@javierflores.photo', '@davidhunterphoto', '@paulmsardelis', '@oliverstrauss'].forEach(h => {
-      DATA.creators.push({ id: Date.now() + Math.random(), handle: h, niche: 'Fotógrafo conceptual', followers: 0 });
-    });
-    save();
-    toast('✓ Datos iniciales cargados');
+function renderTaskList(tasks, containerId) {
+  if (!tasks.length) {
+    document.getElementById(containerId).innerHTML = '<div class="empty">Sin tareas</div>';
+    return;
   }
+  const html = tasks.map(t => `
+    <div class="task-item" style="${t.completed ? 'opacity: 0.6;' : ''}">
+      <input type="checkbox" class="task-checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask(${t.id})">
+      <div class="task-content">
+        <div class="task-title">${t.desc}</div>
+        <div class="task-meta">
+          <span class="task-priority priority-${t.priority}">${t.priority.toUpperCase()}</span>
+          ${t.date}
+        </div>
+      </div>
+      <button class="task-delete" onclick="deleteTask(${t.id})">✕</button>
+    </div>
+  `).join('');
+  document.getElementById(containerId).innerHTML = html;
 }
 
 function render() {
-  const last = DATA.logs[0];
-  document.getElementById('stat-followers').textContent = last ? last.followers : 0;
-  document.getElementById('stat-views').textContent = last ? last.views : 0;
-  document.getElementById('stat-engagement').textContent = (last ? last.engagement : 0) + '%';
-  document.getElementById('creator-count').textContent = DATA.creators.length;
+  const today = getToday();
+  const weekStart = getThisWeek();
+  const thisMonth = getThisMonth();
 
-  const logsHtml = DATA.logs.length ? DATA.logs.map(l => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${l.date}</div><div class="list-item-sub">${l.followers} seg · ${l.views} views · ${l.engagement}% eng</div></div><button class="btn-delete" onclick="deleteLog('${l.date}')">✕</button></div>`).join('') : '<div class="empty">Sin registros</div>';
-  document.getElementById('logs-list').innerHTML = logsHtml;
+  // HOY
+  const todayTasks = DATA.tasks.filter(t => t.date === today);
+  renderTaskList(todayTasks, 'today-tasks');
 
-  const postsHtml = DATA.posts.length ? DATA.posts.map(p => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${p.title}</div><div class="list-item-sub">${p.type} · ${p.date} · ${p.views} views</div></div><button class="btn-delete" onclick="deletePost(${p.id})">✕</button></div>`).join('') : '<div class="empty">Sin posts</div>';
-  document.getElementById('posts-list').innerHTML = postsHtml;
+  const todayEmails = DATA.emails.filter(e => e.date === today);
+  const todayEmailsSent = todayEmails.length;
+  const todayReplies = todayEmails.filter(e => e.replied).length;
+  document.getElementById('today-emails-sent').textContent = todayEmailsSent;
+  document.getElementById('today-emails-replies').textContent = todayReplies;
+  document.getElementById('today-email-rate').textContent = todayEmailsSent > 0 ? Math.round((todayReplies / todayEmailsSent) * 100) + '%' : '0%';
 
-  const creatorsHtml = DATA.creators.length ? DATA.creators.map(c => `<div class="list-item"><div class="list-item-content"><div class="list-item-title">${c.handle}</div><div class="list-item-sub">${c.niche}</div></div><button class="btn-delete" onclick="deleteCreator(${c.id})">✕</button></div>`).join('') : '<div class="empty">Sin creadores</div>';
-  document.getElementById('creators-list').innerHTML = creatorsHtml;
+  const todayIG = DATA.instagram.filter(i => i.date === today)[0];
+  document.getElementById('today-ig-posts').textContent = todayIG ? todayIG.posts : 0;
+  document.getElementById('today-ig-engagement').textContent = todayIG ? todayIG.engagement : 0;
+  document.getElementById('today-ig-followers').textContent = todayIG ? todayIG.newFollowers : 0;
+
+  // SEMANA
+  const weekDemos = DATA.demos;
+  if (weekDemos.length) {
+    const html = weekDemos.map(d => `
+      <div class="task-item">
+        <div class="task-content">
+          <div class="task-title">🎁 ${d.client}</div>
+          <div class="task-meta">
+            <span class="task-priority priority-${d.status === 'completed' ? 'low' : 'high'}">${d.status}</span>
+            ${d.datetime.slice(0, 16).replace('T', ' ')}
+          </div>
+        </div>
+        <button class="task-delete" onclick="deleteDemo(${d.id})">✕</button>
+      </div>
+    `).join('');
+    document.getElementById('week-demos').innerHTML = html;
+  } else {
+    document.getElementById('week-demos').innerHTML = '<div class="empty">Sin demos programadas</div>';
+  }
+
+  const weekEmails = DATA.emails;
+  const weekEmailsSent = weekEmails.length;
+  const weekReplies = weekEmails.filter(e => e.replied).length;
+  document.getElementById('week-emails-sent').textContent = weekEmailsSent;
+  document.getElementById('week-emails-replies').textContent = weekReplies;
+  document.getElementById('week-email-rate').textContent = weekEmailsSent > 0 ? Math.round((weekReplies / weekEmailsSent) * 100) + '%' : '0%';
+
+  const weekPosts = DATA.posts;
+  if (weekPosts.length) {
+    const html = weekPosts.map(p => `
+      <div class="task-item">
+        <div class="task-content">
+          <div class="task-title">${p.type === 'reel' ? '🎬' : p.type === 'image' ? '📷' : '🖼'} ${p.title}</div>
+          <div class="task-meta">
+            <span class="task-priority priority-${p.status === 'published' ? 'low' : 'high'}">${p.status}</span>
+            ${p.date}
+          </div>
+        </div>
+        <button class="task-delete" onclick="deletePost(${p.id})">✕</button>
+      </div>
+    `).join('');
+    document.getElementById('week-posts').innerHTML = html;
+  } else {
+    document.getElementById('week-posts').innerHTML = '<div class="empty">Sin posts planeados</div>';
+  }
+
+  // MENSUAL
+  const lastMonth = DATA.monthly.length ? DATA.monthly[DATA.monthly.length - 1] : null;
+  document.getElementById('month-followers').textContent = lastMonth ? lastMonth.followers : 0;
+  document.getElementById('month-views').textContent = lastMonth ? lastMonth.views : 0;
+  document.getElementById('month-engagement').textContent = (lastMonth ? lastMonth.engagement : 0) + '%';
+  document.getElementById('month-posts').textContent = lastMonth ? lastMonth.posts : 0;
+
+  const monthlySummary = DATA.monthly.slice().reverse().slice(0, 3);
+  if (monthlySummary.length) {
+    const html = monthlySummary.map(m => `
+      <div class="task-item">
+        <div class="task-content">
+          <div class="task-title">${m.month}</div>
+          <div class="task-meta">👥 ${m.followers} seg · 👁 ${m.views} views · 💬 ${m.posts} posts</div>
+        </div>
+      </div>
+    `).join('');
+    document.getElementById('monthly-summary').innerHTML = html;
+  } else {
+    document.getElementById('monthly-summary').innerHTML = '<div class="empty">Sin datos mensuales</div>';
+  }
 }
 
-// Init
 DATA = load();
-document.getElementById('log-date').value = new Date().toISOString().split('T')[0];
-document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+document.getElementById('task-date').value = getToday();
+document.getElementById('email-date').value = getToday();
+document.getElementById('demo-datetime').value = new Date().toISOString().slice(0, 16);
+document.getElementById('post-date').value = getToday();
+document.getElementById('monthly-date').value = getThisMonth();
 render();
 </script>
 </body>
