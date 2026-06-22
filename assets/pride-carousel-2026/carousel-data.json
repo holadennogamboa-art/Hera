@@ -1,0 +1,223 @@
+{
+  "carousel": {
+    "title": "Libertad en Movimiento - Pride 2026",
+    "campaign": "Hera Pride Campaign",
+    "date_created": "2026-06-22",
+    "target_platform": "Instagram",
+    "total_slides": 6,
+    "dimensions": {
+      "width": 1080,
+      "height": 1920,
+      "ratio": "9:16",
+      "format": "JPEG/PNG"
+    },
+    "slides": [
+      {
+        "id": 1,
+        "title": "Libertad en Movimiento",
+        "type": "image_hero",
+        "headline": "Libertad en Movimiento",
+        "subheadline": "La libertad no tiene un solo camino",
+        "image": "slide-1-hero.jpg",
+        "background": "image_overlay",
+        "overlay_color": "rgba(0, 0, 0, 0.3)",
+        "gradient": "linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(102, 126, 234, 0.5))",
+        "text_color": "white",
+        "text_shadow": true,
+        "font_sizes": {
+          "headline": 44,
+          "subheadline": 18
+        },
+        "duration_seconds": 5,
+        "seo": "Pride 2026 libertad autenticidad LGBTQ+"
+      },
+      {
+        "id": 2,
+        "title": "Fluir sin Miedo",
+        "type": "video_overlay",
+        "headline": "Fluir sin Miedo",
+        "subheadline": "Movimiento, energía, libertad auténtica",
+        "video": "Flow_202606221356.mp4",
+        "gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        "text_color": "white",
+        "font_sizes": {
+          "headline": 32,
+          "subheadline": 16
+        },
+        "duration_seconds": 8,
+        "seo": "Movimiento libertad danza Pride"
+      },
+      {
+        "id": 3,
+        "title": "Estadística + Historia",
+        "type": "data_graphic",
+        "gradient": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        "text_color": "white",
+        "content": {
+          "stat": "1 de 4",
+          "stat_text": "personas LGBTQ+ viven escondiendo su verdadero yo",
+          "story": "Tu historia importa. Tu identidad es válida. Tu voz merece ser escuchada. Porque ser tú mismo no es un acto de rebeldía, es un acto de valentía."
+        },
+        "data_box": {
+          "background": "rgba(255, 255, 255, 0.15)",
+          "backdrop_filter": "blur(10px)",
+          "border": "1px solid rgba(255, 255, 255, 0.3)",
+          "padding": 30
+        },
+        "font_sizes": {
+          "stat": 48,
+          "stat_text": 16,
+          "story": 15
+        },
+        "duration_seconds": 6,
+        "seo": "LGBTQ+ identidad historia visibilidad"
+      },
+      {
+        "id": 4,
+        "title": "¿Cuál es tu Historia?",
+        "type": "cta_graphic",
+        "gradient": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+        "text_color": "white",
+        "headline": "¿Cuál es tu historia?",
+        "emoji": "📢",
+        "content": "Comparte tu verdad. Inspira otros. Crea comunidad.",
+        "cta_button": {
+          "text": "Ir al Link Bio",
+          "background": "white",
+          "color": "#4facfe",
+          "padding": "14px 40px",
+          "border_radius": 50
+        },
+        "font_sizes": {
+          "headline": 40,
+          "content": 16
+        },
+        "duration_seconds": 5,
+        "seo": "Comunidad historias inspiración"
+      },
+      {
+        "id": 5,
+        "title": "Manifesto - Orgullo es Libertad",
+        "type": "manifesto_graphic",
+        "gradient": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+        "text_color": "white",
+        "headline": "Orgullo es Libertad",
+        "content": {
+          "quote_mark": "\"",
+          "quote": "El orgullo no es un mes. Es cada día eligiendo ser libre, auténtico y verdaderamente tú mismo, sin disculpas.",
+          "author": "— Hera Community"
+        },
+        "font_sizes": {
+          "headline": 36,
+          "quote": 18,
+          "author": 14
+        },
+        "duration_seconds": 5,
+        "seo": "Orgullo autenticidad libertad manifesto"
+      },
+      {
+        "id": 6,
+        "title": "Únete al Movimiento",
+        "type": "cta_final",
+        "gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        "text_color": "white",
+        "emoji": "🌈",
+        "headline": "Únete al Movimiento",
+        "hashtags": [
+          "#OrguloLGBTQ+",
+          "#HeraPride2026",
+          "#LibertadEnMovimiento"
+        ],
+        "closing": "Síguenos y sé parte de la comunidad",
+        "font_sizes": {
+          "emoji": 60,
+          "headline": 36,
+          "hashtags": 16,
+          "closing": 14
+        },
+        "duration_seconds": 4,
+        "seo": "Comunidad Hera Pride 2026"
+      }
+    ],
+    "instagram_caption": {
+      "main_text": "🌈 La libertad no tiene un solo camino.\n\nDurante el Pride, celebramos a quienes han tenido el valor de ser ellos mismos. A quienes eligieron correr sin miedo. A quienes dicen: \"Así soy, y está bien.\"\n\nEn Hera, creemos que el orgullo no es un mes. Es cada día eligiendo autenticidad, eligiendo libertad, eligiendo ser verdaderamente tú.\n\n¿Cuál es tu historia? Comparte en los comentarios. 👇\n\nTu voz importa. Tu identidad es válida. Tu comunidad te espera.",
+      "hashtags": [
+        "#OrguloLGBTQ+",
+        "#HeraPride2026",
+        "#LibertadEnMovimiento",
+        "#Pride2026",
+        "#ComunidadHera",
+        "#Autenticidad",
+        "#VisibilidadLGBTQ",
+        "#TransRights",
+        "#Inclusión",
+        "#Diversidad"
+      ],
+      "cta": "Síguenos para más contenido que celebra la diversidad y la autenticidad"
+    },
+    "first_comment_strategy": {
+      "text": "\"La libertad no se celebra en silencio 🌈\n\n¿Cuál fue el momento en que decidiste ser tú mismo?\nComparte tu historia en los comentarios. Leemos cada una. 👇\"",
+      "purpose": "Boost early engagement and algorithm visibility"
+    },
+    "engagement_metrics": {
+      "target_reach": 5000,
+      "target_impressions": 8000,
+      "target_saves": 100,
+      "target_shares": 50,
+      "target_comments": 50,
+      "target_engagement_rate": "5-8%",
+      "target_new_followers_7days": 200
+    },
+    "publishing_strategy": {
+      "best_day": "Friday",
+      "best_time": "18:00-21:00",
+      "critical_hours": 3,
+      "campaign_duration": "June 1-30, 2026",
+      "republish_on": [
+        "TikTok",
+        "Instagram Reels",
+        "Facebook"
+      ]
+    },
+    "color_palette": {
+      "slide_1": {
+        "primary": "#667eea",
+        "secondary": "#764ba2",
+        "overlay": "rgba(0, 0, 0, 0.3)"
+      },
+      "slide_2": {
+        "gradient_start": "#667eea",
+        "gradient_end": "#764ba2"
+      },
+      "slide_3": {
+        "gradient_start": "#f093fb",
+        "gradient_end": "#f5576c"
+      },
+      "slide_4": {
+        "gradient_start": "#4facfe",
+        "gradient_end": "#00f2fe"
+      },
+      "slide_5": {
+        "gradient_start": "#fa709a",
+        "gradient_end": "#fee140"
+      },
+      "slide_6": {
+        "gradient_start": "#667eea",
+        "gradient_end": "#764ba2"
+      }
+    },
+    "accessibility": {
+      "alt_text": "Carousel celebrating Pride 2026 with messages of freedom, authenticity, and community acceptance",
+      "captions": true,
+      "high_contrast": true,
+      "readable_fonts": true
+    },
+    "metadata": {
+      "created_by": "Hera Marketing",
+      "version": "1.0",
+      "last_updated": "2026-06-22",
+      "template_reusable": true,
+      "notes": "All slides optimized for Instagram mobile viewing. Video should be 3-15 seconds. All text is customer-facing and tested for engagement."
+    }
+  }
+}
