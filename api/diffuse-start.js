@@ -1,14 +1,16 @@
 // Vercel serverless (raíz del repo): inicia una predicción en Replicate.
 // Estilo Magnific "Sharpy" — reconstrucción de poros y micro-textura.
-// Autocontenido para no depender de imports entre carpetas.
 const MODEL_ENDPOINT =
   'https://api.replicate.com/v1/models/philz1337x/clarity-upscaler/predictions'
 
+// Acepta la llave con cualquiera de los dos nombres habituales.
+const KEY = process.env.REPLICATE_API_KEY || process.env.REPLICATE_API_TOKEN
+
 const MAGNIFIC_STYLE = {
   prompt:
-    'masterpiece, best quality, highres, raw photo, realistic skin texture, visible pores, fine facial hair, natural skin imperfections, sharp focus, 8k, professional photography',
+    'masterpiece, best quality, highres, raw photo, realistic skin texture, visible pores, natural skin, sharp focus, 8k, professional photography',
   negative_prompt:
-    '(worst quality, low quality, normal quality:2), plastic skin, smooth skin, airbrushed, waxy, blurry, 3d render, cgi, illustration, painting, cartoon, oversaturated',
+    '(worst quality, low quality, normal quality:2), plastic skin, smooth skin, airbrushed, waxy, blurry, 3d render, cgi, illustration, cartoon',
   scale_factor: 2,
   dynamic: 6,
   creativity: 0.3,
@@ -34,32 +36,35 @@ function buildInput(body) {
 }
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido' })
   try {
     const body = req.body || {}
-    if (!body.imageDataUrl) return res.status(400).json({ error: 'Missing imageDataUrl' })
-    if (String(body.imageDataUrl).length > 10 * 1024 * 1024) {
-      return res.status(413).json({ error: 'Image too large (max 10MB)' })
+    if (!body.imageDataUrl) return res.status(400).json({ error: 'Falta la imagen' })
+    if (String(body.imageDataUrl).length > 4 * 1024 * 1024) {
+      return res.status(413).json({ error: 'Imagen demasiado grande (máx ~4MB). Usa una foto más pequeña.' })
     }
-    if (!process.env.REPLICATE_API_KEY) {
-      return res.status(500).json({ error: 'Server misconfigured: missing REPLICATE_API_KEY' })
+    if (!KEY) {
+      return res.status(500).json({ error: 'Falta REPLICATE_API_KEY en Vercel (Environment Variables).' })
     }
 
     const r = await fetch(MODEL_ENDPOINT, {
       method: 'POST',
-      headers: {
-        Authorization: `Token ${process.env.REPLICATE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ input: buildInput(body) }),
     })
+
+    // Surface el error REAL de Replicate (código + mensaje) para poder diagnosticar.
     if (!r.ok) {
-      const err = await r.json().catch(() => ({}))
-      return res.status(r.status).json({ error: 'Replicate API error', details: err })
+      const text = await r.text().catch(() => '')
+      let msg = text
+      try { msg = JSON.parse(text).detail || JSON.parse(text).title || text } catch {}
+      return res.status(200).json({
+        error: `Replicate ${r.status}: ${String(msg).slice(0, 240)}`,
+      })
     }
     const data = await r.json()
     return res.status(200).json({ id: data.id, status: data.status })
   } catch (err) {
-    return res.status(500).json({ error: 'Internal server error', message: err.message })
+    return res.status(200).json({ error: `Error interno: ${err.message}` })
   }
 }

@@ -184,13 +184,14 @@ export function DiffusionProcessor({ sourceImage, onSuccess, onClose }: Diffusio
               className="p-5 bg-red-500/10 border border-red-500/30 rounded-2xl space-y-3"
             >
               <p className="text-[12px] font-bold text-red-300">⚠️ Error en procesamiento</p>
-              <p className="text-[11px] text-red-200 font-mono break-words">{error}</p>
+              <p className="text-[12px] text-red-100 font-mono break-words bg-black/40 rounded-lg p-3 leading-relaxed">{error}</p>
               <div className="text-[10px] text-gray-400 space-y-1">
-                <p><span className="font-bold">Verifica:</span></p>
+                <p><span className="font-bold">Pista según el código:</span></p>
                 <ul className="list-disc list-inside space-y-0.5 ml-1">
-                  <li>Backend corriendo: localhost:5000</li>
-                  <li>REPLICATE_API_KEY en server/.env.local</li>
-                  <li>Saldo/crédito en tu cuenta de Replicate</li>
+                  <li><b>401/403</b> → la API key es inválida o está desactivada</li>
+                  <li><b>402</b> → falta saldo/tarjeta en Replicate</li>
+                  <li><b>422</b> → parámetro no aceptado por el modelo</li>
+                  <li><b>500</b> → falta la variable REPLICATE_API_KEY en Vercel</li>
                 </ul>
               </div>
               <div className="flex gap-2 pt-2">
