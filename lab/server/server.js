@@ -3,7 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { fileURLToPath } from 'url'
 import path from 'path'
-import { MODEL_ENDPOINT, buildInput } from '../api/_config.js'
+import { PREDICTIONS_URL, buildInput, resolveModelVersion } from '../api/_config.js'
 
 // Cargar .env.local que vive junto a este archivo (server/.env.local),
 // sin importar desde qué carpeta se arranque el proceso.
@@ -29,10 +29,11 @@ app.post('/api/diffuse-start', async (req, res) => {
     if (!process.env.REPLICATE_API_KEY) {
       return res.status(500).json({ error: 'Server misconfigured: missing REPLICATE_API_KEY' })
     }
-    const r = await fetch(MODEL_ENDPOINT, {
+    const version = await resolveModelVersion(process.env.REPLICATE_API_KEY)
+    const r = await fetch(PREDICTIONS_URL, {
       method: 'POST',
-      headers: { Authorization: `Token ${process.env.REPLICATE_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ input: buildInput(body) }),
+      headers: { Authorization: `Bearer ${process.env.REPLICATE_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ version, input: buildInput(body) }),
     })
     if (!r.ok) {
       const err = await r.json().catch(() => ({}))

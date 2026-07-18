@@ -1,8 +1,14 @@
 // Vercel serverless (raíz del repo): inicia una predicción en Replicate.
-// GET  → auto-test de conexión (¿hay key? ¿es válida?), sin coste.
+// GET  → auto-test de conexión (¿hay key? ¿es válida? ¿el modelo responde?), sin coste.
 // POST → inicia la predicción (estilo Magnific "Sharpy").
-const MODEL_ENDPOINT =
-  'https://api.replicate.com/v1/models/philz1337x/clarity-upscaler/predictions'
+//
+// IMPORTANTE: clarity-upscaler es un modelo COMUNITARIO. Replicate solo permite
+// /v1/models/{owner}/{model}/predictions para modelos oficiales — para los
+// comunitarios hay que usar /v1/predictions con el hash de versión (si no: 404).
+const MODEL_URL = 'https://api.replicate.com/v1/models/philz1337x/clarity-upscaler'
+const PREDICTIONS_URL = 'https://api.replicate.com/v1/predictions'
+// Versión conocida de clarity-upscaler (fallback si no podemos resolver la última).
+const FALLBACK_VERSION = 'dfad41707589d68ecdccd1dfa600d55a208f9310748e44bfe35b4a6291453d5e'
 
 // Acepta la llave con cualquiera de los dos nombres habituales.
 const KEY = process.env.REPLICATE_API_KEY || process.env.REPLICATE_API_TOKEN
@@ -36,6 +42,22 @@ function buildInput(body) {
   }
 }
 
+let cachedVersion = null
+async function resolveModelVersion() {
+  if (cachedVersion) return cachedVersion
+  try {
+    const r = await fetch(MODEL_URL, { headers: { Authorization: `Bearer ${KEY}` } })
+    if (r.ok) {
+      const m = await r.json().catch(() => ({}))
+      if (m.latest_version && m.latest_version.id) {
+        cachedVersion = m.latest_version.id
+        return cachedVersion
+      }
+    }
+  } catch {}
+  return FALLBACK_VERSION
+}
+
 async function selfTest() {
   if (!KEY) {
     return {
@@ -47,20 +69,22 @@ async function selfTest() {
     const r = await fetch('https://api.replicate.com/v1/account', {
       headers: { Authorization: `Bearer ${KEY}` },
     })
-    if (r.ok) {
-      const acc = await r.json().catch(() => ({}))
-      return {
-        ok: true,
-        verdict: `Conexión IA lista (cuenta: ${acc.username || 'ok'}, clave ${KEY.slice(0, 6)}…).`,
-      }
-    }
     if (r.status === 401) {
       return {
         ok: false,
         verdict: `La clave (${KEY.slice(0, 6)}…) es inválida o está desactivada — crea un token nuevo en replicate.com/account/api-tokens y actualízalo en Vercel.`,
       }
     }
-    return { ok: false, verdict: `Replicate respondió ${r.status} al verificar la clave.` }
+    if (!r.ok) {
+      return { ok: false, verdict: `Replicate respondió ${r.status} al verificar la clave.` }
+    }
+    const acc = await r.json().catch(() => ({}))
+    // Segundo chequeo: resolver la versión del modelo clarity-upscaler (gratis).
+    const version = await resolveModelVersion()
+    return {
+      ok: true,
+      verdict: `Conexión IA lista (cuenta: ${acc.username || 'ok'}, modelo Clarity ${String(version).slice(0, 8)}…).`,
+    }
   } catch (e) {
     return { ok: false, verdict: `No se pudo contactar a Replicate: ${e.message}` }
   }
@@ -82,10 +106,11 @@ export default async function handler(req, res) {
       return res.status(200).json({ error: 'Falta la variable REPLICATE_API_KEY en Vercel.' })
     }
 
-    const r = await fetch(MODEL_ENDPOINT, {
+    const version = await resolveModelVersion()
+    const r = await fetch(PREDICTIONS_URL, {
       method: 'POST',
       headers: { Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ input: buildInput(body) }),
+      body: JSON.stringify({ version, input: buildInput(body) }),
     })
 
     // Devuelve SIEMPRE el error real de Replicate (código + mensaje).

@@ -1,7 +1,13 @@
 // Receta compartida "Sharpy / Portrait" — realismo de piel estilo Magnific.
-// Usada por diffuse-start (serverless) y por el server Express local.
-export const MODEL_ENDPOINT =
-  'https://api.replicate.com/v1/models/philz1337x/clarity-upscaler/predictions'
+// Usada por el server Express local (server/server.js).
+//
+// IMPORTANTE: clarity-upscaler es un modelo COMUNITARIO de Replicate. El
+// endpoint /v1/models/{owner}/{model}/predictions solo funciona para modelos
+// oficiales — para los comunitarios hay que usar /v1/predictions con el hash
+// de versión (si no, Replicate devuelve 404).
+export const MODEL_URL = 'https://api.replicate.com/v1/models/philz1337x/clarity-upscaler'
+export const PREDICTIONS_URL = 'https://api.replicate.com/v1/predictions'
+export const FALLBACK_VERSION = 'dfad41707589d68ecdccd1dfa600d55a208f9310748e44bfe35b4a6291453d5e'
 
 export const MAGNIFIC_STYLE = {
   prompt:
@@ -31,4 +37,21 @@ export function buildInput(body) {
     num_inference_steps: MAGNIFIC_STYLE.num_inference_steps,
     output_format: 'png',
   }
+}
+
+let cachedVersion = null
+/** Resuelve la última versión del modelo (GET gratuito); cae al hash conocido si falla. */
+export async function resolveModelVersion(key) {
+  if (cachedVersion) return cachedVersion
+  try {
+    const r = await fetch(MODEL_URL, { headers: { Authorization: `Bearer ${key}` } })
+    if (r.ok) {
+      const m = await r.json().catch(() => ({}))
+      if (m.latest_version && m.latest_version.id) {
+        cachedVersion = m.latest_version.id
+        return cachedVersion
+      }
+    }
+  } catch {}
+  return FALLBACK_VERSION
 }
