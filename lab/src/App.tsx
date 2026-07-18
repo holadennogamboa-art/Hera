@@ -24,6 +24,7 @@ import { MoodboardGrid } from './components/MoodboardGrid'
 import { Scheduler } from './components/Scheduler'
 import { CarouselStudio } from './components/CarouselStudio'
 import { ResultSheet } from './components/ResultSheet'
+import { DiffusionProcessor } from './components/DiffusionProcessor'
 import { Button } from './components/ui/button'
 import { Post, loadPosts, savePosts, newId } from './lib/storage'
 import { processImage, StageId } from './lib/engines'
@@ -173,6 +174,7 @@ export default function App() {
   const [showStudio, setShowStudio] = useState(false)
   const [intensity, setIntensity] = useState(1)
   const [sheet, setSheet] = useState<DeliverItem[] | null>(null)
+  const [diffusionSource, setDiffusionSource] = useState<string | null>(null)
   const processCache = useRef<Map<string, string>>(new Map())
 
   const stageId = currentStage.id as StageId
@@ -500,6 +502,12 @@ export default function App() {
                         >
                           <Instagram className="w-4 h-4 mr-2" /> AÑADIR AL FEED
                         </Button>
+                        <Button
+                          onClick={() => setDiffusionSource(processed)}
+                          className="rounded-full px-8 h-12 bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 font-bold"
+                        >
+                          <Sparkles className="w-4 h-4 mr-2" /> REALISMO DE PIEL
+                        </Button>
                       </div>
 
                       {/* Receta IA — realismo de piel (difusión externa) */}
@@ -619,6 +627,27 @@ export default function App() {
       {/* Hoja de guardado (iOS-compatible) */}
       <AnimatePresence>
         {sheet && <ResultSheet items={sheet} title="Guardar pieza" onClose={() => setSheet(null)} />}
+      </AnimatePresence>
+
+      {/* Diffusion Processor Modal */}
+      <AnimatePresence>
+        {diffusionSource && (
+          <DiffusionProcessor
+            sourceImage={diffusionSource}
+            onSuccess={(resultUrl) => {
+              handleAdd([{
+                id: newId(),
+                type: 'image',
+                image: resultUrl,
+                status: 'draft',
+                caption: 'AI Enhanced — Skin Realism',
+              }])
+              setDiffusionSource(null)
+              setView('moodboard')
+            }}
+            onClose={() => setDiffusionSource(null)}
+          />
+        )}
       </AnimatePresence>
 
       {/* Footer Status Bar */}
