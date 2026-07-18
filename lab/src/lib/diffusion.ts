@@ -21,6 +21,19 @@ export const MAGNIFIC_PRESETS: Record<string, DiffusionParams & { label: string;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
+/** Auto-test de conexión: ¿está la key en el servidor y es válida? (GET, sin coste) */
+export async function checkDiffusionAPI(): Promise<{ ok: boolean; verdict: string }> {
+  try {
+    const r = await fetch('/api/diffuse-start')
+    if (!r.ok) return { ok: false, verdict: `El endpoint /api no responde (HTTP ${r.status}).` }
+    const data = await r.json()
+    if (typeof data.ok === 'boolean') return data
+    return { ok: false, verdict: 'Respuesta inesperada del servidor.' }
+  } catch (e) {
+    return { ok: false, verdict: 'No se pudo contactar al servidor /api.' }
+  }
+}
+
 /**
  * Procesa la imagen con el modelo de difusión.
  * Arranca la predicción y hace polling al estado hasta terminar.
@@ -34,12 +47,12 @@ export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionPa
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ imageDataUrl, ...params }),
   })
-  if (!startRes.ok) {
-    const error = await startRes.json().catch(() => ({}))
-    throw new Error(error.error || `API error: ${startRes.status}`)
-  }
-  const { id } = await startRes.json()
-  if (!id) throw new Error('No prediction id returned by server')
+  const startData = await startRes.json().catch(() => ({}))
+  // El servidor devuelve el error REAL de Replicate en el campo `error`.
+  if (startData.error) throw new Error(startData.error)
+  if (!startRes.ok) throw new Error(`API error: ${startRes.status}`)
+  const id = startData.id
+  if (!id) throw new Error('El servidor no devolvió id de predicción')
 
   // 2) Polling del estado (hasta ~3 min)
   for (let i = 0; i < 90; i++) {

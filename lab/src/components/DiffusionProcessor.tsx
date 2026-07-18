@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
 import { Loader2, X, Eye, Sparkles, Wand2 } from 'lucide-react'
 import { Button } from './ui/button'
-import { callDiffusionAPI, MAGNIFIC_PRESETS, DiffusionParams } from '../lib/diffusion'
+import { callDiffusionAPI, checkDiffusionAPI, MAGNIFIC_PRESETS, DiffusionParams } from '../lib/diffusion'
 
 interface DiffusionProcessorProps {
   sourceImage: string
@@ -19,6 +19,18 @@ export function DiffusionProcessor({ sourceImage, onSuccess, onClose }: Diffusio
   const [error, setError] = useState<string | null>(null)
   const [compare, setCompare] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [health, setHealth] = useState<{ ok: boolean; verdict: string } | null>(null)
+
+  // Auto-diagnóstico al abrir: comprueba key y conexión con Replicate (sin coste).
+  useEffect(() => {
+    let cancelled = false
+    checkDiffusionAPI().then((h) => {
+      if (!cancelled) setHealth(h)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const run = async () => {
     setProcessing(true)
@@ -68,9 +80,27 @@ export function DiffusionProcessor({ sourceImage, onSuccess, onClose }: Diffusio
           </button>
         </div>
 
-        <p className="text-[11px] text-gray-500 font-mono mb-5 -mt-2">
+        <p className="text-[11px] text-gray-500 font-mono mb-3 -mt-2">
           Motor: Clarity Upscaler · estilo Magnific "Sharpy" — reconstruye poros y micro-textura por difusión
         </p>
+
+        {/* Estado de conexión IA (auto-diagnóstico) */}
+        <div
+          className={`mb-5 px-4 py-2.5 rounded-xl border text-[11px] font-mono leading-relaxed flex items-start gap-2 ${
+            health === null
+              ? 'bg-white/5 border-white/10 text-gray-500'
+              : health.ok
+                ? 'bg-green-500/10 border-green-500/25 text-green-300'
+                : 'bg-red-500/10 border-red-500/30 text-red-200'
+          }`}
+        >
+          <span className="shrink-0 mt-0.5">
+            {health === null ? '…' : health.ok ? '✅' : '⛔'}
+          </span>
+          <span className="break-words">
+            {health === null ? 'Comprobando conexión IA…' : health.verdict}
+          </span>
+        </div>
 
         <div className="space-y-6">
           {/* Imagen de entrada */}
