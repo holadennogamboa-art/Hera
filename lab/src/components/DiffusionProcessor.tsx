@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
-import { Loader2, X, Eye, Sparkles, Wand2 } from 'lucide-react'
+import { Loader2, X, Eye, Sparkles, Wand2, Download } from 'lucide-react'
 import { Button } from './ui/button'
-import { callDiffusionAPI, checkDiffusionAPI, MAGNIFIC_PRESETS, DiffusionParams } from '../lib/diffusion'
+import { callDiffusionAPI, checkDiffusionAPI, saveDiffusionImage, MAGNIFIC_PRESETS, DiffusionParams } from '../lib/diffusion'
 
 interface DiffusionProcessorProps {
   sourceImage: string
@@ -20,6 +20,21 @@ export function DiffusionProcessor({ sourceImage, onSuccess, onClose }: Diffusio
   const [compare, setCompare] = useState(false)
   const [progress, setProgress] = useState(0)
   const [health, setHealth] = useState<{ ok: boolean; verdict: string } | null>(null)
+  const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
+
+  const save = async () => {
+    if (!result || saving) return
+    setSaving(true)
+    setSaveError(null)
+    try {
+      await saveDiffusionImage(result)
+    } catch (err) {
+      setSaveError(err instanceof Error ? err.message : 'No se pudo guardar')
+    } finally {
+      setSaving(false)
+    }
+  }
 
   // Auto-diagnóstico al abrir: comprueba key y conexión con Replicate (sin coste).
   useEffect(() => {
@@ -266,6 +281,24 @@ export function DiffusionProcessor({ sourceImage, onSuccess, onClose }: Diffusio
               </div>
 
               <div className="flex flex-col gap-2 pt-2">
+                <Button
+                  onClick={save}
+                  disabled={saving}
+                  className="w-full h-12 bg-white text-black hover:bg-gray-200 font-bold rounded-xl"
+                >
+                  {saving ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Preparando JPG…
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4 mr-2" /> GUARDAR IMAGEN (JPG máx. calidad)
+                    </>
+                  )}
+                </Button>
+                {saveError && (
+                  <p className="text-[10px] text-red-300 text-center font-mono">{saveError}</p>
+                )}
                 <Button
                   onClick={() => onSuccess(result)}
                   className="w-full h-12 bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 font-bold rounded-xl"

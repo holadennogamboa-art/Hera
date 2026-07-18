@@ -22,7 +22,7 @@ const MAGNIFIC_STYLE = {
   dynamic: 6,
   creativity: 0.3,
   resemblance: 1.2,
-  sharpen: 1,
+  sharpen: 0,
   num_inference_steps: 18,
 }
 

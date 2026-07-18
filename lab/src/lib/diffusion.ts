@@ -12,11 +12,13 @@ export interface DiffusionParams {
   negativePrompt?: string
 }
 
-/** Presets tipo Magnific listos para usar. */
+/** Presets tipo Magnific listos para usar.
+ *  Calibración anti-deriva: creativity baja + resemblance alta = misma cara,
+ *  misma luz, solo gana micro-textura. dynamic bajo evita el look HDR "de IA". */
 export const MAGNIFIC_PRESETS: Record<string, DiffusionParams & { label: string; hint: string }> = {
-  subtle: { label: 'SUTIL', hint: 'Máxima fidelidad, textura ligera', creativity: 0.2, resemblance: 1.5, dynamic: 4, scaleFactor: 2 },
-  balanced: { label: 'EQUILIBRADO', hint: 'Poros y piel real (recomendado)', creativity: 0.3, resemblance: 1.2, dynamic: 6, scaleFactor: 2 },
-  strong: { label: 'FUERTE', hint: 'Reconstrucción intensa de detalle', creativity: 0.45, resemblance: 0.9, dynamic: 8, scaleFactor: 2 },
+  subtle: { label: 'SUTIL', hint: 'Idéntica a la original, piel afinada', creativity: 0.1, resemblance: 1.6, dynamic: 3, scaleFactor: 2 },
+  balanced: { label: 'EQUILIBRADO', hint: 'Fiel + textura real (recomendado)', creativity: 0.18, resemblance: 1.5, dynamic: 4, scaleFactor: 2 },
+  strong: { label: 'FUERTE', hint: 'Más detalle · puede alterar rasgos', creativity: 0.3, resemblance: 1.3, dynamic: 6, scaleFactor: 2 },
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -68,22 +70,47 @@ export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionPa
 }
 
 /**
- * Descargar la imagen resultante (convertir URL remota a blob local)
+ * Guardar la imagen resultante en máxima calidad.
+ * Convierte el PNG remoto a JPG 95% a resolución completa y lo entrega con
+ * el menú nativo de compartir en iOS ("Guardar imagen") o descarga directa
+ * en escritorio. Un solo toque — sin "guardar como".
  */
-export async function downloadDiffusionResult(resultUrl: string, filename: string): Promise<void> {
-  try {
-    const response = await fetch(resultUrl)
-    if (!response.ok) throw new Error('Failed to fetch result image')
+export async function saveDiffusionImage(resultUrl: string, filename = 'hera-realismo.jpg'): Promise<void> {
+  const response = await fetch(resultUrl)
+  if (!response.ok) throw new Error('No se pudo descargar la imagen del servidor')
+  const sourceBlob = await response.blob()
 
-    const blob = await response.blob()
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = filename
-    link.click()
-    URL.revokeObjectURL(url)
-  } catch (err) {
-    console.error('[diffusion] Download failed:', err)
-    throw new Error(`Failed to download result: ${err instanceof Error ? err.message : 'unknown'}`)
+  // Re-encodar a JPG de alta calidad a resolución completa (mejor para Instagram).
+  const bitmap = await createImageBitmap(sourceBlob)
+  const canvas = document.createElement('canvas')
+  canvas.width = bitmap.width
+  canvas.height = bitmap.height
+  const ctx = canvas.getContext('2d')
+  if (!ctx) throw new Error('Canvas no disponible')
+  ctx.drawImage(bitmap, 0, 0)
+  bitmap.close()
+
+  const jpegBlob = await new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('No se pudo convertir a JPG'))), 'image/jpeg', 0.95)
+  })
+
+  const file = new File([jpegBlob], filename, { type: 'image/jpeg' })
+
+  // iOS/Android: hoja nativa de compartir → "Guardar imagen" va directo a Fotos.
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file] })
+      return
+    } catch (err) {
+      // Usuario canceló la hoja → no es error; cualquier otro fallo → descarga clásica.
+      if (err instanceof Error && err.name === 'AbortError') return
+    }
   }
+
+  const url = URL.createObjectURL(jpegBlob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  link.click()
+  setTimeout(() => URL.revokeObjectURL(url), 5000)
 }
