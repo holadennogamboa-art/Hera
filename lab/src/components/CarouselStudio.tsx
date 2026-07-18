@@ -4,6 +4,8 @@ import { X, Download, Plus, ChevronLeft, ChevronRight, Trash2, Loader2, Instagra
 import { Button } from './ui/button'
 import { Post, newId } from '../lib/storage'
 import { renderSlide, SlideConfig, SlideStyle, PaletteId, PALETTES } from '../lib/carousel'
+import { ResultSheet } from './ResultSheet'
+import { DeliverItem } from '../lib/download'
 
 interface CarouselStudioProps {
   posts: Post[]
@@ -98,16 +100,13 @@ export function CarouselStudio({ posts, onClose, onAddToFeed }: CarouselStudioPr
     return out
   }
 
+  const [sheet, setSheet] = useState<DeliverItem[] | null>(null)
+
   const downloadAll = async () => {
     setExporting(true)
     try {
       const rendered = await renderAll()
-      rendered.forEach((url, i) => {
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `HERA_carrusel_${String(i + 1).padStart(2, '0')}.jpg`
-        a.click()
-      })
+      setSheet(rendered.map((url, i) => ({ url, name: `HERA_carrusel_${String(i + 1).padStart(2, '0')}.jpg` })))
     } finally {
       setExporting(false)
     }
@@ -115,10 +114,7 @@ export function CarouselStudio({ posts, onClose, onAddToFeed }: CarouselStudioPr
 
   const downloadOne = () => {
     if (!preview) return
-    const a = document.createElement('a')
-    a.href = preview
-    a.download = `HERA_slide_${String(active + 1).padStart(2, '0')}.jpg`
-    a.click()
+    setSheet([{ url: preview, name: `HERA_slide_${String(active + 1).padStart(2, '0')}.jpg` }])
   }
 
   const addToFeed = async () => {
@@ -309,6 +305,11 @@ export function CarouselStudio({ posts, onClose, onAddToFeed }: CarouselStudioPr
             )}
           </div>
         </div>
+
+        {/* Hoja de guardado (iOS-compatible) */}
+        <AnimatePresence>
+          {sheet && <ResultSheet items={sheet} title="Guardar carrusel" onClose={() => setSheet(null)} />}
+        </AnimatePresence>
 
         {/* Selector de fotos del feed */}
         <AnimatePresence>

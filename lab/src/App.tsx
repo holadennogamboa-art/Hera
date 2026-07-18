@@ -23,9 +23,11 @@ import { EngineVisualizer } from './components/EngineVisualizer'
 import { MoodboardGrid } from './components/MoodboardGrid'
 import { Scheduler } from './components/Scheduler'
 import { CarouselStudio } from './components/CarouselStudio'
+import { ResultSheet } from './components/ResultSheet'
 import { Button } from './components/ui/button'
 import { Post, loadPosts, savePosts, newId } from './lib/storage'
 import { processImage, StageId } from './lib/engines'
+import { DeliverItem } from './lib/download'
 
 const stages = [
   {
@@ -169,6 +171,8 @@ export default function App() {
   const [processingStage, setProcessingStage] = useState(false)
   const [compare, setCompare] = useState(false)
   const [showStudio, setShowStudio] = useState(false)
+  const [intensity, setIntensity] = useState(1)
+  const [sheet, setSheet] = useState<DeliverItem[] | null>(null)
   const processCache = useRef<Map<string, string>>(new Map())
 
   const stageId = currentStage.id as StageId
@@ -183,14 +187,14 @@ export default function App() {
       setProcessed(engineImage)
       return
     }
-    const key = `${stageId}:${engineImage.length}:${engineImage.slice(100, 132)}`
+    const key = `${stageId}:${intensity}:${engineImage.length}:${engineImage.slice(100, 132)}`
     const cached = processCache.current.get(key)
     if (cached) {
       setProcessed(cached)
       return
     }
     setProcessingStage(true)
-    processImage(engineImage, stageId)
+    processImage(engineImage, stageId, intensity)
       .then((out) => {
         if (cancelled) return
         processCache.current.set(key, out)
@@ -205,14 +209,11 @@ export default function App() {
     return () => {
       cancelled = true
     }
-  }, [engineImage, stageId])
+  }, [engineImage, stageId, intensity])
 
   const downloadFinal = () => {
     if (!processed) return
-    const a = document.createElement('a')
-    a.href = processed
-    a.download = 'HERA_pieza_final.jpg'
-    a.click()
+    setSheet([{ url: processed, name: 'HERA_pieza_final.jpg' }])
   }
 
   const addFinalToFeed = () => {
@@ -460,22 +461,84 @@ export default function App() {
                     </Button>
                   </div>
 
-                  {currentStage.isFinal && processed && engineImage && (
-                    <div className="flex flex-wrap gap-3 pt-2">
-                      <Button
-                        onClick={downloadFinal}
-                        className="rounded-full px-8 h-12 bg-gradient-to-r from-yellow-500 to-amber-500 text-black hover:opacity-90 font-bold"
-                      >
-                        <Download className="w-4 h-4 mr-2" /> DESCARGAR PIEZA
-                      </Button>
-                      <Button
-                        variant="secondary"
-                        onClick={addFinalToFeed}
-                        className="rounded-full px-8 h-12 bg-white/10 text-white hover:bg-white/20 border border-white/20"
-                      >
-                        <Instagram className="w-4 h-4 mr-2" /> AÑADIR AL FEED
-                      </Button>
+                  {stageId !== 'source' && engineImage && (
+                    <div className="flex items-center gap-2 pt-1">
+                      <span className="text-[10px] font-bold tracking-widest uppercase text-gray-500 mr-1">Intensidad</span>
+                      {[
+                        { label: 'SUAVE', v: 0.6 },
+                        { label: 'MEDIO', v: 1 },
+                        { label: 'FUERTE', v: 1.7 },
+                      ].map((opt) => (
+                        <button
+                          key={opt.label}
+                          onClick={() => setIntensity(opt.v)}
+                          className={`text-[10px] px-3 py-1.5 rounded-full border uppercase tracking-wider transition-all cursor-pointer ${
+                            intensity === opt.v
+                              ? 'bg-white text-black border-white'
+                              : 'bg-white/5 border-white/15 text-gray-500 hover:border-white/40'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
                     </div>
+                  )}
+
+                  {currentStage.isFinal && processed && engineImage && (
+                    <>
+                      <div className="flex flex-wrap gap-3 pt-2">
+                        <Button
+                          onClick={downloadFinal}
+                          className="rounded-full px-8 h-12 bg-gradient-to-r from-yellow-500 to-amber-500 text-black hover:opacity-90 font-bold"
+                        >
+                          <Download className="w-4 h-4 mr-2" /> GUARDAR PIEZA
+                        </Button>
+                        <Button
+                          variant="secondary"
+                          onClick={addFinalToFeed}
+                          className="rounded-full px-8 h-12 bg-white/10 text-white hover:bg-white/20 border border-white/20"
+                        >
+                          <Instagram className="w-4 h-4 mr-2" /> AÑADIR AL FEED
+                        </Button>
+                      </div>
+
+                      {/* Receta IA — realismo de piel (difusión externa) */}
+                      <div className="mt-4 p-5 bg-white/5 border border-white/10 rounded-2xl space-y-3 max-w-lg">
+                        <h3 className="text-[10px] font-bold tracking-widest uppercase text-purple-300 flex items-center gap-2">
+                          <Sparkles className="w-3.5 h-3.5" /> Motor IA · Realismo de piel (Magnific / Krea)
+                        </h3>
+                        <p className="text-[11px] text-gray-400 leading-relaxed">
+                          La reconstrucción de poros y micro-texturas necesita un modelo de difusión en GPU — corre en tu
+                          herramienta IA. Guarda la pieza de arriba, súbela allí y aplica esta receta exacta:
+                        </p>
+                        <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
+                          <div className="bg-black/40 rounded-lg px-3 py-2"><span className="text-gray-500">Engine</span><br /><span className="text-white">Sharpy</span></div>
+                          <div className="bg-black/40 rounded-lg px-3 py-2"><span className="text-gray-500">Optimized for</span><br /><span className="text-white">Portrait / Films</span></div>
+                          <div className="bg-black/40 rounded-lg px-3 py-2"><span className="text-gray-500">Creativity</span><br /><span className="text-white">1–2 (bajo)</span></div>
+                          <div className="bg-black/40 rounded-lg px-3 py-2"><span className="text-gray-500">Resemblance</span><br /><span className="text-white">70–90 (alto)</span></div>
+                          <div className="bg-black/40 rounded-lg px-3 py-2"><span className="text-gray-500">HDR</span><br /><span className="text-white">0</span></div>
+                          <div className="bg-black/40 rounded-lg px-3 py-2"><span className="text-gray-500">Fractality</span><br /><span className="text-white">moderado</span></div>
+                        </div>
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => navigator.clipboard?.writeText('raw photo, realistic skin texture, pores, natural lighting, 8k, photography')}
+                            className="text-[10px] border-white/15"
+                          >
+                            Copiar prompt
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => navigator.clipboard?.writeText('plastic, smooth skin, airbrushed, 3d render, illustration')}
+                            className="text-[10px] border-white/15"
+                          >
+                            Copiar negative
+                          </Button>
+                        </div>
+                      </div>
+                    </>
                   )}
                 </motion.div>
 
@@ -551,6 +614,11 @@ export default function App() {
         {showStudio && (
           <CarouselStudio posts={posts} onClose={() => setShowStudio(false)} onAddToFeed={addCarouselToFeed} />
         )}
+      </AnimatePresence>
+
+      {/* Hoja de guardado (iOS-compatible) */}
+      <AnimatePresence>
+        {sheet && <ResultSheet items={sheet} title="Guardar pieza" onClose={() => setSheet(null)} />}
       </AnimatePresence>
 
       {/* Footer Status Bar */}

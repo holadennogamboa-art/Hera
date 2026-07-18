@@ -68,9 +68,9 @@ function boxBlur(src: Uint8ClampedArray, w: number, h: number, radius: number): 
 }
 
 // GEO-LOCK: nitidez/claridad (unsharp mask fina) — realza detalle geométrico.
-function applyGeoLock(data: Uint8ClampedArray, w: number, h: number) {
+function applyGeoLock(data: Uint8ClampedArray, w: number, h: number, k: number) {
   const blurred = boxBlur(data, w, h, 2)
-  const amount = 0.85
+  const amount = 0.85 * k
   for (let i = 0; i < data.length; i += 4) {
     data[i] = data[i] + (data[i] - blurred[i]) * amount
     data[i + 1] = data[i + 1] + (data[i + 1] - blurred[i + 1]) * amount
@@ -79,7 +79,7 @@ function applyGeoLock(data: Uint8ClampedArray, w: number, h: number) {
 }
 
 // ATMOSPHERE: bloom en altas luces + viñeta suave — profundidad atmosférica.
-function applyAtmosphere(data: Uint8ClampedArray, w: number, h: number) {
+function applyAtmosphere(data: Uint8ClampedArray, w: number, h: number, k: number) {
   // máscara de altas luces (luminancia)
   const mask = new Uint8ClampedArray(data.length)
   for (let i = 0; i < data.length; i += 4) {
@@ -88,7 +88,7 @@ function applyAtmosphere(data: Uint8ClampedArray, w: number, h: number) {
     mask[i] = v; mask[i + 1] = v; mask[i + 2] = v; mask[i + 3] = 255
   }
   const glow = boxBlur(mask, w, h, Math.max(6, Math.round(w / 90)))
-  const opacity = 0.4
+  const opacity = 0.4 * k
   for (let i = 0; i < data.length; i += 4) {
     // screen blend, misma cantidad por canal → no cambia el tono
     data[i] = 255 - ((255 - data[i]) * (255 - glow[i] * opacity)) / 255
@@ -101,7 +101,7 @@ function applyAtmosphere(data: Uint8ClampedArray, w: number, h: number) {
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       const d = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) / maxD
-      const f = 1 - 0.22 * d * d
+      const f = 1 - 0.22 * k * d * d
       const p = (y * w + x) * 4
       data[p] *= f; data[p + 1] *= f; data[p + 2] *= f
     }
@@ -109,16 +109,16 @@ function applyAtmosphere(data: Uint8ClampedArray, w: number, h: number) {
 }
 
 // TEXTURE-BLEND: contraste local (claridad amplia) + grano fílmico monocromo.
-function applyTexture(data: Uint8ClampedArray, w: number, h: number) {
+function applyTexture(data: Uint8ClampedArray, w: number, h: number, k: number) {
   const blurred = boxBlur(data, w, h, Math.max(12, Math.round(w / 45)))
-  const amount = 0.3
+  const amount = 0.3 * k
   for (let i = 0; i < data.length; i += 4) {
     data[i] = data[i] + (data[i] - blurred[i]) * amount
     data[i + 1] = data[i + 1] + (data[i + 1] - blurred[i + 1]) * amount
     data[i + 2] = data[i + 2] + (data[i + 2] - blurred[i + 2]) * amount
   }
   // grano: mismo valor en RGB → monocromo, no altera color
-  const strength = 12
+  const strength = 12 * k
   for (let i = 0; i < data.length; i += 4) {
     const n = (Math.random() - 0.5) * strength
     data[i] += n; data[i + 1] += n; data[i + 2] += n
@@ -126,9 +126,9 @@ function applyTexture(data: Uint8ClampedArray, w: number, h: number) {
 }
 
 // FINAL: curva S de luminancia suave + pulido fino.
-function applyFinal(data: Uint8ClampedArray, w: number, h: number) {
+function applyFinal(data: Uint8ClampedArray, w: number, h: number, k: number) {
   const lut = new Uint8ClampedArray(256)
-  const mix = 0.3
+  const mix = Math.min(0.55, 0.3 * k)
   for (let i = 0; i < 256; i++) {
     const x = i / 255
     const s = x * x * (3 - 2 * x) // smoothstep
@@ -140,7 +140,7 @@ function applyFinal(data: Uint8ClampedArray, w: number, h: number) {
     data[i + 2] = lut[data[i + 2]]
   }
   const blurred = boxBlur(data, w, h, 1)
-  const amount = 0.35
+  const amount = 0.35 * k
   for (let i = 0; i < data.length; i += 4) {
     data[i] = data[i] + (data[i] - blurred[i]) * amount
     data[i + 1] = data[i + 1] + (data[i + 1] - blurred[i + 1]) * amount
@@ -152,7 +152,7 @@ function applyFinal(data: Uint8ClampedArray, w: number, h: number) {
  * Procesa la imagen acumulando los motores hasta la etapa dada.
  * 'source' devuelve la original tal cual.
  */
-export async function processImage(dataUrl: string, stage: StageId): Promise<string> {
+export async function processImage(dataUrl: string, stage: StageId, intensity = 1): Promise<string> {
   const idx = STAGE_ORDER.indexOf(stage)
   if (idx <= 0) return dataUrl
 
@@ -170,10 +170,11 @@ export async function processImage(dataUrl: string, stage: StageId): Promise<str
   const imageData = ctx.getImageData(0, 0, w, h)
   const data = imageData.data
 
-  if (idx >= 1) applyGeoLock(data, w, h)
-  if (idx >= 2) applyAtmosphere(data, w, h)
-  if (idx >= 3) applyTexture(data, w, h)
-  if (idx >= 4) applyFinal(data, w, h)
+  const k = intensity
+  if (idx >= 1) applyGeoLock(data, w, h, k)
+  if (idx >= 2) applyAtmosphere(data, w, h, k)
+  if (idx >= 3) applyTexture(data, w, h, k)
+  if (idx >= 4) applyFinal(data, w, h, k)
 
   ctx.putImageData(imageData, 0, 0)
   return canvas.toDataURL('image/jpeg', 0.9)
