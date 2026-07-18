@@ -19,31 +19,39 @@ export const MAGNIFIC_PRESETS: Record<string, DiffusionParams & { label: string;
   strong: { label: 'FUERTE', hint: 'Reconstrucción intensa de detalle', creativity: 0.45, resemblance: 0.9, dynamic: 8, scaleFactor: 2 },
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
+
 /**
- * Llamar al backend de diffusion para procesar imagen.
- * Devuelve la URL del resultado (URL pública de Replicate).
+ * Procesa la imagen con el modelo de difusión.
+ * Arranca la predicción y hace polling al estado hasta terminar.
+ * Endpoints relativos → funciona igual en Vercel (producción) que en
+ * `vercel dev` / proxy local. Devuelve la URL pública del resultado.
  */
 export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionParams = {}): Promise<string> {
-  try {
-    const response = await fetch('http://localhost:5000/api/diffuse', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ imageDataUrl, ...params }),
-    })
-
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.error || `API error: ${response.status}`)
-    }
-
-    const data: DiffusionResponse = await response.json()
-    return data.resultUrl
-  } catch (err) {
-    console.error('[diffusion] API call failed:', err)
-    throw new Error(
-      `Diffusion processing failed: ${err instanceof Error ? err.message : 'unknown error'}`
-    )
+  // 1) Arrancar la predicción
+  const startRes = await fetch('/api/diffuse-start', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ imageDataUrl, ...params }),
+  })
+  if (!startRes.ok) {
+    const error = await startRes.json().catch(() => ({}))
+    throw new Error(error.error || `API error: ${startRes.status}`)
   }
+  const { id } = await startRes.json()
+  if (!id) throw new Error('No prediction id returned by server')
+
+  // 2) Polling del estado (hasta ~3 min)
+  for (let i = 0; i < 90; i++) {
+    await sleep(2000)
+    const statusRes = await fetch(`/api/diffuse-status?id=${encodeURIComponent(id)}`)
+    if (!statusRes.ok) continue
+    const data = await statusRes.json()
+    if (data.status === 'succeeded' && data.resultUrl) return data.resultUrl as string
+    if (data.status === 'failed') throw new Error(data.error || 'Diffusion processing failed')
+    if (data.status === 'canceled') throw new Error('Prediction was canceled')
+  }
+  throw new Error('Processing timeout (exceeded 3 minutes)')
 }
 
 /**
