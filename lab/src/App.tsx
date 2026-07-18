@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import {
   ChevronRight,
@@ -15,12 +15,17 @@ import {
   Grid3X3,
   Image as ImageIcon,
   Share2,
+  Download,
+  Loader2,
+  Eye,
 } from 'lucide-react'
 import { EngineVisualizer } from './components/EngineVisualizer'
 import { MoodboardGrid } from './components/MoodboardGrid'
 import { Scheduler } from './components/Scheduler'
+import { CarouselStudio } from './components/CarouselStudio'
 import { Button } from './components/ui/button'
-import { Post, loadPosts, savePosts } from './lib/storage'
+import { Post, loadPosts, savePosts, newId } from './lib/storage'
+import { processImage, StageId } from './lib/engines'
 
 const stages = [
   {
@@ -158,6 +163,67 @@ export default function App() {
 
   // La imagen que procesan los motores: post seleccionado, o el primero del feed
   const engineImage = selectedPost?.image ?? posts[0]?.image
+
+  // ── Procesamiento real por motor ──
+  const [processed, setProcessed] = useState<string | undefined>(undefined)
+  const [processingStage, setProcessingStage] = useState(false)
+  const [compare, setCompare] = useState(false)
+  const [showStudio, setShowStudio] = useState(false)
+  const processCache = useRef<Map<string, string>>(new Map())
+
+  const stageId = currentStage.id as StageId
+
+  useEffect(() => {
+    let cancelled = false
+    if (!engineImage) {
+      setProcessed(undefined)
+      return
+    }
+    if (stageId === 'source') {
+      setProcessed(engineImage)
+      return
+    }
+    const key = `${stageId}:${engineImage.length}:${engineImage.slice(100, 132)}`
+    const cached = processCache.current.get(key)
+    if (cached) {
+      setProcessed(cached)
+      return
+    }
+    setProcessingStage(true)
+    processImage(engineImage, stageId)
+      .then((out) => {
+        if (cancelled) return
+        processCache.current.set(key, out)
+        setProcessed(out)
+      })
+      .catch(() => {
+        if (!cancelled) setProcessed(engineImage)
+      })
+      .finally(() => {
+        if (!cancelled) setProcessingStage(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [engineImage, stageId])
+
+  const downloadFinal = () => {
+    if (!processed) return
+    const a = document.createElement('a')
+    a.href = processed
+    a.download = 'HERA_pieza_final.jpg'
+    a.click()
+  }
+
+  const addFinalToFeed = () => {
+    if (!processed) return
+    handleAdd([{ id: newId(), type: 'image', image: processed, status: 'draft', caption: selectedPost?.caption }])
+    setView('moodboard')
+  }
+
+  const addCarouselToFeed = (slides: string[]) => {
+    handleAdd(slides.map((img) => ({ id: newId(), type: 'carousel' as const, image: img, status: 'draft' as const })))
+  }
 
   const counts = {
     published: posts.filter((p) => p.status === 'published').length,
@@ -306,12 +372,18 @@ export default function App() {
                     <h3 className="font-bold tracking-widest text-xs uppercase mb-6 flex items-center gap-2">
                       <ImageIcon className="w-4 h-4 text-purple-400" /> Creador de Carruseles
                     </h3>
-                    <div className="aspect-video bg-black/40 rounded-xl border border-dashed border-white/20 flex flex-col items-center justify-center gap-4 group cursor-pointer hover:border-white/40 transition-all">
+                    <div
+                      onClick={() => setShowStudio(true)}
+                      className="aspect-video bg-black/40 rounded-xl border border-dashed border-white/20 flex flex-col items-center justify-center gap-4 group cursor-pointer hover:border-white/40 transition-all"
+                    >
                       <div className="p-4 bg-white/5 rounded-full group-hover:scale-110 transition-transform">
-                        <ImageIcon className="w-8 h-8 text-gray-500" />
+                        <ImageIcon className="w-8 h-8 text-gray-500 group-hover:text-white transition-colors" />
                       </div>
-                      <p className="text-xs text-gray-500 font-mono text-center px-4">
-                        MARCA POSTS COMO "CAROUSEL" EN EL FEED PARA AGRUPARLOS
+                      <p className="text-xs text-gray-400 font-mono text-center px-4">
+                        ABRIR ESTUDIO — slides editoriales 1080×1350
+                      </p>
+                      <p className="text-[10px] text-gray-600 font-mono text-center px-4">
+                        estilos cinematic · minimal · clean · nota · cierre / paletas desert · studio · noir
                       </p>
                     </div>
                   </div>
@@ -387,6 +459,24 @@ export default function App() {
                       SIGUIENTE FASE <ChevronRight className="w-4 h-4 ml-1" />
                     </Button>
                   </div>
+
+                  {currentStage.isFinal && processed && engineImage && (
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      <Button
+                        onClick={downloadFinal}
+                        className="rounded-full px-8 h-12 bg-gradient-to-r from-yellow-500 to-amber-500 text-black hover:opacity-90 font-bold"
+                      >
+                        <Download className="w-4 h-4 mr-2" /> DESCARGAR PIEZA
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        onClick={addFinalToFeed}
+                        className="rounded-full px-8 h-12 bg-white/10 text-white hover:bg-white/20 border border-white/20"
+                      >
+                        <Instagram className="w-4 h-4 mr-2" /> AÑADIR AL FEED
+                      </Button>
+                    </div>
+                  )}
                 </motion.div>
 
                 {/* 3D Visualization */}
@@ -398,7 +488,23 @@ export default function App() {
                       transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
                     />
                     <div className="absolute inset-12 md:inset-16 rounded-3xl overflow-hidden border border-white/20 shadow-2xl bg-black/40 backdrop-blur-sm">
-                      <EngineVisualizer engineId={currentStage.id} image={engineImage} />
+                      <EngineVisualizer engineId={currentStage.id} image={compare ? engineImage : processed ?? engineImage} />
+                      {processingStage && (
+                        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center gap-3 z-20">
+                          <Loader2 className="w-8 h-8 animate-spin text-white/80" />
+                          <span className="text-[10px] font-mono tracking-[0.3em] text-white/60 uppercase">Procesando…</span>
+                        </div>
+                      )}
+                      {stageId !== 'source' && engineImage && !processingStage && (
+                        <button
+                          onPointerDown={() => setCompare(true)}
+                          onPointerUp={() => setCompare(false)}
+                          onPointerLeave={() => setCompare(false)}
+                          className="absolute bottom-3 right-3 z-20 flex items-center gap-1.5 bg-black/60 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase text-white/80 border border-white/20 cursor-pointer select-none"
+                        >
+                          <Eye className="w-3.5 h-3.5" /> {compare ? 'ORIGINAL' : 'COMPARAR'}
+                        </button>
+                      )}
                     </div>
                     {/* Floating decorative elements */}
                     {[...Array(6)].map((_, i) => (
@@ -439,6 +545,13 @@ export default function App() {
           )}
         </AnimatePresence>
       </main>
+
+      {/* Estudio de Carrusel */}
+      <AnimatePresence>
+        {showStudio && (
+          <CarouselStudio posts={posts} onClose={() => setShowStudio(false)} onAddToFeed={addCarouselToFeed} />
+        )}
+      </AnimatePresence>
 
       {/* Footer Status Bar */}
       <div className="absolute bottom-0 left-16 md:left-20 right-0 h-12 bg-black/50 backdrop-blur-xl border-t border-white/10 flex items-center justify-between px-4 md:px-8 z-50">
