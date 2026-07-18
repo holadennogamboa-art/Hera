@@ -67,10 +67,11 @@ function boxBlur(src: Uint8ClampedArray, w: number, h: number, radius: number): 
   return out
 }
 
-// GEO-LOCK: nitidez/claridad (unsharp mask fina) — realza detalle geométrico.
+// GEO-LOCK: nitidez fina y limpia (unsharp mask sutil, sin halos).
+// Objetivo Magnific: detalle real, no "crujiente".
 function applyGeoLock(data: Uint8ClampedArray, w: number, h: number, k: number) {
   const blurred = boxBlur(data, w, h, 2)
-  const amount = 0.85 * k
+  const amount = 0.3 * k // antes 0.85 — mucho más suave
   for (let i = 0; i < data.length; i += 4) {
     data[i] = data[i] + (data[i] - blurred[i]) * amount
     data[i + 1] = data[i + 1] + (data[i + 1] - blurred[i + 1]) * amount
@@ -78,57 +79,60 @@ function applyGeoLock(data: Uint8ClampedArray, w: number, h: number, k: number) 
   }
 }
 
-// ATMOSPHERE: bloom en altas luces + viñeta suave — profundidad atmosférica.
+// ATMOSPHERE: bloom apenas perceptible + viñeta mínima.
+// Se baja fuerte para evitar "sombras marcadas" que se ven irreales.
 function applyAtmosphere(data: Uint8ClampedArray, w: number, h: number, k: number) {
-  // máscara de altas luces (luminancia)
   const mask = new Uint8ClampedArray(data.length)
   for (let i = 0; i < data.length; i += 4) {
     const lum = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]
-    const v = Math.max(0, lum - 190) * 3.9
+    const v = Math.max(0, lum - 205) * 2.4 // umbral más alto, ganancia menor
     mask[i] = v; mask[i + 1] = v; mask[i + 2] = v; mask[i + 3] = 255
   }
   const glow = boxBlur(mask, w, h, Math.max(6, Math.round(w / 90)))
-  const opacity = 0.4 * k
+  const opacity = 0.12 * k // antes 0.4
   for (let i = 0; i < data.length; i += 4) {
-    // screen blend, misma cantidad por canal → no cambia el tono
     data[i] = 255 - ((255 - data[i]) * (255 - glow[i] * opacity)) / 255
     data[i + 1] = 255 - ((255 - data[i + 1]) * (255 - glow[i + 1] * opacity)) / 255
     data[i + 2] = 255 - ((255 - data[i + 2]) * (255 - glow[i + 2] * opacity)) / 255
   }
-  // viñeta
+  // viñeta muy sutil (antes 0.22 → ahora 0.07)
   const cx = w / 2, cy = h / 2
   const maxD = Math.sqrt(cx * cx + cy * cy)
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
       const d = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2) / maxD
-      const f = 1 - 0.22 * k * d * d
+      const f = 1 - 0.07 * k * d * d
       const p = (y * w + x) * 4
       data[p] *= f; data[p + 1] *= f; data[p + 2] *= f
     }
   }
 }
 
-// TEXTURE-BLEND: contraste local (claridad amplia) + grano fílmico monocromo.
+// TEXTURE-BLEND: microtextura limpia. Contraste local suave + grano MUY fino
+// limitado a medios tonos (para no ensuciar cielos ni sombras).
 function applyTexture(data: Uint8ClampedArray, w: number, h: number, k: number) {
   const blurred = boxBlur(data, w, h, Math.max(12, Math.round(w / 45)))
-  const amount = 0.3 * k
+  const amount = 0.1 * k // claridad suave (antes 0.3)
   for (let i = 0; i < data.length; i += 4) {
     data[i] = data[i] + (data[i] - blurred[i]) * amount
     data[i + 1] = data[i + 1] + (data[i + 1] - blurred[i + 1]) * amount
     data[i + 2] = data[i + 2] + (data[i + 2] - blurred[i + 2]) * amount
   }
-  // grano: mismo valor en RGB → monocromo, no altera color
-  const strength = 12 * k
+  // grano fílmico apenas visible (antes 12 → ahora 2.5) y con máscara de medios:
+  // el cielo (altas luces) y las sombras quedan limpios, sin ruido.
+  const strength = 2.5 * k
   for (let i = 0; i < data.length; i += 4) {
-    const n = (Math.random() - 0.5) * strength
+    const lum = (0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]) / 255
+    const mid = 1 - Math.abs(lum - 0.5) * 2 // 1 en medios, 0 en extremos
+    const n = (Math.random() - 0.5) * strength * mid * mid
     data[i] += n; data[i + 1] += n; data[i + 2] += n
   }
 }
 
-// FINAL: curva S de luminancia suave + pulido fino.
+// FINAL: contraste suave + pulido mínimo. Nada de curva S dura.
 function applyFinal(data: Uint8ClampedArray, w: number, h: number, k: number) {
   const lut = new Uint8ClampedArray(256)
-  const mix = Math.min(0.55, 0.3 * k)
+  const mix = Math.min(0.18, 0.1 * k) // antes hasta 0.55 — mucho más plano/natural
   for (let i = 0; i < 256; i++) {
     const x = i / 255
     const s = x * x * (3 - 2 * x) // smoothstep
@@ -140,7 +144,7 @@ function applyFinal(data: Uint8ClampedArray, w: number, h: number, k: number) {
     data[i + 2] = lut[data[i + 2]]
   }
   const blurred = boxBlur(data, w, h, 1)
-  const amount = 0.35 * k
+  const amount = 0.12 * k // pulido final sutil (antes 0.35)
   for (let i = 0; i < data.length; i += 4) {
     data[i] = data[i] + (data[i] - blurred[i]) * amount
     data[i + 1] = data[i + 1] + (data[i + 1] - blurred[i + 1]) * amount
