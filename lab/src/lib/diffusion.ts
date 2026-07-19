@@ -76,15 +76,10 @@ export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionPa
   }
   if (!remoteUrl) throw new Error('Processing timeout (exceeded 3 minutes)')
 
-  // 3) Injerto de textura: identidad garantizada. Si algo falla (p. ej. CORS),
-  //    devolvemos el resultado crudo de la IA como plan B.
-  const strength = params.textureStrength ?? 0.65
-  try {
-    return await graftTexture(imageDataUrl, remoteUrl, strength)
-  } catch (err) {
-    console.warn('[diffusion] graft falló, uso resultado crudo:', err)
-    return remoteUrl
-  }
+  // 3) Injerto de textura: identidad garantizada. NUNCA devolvemos la imagen
+  //    cruda de la IA (repinta la cara) — si el injerto falla, es un error.
+  const strength = params.textureStrength ?? 0.8
+  return graftTexture(imageDataUrl, remoteUrl, strength)
 }
 
 /**
@@ -145,10 +140,23 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
 }
 
 async function loadBitmap(url: string): Promise<ImageBitmap> {
-  const r = await fetch(url)
-  if (!r.ok) throw new Error(`No se pudo cargar imagen (${r.status})`)
-  const blob = await r.blob()
-  return createImageBitmap(blob)
+  // Las URLs remotas (replicate.delivery) se sirven vía nuestro proxy /api
+  // para esquivar CORS; si el proxy falla, intentamos el CDN directo.
+  const candidates = /^https?:/i.test(url)
+    ? [`/api/fetch-image?url=${encodeURIComponent(url)}`, url]
+    : [url]
+  let lastErr: unknown = null
+  for (const u of candidates) {
+    try {
+      const r = await fetch(u)
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      const blob = await r.blob()
+      return await createImageBitmap(blob)
+    } catch (err) {
+      lastErr = err
+    }
+  }
+  throw new Error(`No se pudo cargar la imagen para el injerto (${lastErr instanceof Error ? lastErr.message : 'error'})`)
 }
 
 /** Box blur separable (3 iteraciones ≈ gaussiana), solo canales RGB. */

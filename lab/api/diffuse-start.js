@@ -38,7 +38,7 @@ function buildInput(body) {
     resemblance: resemblance ?? MAGNIFIC_STYLE.resemblance,
     sharpen: MAGNIFIC_STYLE.sharpen,
     num_inference_steps: MAGNIFIC_STYLE.num_inference_steps,
-    output_format: 'png',
+    output_format: 'jpg',
   }
 }
 
