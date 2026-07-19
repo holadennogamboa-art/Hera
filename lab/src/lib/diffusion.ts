@@ -21,9 +21,9 @@ export interface DiffusionParams {
  *  de la foto original quedan intactos por construcción: es matemáticamente
  *  imposible que cambie la identidad. textureStrength controla el injerto. */
 export const MAGNIFIC_PRESETS: Record<string, DiffusionParams & { label: string; hint: string }> = {
-  subtle: { label: 'SUTIL', hint: 'Textura ligera · cara 100% intacta', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.4 },
-  balanced: { label: 'EQUILIBRADO', hint: 'Poros y definición real (recomendado)', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.65 },
-  strong: { label: 'FUERTE', hint: 'Máxima textura · cara 100% intacta', creativity: 0.35, resemblance: 1.2, dynamic: 5, scaleFactor: 2, textureStrength: 0.9 },
+  subtle: { label: 'SUTIL', hint: 'Textura ligera · cara 100% intacta', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.5 },
+  balanced: { label: 'EQUILIBRADO', hint: 'Poros y definición real (recomendado)', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.8 },
+  strong: { label: 'FUERTE', hint: 'Máxima textura · cara 100% intacta', creativity: 0.35, resemblance: 1.2, dynamic: 5, scaleFactor: 2, textureStrength: 1.1 },
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -129,10 +129,15 @@ async function graftTexture(originalDataUrl: string, resultUrl: string, strength
   const o = orig.data.data
   const r = res.data.data
   const n = W * H * 4
+  // SOFT-CLIP: deja pasar la micro-textura (amplitud baja: poros, grano) y
+  // bloquea los trazos estructurales (amplitud alta: cejas, bordes, líneas).
+  // Así el injerto NUNCA dibuja rasgos — solo aporta piel.
+  const T = 8
   for (let i = 0; i < n; i += 4) {
-    o[i] = o[i] + strength * (r[i] - blurred[i])
-    o[i + 1] = o[i + 1] + strength * (r[i + 1] - blurred[i + 1])
-    o[i + 2] = o[i + 2] + strength * (r[i + 2] - blurred[i + 2])
+    for (let c = 0; c < 3; c++) {
+      const d = r[i + c] - blurred[i + c]
+      o[i + c] = o[i + c] + strength * (d / (1 + Math.abs(d) / T))
+    }
     // alpha se queda como está
   }
   orig.ctx.putImageData(orig.data, 0, 0)
