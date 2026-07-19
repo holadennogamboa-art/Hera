@@ -10,15 +10,20 @@ export interface DiffusionParams {
   scaleFactor?: 2 | 4
   prompt?: string
   negativePrompt?: string
+  /** 0–1 · cuánta micro-textura de la IA se injerta sobre la foto ORIGINAL (cliente). */
+  textureStrength?: number
 }
 
-/** Presets tipo Magnific listos para usar.
- *  Calibración anti-deriva: creativity baja + resemblance alta = misma cara,
- *  misma luz, solo gana micro-textura. dynamic bajo evita el look HDR "de IA". */
+/** Presets tipo Magnific.
+ *  ARQUITECTURA "INJERTO": la IA genera una versión con micro-textura rica,
+ *  pero NO usamos su imagen — solo extraemos su detalle fino (alta frecuencia)
+ *  y lo injertamos sobre los píxeles ORIGINALES. La cara, la luz y el grano
+ *  de la foto original quedan intactos por construcción: es matemáticamente
+ *  imposible que cambie la identidad. textureStrength controla el injerto. */
 export const MAGNIFIC_PRESETS: Record<string, DiffusionParams & { label: string; hint: string }> = {
-  subtle: { label: 'SUTIL', hint: 'Idéntica a la original, piel afinada', creativity: 0.1, resemblance: 1.6, dynamic: 3, scaleFactor: 2 },
-  balanced: { label: 'EQUILIBRADO', hint: 'Fiel + textura real (recomendado)', creativity: 0.18, resemblance: 1.5, dynamic: 4, scaleFactor: 2 },
-  strong: { label: 'FUERTE', hint: 'Más detalle · puede alterar rasgos', creativity: 0.3, resemblance: 1.3, dynamic: 6, scaleFactor: 2 },
+  subtle: { label: 'SUTIL', hint: 'Textura ligera · cara 100% intacta', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.4 },
+  balanced: { label: 'EQUILIBRADO', hint: 'Poros y definición real (recomendado)', creativity: 0.3, resemblance: 1.3, dynamic: 4, scaleFactor: 2, textureStrength: 0.65 },
+  strong: { label: 'FUERTE', hint: 'Máxima textura · cara 100% intacta', creativity: 0.35, resemblance: 1.2, dynamic: 5, scaleFactor: 2, textureStrength: 0.9 },
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -37,10 +42,9 @@ export async function checkDiffusionAPI(): Promise<{ ok: boolean; verdict: strin
 }
 
 /**
- * Procesa la imagen con el modelo de difusión.
- * Arranca la predicción y hace polling al estado hasta terminar.
- * Endpoints relativos → funciona igual en Vercel (producción) que en
- * `vercel dev` / proxy local. Devuelve la URL pública del resultado.
+ * Procesa la imagen con el modelo de difusión y luego INJERTA solo la
+ * micro-textura del resultado sobre la foto original (ver graftTexture).
+ * Devuelve un data-URL JPG listo para mostrar y guardar.
  */
 export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionParams = {}): Promise<string> {
   // 1) Arrancar la predicción
@@ -57,42 +61,158 @@ export async function callDiffusionAPI(imageDataUrl: string, params: DiffusionPa
   if (!id) throw new Error('El servidor no devolvió id de predicción')
 
   // 2) Polling del estado (hasta ~3 min)
+  let remoteUrl: string | null = null
   for (let i = 0; i < 90; i++) {
     await sleep(2000)
     const statusRes = await fetch(`/api/diffuse-status?id=${encodeURIComponent(id)}`)
     if (!statusRes.ok) continue
     const data = await statusRes.json()
-    if (data.status === 'succeeded' && data.resultUrl) return data.resultUrl as string
+    if (data.status === 'succeeded' && data.resultUrl) {
+      remoteUrl = data.resultUrl as string
+      break
+    }
     if (data.status === 'failed') throw new Error(data.error || 'Diffusion processing failed')
     if (data.status === 'canceled') throw new Error('Prediction was canceled')
   }
-  throw new Error('Processing timeout (exceeded 3 minutes)')
+  if (!remoteUrl) throw new Error('Processing timeout (exceeded 3 minutes)')
+
+  // 3) Injerto de textura: identidad garantizada. Si algo falla (p. ej. CORS),
+  //    devolvemos el resultado crudo de la IA como plan B.
+  const strength = params.textureStrength ?? 0.65
+  try {
+    return await graftTexture(imageDataUrl, remoteUrl, strength)
+  } catch (err) {
+    console.warn('[diffusion] graft falló, uso resultado crudo:', err)
+    return remoteUrl
+  }
+}
+
+/**
+ * INJERTO DE MICRO-TEXTURA (frequency graft, técnica de retoque editorial):
+ *   salida = original + strength × (resultadoIA − blur(resultadoIA))
+ * La estructura, el color, la luz y la CARA vienen al 100% de la original;
+ * de la IA solo se toma el detalle de alta frecuencia (poros, pestañas,
+ * tejido, hierba). Así se obtiene el "detalle Magnific" sin cambiar la persona.
+ */
+async function graftTexture(originalDataUrl: string, resultUrl: string, strength: number): Promise<string> {
+  const [origBmp, resBmp] = await Promise.all([loadBitmap(originalDataUrl), loadBitmap(resultUrl)])
+
+  // Trabajar a la resolución del resultado (2x), con tope de ~8MP por memoria móvil.
+  let W = resBmp.width
+  let H = resBmp.height
+  const MAX_PIXELS = 8_000_000
+  if (W * H > MAX_PIXELS) {
+    const k = Math.sqrt(MAX_PIXELS / (W * H))
+    W = Math.round(W * k)
+    H = Math.round(H * k)
+  }
+
+  const draw = (bmp: ImageBitmap) => {
+    const c = document.createElement('canvas')
+    c.width = W
+    c.height = H
+    const ctx = c.getContext('2d')!
+    ctx.imageSmoothingQuality = 'high'
+    ctx.drawImage(bmp, 0, 0, W, H)
+    return { canvas: c, ctx, data: ctx.getImageData(0, 0, W, H) }
+  }
+
+  const orig = draw(origBmp)
+  const res = draw(resBmp)
+  origBmp.close()
+  resBmp.close()
+
+  // Blur del resultado (3 pasadas de box blur ≈ gaussiana) para aislar la alta frecuencia.
+  const radius = Math.max(3, Math.round(W / 550))
+  const blurred = boxBlurRGB(res.data.data, W, H, radius)
+
+  const o = orig.data.data
+  const r = res.data.data
+  const n = W * H * 4
+  for (let i = 0; i < n; i += 4) {
+    o[i] = o[i] + strength * (r[i] - blurred[i])
+    o[i + 1] = o[i + 1] + strength * (r[i + 1] - blurred[i + 1])
+    o[i + 2] = o[i + 2] + strength * (r[i + 2] - blurred[i + 2])
+    // alpha se queda como está
+  }
+  orig.ctx.putImageData(orig.data, 0, 0)
+  return orig.canvas.toDataURL('image/jpeg', 0.95)
+}
+
+async function loadBitmap(url: string): Promise<ImageBitmap> {
+  const r = await fetch(url)
+  if (!r.ok) throw new Error(`No se pudo cargar imagen (${r.status})`)
+  const blob = await r.blob()
+  return createImageBitmap(blob)
+}
+
+/** Box blur separable (3 iteraciones ≈ gaussiana), solo canales RGB. */
+function boxBlurRGB(src: Uint8ClampedArray, W: number, H: number, radius: number): Float32Array {
+  let a = new Float32Array(W * H * 3)
+  for (let i = 0, j = 0; j < a.length; i += 4, j += 3) {
+    a[j] = src[i]
+    a[j + 1] = src[i + 1]
+    a[j + 2] = src[i + 2]
+  }
+  let b = new Float32Array(a.length)
+  for (let pass = 0; pass < 3; pass++) {
+    blurAxis(a, b, W, H, radius, true)
+    blurAxis(b, a, W, H, radius, false)
+  }
+  return a
+}
+
+function blurAxis(src: Float32Array, dst: Float32Array, W: number, H: number, radius: number, horizontal: boolean) {
+  const len = horizontal ? W : H
+  const lines = horizontal ? H : W
+  const stridePx = horizontal ? 1 : W
+  const lineStartPx = horizontal ? W : 1
+  const win = radius * 2 + 1
+  for (let line = 0; line < lines; line++) {
+    const base = line * lineStartPx
+    for (let ch = 0; ch < 3; ch++) {
+      // suma inicial con borde extendido (clamp)
+      let sum = 0
+      for (let k = -radius; k <= radius; k++) {
+        const idx = base + Math.min(len - 1, Math.max(0, k)) * stridePx
+        sum += src[idx * 3 + ch]
+      }
+      for (let p = 0; p < len; p++) {
+        dst[(base + p * stridePx) * 3 + ch] = sum / win
+        const addP = Math.min(len - 1, p + radius + 1)
+        const subP = Math.max(0, p - radius)
+        sum += src[(base + addP * stridePx) * 3 + ch] - src[(base + subP * stridePx) * 3 + ch]
+      }
+    }
+  }
 }
 
 /**
  * Guardar la imagen resultante en máxima calidad.
- * Convierte el PNG remoto a JPG 95% a resolución completa y lo entrega con
- * el menú nativo de compartir en iOS ("Guardar imagen") o descarga directa
- * en escritorio. Un solo toque — sin "guardar como".
+ * Convierte a JPG 95% a resolución completa y lo entrega con el menú nativo
+ * de compartir en iOS ("Guardar imagen") o descarga directa en escritorio.
  */
 export async function saveDiffusionImage(resultUrl: string, filename = 'hera-realismo.jpg'): Promise<void> {
   const response = await fetch(resultUrl)
   if (!response.ok) throw new Error('No se pudo descargar la imagen del servidor')
   const sourceBlob = await response.blob()
 
-  // Re-encodar a JPG de alta calidad a resolución completa (mejor para Instagram).
-  const bitmap = await createImageBitmap(sourceBlob)
-  const canvas = document.createElement('canvas')
-  canvas.width = bitmap.width
-  canvas.height = bitmap.height
-  const ctx = canvas.getContext('2d')
-  if (!ctx) throw new Error('Canvas no disponible')
-  ctx.drawImage(bitmap, 0, 0)
-  bitmap.close()
-
-  const jpegBlob = await new Promise<Blob>((resolve, reject) => {
-    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('No se pudo convertir a JPG'))), 'image/jpeg', 0.95)
-  })
+  let jpegBlob: Blob
+  if (sourceBlob.type === 'image/jpeg') {
+    jpegBlob = sourceBlob
+  } else {
+    const bitmap = await createImageBitmap(sourceBlob)
+    const canvas = document.createElement('canvas')
+    canvas.width = bitmap.width
+    canvas.height = bitmap.height
+    const ctx = canvas.getContext('2d')
+    if (!ctx) throw new Error('Canvas no disponible')
+    ctx.drawImage(bitmap, 0, 0)
+    bitmap.close()
+    jpegBlob = await new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('No se pudo convertir a JPG'))), 'image/jpeg', 0.95)
+    })
+  }
 
   const file = new File([jpegBlob], filename, { type: 'image/jpeg' })
 
