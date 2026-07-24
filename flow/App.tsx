@@ -15,8 +15,16 @@
 import React, { useState, useEffect } from 'react'
 import { Flow } from 'flow-sdk'
 import { graftTexture, graftReportLine } from './services/processor'
-import { PRESETS, TexturePreset, buildPrompt, aspectRatioOf } from './prompts'
-import { AppState, BananaModel, MODELS, ProcessingStep } from './types'
+import {
+  PRESETS,
+  TexturePreset,
+  buildPrompt,
+  aspectRatioOf,
+  AppState,
+  BananaModel,
+  MODELS,
+  ProcessingStep,
+} from './types'
 import { ComparisonView } from './components/ComparisonView'
 import { ProcessingOverlay } from './components/ProcessingOverlay'
 import { MaskEditor } from './components/MaskEditor'
