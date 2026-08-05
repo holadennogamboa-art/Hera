@@ -822,9 +822,12 @@ function median3(g: Float32Array, gw: number, gh: number): void {
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const im = new Image()
-    im.crossOrigin = 'anonymous'
+    // crossOrigin SOLO para URLs remotas. En una cadena base64 no aporta nada
+    // y en algunos navegadores hace fallar la carga: es una fuente conocida de
+    // "error de galería" cuando todo el flujo trabaja con data URLs.
+    if (/^https?:/i.test(src)) im.crossOrigin = 'anonymous'
     im.onload = () => resolve(im)
-    im.onerror = () => reject(new Error('No se pudo cargar la imagen'))
+    im.onerror = () => reject(new Error('No se pudo decodificar la imagen'))
     im.src = src
   })
 }
