@@ -79,7 +79,7 @@ export interface GraftOptions {
   /** 0–0.6 · contraste local extraído del PROPIO original. Recomendado 0.25 */
   clarity?: number
   /** 0–1 · acabado de cámara: grano, hombro, aberración, viñeteo, esquinas.
-   *  Recomendado 0.55. A 0 se desactiva por completo. */
+   *  Recomendado 0.4. A 0 se desactiva por completo. */
   opticalFinish?: number
   /** Respetar el desenfoque del original (no texturizar el bokeh). Por defecto true */
   preserveFocus?: boolean
@@ -141,7 +141,7 @@ export async function graftTexture(
   const t0 = performance.now()
   const intensity = clamp(options.intensity ?? 0.85, 0, 1.5)
   const clarity = clamp(options.clarity ?? 0.25, 0, 0.6)
-  const optical = clamp(options.opticalFinish ?? 0.55, 0, 1)
+  const optical = clamp(options.opticalFinish ?? 0.4, 0, 1)
   const preserveFocus = options.preserveFocus !== false
   const report = (s: string) => options.onProgress?.(s)
 
@@ -594,7 +594,9 @@ function applyGrain(
   amount: number,
   seed: number
 ): void {
-  const strength = 5.2 * amount
+  // 4.0 y no 5.2: sobre vegetación o tejido ya muy detallado, el grano a 5.2
+  // se lee como ruido en vez de como grano. En piel la diferencia no se nota.
+  const strength = 4.0 * amount
   if (strength <= 0) return
   const N = W * H
   const rnd = mulberry32(seed >>> 0)
