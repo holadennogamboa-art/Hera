@@ -1,10 +1,11 @@
 # T3 — Taller de Plataforma · HERA / EYEHERA
 
 **Naturaleza:** actualización total — web, producto, redes, contenido.
-**Horas:** 9 h/semana — Lunes B3+B4, Miércoles B2+B3+B4, Viernes B3.
+**Horas:** 3 h/semana — Lunes B3 (marca y web), Miércoles B2 (contenido en lote) — más publicar e interactuar cada día en [la ronda](LA-RONDA.md).
 
-Es el taller con más horas porque es el único con tres frentes vivos a la vez
-(plataforma, contenido y audiencia) y porque es el escaparate del resto.
+Tres frentes vivos a la vez —marca, contenido y audiencia— pero solo dos bloques: la
+parte que no puede fallar (publicar e interactuar) vive en la ronda diaria, porque la
+cadencia se sostiene todos los días o no se sostiene.
 
 ## Objetivo del taller
 
@@ -49,9 +50,15 @@ funcionando y documentadas.
 
 ## Estado actual
 
-- Web:
-- Última publicación:
-- Herramientas en marcha:
+- **Identidad HERA STUDIO** construida en Figma: wordmark brutalista + mutaciones Escala y
+  Fragmentada, lockup STUDIO secundario, plantillas reutilizables. Aplicaciones inspiradas
+  en Acne Studios. **Cerrada.**
+- **Web en Vercel**, con problemas de rutas de imagen ya diagnosticados y sin arreglar.
+- **Estrategia de Instagram** definida: captions bilingües, hashtags en primer comentario,
+  ventanas de publicación óptimas.
+- **Es el proyecto que más se resiente si se para**, porque es cadencia. Por eso publicar
+  está en la ronda diaria y no en un bloque semanal.
+- Siguiente paso concreto: el calendario editorial de la semana.
 
 ## Backlog
 

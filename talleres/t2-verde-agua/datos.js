@@ -1,45 +1,49 @@
 const D = {
-meta:{titulo:'El taller', sub:'Verde agua', K:'taller-verde-agua'},
+meta:{titulo:'El taller', sub:'Verde agua · la serie', K:'taller-verde-agua'},
 ampliable:true,
 reglas:[
- 'Aquí no se corrige. Se avanza. La corrección tiene su propio taller y llegará.',
- 'Prohibido releer para mejorar. Si algo falla, se marca [revisar: …] y se sigue.',
- 'Cada sesión termina con una frase empezada del paso siguiente. Mañana no se decide nada.',
- 'Lo que se escribe feo hoy existe; lo que se escribe perfecto dentro de un mes, no.',
- 'Si una escena se resiste dos sesiones seguidas, se salta y se escribe la siguiente. El orden se arregla después.'
+ 'Aquí no se corrige. Se redacta. La corrección tiene su propio taller y llegará.',
+ 'La biblia está cerrada. Mientras se escribe no se rediscute: si algo chirría, se marca [revisar: …] y se sigue.',
+ 'Contención, siempre: la muerte sin método ni objeto, la carta no se abre, el daño de Carlos se sabe qué es pero no se ve nunca.',
+ 'Los narradores hablan a Crónica, no al espectador. Quien la tiene, narra. El relevo solo ocurre por pérdida.',
+ 'Las zonas mudas son de Darío y son mudas de verdad: sin voz, sin música, sin trampa.'
 ],
 caps:[
-{n:1,t:'FUNDACIÓN',fn:'Antes de escribir hay que saber qué se está escribiendo. Cinco respuestas cortas. Ninguna es definitiva, todas son obligatorias.',
- reglas:['Respuestas cortas. Si necesitas un párrafo largo, todavía no lo sabes.','Se puede volver aquí y cambiarlo cuando quieras. Lo que no se puede es seguir sin haberlo escrito.'],
+{n:1,t:'LA INTRO',fn:'El arranque del episodio 1: Darío corre, muere, la cámara sube. Sobre el plano alto y sin cuerpo en cuadro entra la voz de Carlos. El relevo es del relato, no del cuerpo.',
+ reglas:['Nadie toca a Darío. Ni la cámara ni un personaje.','La voz de Carlos entra cuando ya no hay cuerpo en cuadro.','La muerte sin método ni objeto.'],
  items:[
-  {b:'La premisa en una sola frase. Quién quiere qué y qué se lo impide. Sin adjetivos.'},
-  {b:'¿Desde dónde se cuenta? Quién narra, en qué persona, en qué tiempo verbal y con cuánta distancia de lo que cuenta.'},
-  {b:'El tono. Tres o cuatro líneas describiendo cómo suena este libro. Si ayuda: qué canción sonaría de fondo, como en Golpe de estado.'},
-  {b:'El final. No hace falta que sea el que quede, pero hay que escribir hacia algún sitio. ¿Dónde acaba esto y con qué imagen?'},
-  {b:'La apuesta: ¿qué hace este libro que no hace Golpe de estado? Si la respuesta es «nada», el problema es de premisa, no de escritura.'}
+  {b:'La carrera. Lo que se ve y lo que se oye antes de que pase nada. Escribirla como si no fuera a pasar nada.'},
+  {b:'El momento. Sin método, sin objeto, sin plano que lo explique.'},
+  {b:'La subida a aérea. Cuántos segundos aguanta el plano antes de que entre la voz.'},
+  {b:'Las primeras frases de Carlos a Crónica. De cómo suenen sale el tono de la serie entera.'}
  ]},
-{n:2,t:'EL MAPA',fn:'La escaleta. No es una jaula: es una barandilla para las noches en las que no sepas por dónde seguir.',
- reglas:['El mapa puede cambiar entero mientras escribes. Eso no es fracasar, es escribir.','Cada escena del mapa se resume en una línea. Si necesitas tres, es más de una escena.'],
+{n:2,t:'CARLOS Y LUCY',fn:'El motor del episodio: Lucy conoció a un Darío anterior, con vida propia. Cuentan dos hombres distintos y ninguno miente.',
+ reglas:['Lucy ve a Carlos y discute con él desde este episodio. No hay ambigüedad sobre si existe.','Carlos cree que fue el arma. No lo fue. Nadie lo fue. Él no lo sabe y no se le puede decir aquí.','El daño real de Carlos es de otra vida, antes y aparte de Darío. Con Darío solo hay amor.'],
  items:[
-  {b:'Las partes. ¿En cuántos bloques se divide y qué le pasa al protagonista en cada uno?'},
-  {b:'El primer capítulo, en cinco líneas. Qué se ve, qué se oye y qué queda sin decir.'},
-  {b:'El punto medio: la cosa que ocurre a mitad de libro después de la cual ya no se puede volver atrás.'},
-  {b:'El último capítulo, en cinco líneas. Escribirlo ahora, aunque cambie.'},
-  {b:'La lista de escenas de la primera parte, una línea cada una. De aquí salen los pasos de la unidad 4.'}
+  {b:'La primera escena de Lucy y Carlos juntos. Qué se están disputando exactamente.'},
+  {b:'El Darío de Carlos: una escena que solo él pudo ver.'},
+  {b:'El Darío de Lucy: la misma clase de escena, y que sea otro hombre.'},
+  {b:'Dónde se cruzan las dos versiones por primera vez sin que ninguno ceda.'}
  ]},
-{n:3,t:'LOS QUE APARECEN',fn:'Fichas de personaje. Lo justo para no contradecirte en el capítulo 20.',
- reglas:['De cada personaje: qué quiere, qué esconde y de qué manera habla.','Nada de biografías completas. Solo lo que va a salir en la página.'],
+{n:3,t:'LAS ZONAS MUDAS',fn:'Las tres zonas que son solo de Darío: sin voz, sin música. Es donde la serie deja de contarse y simplemente ocurre.',
+ reglas:['Nada de voz en off. Ni de Carlos ni de nadie.','Silencio fabricado partido por un solo sonido. La respiración como portadora.','Si una zona muda necesita que alguien explique algo, está mal escrita.'],
  items:[
-  {b:'Protagonista: qué quiere, qué esconde, cómo habla, y qué gesto suyo lo delata.'},
-  {b:'El que se le opone. Ojo: tiene que tener razón desde su lado.'},
-  {b:'El personaje que sostiene emocionalmente el libro, el que hace que duela.'},
-  {b:'La geografía: dónde ocurre. Tres lugares concretos que se repiten. El agua verde, ¿dónde está exactamente?'}
+  {b:'Las 72 horas. Cómo se ruedan sigue abierto y no bloquea: escribe lo que se ve.'},
+  {b:'Los sueños.'},
+  {b:'La mañana feliz del 3 de agosto: sérum, casa ordenada, carta sin abrir, juego con Osaka. Es la escena más importante de la serie y es la más tranquila.'}
  ]},
-{n:4,t:'ESCENAS',fn:'El trabajo de verdad. Un paso, una escena, escrita entera. Usa «+ paso» para añadir las escenas que salgan de tu escaleta.',
- reglas:['Una escena por sesión de B1. Si sobra tiempo, se empieza la siguiente, no se pule la anterior.','Escena terminada = tiene un final, aunque sea provisional. Nada de fragmentos colgando.','Se puede escribir directamente aquí o pegar lo escrito fuera. Lo importante es que quede registrado.'],
+{n:4,t:'EL RESTO DEL EPISODIO 1',fn:'Las secuencias que faltan hasta cerrarlo entero. Usa «+ paso» para añadir las que salgan al redactar.',
+ reglas:['Una secuencia por sesión de B1. Si sobra tiempo, se empieza la siguiente, no se pule la anterior.','Secuencia terminada = tiene un final, aunque sea provisional.','La carta de color es el calamar: azules, verdes y morados sobre gris. Literalmente verde agua.'],
  items:[
-  {b:'Escena 1 — la primera del libro. La que decide si alguien sigue leyendo.'},
-  {b:'Escena 2 — la que presenta lo que el protagonista quiere.'},
-  {b:'Escena 3 — la primera vez que algo sale mal.'}
+  {b:'La casa: Carlos y Darío viviendo juntos. Cómo se enseña sin explicarlo.'},
+  {b:'El final del episodio 1: con qué imagen se cierra y qué queda abierto.'}
+ ]},
+{n:5,t:'LO QUE QUEDA ABIERTO',fn:'Decisiones pendientes que NO bloquean la escritura. Se anotan aquí para sacarlas de la cabeza y se deciden cuando el episodio 1 esté redactado.',
+ reglas:['Nada de esto detiene una sesión de escritura.','Si una decisión empieza a bloquear de verdad, sube a la unidad que corresponda.'],
+ items:[
+  {b:'Número de episodios de la temporada.',check:true},
+  {b:'Si la planta sostiene peso.',check:true},
+  {b:'Cómo se ruedan las 72 horas.',check:true},
+  {b:'El final del episodio 6 ya está decidido: Lucy se lleva a Osaka, sin diálogo, y el último plano es Carlos solo. Anotar aquí cualquier cosa que lo prepare desde el episodio 1.'}
  ]}
 ]};

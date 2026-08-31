@@ -1,65 +1,97 @@
-# T4 — Taller de Servicio · VERDER
+# T4 — Taller de Servicio · VERDER / AUDITOR GEO
 
-**Naturaleza:** negocio real, con clientes y entregables.
-**Horas:** 6 h/semana — Martes B3+B4, Jueves B3+B4, Viernes B2.
+**Naturaleza:** una herramienta terminada sin clientes. Fase comercial, no de código.
+**Horas:** 3 h/semana — Martes B3, Viernes B3 (medición) — más 35 minutos diarios de
+prospección y correo en [la ronda](LA-RONDA.md).
 
-VERDER es el servicio de **GEO** (optimización para motores generativos): conseguir que
-un negocio aparezca, y aparezca bien descrito, cuando alguien pregunta por él a un
-asistente de IA — y poder demostrárselo al cliente con una visualización.
+Todo vive en `~/geo-auditor`, con control de versiones. La nota de continuación está en
+`SIGUIENTE.md` y los registros de cada medición, con respuestas literales y fuentes, en
+`informes/consultas/`.
 
-Es el único taller donde el resultado lo mide otra persona: el cliente que paga.
-Por eso tiene dos bloques dedicados a mundo exterior y no solo a producto.
+## Qué es
 
-## Objetivo del taller
+Analiza la web de un negocio y mide si los asistentes de IA lo recomiendan. 2.890 líneas,
+11 sectores, 21 reglas de auditoría, 120 tipos de schema.org, 4 asistentes.
 
-Pasar de idea a servicio vendible: una oferta clara, un método repetible, una forma de
-demostrar el resultado, y los primeros clientes de pago.
+## La norma innegociable
 
-## Definición de terminado (fase 1)
+**El programa no estima, no puntúa a ojo y no rellena huecos.** Todo lo que informa se
+puede comprobar abriendo el código de la web. Cada hallazgo se etiqueta:
 
-### Oferta
-- [ ] Qué se vende, en una frase que entienda un dueño de bar.
-- [ ] Precio y alcance de tres paquetes (diagnóstico / implantación / seguimiento).
-- [ ] Página de venta y un PDF de una página.
+- **Hecho verificado** — comprobado contra la respuesta del servidor. El cliente puede
+  abrir su código y encontrarlo literal.
+- **Señal · confirmar** — un patrón detectado. Exige que un humano lo confirme antes de
+  usarlo con un cliente.
 
-### Método
-- [ ] Protocolo de diagnóstico: qué se le pregunta a cada asistente de IA sobre el negocio y cómo se registra la respuesta.
-- [ ] Checklist de intervención: datos estructurados, fichas, presencia en las fuentes que estos sistemas leen, reseñas, coherencia de nombre/dirección/teléfono.
-- [ ] Protocolo de medición: antes / después, con fechas.
+Nació de un error real: una herramienta hecha con otra IA generó datos falsos sobre el
+Gran Hotel Inglés. El contacto se salvó rehaciendo la auditoría a mano. De ahí sale la
+norma, y de la norma salen los once defectos que se encontraron y corrigieron.
 
-### Visualización
-- [ ] Informe visual para el cliente: dónde aparece, dónde no, cómo lo describen, qué ha cambiado.
-- [ ] Plantilla reutilizable (se genera igual para cualquier cliente).
+## Los comandos
 
-### Mercado
-- [ ] Lista de 30 negocios objetivo del entorno cercano.
-- [ ] Guion de primer contacto y de la llamada.
-- [ ] 3 diagnósticos gratuitos hechos como caso de estudio.
+```bash
+cd ~/geo-auditor && node servidor.mjs          # panel en localhost:4321
+cd ~/geo-auditor && node audit.mjs sisibagels.com --html --parche
+cd ~/geo-auditor && node lote.mjs mi-lista.txt # prospección, un dominio por línea
+cd ~/geo-auditor && ANTHROPIC_API_KEY="…" node consultar.mjs "SI SI BAGELS" \
+  --sector=gastronomia --ciudad=Madrid --repeticiones=3   # consume crédito
+```
+
+Auditar y prospectar es **gratis**. Solo medir en los asistentes gasta: unos 47.000 tokens
+y 5 búsquedas web por consulta.
+
+## Estado real
+
+**Funciona · sin cliente todavía.**
+
+- Auditoría de webs: probada contra hoteles, restaurantes, museos, clínicas, despachos y
+  tiendas. Reconoce lo que está bien hecho: el Hotel Orfila sale con 69 % y cero críticos.
+- Panel web y modo lote: funcionando.
+- Medición en Claude: verificada con dos negocios reales y 21 consultas.
+- ChatGPT, Perplexity y Gemini: código escrito y endpoints verificados, pero **ninguno ha
+  devuelto todavía una respuesta correcta**. Cada uno necesita su clave de pago.
+- **Ningún cliente ha pagado.** Es una herramienta que funciona, no un negocio en marcha.
+- Sin crédito de API: se agotaron los 5 dólares a mitad de la última medición.
+
+## Definición de terminado (fase actual)
+
+- [ ] **Enviar el correo de SI SI BAGELS.** Está escrito, en `informes/sisibagels-correo.md`.
+- [ ] Si contestan: mandarles `informes/sisibagels-marcado.html` y pedir los tres datos que
+      no están en su web (teléfono de cada local, rango de precio, si aceptan reservas).
+- [ ] Diez negocios contactados por semana, contados en la bitácora.
+- [ ] Los tres diagnósticos gratuitos como casos de estudio.
 - [ ] Primer cliente de pago.
+- [ ] Los tres paquetes con precio y alcance escritos.
 
-## Cómo se usa cada bloque
+## Fuera del trabajo diario, pero pendiente
 
-- **B3 (técnico):** método, herramientas de diagnóstico, generación del informe visual.
-- **B4 (mundo):** prospección, contactos, seguimientos, llamadas, propuestas.
-- **B2 del viernes:** medición — pasar el diagnóstico a los clientes activos y registrar el cambio.
+- **Cambiar la clave de Anthropic.** La actual se pegó en un chat. Se crea otra en
+  console.anthropic.com y se borra la vieja.
+- **Recargar crédito.** Solo hace falta para medir en los asistentes.
+
+## El dato que vende
+
+Mismo negocio, misma web, misma semana:
+
+| Pregunta | Aparece | Puestos |
+|---|---|---|
+| ¿Dónde comer buenos bagels en Madrid? | **4 de 4** | 5.º 2.º 4.º 2.º |
+| Brunch o desayuno en Malasaña | **0 de 4** | — |
+| Mejores cafeterías de especialidad | 0 de 1 | — |
+
+Quien busca «bagels» los encuentra porque el nombre lleva la palabra. Quien busca «dónde
+desayunar en Malasaña» no, porque en el código no consta que estén allí. En esa pregunta
+salen Toma Café y HanSo Café las cuatro veces. **Ese contraste es la venta entera.**
 
 ## Métricas
 
 | Métrica | Objetivo semanal |
 |---|---|
-| Negocios contactados | 10 |
-| Diagnósticos realizados | 2 |
-| Propuestas enviadas | 1 |
+| Negocios auditados | 10 (gratis) |
+| Correos enviados | 5 (uno al día en la ronda) |
+| Diagnósticos completos | 2 |
 | Clientes activos | — (acumulado) |
 
-## Estado actual
+## Taller vivo
 
-- Fase:
-- Clientes activos:
-- Diagnósticos hechos:
-
-## Backlog
-
-- [ ] Definir la lista de preguntas del diagnóstico.
-- [ ] Elegir los asistentes de IA sobre los que se mide.
-- [ ]
+[`t4-verder/TALLER.html`](t4-verder/TALLER.html)

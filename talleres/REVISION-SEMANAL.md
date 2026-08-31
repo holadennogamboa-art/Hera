@@ -8,19 +8,37 @@
 
 | Taller | Bloques previstos | Bloques hechos | % |
 |---|---|---|---|
-| T1 Golpe de Estado | 4 | | |
-| T2 Verde Agua | 4 | | |
-| T3 HERA | 6 | | |
-| T4 VERDER | 5 | | |
-| T5 Dirección | 1 | | |
+| T1 Golpe de estado | 3 | | |
+| T2 Verde agua | 4 | | |
+| T3 HERA marca e IG | 2 | | |
+| T4 VERDER · Auditor GEO | 2 | | |
+| T5 Skin Lab | 2 | | |
+| T6 Kierck | 1 | | |
+| T7 Encargos y campaña | 1 | | |
+| T8 Dirección | 1 | | |
+| La ronda (B4) | 4 | | |
 | **Total** | **20** | | |
 
 ## 2. Lo entregado
 
-- T1:
-- T2:
-- T3:
-- T4:
+- T1 Golpe de estado:
+- T2 Verde agua:
+- T3 HERA:
+- T4 Auditor GEO:
+- T5 Skin Lab:
+- T6 / T7:
+
+## 2 bis. Los números de la ronda
+
+*Los que deciden si esto es un negocio o un pasatiempo.*
+
+| | Esta semana |
+|---|---|
+| Negocios auditados | |
+| Correos enviados | |
+| Respuestas recibidas | |
+| Personas **ajenas** que han renderizado en Skin Lab | |
+| Publicaciones de HERA | |
 
 ## 3. Lo que no salió
 

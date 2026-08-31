@@ -17,15 +17,29 @@ entregables medibles, revisión semanal y un archivo de lo hecho.
 
 ## Los talleres
 
-| # | Taller | Proyecto | Naturaleza | h/semana | Taller vivo |
-|---|--------|----------|------------|----------|---|
-| T1 | [Escritura — Golpe de Estado](T1-golpe-de-estado.md) | Golpe de Estado | Corrección / cierre de manuscrito | 6 h | [abrir](t1-golpe-de-estado/EL_TALLER.html) |
-| T2 | [Creación — Verde Agua](T2-verde-agua.md) | Verde Agua | Escritura de primer borrador | 6 h | [abrir](t2-verde-agua/TALLER.html) |
-| T3 | [Plataforma — HERA](T3-hera.md) | HERA / EYEHERA | Web, producto, redes, contenido | 9 h | [abrir](t3-hera/TALLER.html) |
-| T4 | [Servicio — VERDER](T4-verder.md) | VERDER (GEO para negocios) | Negocio, clientes, entregables | 6 h | [abrir](t4-verder/TALLER.html) |
-| T5 | [Dirección](T5-direccion.md) | Todos | Métricas, planificación, admin, archivo | 3 h | — |
+| # | Taller | Estado del proyecto | h/sem | Taller vivo |
+|---|--------|---------------------|-------|-------------|
+| [T1](T1-golpe-de-estado.md) | **Golpe de estado** | Novela cerrada. Quedan correcciones, dos canciones, registro y envíos. | 4,5 | [abrir](t1-golpe-de-estado/EL_TALLER.html) |
+| [T2](T2-verde-agua.md) | **Verde agua** | Serie. Biblia cerrada, episodio 1 diseñado. Falta redactarlo. | 6 | [abrir](t2-verde-agua/TALLER.html) |
+| [T3](T3-hera.md) | **HERA · marca e Instagram** | Identidad cerrada, web con fallos conocidos. Es cadencia. | 3 | [abrir](t3-hera/TALLER.html) |
+| [T4](T4-verder.md) | **VERDER · Auditor GEO** | Funciona. 2.890 líneas, 11 sectores. Ningún cliente todavía. | 3 | [abrir](t4-verder/TALLER.html) |
+| [T5](T5-skin-lab.md) | **HERA Skin Lab** | En producción. 24 renders, todos tuyos. Nadie ajeno ha renderizado. | 3 | [abrir](t5-skin-lab/TALLER.html) |
+| [T6](T6-kierck.md) | **Kierck** | Biblia en construcción. Falta la primera frase de ella. | 1,5 | — |
+| [T7](T7-encargos.md) | **Encargos y campaña pro-IA** | Cuatro encargos vivos y una decisión pendiente. | 1,5 | — |
+| [T8](T8-direccion.md) | **Dirección** | Métricas, revisión semanal, archivo. | 1,5 | — |
+| [La ronda](LA-RONDA.md) | **El bloque B4, todos los días** | Reparte T3, T4 y T5. Es donde el trabajo hecho se convierte en trabajo cobrado. | 6 | — |
 
-Total: **30 h/semana = 6 h/día × 5 días.**
+Total: **30 h/semana = 6 h/día × 5 días**, en 20 bloques de 90 minutos.
+
+### Lo que dicen los números de este reparto
+
+Tres proyectos —Skin Lab, el Auditor GEO y el Instagram de HERA— **ya están construidos y
+funcionando, y ninguno tiene un usuario, un cliente o una audiencia**. Ninguno se arregla
+escribiendo más código. Por eso los tres tienen pocas horas de bloque y viven sobre todo
+en la ronda diaria: su cuello de botella no es el teclado, es que nadie los conoce.
+
+Y por eso el bloque de las 15:00 no es el bloque de sobra: es el único que hoy mueve la
+aguja de verdad.
 
 ## Los talleres vivos
 
@@ -44,6 +58,8 @@ funcionaba en *Golpe de estado*, con su motor extraído para poder reutilizarla.
 
 - [`HORARIO.md`](HORARIO.md) — el horario diario y la rotación semanal.
 - [`PROTOCOLO.md`](PROTOCOLO.md) — rituales de apertura y cierre, reglas de foco, qué hacer los días malos.
+- [`LA-RONDA.md`](LA-RONDA.md) — el bloque B4, minuto a minuto. El más importante y el que primero se cae.
+- [`fuentes/`](fuentes/) — los dossieres de origen: universo Golpe de estado / Verde agua, Skin Lab e índice maestro.
 - [`REVISION-SEMANAL.md`](REVISION-SEMANAL.md) — la reunión del viernes conmigo mismo (plantilla).
 - [`registro/`](registro/) — bitácora diaria y semanal. Una línea por bloque.
 - [`registro/BITACORA.csv`](registro/BITACORA.csv) — registro cuantitativo para ver la tendencia.

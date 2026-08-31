@@ -15,41 +15,59 @@ Es el método que se ha extraído para los demás talleres.
 
 ## Objetivo del taller
 
-Llevar *Golpe de Estado* de manuscrito corregible a manuscrito enviable: texto cerrado,
-formato de envío, y el material de acompañamiento (sinopsis, carta, primeras páginas)
-listo para agencias.
+La novela está **cerrada**: 12 capítulos, unas 20.300 palabras (nouvelle). *Los tres /
+La armadura / El corazón / El ticket / El disfraz I / Las noches / El disfraz II / El
+cuarto de al lado / El disfraz III / La víspera / La fiesta / El superviviente.*
+
+Lo que queda no es escribir: es **cerrar y enviar**.
 
 ## Definición de terminado
 
-- [ ] Todos los capítulos han pasado al menos una pasada completa de corrección de estilo.
+### Texto
+- [ ] Pasada de corrección de estilo sobre los capítulos que aún no la tienen.
 - [ ] Una lectura seguida de principio a fin, sin tocar nada, con notas aparte.
 - [ ] Segunda pasada solo sobre lo que esa lectura marcó.
+- [ ] `GOLPE_DE_ESTADO_corregido.docx`: **decidir los cuatro guiones largos** pendientes.
 - [ ] Corrección ortotipográfica final.
-- [ ] Manuscrito en formato de envío (fuente, interlineado, numeración, portada).
-- [ ] Sinopsis (1 página), carta de presentación y primeras 50 páginas preparadas.
-- [ ] Lista de 20 agencias/editoriales con criterios y fechas de envío.
+
+### Banda sonora
+- [ ] **Capítulo 7 — canción.** Slot abierto, curaduría tuya.
+- [ ] **Capítulo 9 — canción.** Slot abierto.
+- (El 8 es SILENCIO, y es conceptual: el padre nunca compartió música. Ya está decidido.)
+
+### Registro
+- [ ] **Registro de propiedad intelectual de la Comunidad de Madrid: gratis y online.**
+      Esto no depende de tener fondos. Hacerlo antes de enviar nada.
+- [ ] Safe Creative: cuando haya fondos.
+
+### Envío
+- [ ] Sinopsis (1 página), carta de presentación y primeras páginas.
+- [ ] Manuscrito en formato de envío.
+- [ ] Lista de agencias con criterios y fechas. Punto de partida: Antonia Kerrigan,
+      Sandra Bruna, Pilar Bernardo.
+- [ ] *El ticket*: seguimiento del II Certamen Carmen Martín Gaite. La versión inglesa,
+      *The Receipt*, reservada para revistas anglosajonas.
 
 ## Cómo se usa cada bloque
 
-- **B1 (profundo):** corrección de capítulo. Un capítulo por bloque como ritmo base.
-- **B2 (producción):** lo que la corrección genera — reescritura de escenas, coherencia
-  de la línea temporal, fichas de personaje, materiales de envío.
+- **B1 (profundo):** corrección de capítulo, con el taller vivo delante.
+- **B2 (producción):** lo que la corrección genera y los materiales de envío.
 
 ## Métricas
 
 | Métrica | Objetivo semanal |
 |---|---|
-| Capítulos corregidos | 3 |
-| Páginas revisadas | 40–60 |
-| Escenas reescritas | según lectura |
+| Capítulos corregidos | 2 |
+| Materiales de envío cerrados | 1 |
 
 ## Estado actual
 
-> *Rellenar: capítulo por el que voy, número total de capítulos, fecha objetivo de envío.*
-
-- Capítulo actual:
-- Capítulos totales:
-- Fecha objetivo de manuscrito cerrado:
+- Capítulo 7 (*El disfraz II*): **corregido**, en `manuscrito/`.
+- Portada: **cerrada**. Dibujo original CHAOS sobre crema cálido, título serif negro
+  plano sobre el cráneo, monigotes rojos arriba-izquierda, pie sin caja. Sin efectos
+  metálicos ni IA. Referencia: crema #F5F3ED con grano, carboncillo #1A1A1A, rojo
+  #C8102E, 140×215 mm.
+- Fecha objetivo de envío a agencias: *(ponerla, y ponerla pronto)*
 
 ## Backlog
 

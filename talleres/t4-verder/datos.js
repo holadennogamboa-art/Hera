@@ -1,5 +1,5 @@
 const D = {
-meta:{titulo:'El taller', sub:'VERDER — GEO para negocios', K:'taller-verder'},
+meta:{titulo:'El taller', sub:'VERDER · Auditor GEO', K:'taller-verder'},
 ampliable:true,
 reglas:[
  'Aquí el resultado lo mide otra persona: el cliente que paga. Todo se escribe como para enseñárselo.',
@@ -9,7 +9,17 @@ reglas:[
  'Si no lo entiende el dueño de un bar en treinta segundos, está mal explicado.'
 ],
 caps:[
-{n:1,t:'LA OFERTA',fn:'Qué se vende exactamente. Sin esto no hay servicio, hay una idea.',
+{n:0,t:'LO QUE ESTÁ ESPERANDO',fn:'La herramienta ya funciona: 2.890 líneas, 11 sectores, 21 reglas. Lo que falta es enviar el primer correo. Esta unidad va antes que ninguna otra.',
+ reglas:['El correo de SI SI BAGELS está escrito y lleva días parado. Eso es lo único urgente de este taller.','Todo lo que se informa se puede comprobar abriendo el código de la web del cliente. Si no, no se informa.','Primero se enseña el diagnóstico, después se habla de dinero.'],
+ items:[
+  {b:'Leer informes/sisibagels-correo.md y comprobar que suena a ti hablando.',check:true},
+  {b:'Conseguir su contacto: no tienen correo público. Instagram @sisi.bagels, o en persona en Calle del Espíritu Santo 38, Malasaña, abierto de 8:30 a 20:00.',check:true},
+  {b:'Enviarlo. Solo el texto, sin adjuntar el código: eso va si contestan.',check:true},
+  {b:'Si contestan: mandar informes/sisibagels-marcado.html y pedir los tres datos que no están en su web — teléfono de cada local, rango de precio, y si aceptan reservas.',check:true},
+  {b:'Cambiar la clave de Anthropic: la actual se pegó en un chat. Crear otra en console.anthropic.com y borrar la vieja.',check:true},
+  {b:'Recargar crédito de API. Solo hace falta para medir en los asistentes; auditar y prospectar es gratis.',check:true}
+ ]},
+{n:1,t:'LA OFERTA',fn:'Qué se vende exactamente. La herramienta existe; la oferta todavía no está escrita.',
  reglas:['Una frase, sin la palabra «soluciones» y sin siglas sin explicar.','Precios escritos y con alcance cerrado. Lo que no está en el alcance, no está.'],
  items:[
   {b:'Qué es VERDER en una frase que entienda el dueño de un bar. Escribe cinco versiones y quédate con una.'},
@@ -24,7 +34,8 @@ caps:[
   {b:'La lista de preguntas del diagnóstico. Del tipo: «¿dónde puedo comer X en Y?», «¿está abierto ahora Z?», «¿qué opinan de Z?». Escríbelas todas.'},
   {b:'Sobre qué asistentes se mide y por qué esos. Decidirlo y no cambiarlo cada semana.'},
   {b:'La ficha de registro: qué se anota de cada respuesta (aparece / no aparece / aparece mal, cómo lo describe, qué fuente cita).'},
-  {b:'Hacer el diagnóstico de un negocio real de prueba, de principio a fin, y anotar cuánto se tarda. Ese tiempo es tu coste.',check:true}
+  {b:'Hacer el diagnóstico de un negocio real de prueba, de principio a fin, y anotar cuánto se tarda. Ese tiempo es tu coste.',check:true},
+  {b:'ChatGPT, Perplexity y Gemini: los cuatro endpoints están verificados pero ninguno ha devuelto todavía una respuesta correcta. Cada uno necesita su clave de pago. Anotar aquí qué falta en cada uno.'}
  ]},
 {n:3,t:'LA INTERVENCIÓN',fn:'Lo que se hace después del diagnóstico para que el negocio aparezca mejor. El checklist que se repite en cada cliente.',
  reglas:['Cada punto del checklist tiene que poder marcarse hecho o no hecho. Nada ambiguo.','Solo se toca lo que el cliente autoriza por escrito.'],
