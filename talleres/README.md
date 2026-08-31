@@ -17,15 +17,28 @@ entregables medibles, revisión semanal y un archivo de lo hecho.
 
 ## Los talleres
 
-| # | Taller | Proyecto | Naturaleza | h/semana |
-|---|--------|----------|------------|----------|
-| T1 | [Taller de Escritura — Golpe de Estado](T1-golpe-de-estado.md) | Golpe de Estado | Corrección / cierre de manuscrito | 6 h |
-| T2 | [Taller de Creación — Verde Agua](T2-verde-agua.md) | Verde Agua | Escritura de primer borrador | 6 h |
-| T3 | [Taller de Plataforma — HERA](T3-hera.md) | HERA / EYEHERA | Web, producto, redes, contenido | 9 h |
-| T4 | [Taller de Servicio — VERDER](T4-verder.md) | VERDER (GEO para negocios) | Negocio, clientes, entregables | 6 h |
-| T5 | [Taller de Dirección](T5-direccion.md) | Todos | Métricas, planificación, admin, archivo | 3 h |
+| # | Taller | Proyecto | Naturaleza | h/semana | Taller vivo |
+|---|--------|----------|------------|----------|---|
+| T1 | [Escritura — Golpe de Estado](T1-golpe-de-estado.md) | Golpe de Estado | Corrección / cierre de manuscrito | 6 h | [abrir](t1-golpe-de-estado/EL_TALLER.html) |
+| T2 | [Creación — Verde Agua](T2-verde-agua.md) | Verde Agua | Escritura de primer borrador | 6 h | [abrir](t2-verde-agua/TALLER.html) |
+| T3 | [Plataforma — HERA](T3-hera.md) | HERA / EYEHERA | Web, producto, redes, contenido | 9 h | [abrir](t3-hera/TALLER.html) |
+| T4 | [Servicio — VERDER](T4-verder.md) | VERDER (GEO para negocios) | Negocio, clientes, entregables | 6 h | [abrir](t4-verder/TALLER.html) |
+| T5 | [Dirección](T5-direccion.md) | Todos | Métricas, planificación, admin, archivo | 3 h | — |
 
 Total: **30 h/semana = 6 h/día × 5 días.**
+
+## Los talleres vivos
+
+Cada taller tiene, además de su documento, una **aplicación de taller**: la misma que ya
+funcionaba en *Golpe de estado*, con su motor extraído para poder reutilizarla.
+
+- [`index.html`](index.html) — la portada: los cinco talleres, se abre desde ahí.
+- Funciona igual en todos: unidades arriba, paso a paso abajo, la consigna o el borrador
+  a la izquierda, lo tuyo a la derecha, progreso guardado solo.
+- **Conectar carpeta** (Chrome o Edge en el escritorio) escribe un `.md` por unidad en una
+  carpeta real de tu disco cada vez que dejas de teclear. **Exportar unidad** la descarga suelta.
+- Cada taller guarda en su propia clave: no se pisan entre ellos.
+- El motor y cómo crear un taller nuevo: [`motor/README.md`](motor/README.md).
 
 ## Documentos del sistema
 

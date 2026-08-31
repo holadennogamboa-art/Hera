@@ -3,6 +3,16 @@
 **Naturaleza:** corrección y cierre de manuscrito.
 **Horas:** 6 h/semana — Lunes B1+B2, Miércoles B1, Viernes B1.
 
+## El taller vivo
+
+[`t1-golpe-de-estado/EL_TALLER.html`](t1-golpe-de-estado/EL_TALLER.html) — el que ya estaba
+en marcha. Método: el borrador va a la izquierda **solo como referencia** y la versión buena
+se escribe a mano en la derecha, párrafo a párrafo, con las reglas del capítulo a la vista y
+las etiquetas de lo que no se puede tocar. No se edita el original: se reescribe encima.
+De ahí sale el manuscrito, un `.md` por capítulo, en [`manuscrito/`](t1-golpe-de-estado/manuscrito/).
+
+Es el método que se ha extraído para los demás talleres.
+
 ## Objetivo del taller
 
 Llevar *Golpe de Estado* de manuscrito corregible a manuscrito enviable: texto cerrado,
