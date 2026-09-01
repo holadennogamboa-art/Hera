@@ -67,6 +67,9 @@ funcionaba en *Golpe de estado*, con su motor extraído para poder reutilizarla.
 
 ## Cómo se empieza
 
+**Si es hoy: [`ARRANQUE.md`](ARRANQUE.md).** El primer día no empieza por el principio,
+empieza por la hora que es.
+
 1. Leer [`PROTOCOLO.md`](PROTOCOLO.md) una vez, entero.
 2. Poner el horario de [`HORARIO.md`](HORARIO.md) en el calendario como eventos fijos y repetitivos.
 3. Rellenar la sección **Estado actual** de cada taller con dónde está hoy el proyecto.
