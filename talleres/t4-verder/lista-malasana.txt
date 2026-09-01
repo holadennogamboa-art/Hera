@@ -1,28 +1,33 @@
-# Lista de prospección · Malasaña y alrededores · 1-sep-2026
-# Uso: node lote.mjs lista-malasana.txt   (o --csv para hoja de cálculo)
-# Las líneas que empiezan por # son notas; borra la almohadilla al confirmar un dominio.
+# Lista de prospección · Malasaña y alrededores
+# Actualizada: 1-sep-2026
+#
+# CÓMO SE USA ESTE ARCHIVO
+# Solo dominios, uno por línea. Nada más. Sin https://, sin barras, sin el código
+# de la web: eso lo descarga audit.mjs solo.
+#
+#   cd ~/geo-auditor && node lote.mjs lista-malasana.txt --csv
+#
+# Las líneas con # son notas y el programa las ignora.
 
 # --- OBJETIVO DESEADO ---
-# PEZ TORTILLA — el que quieres. Trátalo como tal: no va en el lote genérico.
-# Confirma su dominio a mano, audítalo tú solo con audit.mjs --html --parche,
-# y no le escribas hasta tener el informe entero mirado con calma.
-# Encaja con el criterio: "tortilla" está en el nombre, así que esa pregunta la ganan
-# solos; "dónde cenar de tapas en Malasaña" o "dónde tomar algo por Fuencarral" es
-# donde probablemente no salgan. Ahí está la conversación.
-# pez tortilla       → buscar dominio y confirmarlo
+# Pez Tortilla no va en el lote: se audita a solas y con calma.
+#   node audit.mjs peztortilla.com --html --parche
+# Tres locales: Calle del Pez 36, Cava Baja 42, Espoz y Mina 13. No aceptan reservas
+# (dato útil: es justo uno de los campos que los asistentes citan).
+# peztortilla.com
 
-# --- Dominios confirmados ---
+# --- LOS QUE SALEN DONDE SI SI BAGELS NO SALE ---
+# No son clientes: son la referencia. Audítalos para ver qué tienen ellos en el código
+# que a SI SI BAGELS le falta. Salen 4 de 4 en "brunch o desayuno en Malasaña".
+tomacafe.es
+hansocafe.es
+
+# --- PROSPECCIÓN ---
 masamunecoffee.com
 brunchclubcafe.com
 brunchit.es
+labicicletacafe.com
+camdencoffeeroasters.com
 
-# --- Confirmados como competidores en tus propias consultas ---
-# Salen las 4 de 4 en "brunch o desayuno en Malasaña", donde SI SI BAGELS sale 0 de 4.
-# Auditarlos no es para venderles: es para saber qué tienen ellos en el código.
-# Toma Café        → buscar dominio
-# HanSo Café       → buscar dominio
-
-# --- Nombres a los que hay que sacarles el dominio (5 min en Maps) ---
-# La Bicicleta Café  · Plaza de San Ildefonso 9
-# Urbano Coffee      · Calle Santa Bárbara 8
-# Camden Coffee Roasters · Malasaña
+# --- PENDIENTE DE CONFIRMAR EN MAPS ---
+# Urbano Coffee · Calle Santa Bárbara 8 · no se le encuentra dominio propio
