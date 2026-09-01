@@ -81,6 +81,15 @@ cuál engancha, escribe el de Pez Tortilla.
   console.anthropic.com y se borra la vieja.
 - **Recargar crédito.** Solo hace falta para medir en los asistentes.
 
+## Hallazgo del 1-sep: el marcado no basta
+
+Primera tanda de siete auditorías. **Toma Café y HanSo, que salen 4 de 4 en los
+asistentes, tienen el código peor que SI SI BAGELS. Masamune, con el marcado correcto, no
+sale en ninguna consulta.**
+
+El marcado no explica por sí solo quién sale recomendado. Cambia lo que se puede prometer.
+Detalle y consecuencias: [`t4-verder/hallazgo-01-el-marcado-no-basta.md`](t4-verder/hallazgo-01-el-marcado-no-basta.md).
+
 ## El dato que vende
 
 Mismo negocio, misma web, misma semana:
@@ -91,9 +100,11 @@ Mismo negocio, misma web, misma semana:
 | Brunch o desayuno en Malasaña | **0 de 4** | — |
 | Mejores cafeterías de especialidad | 0 de 1 | — |
 
-Quien busca «bagels» los encuentra porque el nombre lleva la palabra. Quien busca «dónde
-desayunar en Malasaña» no, porque en el código no consta que estén allí. En esa pregunta
-salen Toma Café y HanSo Café las cuatro veces. **Ese contraste es la venta entera.**
+Quien busca «bagels» los encuentra porque el nombre lleva la palabra. En la de Malasaña
+salen Toma Café y HanSo las cuatro veces.
+
+**El contraste es la venta. La causa, no**: ver el hallazgo del 1-sep. Se enseña el dato y
+se ofrece el diagnóstico; no se promete que arreglar el código cambie el resultado.
 
 ## Métricas
 
