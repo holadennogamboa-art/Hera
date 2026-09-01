@@ -50,6 +50,24 @@ Si contestan: **no prometer que el arreglo los hará aparecer.** Ofrecer el diag
 completo y la medición antes/después. Si preguntan directamente, contarles esto — que sus
 competidores salen con el código peor. Un cliente que oye eso de ti confía más, no menos.
 
+## El caso La Bicicleta (auditado el 1-sep)
+
+Cobertura **6%** · 1 de 17 propiedades · 1 crítico, 2 altos.
+
+- Declara `LocalBusiness` con nombre **«(sin nombre)»**. No hay `name`, ni `address`,
+  ni `servesCuisine`, ni `award`.
+- **26 palabras de texto visible en 358 kB de HTML.** Toda la web se pinta con
+  JavaScript, y los rastreadores de modelos de lenguaje no lo ejecutan: para ellos esa
+  página está en blanco.
+- Lo que sí está bien: robots.txt no bloquea a ninguno de los 13 rastreadores, y la
+  redirección es limpia dentro del dominio.
+
+Es el mejor argumento de venta encontrado hasta hoy, y **no necesita ninguna promesa**:
+basta con enseñar que su web, para estos sistemas, está vacía.
+
+Faltan 7 datos que solo puede dar el cliente antes de publicar el marcado: dirección
+completa, teléfono, coordenadas, imagen y rango de precio.
+
 ## Para el futuro
 
 Hace falta una tercera columna en el diagnóstico, además de código y aparición:
