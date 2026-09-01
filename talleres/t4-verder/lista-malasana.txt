@@ -1,0 +1,19 @@
+# Lista de prospección · Malasaña y alrededores · 1-sep-2026
+# Uso: node lote.mjs lista-malasana.txt   (o --csv para hoja de cálculo)
+# Las líneas que empiezan por # son notas; borra la almohadilla al confirmar un dominio.
+
+# --- Dominios confirmados ---
+masamunecoffee.com
+brunchclubcafe.com
+brunchit.es
+
+# --- Confirmados como competidores en tus propias consultas ---
+# Salen las 4 de 4 en "brunch o desayuno en Malasaña", donde SI SI BAGELS sale 0 de 4.
+# Auditarlos no es para venderles: es para saber qué tienen ellos en el código.
+# Toma Café        → buscar dominio
+# HanSo Café       → buscar dominio
+
+# --- Nombres a los que hay que sacarles el dominio (5 min en Maps) ---
+# La Bicicleta Café  · Plaza de San Ildefonso 9
+# Urbano Coffee      · Calle Santa Bárbara 8
+# Camden Coffee Roasters · Malasaña
