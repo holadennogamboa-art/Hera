@@ -21,7 +21,7 @@ proyecto se coma horas de escritura arreglando cosas que nadie está usando toda
 
 - [ ] Vídeo 1, «El poro», grabado y publicado. Guion en la sección 6 del dossier.
 - [ ] 24 h después: mirar el informe y anotar qué pasó.
-- [ ] Reescribir a Estefani y a vicky. Lo probaron roto en móvil; ya está arreglado.
+- [x] Reescribir a Estefani y a vicky. Hecho el 1-sep. Pendiente ver si renderizan.
 - [ ] Escribir a los registrados que entraron y no renderizaron.
 - [ ] Vídeo 2 (silencioso, ASMR de piel, sin texto) solo cuando el 1 tenga datos.
 - [ ] **Rotar la clave de Gemini.** Quedó visible en la configuración del servicio.
