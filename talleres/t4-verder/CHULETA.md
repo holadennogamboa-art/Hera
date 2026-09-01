@@ -2,6 +2,27 @@
 
 > Una pantalla. Si algún día no te acuerdas de nada más, con esto basta.
 
+## Por dónde se entra
+
+Hay dos puertas al mismo motor. Empieza siempre por la primera.
+
+**1 · El panel — para mirar.** Doble clic en `abrir-panel.command`, o en la terminal:
+
+```
+cd ~/geo-auditor && node servidor.mjs
+```
+
+Y luego, en el navegador: **http://localhost:4321**
+
+La terminal se queda quieta con el cursor parpadeando. **Eso es correcto: es el servidor
+encendido, no está colgado.** Para apagarlo, `Ctrl + C` en esa ventana.
+
+**2 · Los comandos — para trabajar.** Hacen lo que el panel no puede: mirar diez webs de
+golpe, y dejar el informe guardado en un archivo que se le puede mandar a alguien.
+
+`audit.mjs` y `lote.mjs` no son páginas web ni enlaces: son archivos de programa que se
+ejecutan escribiendo su nombre en la terminal, siempre desde `~/geo-auditor`.
+
 ## El bucle, en cuatro líneas
 
 ```
