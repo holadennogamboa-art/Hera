@@ -2,6 +2,15 @@
 # Uso: node lote.mjs lista-malasana.txt   (o --csv para hoja de cálculo)
 # Las líneas que empiezan por # son notas; borra la almohadilla al confirmar un dominio.
 
+# --- OBJETIVO DESEADO ---
+# PEZ TORTILLA — el que quieres. Trátalo como tal: no va en el lote genérico.
+# Confirma su dominio a mano, audítalo tú solo con audit.mjs --html --parche,
+# y no le escribas hasta tener el informe entero mirado con calma.
+# Encaja con el criterio: "tortilla" está en el nombre, así que esa pregunta la ganan
+# solos; "dónde cenar de tapas en Malasaña" o "dónde tomar algo por Fuencarral" es
+# donde probablemente no salgan. Ahí está la conversación.
+# pez tortilla       → buscar dominio y confirmarlo
+
 # --- Dominios confirmados ---
 masamunecoffee.com
 brunchclubcafe.com

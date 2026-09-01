@@ -63,6 +63,18 @@ y 5 búsquedas web por consulta.
 - [ ] Primer cliente de pago.
 - [ ] Los tres paquetes con precio y alcance escritos.
 
+## El cliente que quieres
+
+**Pez Tortilla.** Anotado el 1-sep como objetivo deseado, no como uno más de la lista.
+
+Regla para los clientes que te importan: **no entran en el lote.** Se auditan a solas,
+se lee el informe entero, y se escribe cuando tengas el mejor dato del informe claro en
+una frase. Un correo mediocre a un negocio que te da igual cuesta un contacto; a uno que
+quieres, cuesta el único que tenías.
+
+Práctica primero con los que te dan igual. Cuando lleves cinco correos escritos y sepas
+cuál engancha, escribe el de Pez Tortilla.
+
 ## Fuera del trabajo diario, pero pendiente
 
 - **Cambiar la clave de Anthropic.** La actual se pegó en un chat. Se crea otra en
