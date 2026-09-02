@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hoy — arranque</title><link rel="stylesheet" href="motor/motor.css">
 <style>
-.p{max-width:720px;margin:0 auto;padding:40px 18px 80px}
+.pg{max-width:720px;margin:0 auto;padding:40px 18px 80px}
 h1{font-family:var(--serif);font-size:clamp(28px,5vw,40px);margin:0 0 4px}
 .sub{color:var(--soft);margin:0 0 26px}
 .big{font-family:var(--serif);font-size:22px;padding:18px 26px;width:100%;margin:8px 0 18px}
@@ -19,7 +19,7 @@ tr.pausa td{color:var(--soft);font-size:13px;padding:6px 12px;background:var(--p
 .foot{margin-top:22px;color:var(--soft);font-size:13.5px}
 .foot b{color:var(--ink)}
 .hint{background:var(--paper2);border-left:3px solid var(--gold);padding:10px 14px;margin:0 0 18px;font-size:14px}
-</style></head><body><div class="p">
+</style></head><body><div class="pg">
 <h1 id="t">Hoy</h1>
 <p class="sub" id="d"></p>
 
@@ -29,7 +29,8 @@ tr.pausa td{color:var(--soft);font-size:13px;padding:6px 12px;background:var(--p
   <select id="n"><option>4</option><option>5</option><option>6</option><option>3</option><option>2</option></select>
   <span id="extra"></span>
  </div>
- <button class="p big" onclick="arrancar()">Arranco ahora</button>
+ <button class="p big" id="btn" onclick="arrancar()">Arranco ahora</button>
+ <div class="hint" id="tarde" hidden></div>
 </div>
 
 <div id="post" hidden>
@@ -89,6 +90,14 @@ function pintar(){
   return '<tr class="'+cls+'"><td class="h">'+hhmm(x.ini)+' – '+hhmm(x.fin)+'</td><td>'+x.label+'</td><td><span class="tag">'+x.b[0]+'</span> '+x.b[1]+'</td></tr>'+pausa;
  }).join('');
 }
+function aviso(){
+ const h=new Date().getHours()+new Date().getMinutes()/60, n=+document.getElementById('n').value;
+ const fin=h+n*1.5+((n-1)*0.25)+(n>1?0.75:0), el=document.getElementById('tarde');
+ if(h>12.5){el.hidden=false;el.innerHTML='<b>Pasan de las 12:30.</b> Ya no caben cuatro bloques. Haz media jornada — B1 y la ronda — y anótalo. Baja el número a 2.'}
+ else if(fin>22){el.hidden=false;el.innerHTML='Con '+n+' bloques terminarías a las '+String(Math.floor(fin)%24).padStart(2,'0')+':00 aproximadamente. Baja uno.'}
+ else el.hidden=true;
+}
+document.getElementById('n').addEventListener('change',aviso); aviso(); setInterval(aviso,60000);
 function arrancar(){localStorage.setItem(K,JSON.stringify({t0:new Date().toISOString(),n:+document.getElementById('n').value}));pintar()}
 function reset(){localStorage.removeItem(K);location.reload()}
 pintar(); setInterval(pintar,60000);
