@@ -31,13 +31,12 @@ Lo que queda no es escribir: es **cerrar y enviar**.
 - [ ] Corrección ortotipográfica final.
 
 ### Banda sonora
-- [ ] **Capítulo 7 — canción.** Slot abierto, curaduría tuya.
+- [x] **Capítulo 7 — canción:** «Mi enfermedad», Andrés Calamaro (1997). Fijada.
 - [ ] **Capítulo 9 — canción.** Slot abierto.
 - (El 8 es SILENCIO, y es conceptual: el padre nunca compartió música. Ya está decidido.)
 
 ### Registro
-- [ ] **Registro de propiedad intelectual de la Comunidad de Madrid: gratis y online.**
-      Esto no depende de tener fondos. Hacerlo antes de enviar nada.
+- [x] **Registro de propiedad intelectual de la Comunidad de Madrid: en trámite** (2-sep-2026).
 - [ ] Safe Creative: cuando haya fondos.
 
 ### Envío
@@ -62,7 +61,11 @@ Lo que queda no es escribir: es **cerrar y enviar**.
 
 ## Estado actual
 
-- Capítulo 7 (*El disfraz II*): **corregido**, en `manuscrito/`.
+- **Taller vivo en línea:** `taller-gde.vercel.app` — mismo motor, accesible desde el móvil.
+- Capítulo 7 (*El disfraz II*): **8 de 19 párrafos** reescritos. Progreso global 8/132.
+- El `.md` de `manuscrito/` es el **borrador de referencia**, no la versión reescrita.
+- ⚠️ El progreso se guarda solo en el navegador donde se escribe. Conectar carpeta en el
+  Mac para que quede en disco.
 - Portada: **cerrada**. Dibujo original CHAOS sobre crema cálido, título serif negro
   plano sobre el cráneo, monigotes rojos arriba-izquierda, pie sin caja. Sin efectos
   metálicos ni IA. Referencia: crema #F5F3ED con grano, carboncillo #1A1A1A, rojo
