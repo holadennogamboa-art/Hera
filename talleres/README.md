@@ -56,7 +56,8 @@ funcionaba en *Golpe de estado*, con su motor extraído para poder reutilizarla.
 
 ## Documentos del sistema
 
-- [`HORARIO.md`](HORARIO.md) — el horario diario y la rotación semanal.
+- [`HOY.html`](HOY.html) — **se abre cada mañana.** Pulsas «Arranco ahora» y calcula los bloques desde esa hora.
+- [`HORARIO.md`](HORARIO.md) — la rotación semanal y las reglas de reposición.
 - [`PROTOCOLO.md`](PROTOCOLO.md) — rituales de apertura y cierre, reglas de foco, qué hacer los días malos.
 - [`LA-RONDA.md`](LA-RONDA.md) — el bloque B4, minuto a minuto. El más importante y el que primero se cae.
 - [`fuentes/`](fuentes/) — los dossieres de origen: universo Golpe de estado / Verde agua, Skin Lab e índice maestro.

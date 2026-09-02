@@ -1,53 +1,33 @@
-# ARRANQUE — el primer día
+# ARRANQUE — jueves 3 de septiembre
 
-> Martes 1 de septiembre de 2026. El sistema empieza hoy, no el lunes que viene.
+> El miércoles se hizo B1 y el resto fue imposible. No se juzga: se repone lo que se puede
+> y se sigue. Hoy el día tiene **seis bloques**: los cuatro del jueves y dos de reposición.
 
-## Hoy no se empieza por el principio, se empieza por la hora que es
+## Cómo se arranca
 
-B1 y B2 ya han pasado. **No se recuperan.** Un día que empieza a media mañana no se
-alarga hasta las nueve de la noche: se entra en el bloque que toca y mañana se entra en
-el primero. La cadena empieza igual.
+Abre [`HOY.html`](HOY.html), elige **6** bloques y pulsa **«Arranco ahora»** cuando estés
+sentado. Las horas se calculan desde ese minuto. Con seis bloques el día dura 11 horas
+con pausas y comida: **si arrancas después de las 10:00, baja a 5** y deja el segundo
+extra para el viernes.
 
-Hoy es martes, así que tocaría T2 Verde agua (B1 y B2), T4 Auditor GEO (B3) y la ronda
-(B4). Quedan dos bloques.
+## Los seis bloques
 
-## B3 · 13:15 – 14:45 · Auditor GEO
+| | Taller | Qué se hace |
+|---|---|---|
+| B1 | **T2 Verde agua** | Episodio 1. La intro: Darío corre, muere, la cámara sube. Es la primera escena de la serie y esta semana aún no tiene ni una palabra. |
+| B2 | **T2 Verde agua** | Seguir. Si la intro se resiste, las primeras frases de Carlos a Crónica. |
+| B3 | **T7 Encargos** | Empieza mirando cuál tiene el deadline más cerca y se lleva el bloque entero. Si sobra: decidir si la campaña pro-IA es una pieza o dos. |
+| B4 | **T5 Skin Lab** *(repone)* | El vídeo 1, «El poro». Plano a plano en el taller. Si grabar hoy no es posible, se monta lo que haya o se prepara el rodaje: localización, retrato, permiso. |
+| B5 | **T3 HERA** *(repone)* | Contenido en lote: calendario de cuatro semanas y pies de foto de una sentada. |
+| B6 | **La ronda** | Igual que siempre, y cierra el día. Stats de Skin Lab, dos o tres auditorías, **el correo de hoy** — el de La Bicicleta, con las fuentes de Toma Café miradas antes — y bitácora. |
 
-Abre `t4-verder/TALLER.html` y ve a la unidad **0 · LO QUE ESTÁ ESPERANDO**.
+## Lo que no se hace hoy
 
-1. Lee `informes/sisibagels-correo.md`. Comprueba que suena a ti hablando, no a una
-   herramienta. Si no suena a ti, reescríbelo en el taller.
-2. Decide cómo se lo haces llegar. No tienen correo público: Instagram `@sisi.bagels`, o
-   Calle del Espíritu Santo 38, Malasaña, abierto hasta las 20:00. En persona es mejor y
-   hoy te pilla en horario.
-3. Si sobra tiempo: `node lote.mjs` con cinco negocios del barrio. Es gratis.
+- El análisis de fuentes de Toma Café va **dentro de la ronda**, en los 20 minutos de
+  auditar. No abre bloque propio.
+- La ronda del miércoles **no se repone**. Se perdió y está anotada.
 
-**Lo que no se hace hoy:** tocar el código del auditor. Funciona. No es el problema.
+## Regla del día
 
-## B4 · 15:00 – 16:30 · La ronda, por primera vez
-
-El guion completo está en [`LA-RONDA.md`](LA-RONDA.md). Hoy, la versión corta:
-
-- **5 min** — `./hera-stats.sh`. Apunta los dos números y cierra la terminal.
-- **20 min** — auditar dos o tres negocios y guardar los que salgan mal.
-- **15 min** — **el correo.** Hoy el correo es el de SI SI BAGELS. Sale hoy.
-- **10 min** — escribir a Estefani. Lo probó roto y ya está arreglado.
-- **30 min** — publicar en HERA lo que haya listo, o preparar lo de mañana.
-- **10 min** — apuntar en `registro/BITACORA.csv` y dejar mañana empezado.
-
-## Antes de dormir, cinco minutos
-
-Abre `registro/BITACORA.csv` y escribe las dos líneas de hoy. Aunque uno de los dos
-bloques haya salido mal. **Sobre todo si ha salido mal**: la bitácora que solo registra
-los días buenos no sirve para decidir nada el viernes.
-
-## Mañana, miércoles, a las 09:00
-
-B1 es Golpe de estado. Abre `t1-golpe-de-estado/EL_TALLER.html` y sigue por donde estabas.
-No hay nada que decidir a las nueve de la mañana: eso ya está decidido aquí.
-
-## Y el viernes
-
-B4 es la revisión semanal. Serán tres días de datos, no una semana, y da igual: se hace
-igual. La primera revisión es la que enseña si el horario está bien puesto o hay que
-mover algo. Plantilla en [`REVISION-SEMANAL.md`](REVISION-SEMANAL.md).
+Seis bloques es mucho. Si a mitad ves que no llegas, **se cae el B5**, no la ronda. La
+ronda es lo único que hoy convierte trabajo en dinero.

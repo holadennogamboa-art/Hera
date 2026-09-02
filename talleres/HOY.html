@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hoy — arranque</title><link rel="stylesheet" href="motor/motor.css">
+<style>
+.p{max-width:720px;margin:0 auto;padding:40px 18px 80px}
+h1{font-family:var(--serif);font-size:clamp(28px,5vw,40px);margin:0 0 4px}
+.sub{color:var(--soft);margin:0 0 26px}
+.big{font-family:var(--serif);font-size:22px;padding:18px 26px;width:100%;margin:8px 0 18px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0 16px;color:var(--soft);font-size:14px}
+select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid var(--rule);border-radius:4px;background:var(--card);color:var(--ink)}
+table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+td,th{padding:12px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);font-weight:400}
+td.h{font-family:var(--mono);white-space:nowrap;font-size:13.5px}
+tr.now td{background:color-mix(in srgb,var(--green) 12%,var(--card))}
+tr.done td{opacity:.5;text-decoration:line-through}
+tr.pausa td{color:var(--soft);font-size:13px;padding:6px 12px;background:var(--paper2)}
+.tag{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.1em}
+.foot{margin-top:22px;color:var(--soft);font-size:13.5px}
+.foot b{color:var(--ink)}
+.hint{background:var(--paper2);border-left:3px solid var(--gold);padding:10px 14px;margin:0 0 18px;font-size:14px}
+</style></head><body><div class="p">
+<h1 id="t">Hoy</h1>
+<p class="sub" id="d"></p>
+
+<div id="pre">
+ <div class="hint">Los bloques no van con el reloj: van con <b>tu hora de arranque</b>. Pulsa cuando estés sentado, no antes.</div>
+ <div class="row">Bloques hoy:
+  <select id="n"><option>4</option><option>5</option><option>6</option><option>3</option><option>2</option></select>
+  <span id="extra"></span>
+ </div>
+ <button class="p big" onclick="arrancar()">Arranco ahora</button>
+</div>
+
+<div id="post" hidden>
+ <table><thead><tr><th>Hora</th><th>Bloque</th><th>Taller</th></tr></thead><tbody id="tb"></tbody></table>
+ <div class="foot">
+  Arrancaste a las <b id="t0"></b>. Termina a las <b id="tf"></b>.
+  <br>Si te descuadras, no recortes el bloque: desplázalo. <a href="#" onclick="reset();return false">Reiniciar el día</a>.
+ </div>
+</div>
+
+<div class="foot" style="margin-top:34px">
+ <a href="index.html">Talleres</a> · <a href="LA-RONDA.md">La ronda</a> · <a href="HORARIO.md">Horario</a> · <a href="registro/BITACORA.csv">Bitácora</a>
+</div>
+</div>
+<script>
+// Rotación por día (0=dom). Cada bloque: [taller, qué].
+const R={
+ 1:[['T1','Golpe de estado'],['T1','Golpe de estado'],['T3','HERA marca y web'],['ronda','La ronda']],
+ 2:[['T2','Verde agua'],['T2','Verde agua'],['T4','Auditor GEO'],['ronda','La ronda']],
+ 3:[['T1','Golpe de estado'],['T3','HERA contenido en lote'],['T5','Skin Lab · vídeo'],['ronda','La ronda']],
+ 4:[['T2','Verde agua'],['T2','Verde agua'],['T7','Encargos y campaña'],['ronda','La ronda']],
+ 5:[['T6','Kierck'],['T5','Skin Lab · lo que pidan los datos'],['T4','GEO medición + ronda 30′'],['T8','Dirección · revisión semanal']],
+ 6:[['libre','Taller libre (máx. 2 h)']],0:[]
+};
+// Bloques extra (reposición) pendientes, por fecha. Se editan aquí a mano o se deja vacío.
+const EXTRA={'2026-09-04':[['T5','Skin Lab · vídeo 1 (repone el miércoles)'],['T3','HERA contenido en lote (repone el miércoles)']]};
+const DIAS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+const hoy=new Date(), iso=hoy.toISOString().slice(0,10), dow=hoy.getDay();
+const K='hoy:'+iso;
+document.getElementById('d').textContent=DIAS[dow]+' '+hoy.toLocaleDateString('es-ES',{day:'numeric',month:'long'});
+const ex=EXTRA[iso]||[];
+document.getElementById('extra').textContent=ex.length?('· pendientes de reponer: '+ex.map(e=>e[1]).join(' / ')):'';
+if(ex.length)document.getElementById('n').value=String(Math.min(6,(R[dow]||[]).length+ex.length));
+const hhmm=d=>d.toTimeString().slice(0,5);
+function plan(t0,n){
+ const base=(R[dow]||[]).slice(), todos=base.concat(ex).slice(0,n);
+ // la ronda siempre va la última del día
+ const i=todos.findIndex(b=>b[0]==='ronda'); if(i>-1&&i!==todos.length-1){const r=todos.splice(i,1)[0];todos.push(r)}
+ while(todos.length<n)todos.push(['libre','Bloque extra: lo que más deuda tenga']);
+ let t=new Date(t0), out=[];
+ todos.forEach((b,j)=>{
+  const fin=new Date(t.getTime()+90*60000);
+  out.push({ini:new Date(t),fin,b,label:'B'+(j+1)});
+  t=new Date(fin.getTime()+(j===1?60:15)*60000); // comida tras B2
+ });
+ return out;
+}
+function pintar(){
+ const s=localStorage.getItem(K); if(!s){return}
+ const {t0,n}=JSON.parse(s); const p=plan(new Date(t0),n); const ahora=new Date();
+ document.getElementById('pre').hidden=true; document.getElementById('post').hidden=false;
+ document.getElementById('t0').textContent=hhmm(new Date(t0));
+ document.getElementById('tf').textContent=hhmm(p[p.length-1].fin);
+ document.getElementById('tb').innerHTML=p.map((x,j)=>{
+  const cls=ahora>x.fin?'done':(ahora>=x.ini?'now':'');
+  const pausa=j<p.length-1?'<tr class="pausa"><td colspan="3">'+(j===1?'comida · 60 min':'pausa · 15 min sin pantallas')+'</td></tr>':'';
+  return '<tr class="'+cls+'"><td class="h">'+hhmm(x.ini)+' – '+hhmm(x.fin)+'</td><td>'+x.label+'</td><td><span class="tag">'+x.b[0]+'</span> '+x.b[1]+'</td></tr>'+pausa;
+ }).join('');
+}
+function arrancar(){localStorage.setItem(K,JSON.stringify({t0:new Date().toISOString(),n:+document.getElementById('n').value}));pintar()}
+function reset(){localStorage.removeItem(K);location.reload()}
+pintar(); setInterval(pintar,60000);
+</script></body></html>

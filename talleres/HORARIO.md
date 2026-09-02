@@ -13,7 +13,24 @@ solapa, no se comparte entre dos proyectos.
 | — | 14:45 – 15:00 | Pausa |
 | B4 | 15:00 – 16:30 | **Mundo.** La ronda: publicar, prospectar, escribir a gente, cerrar el día. |
 
-Si el día empieza más tarde, se desplaza el bloque entero; no se recorta.
+**Las horas de la tabla son la referencia, no la ley.** Desde el 2-sep los bloques se anclan
+a la **hora de arranque**: abres [`HOY.html`](HOY.html), pulsas «Arranco ahora» y el día se
+calcula desde ese minuto — 90, pausa 15, 90, comida 60, 90, pausa 15, 90. Lo que se cumple
+son los bloques y su duración, no la hora del reloj.
+
+Dos límites para que la flexibilidad no se coma el sistema:
+
+- **Tope de arranque: 12:30.** Después de esa hora ya no caben cuatro bloques; se hace
+  media jornada (B1 y la ronda) y se anota.
+- **La ronda cierra siempre el día**, sea la hora que sea.
+
+### Reponer un bloque perdido
+
+- Un bloque de **producción** perdido (escritura, vídeo, contenido) se repone al día
+  siguiente como **bloque extra** (B5, B6), nunca desplazando los del día.
+- **La ronda no se repone.** Es diaria; la de ayer se perdió y la de hoy se hace. Un correo
+  que no salió es un correo que no salió, y se anota.
+- Máximo **dos** bloques extra en un día. Si se perdieron más, se decide el viernes.
 
 ## La rotación
 

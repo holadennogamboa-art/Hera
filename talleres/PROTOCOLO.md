@@ -2,6 +2,8 @@
 
 ## Ritual de apertura (5 min, antes de B1)
 
+0. Abrir [`HOY.html`](HOY.html) y pulsar **«Arranco ahora»** cuando estés sentado. Las horas
+   del día salen de ese minuto.
 1. Abrir `registro/BITACORA.csv` y escribir la fecha.
 2. Mirar la rotación del día en `HORARIO.md`. Decir en voz alta los cuatro proyectos.
 3. Para cada bloque, escribir **una sola frase** con el entregable esperado.
