@@ -1,0 +1,298 @@
+<title>Una cosa a la vez</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Karla:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+ --bg:#11140F; --surface:#191D16; --surface2:#20251C; --line:#2C3327;
+ --ink:#E8EDE2; --soft:#8B9481; --faint:#5D6656;
+ --lime:#C8F751; --lime-dim:#8FAF3A;
+ --amber:#E0A340; --rust:#C4623F; --slate:#6E7A66;
+ --display:"Archivo",system-ui,sans-serif;
+ --body:"Karla",system-ui,sans-serif;
+ --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);
+ font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 90px}
+
+/* --- cabecera --- */
+header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.marca{font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:-.01em}
+.marca span{color:var(--lime)}
+.fecha{font-family:var(--mono);font-size:12.5px;color:var(--soft)}
+
+/* --- AHORA --- */
+.ahora{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+ border-top:4px solid var(--lime);padding:30px 30px 26px;margin-bottom:14px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+ color:var(--lime);margin:0 0 14px}
+.ahora h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,40px);
+ line-height:1.12;margin:0 0 14px;text-wrap:balance;max-width:22ch}
+.porque{color:var(--soft);margin:0 0 22px;max-width:62ch;font-size:15.5px}
+.meta{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px;
+ color:var(--faint);margin:0 0 22px;padding-top:16px;border-top:1px solid var(--line)}
+.meta b{color:var(--soft);font-weight:400}
+.acciones{display:flex;gap:10px;flex-wrap:wrap}
+button{font-family:var(--body);font-size:15px;font-weight:700;cursor:pointer;
+ border-radius:2px;border:1px solid var(--line);background:transparent;color:var(--ink);
+ padding:13px 20px;transition:none}
+button:hover{border-color:var(--soft)}
+button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+button.hecho{background:var(--lime);color:#0F1409;border-color:var(--lime)}
+button.hecho:hover{background:#D6FF6B;border-color:#D6FF6B}
+button.small{font-size:13.5px;padding:9px 14px;font-weight:500}
+
+/* --- rescate --- */
+.rescate{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--amber);
+ border-radius:2px;padding:18px 22px;margin-bottom:34px}
+.rescate p{margin:0 0 10px;font-size:14.5px;color:var(--soft)}
+.rescate p:last-child{margin:0}
+.rescate b{color:var(--ink)}
+.rescate summary{cursor:pointer;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--amber);list-style:none}
+.rescate summary::-webkit-details-marker{display:none}
+.rescate summary::before{content:"▸ ";}
+.rescate details[open] summary::before{content:"▾ ";}
+.rescate details[open] summary{margin-bottom:12px}
+
+/* --- secciones --- */
+h2{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.2em;
+ text-transform:uppercase;color:var(--faint);margin:0 0 4px}
+.h2sub{color:var(--faint);font-size:13.5px;margin:0 0 16px}
+section{margin-bottom:38px}
+
+/* --- bloques del dia --- */
+.bloques{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.bq{background:var(--surface);padding:14px 18px;display:grid;
+ grid-template-columns:56px 1fr auto;gap:16px;align-items:center}
+.bq .n{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.bq .q{font-size:15px}
+.bq .q i{font-style:normal;color:var(--soft);font-size:13.5px;display:block}
+.bq .t{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.bq.on{background:var(--surface2);box-shadow:inset 3px 0 0 var(--lime)}
+.bq.on .n{color:var(--lime)}
+.bq.ya{opacity:.42}
+.bq.ya .q{text-decoration:line-through}
+
+/* --- proyectos --- */
+.proys{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+.pr{background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:18px 20px 16px;
+ display:flex;flex-direction:column;gap:11px}
+.pr.foco{outline:1px solid var(--lime-dim)}
+.pr-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.pr h3{font-family:var(--display);font-weight:700;font-size:17px;margin:0;letter-spacing:-.005em}
+.pr .id{font-family:var(--mono);font-size:11px;color:var(--faint);display:block;font-weight:400;
+ letter-spacing:.1em;margin-bottom:3px}
+.estado{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+ padding:4px 9px;border-radius:2px;white-space:nowrap;border:1px solid}
+.e-marcha{color:var(--lime);border-color:var(--lime-dim);background:rgba(200,247,81,.07)}
+.e-espera{color:var(--amber);border-color:rgba(224,163,64,.5);background:rgba(224,163,64,.07)}
+.e-tuyo{color:var(--rust);border-color:rgba(196,98,63,.5);background:rgba(196,98,63,.08)}
+.e-parado{color:var(--slate);border-color:var(--line)}
+.paso{font-size:15px;line-height:1.45}
+.paso b{color:var(--lime);font-weight:700}
+.donde{font-size:13.5px;color:var(--soft);border-top:1px solid var(--line);padding-top:10px;margin-top:auto}
+.donde em{font-style:normal;color:var(--faint);font-family:var(--mono);font-size:11px;
+ letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px}
+.cifra{font-family:var(--mono);font-size:12.5px;color:var(--soft);font-variant-numeric:tabular-nums}
+.cifra u{text-decoration:none;color:var(--ink)}
+
+/* --- barra --- */
+.barra{height:3px;background:var(--line);border-radius:0;overflow:hidden}
+.barra i{display:block;height:100%;background:var(--lime-dim)}
+
+footer{border-top:1px solid var(--line);padding-top:18px;color:var(--faint);font-size:13.5px}
+footer a{color:var(--soft)}
+.oculto{display:none !important}
+@media (prefers-reduced-motion:no-preference){button{transition:background .12s,border-color .12s}}
+@media (max-width:560px){.bq{grid-template-columns:44px 1fr;}.bq .t{grid-column:2;}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="marca">UNA COSA<span>.</span></div>
+  <div class="fecha" id="fecha"></div>
+</header>
+
+<div class="ahora" id="ahora">
+  <p class="eyebrow">Ahora mismo</p>
+  <h1 id="a-titulo">Abrir el taller y reescribir el párrafo 9 del capítulo 7.</h1>
+  <p class="porque" id="a-porque">El borrador está a la izquierda. No hay que inventar nada: solo contarlo otra vez con tus palabras. Si sale un párrafo, el bloque ha valido.</p>
+  <div class="meta" id="a-meta">
+    <span><b>Proyecto</b> · Golpe de estado</span>
+    <span><b>Dura</b> · 90 min</span>
+    <span><b>Necesita</b> · cabeza fresca</span>
+    <span><b>Empieza en</b> · taller-gde.vercel.app</span>
+  </div>
+  <div class="acciones">
+    <button class="hecho" onclick="hecho()">Hecho · siguiente</button>
+    <button class="small" onclick="foco()" id="btnfoco">Solo este proyecto</button>
+    <button class="small" onclick="saltar()">Hoy no puedo con esto</button>
+  </div>
+</div>
+
+<div class="rescate">
+  <details>
+    <summary>Si no arrancas</summary>
+    <p><b>La versión de dos minutos:</b> <span id="minima">abre el taller y lee el párrafo 9 en voz alta. Nada más. Si después quieres escribir, escribe.</span></p>
+    <p>Empezar cuesta más que seguir. Dos minutos cuentan como día trabajado y la cadena no se rompe.</p>
+    <p><b>Si hoy no hay nada:</b> el mínimo absoluto del día son los 15 minutos del correo, en la ronda. Lo demás puede esperar a mañana.</p>
+  </details>
+</div>
+
+<section>
+  <h2>El día</h2>
+  <p class="h2sub" id="diasub">Cuatro bloques de 90 minutos. Uno a la vez, en este orden.</p>
+  <div class="bloques" id="bloques"></div>
+</section>
+
+<section>
+  <h2>Los proyectos</h2>
+  <p class="h2sub">Cada uno con su siguiente paso concreto y por dónde ibas. Nada de «avanzar en X».</p>
+  <div class="proys" id="proys"></div>
+</section>
+
+<footer>
+  Ningún proyecto se juzga por lo que falta, sino por dónde está.
+  El estado se guarda en este navegador. <a href="#" onclick="reiniciar();return false">Reiniciar el día</a>.
+</footer>
+</div>
+
+<script>
+const PROY = {
+ gde:{n:"Golpe de estado", id:"T1 · novela", est:["e-marcha","En marcha"],
+   paso:"Reescribir el <b>párrafo 9</b> del capítulo 7 en el taller.",
+   donde:"Párrafo 8 cerrado. El capítulo 7 ya tiene final: la crónica se calla.",
+   cifra:"<u>8</u> / 132 párrafos", pct:6,
+   min:"Abre el taller y lee el párrafo 9 en voz alta. Nada más.",
+   dur:"90 min", nec:"cabeza fresca", donde2:"taller-gde.vercel.app",
+   paso2:"Seguir con el <b>párrafo 10</b>, o pasar los materiales de envío a limpio.",
+   min2:"Relee lo que escribiste en B1. Si aguanta, sigue. Si no, déjalo."},
+ va:{n:"Verde agua", id:"T2 · serie", est:["e-tuyo","Te espera a ti"],
+   paso:"Escribir <b>la carrera</b>: lo que se ve y se oye antes de que pase nada.",
+   donde:"Biblia cerrada, episodio 1 diseñado entero. Cero palabras escritas.",
+   cifra:"<u>0</u> / 4 escenas de la intro", pct:0,
+   min:"Escribe una sola frase de lo que se oye mientras corre. Una.",
+   dur:"90 min", nec:"cabeza fresca", donde2:"t2-verde-agua/TALLER.html",
+   paso2:"El momento: <b>sin método, sin objeto</b>, y la cámara subiendo a aérea.",
+   min2:"Escribe cuántos segundos aguanta el plano alto antes de que entre la voz."},
+ geo:{n:"Auditor GEO", id:"T4 · servicio", est:["e-espera","Esperando respuesta"],
+   paso:"Mandar el correo de <b>La Bicicleta</b>: 26 palabras en 358 kB de web.",
+   donde:"Informe guardado. SI SI BAGELS contactado el 1-sep, sin respuesta aún.",
+   cifra:"<u>8</u> auditados · <u>1</u> contacto · <u>0</u> clientes", pct:12,
+   min:"Abre el informe de La Bicicleta y copia el peor dato en una nota.",
+   dur:"20 min", nec:"poca energía", donde2:"informes/la-bicicleta-cafe-2026-09-01.html"},
+ skin:{n:"HERA Skin Lab", id:"T5 · producto", est:["e-tuyo","Te espera a ti"],
+   paso:"Grabar el <b>plano de la lupa 4×</b> sobre la piel. Es el mejor y sigue sin usar.",
+   donde:"App en producción, 24 renders y todos tuyos. Estefani y vicky ya reescritas.",
+   cifra:"<u>0</u> personas ajenas han renderizado", pct:0,
+   min:"Coge el móvil y graba diez segundos de piel en macro. Sin montar nada.",
+   dur:"90 min", nec:"cámara y luz", donde2:"~/Downloads/hera-skin-lab"},
+ hera:{n:"HERA · marca", id:"T3 · cadencia", est:["e-marcha","En marcha"],
+   paso:"Producir el <b>lote de la semana</b> entero antes de publicar el primero.",
+   donde:"Reel de hoy listo. Calendario con cero semanas por delante.",
+   cifra:"<u>0</u> / 4 semanas de colchón", pct:0,
+   min:"Escribe los cuatro temas de la semana que viene. Solo los títulos.",
+   dur:"90 min", nec:"energía media", donde2:"t3-hera/TALLER.html",
+   paso2:"Escribir <b>los pies de foto</b> del lote entero, todos de una vez.",
+   min2:"Escribe un solo pie de foto. El que más claro tengas."},
+ kierck:{n:"Kierck", id:"T6 · serie", est:["e-parado","Aparcado a propósito"],
+   paso:"Escribir <b>la primera frase de ella</b>. De ahí sale el tono de la serie.",
+   donde:"Biblia con las decisiones firmes tomadas. Falta esa frase.",
+   cifra:"<u>1</u> decisión pendiente", pct:0,
+   min:"Escribe cinco versiones malas de esa frase. Malas a propósito.",
+   dur:"90 min", nec:"cabeza fresca", donde2:"T6-kierck.md"},
+ enc:{n:"Encargos y campaña", id:"T7 · clientes", est:["e-espera","Depende de otros"],
+   paso:"Mirar <b>qué encargo tiene el deadline más cerca</b> y darle el bloque entero.",
+   donde:"Playa Negra, BAMBÚ, vilano, Operación HERA. Campaña: ¿una pieza o dos?",
+   cifra:"<u>4</u> encargos vivos", pct:0,
+   min:"Abre el calendario y apunta las cuatro fechas. Nada más.",
+   dur:"90 min", nec:"energía media", donde2:"T7-encargos.md"}
+};
+
+const DIAS = {
+ 1:["gde","gde","hera","ronda"], 2:["va","va","geo","ronda"],
+ 3:["gde","hera","skin","ronda"], 4:["va","va","enc","ronda"],
+ 5:["kierck","skin","geo","ronda"], 6:["libre"], 0:[]
+};
+const NOMDIA=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const RONDA={n:"La ronda", id:"B4 · todos los días",
+ paso:"Métricas, dos auditorías, <b>un correo</b>, responder y publicar.",
+ dur:"90 min", nec:"poca energía", donde2:"LA-RONDA.md",
+ min:"Escribe el correo del día y para. Quince minutos.",
+ porque:"Es el único bloque que convierte trabajo hecho en trabajo cobrado. Si el día se cae, este se hace igual."};
+const LIBRE={n:"Taller libre", id:"sábado", paso:"Lo que te apetezca, máximo dos horas.",
+ dur:"120 min", nec:"—", donde2:"—", min:"Nada. Hoy no hay mínimo.",
+ porque:"El domingo está cerrado y el sábado es opcional. Eso también es el sistema."};
+
+const hoy=new Date(), iso=hoy.toISOString().slice(0,10), dow=hoy.getDay();
+const K='unacosa:'+iso;
+let st=JSON.parse(localStorage.getItem(K)||'{"i":0,"foco":null,"saltados":[]}');
+const guarda=()=>localStorage.setItem(K,JSON.stringify(st));
+
+document.getElementById('fecha').textContent =
+  NOMDIA[dow]+' '+hoy.toLocaleDateString('es-ES',{day:'numeric',month:'long'});
+
+function lista(){
+  return (DIAS[dow]||[]).filter(k=>!st.saltados.includes(k));
+}
+function item(k,j){
+  if(k==='ronda')return RONDA; if(k==='libre')return LIBRE;
+  const p=PROY[k];
+  if(j!==undefined&&j>0&&(DIAS[dow]||[])[j-1]===k&&p.paso2)
+    return Object.assign({},p,{paso:p.paso2,min:p.min2||p.min});
+  return p;
+}
+function pinta(){
+  const L=lista();
+  const k=L[Math.min(st.i,L.length-1)];
+  const ah=k?item(k,Math.min(st.i,L.length-1)):null;
+
+  // AHORA
+  if(!L.length||st.i>=L.length){
+    document.getElementById('a-titulo').textContent='El día está cerrado.';
+    document.getElementById('a-porque').textContent='Anota los bloques en la bitácora y deja el siguiente empezado. Mañana no tienes que decidir nada.';
+    document.getElementById('a-meta').innerHTML='<span><b>Hecho</b> · '+L.length+' de '+L.length+' bloques</span>';
+    document.querySelector('.acciones').classList.add('oculto');
+  }else{
+    document.getElementById('a-titulo').innerHTML=ah.paso;
+    document.getElementById('a-porque').textContent=ah.porque||ah.donde;
+    document.getElementById('a-meta').innerHTML=
+      '<span><b>Proyecto</b> · '+ah.n+'</span>'+
+      '<span><b>Dura</b> · '+ah.dur+'</span>'+
+      '<span><b>Necesita</b> · '+ah.nec+'</span>'+
+      '<span><b>Empieza en</b> · '+ah.donde2+'</span>';
+    document.getElementById('minima').textContent=ah.min;
+  }
+
+  // BLOQUES
+  document.getElementById('bloques').innerHTML=L.map((kk,j)=>{
+    const it=item(kk,j);
+    const cls=j<st.i?'ya':(j===st.i?'on':'');
+    return '<div class="bq '+cls+'"><div class="n">B'+(j+1)+'</div>'+
+      '<div class="q">'+it.n+'<i>'+it.paso.replace(/<\/?b>/g,'')+'</i></div>'+
+      '<div class="t">'+it.dur+'</div></div>';
+  }).join('');
+  document.getElementById('diasub').textContent =
+    L.length+' bloques de 90 minutos. Uno a la vez, en este orden. Vas por el '+Math.min(st.i+1,L.length)+'.';
+
+  // PROYECTOS
+  const ks=st.foco?[st.foco]:Object.keys(PROY);
+  document.getElementById('proys').innerHTML=ks.map(kk=>{
+    const p=PROY[kk];
+    return '<article class="pr'+(kk===k?' foco':'')+'">'+
+     '<div class="pr-top"><h3><span class="id">'+p.id+'</span>'+p.n+'</h3>'+
+     '<span class="estado '+p.est[0]+'">'+p.est[1]+'</span></div>'+
+     '<p class="paso">'+p.paso+'</p>'+
+     '<div class="cifra">'+p.cifra+'</div>'+
+     '<div class="barra"><i style="width:'+p.pct+'%"></i></div>'+
+     '<div class="donde"><em>Dónde lo dejaste</em>'+p.donde+'</div></article>';
+  }).join('');
+  document.getElementById('btnfoco').textContent=st.foco?'Ver todos los proyectos':'Solo este proyecto';
+}
+function hecho(){st.i++;guarda();pinta();scrollTo({top:0})}
+function saltar(){const L=lista();if(L[st.i]&&L[st.i]!=='ronda'){st.saltados.push(L[st.i])}else{st.i++}guarda();pinta()}
+function foco(){const L=lista(),k=L[st.i];st.foco=st.foco?null:(PROY[k]?k:null);guarda();pinta()}
+function reiniciar(){localStorage.removeItem(K);location.reload()}
+pinta();
+</script>

@@ -56,6 +56,7 @@ funcionaba en *Golpe de estado*, con su motor extraído para poder reutilizarla.
 
 ## Documentos del sistema
 
+- [`PANEL-UNA-COSA.html`](PANEL-UNA-COSA.html) — **el panel de decisión.** Una sola acción a la vez, el bloque en curso y el siguiente paso de cada proyecto. Publicado también en la web para el móvil.
 - [`HOY.html`](HOY.html) — **se abre cada mañana.** Pulsas «Arranco ahora» y calcula los bloques desde esa hora.
 - [`HORARIO.md`](HORARIO.md) — la rotación semanal y las reglas de reposición.
 - [`PROTOCOLO.md`](PROTOCOLO.md) — rituales de apertura y cierre, reglas de foco, qué hacer los días malos.
