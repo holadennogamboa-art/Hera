@@ -10,8 +10,16 @@ Todo vive en `~/geo-auditor`, con control de versiones. La nota de continuación
 
 ## Qué es
 
-Analiza la web de un negocio y mide si los asistentes de IA lo recomiendan. 2.890 líneas,
-11 sectores, 21 reglas de auditoría, 120 tipos de schema.org, 4 asistentes.
+Analiza la web de un negocio y mide si los asistentes de IA lo recomiendan. **3.789 líneas**
+tras la reestructuración del 2-sep, 11 sectores, 21 reglas, 120 tipos de schema.org, 4 asistentes.
+
+Dos comandos nuevos que cambian el trabajo diario:
+
+- `node cliente.mjs sisibagels.com` — deja el **paquete entero** de un cliente: auditoría,
+  marcado listo para pegar, informe que abre él y el correo con sus comprobaciones. Es el
+  comando de cada día; sustituye a encadenar `audit.mjs` a mano.
+- `node publicar.mjs` — prepara `publico/` para subir a un alojamiento. Cada informe en una
+  ruta aleatoria y sin indexar, porque son datos de un negocio dirigidos a una persona.
 
 ## La norma innegociable
 
@@ -80,6 +88,8 @@ cuál engancha, escribe el de Pez Tortilla.
 - **Cambiar la clave de Anthropic.** La actual se pegó en un chat. Se crea otra en
   console.anthropic.com y se borra la vieja.
 - **Recargar crédito.** Solo hace falta para medir en los asistentes.
+- **Dominio propio, 10 € al año.** Hoy sale de Gmail y entrega bien, pero con dominio el
+  remitente y el enlace del informe coincidirían, y podrías configurar SPF, DKIM y DMARC.
 
 ## Hallazgo del 1-sep: el marcado no basta
 

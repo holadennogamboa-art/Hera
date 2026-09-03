@@ -7,3 +7,5 @@ fecha,bloque,taller,proyecto,entregable_previsto,estado,minutos,nota
 2026-09-02,B2,T3,HERA,Contenido en lote,perdido,0,Dia imposible tras B1.
 2026-09-02,B3,T5,Skin Lab,Video 1 El poro,perdido,0,Se repone el jueves como bloque extra.
 2026-09-02,B4,ronda,Todos,La ronda,perdido,0,Sin correo del dia. La ronda no se repone: es diaria.
+2026-09-02,extra,T5,Skin Lab,Primeras personas ajenas,hecho,0,Mikel Vicky y Stephania lo probaron. Mikel: no canta a IA y pregunta si lo saco pronto. Se rompe el cero de usuarios ajenos.
+2026-09-02,extra,T4,Auditor GEO,Reestructuracion,hecho,0,De 2890 a 3789 lineas. Nuevos cliente.mjs (paquete completo) y publicar.mjs (informes en ruta aleatoria sin indexar).
