@@ -62,7 +62,11 @@ Lo que queda no es escribir: es **cerrar y enviar**.
 ## Estado actual
 
 - **Taller vivo en línea:** `taller-gde.vercel.app` — mismo motor, accesible desde el móvil.
-- Capítulo 7 (*El disfraz II*): **8 de 19 párrafos** reescritos. Progreso global 8/132.
+- **Decisión abierta:** los párrafos 10-12 (pasiones, el golpe buscado, el ritual) están
+  escritos y guardados en `manuscrito/cap07-parrafos-10-12-EN-DECISION.md`. El 11 enseña
+  la violencia en directo y la novela funciona por elipsis: decidir si se queda, baja al
+  9 o al 11, o vuelve a su proyecto de origen. **No se borra.**
+- Capítulo 7 (*El disfraz II*): **11 de 19 párrafos** reescritos. Progreso global 8/132.
 - El `.md` de `manuscrito/` es el **borrador de referencia**, no la versión reescrita.
 - ⚠️ El progreso se guarda solo en el navegador donde se escribe. Conectar carpeta en el
   Mac para que quede en disco.
