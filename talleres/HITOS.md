@@ -10,14 +10,14 @@ Nada de «terminar la novela» ni «conseguir clientes». Eso son destinos, no h
 
 | # | Hito | Cuánto | Depende de |
 |---|---|---|---|
-| 1 | **Web de la novela bloqueada** y comprobada en incógnito | 10 min | solo de ti |
+| 1 | ~~**Web de la novela retirada**~~ · **hecho el 5-sep**, las dos URLs | ✔ | — |
 | 2 | **Peñalver enviado** — el paquete ya está listo | 15 min | solo de ti |
 | 3 | **Txirimiri enviado** tras subir el ZIP | 30 min | solo de ti |
 | 4 | **Clave de Gemini rotada** — lleva expuesta desde agosto | 10 min | solo de ti |
 | 5 | **Registro de PI confirmado** — mirar si salió del trámite | 5 min | de la administración |
 
-Cinco cosas, hora y cuarto en total, y cuatro dependen solo de ti. **Marca las cinco antes
-del viernes y la semana cuenta como buena**, pase lo que pase con lo demás.
+Cinco cosas, hora y cuarto en total, y cuatro dependen solo de ti. **Una hecha, cuatro van.** Marca las cinco antes
+del viernes y la semana cuenta como buena, pase lo que pase con lo demás.
 
 ## El mes · hitos que se ven desde fuera
 

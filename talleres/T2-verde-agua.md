@@ -68,8 +68,21 @@ Salida a correr para grabar **el sonido real de la carrera**. Cinco notas de voz
 craneado **el momento del desplome** y la **estética visual** que se transmitirá al leer y
 al ver — las dos cosas están en las grabaciones.
 
-⚠️ **Pendiente: transcribirlas.** En Notas de voz del iPhone, abrir la grabación y tocar el
-icono de texto. Sin transcripción, ese material solo existe en el móvil.
+✔ **Transcritas y ordenadas** en [`t2-verde-agua/campo-01-la-carrera.md`](t2-verde-agua/campo-01-la-carrera.md).
+
+Cinco hallazgos que salieron de correr y no habrían salido de una silla:
+
+1. «Dejas de estar de donde venías» — el umbral del Retiro.
+2. «Pude oler la alegría ajena» — el niño, el padre, la pelota que se atraviesa.
+3. «Cada escena alrededor se va disfigurando» — la gramática del arranque.
+4. **«Verdes, pero salvajes» / «que el edificio de atrás las mantenga»** — la Montaña de
+   los Gatos contra el bloque de hormigón. Es la contención, es Carlos y Darío, y es el
+   título de la serie encontrado en la calle.
+5. **«Creo que ya voy arriba. Y estas imágenes en 360 es lo último que percibo.»** — el
+   desplome y el relevo a la aérea, en una frase.
+
+Dirección de foto anotada por el autor: la intro en **blanco y negro**.
+Pendiente: qué canción, sabiendo que es **un cover, no la original**.
 
 ## Estado actual
 

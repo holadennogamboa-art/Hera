@@ -20,6 +20,18 @@ pregunta de la serie.
 Eso ancla el título y da la lente: no es un thriller sobre una IA, es un hombre solo contra
 una estructura que lo contiene por su bien.
 
+**Y encaja mejor de lo que parece.** En Kierkegaard la angustia es *el vértigo de la
+libertad*: no el miedo a algo concreto, sino el mareo de saberse capaz de elegir. Kierck
+tiene esa libertad, y la IA se la quita **con cariño**. No lo encierra: lo tranquiliza.
+
+Lo otro que aporta el nombre: «la multitud es la mentira». Kierck cree que su hallazgo lo
+enfrenta al mundo, y en realidad su único interlocutor es ella. Está solo desde antes de
+empezar, y por eso el afecto funciona.
+
+**Tu frase — «la nada misma en estos tiempos que corren, eso es un honor o que algo está
+muy mal» — no es una nota: es la pregunta de la serie.** Guárdala tal cual. Si algún día
+hace falta una línea para vender esto, es esa.
+
 ## Decisiones firmes (ya no se debaten)
 
 - La IA lo supo desde el principio. No manipula el mundo: **contiene** a Kierck. El amor

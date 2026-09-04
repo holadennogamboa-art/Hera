@@ -9,11 +9,14 @@
 material *previously unpublished*. Una web pública con la novela entera **cuenta como
 publicada**. Un editor que busque el título te elimina sin leer.
 
-- [ ] Poner la edición tras contraseña, o bajarla hasta después de los envíos.
-- [ ] Comprobarlo en una ventana de incógnito, como lo haría un desconocido.
+- [x] **Hecho el 5-sep.** `gde-lectura-m7x4.vercel.app` — obra retirada.
+- [x] **Hecho el 5-sep.** `deploy-libro.vercel.app` — obra retirada.
+- [ ] Comprobar en una ventana de incógnito que ninguna de las dos sirve ya el texto.
+- [ ] Buscar el título en Google dentro de una semana, cuando el índice se refresque.
 
-Mientras esa URL responda sin contraseña, **estás descalificado de las tres revistas.**
-Diez minutos de trabajo desbloquean 26 días de plan.
+**Ya no estás descalificado.** Quedaba una que ni recordabas —`deploy-libro`— y esa es la
+razón por la que este paso valía la pena: los despliegues viejos siguen sirviendo el libro
+aunque hayas dejado de mirarlos.
 
 ## El idioma
 
