@@ -40,7 +40,7 @@ Dos límites para que la flexibilidad no se coma el sistema:
 | **Martes** | T2 Verde agua | T2 Verde agua | T4 VERDER · Auditor GEO | **La ronda** |
 | **Miércoles** | T1 Golpe de estado | T3 HERA contenido en lote | T5 Skin Lab · vídeo | **La ronda** |
 | **Jueves** | T2 Verde agua | T2 Verde agua | T7 Encargos y campaña | **La ronda** |
-| **Viernes** | T6 Kierck | T5 Skin Lab · lo que pidan los datos | T4 VERDER · medición *(+ la ronda, 30 min)* | T8 Dirección |
+| **Viernes** | **T9 Envíos** | T6 Kierck | T4 VERDER · medición *(+ la ronda, 30 min)* | T8 Dirección |
 
 **[`La ronda`](LA-RONDA.md)** es el bloque B4 y es igual todos los días. Es la parte
 comercial de los tres proyectos que ya están construidos y solo necesitan que alguien
@@ -55,10 +55,12 @@ fácil se abandona y el único que hoy mueve la aguja.
 | T2 Verde agua | 4 | 6 h | — |
 | T3 HERA marca e Instagram | 2 | 3 h | publicar, en la ronda |
 | T4 VERDER · Auditor GEO | 2 | 3 h | prospección y correo, en la ronda |
-| T5 HERA Skin Lab | 2 | 3 h | 5 min de métricas, en la ronda |
+| T5 HERA Skin Lab | 1 | 1,5 h | 5 min de métricas, en la ronda |
 | T6 Kierck | 1 | 1,5 h | — |
 | T7 Encargos y campaña pro-IA | 1 | 1,5 h | — |
 | T8 Dirección | 1 | 1,5 h | — |
+| T9 Envíos a revistas | 1 | 1,5 h | ventana de 26 días |
+| T10 The Bus Beasts | 0 | — | **en pausa a propósito** |
 | **La ronda** | 4 | 6 h | reparte T3, T4 y T5 |
 
 ### Por qué está repartido así

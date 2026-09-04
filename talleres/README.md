@@ -17,18 +17,22 @@ entregables medibles, revisión semanal y un archivo de lo hecho.
 
 ## Los talleres
 
-| # | Taller | Estado del proyecto | h/sem | Taller vivo |
-|---|--------|---------------------|-------|-------------|
-| [T1](T1-golpe-de-estado.md) | **Golpe de estado** | Novela cerrada. Quedan correcciones, dos canciones, registro y envíos. | 4,5 | [abrir](t1-golpe-de-estado/EL_TALLER.html) |
-| [T2](T2-verde-agua.md) | **Verde agua** | Serie. Biblia cerrada, episodio 1 diseñado. Falta redactarlo. | 6 | [abrir](t2-verde-agua/TALLER.html) |
-| [T3](T3-hera.md) | **HERA · marca e Instagram** | Identidad cerrada, web con fallos conocidos. Es cadencia. | 3 | [abrir](t3-hera/TALLER.html) |
-| [T4](T4-verder.md) | **VERDER · Auditor GEO** | Funciona. 2.890 líneas, 11 sectores. Ningún cliente todavía. | 3 | [abrir](t4-verder/TALLER.html) |
-| [T5](T5-skin-lab.md) | **HERA Skin Lab** | En producción. 24 renders, todos tuyos. Nadie ajeno ha renderizado. | 3 | [abrir](t5-skin-lab/TALLER.html) |
-| [T6](T6-kierck.md) | **Kierck** | Biblia en construcción. Falta la primera frase de ella. | 1,5 | — |
-| [T7](T7-encargos.md) | **Encargos y campaña pro-IA** | Cuatro encargos vivos y una decisión pendiente. | 1,5 | — |
-| [T9](T9-envios-revistas.md) | **Envíos a revistas** | Kenyon y Brooklyn Review. 26 días. La web pública descalifica. | — | — |
-| [T8](T8-direccion.md) | **Dirección** | Métricas, revisión semanal, archivo. | 1,5 | — |
-| [La ronda](LA-RONDA.md) | **El bloque B4, todos los días** | Reparte T3, T4 y T5. Es donde el trabajo hecho se convierte en trabajo cobrado. | 6 | — |
+**La fuente única es [`ESTADO.md`](ESTADO.md).** Se regenera los viernes y contiene los diez
+frentes con su siguiente paso. Si algo no está ahí, no existe para el sistema.
+
+| # | Taller | Estado | h/sem | Taller vivo |
+|---|--------|--------|-------|-------------|
+| [T1](T1-golpe-de-estado.md) | **Golpe de estado** | Corrigiendo, 11 de 132 párrafos | 4,5 | [abrir](t1-golpe-de-estado/EL_TALLER.html) |
+| [T2](T2-verde-agua.md) | **Verde agua** | Biblia cerrada, 0 de 15 pasos | 6 | [abrir](t2-verde-agua/UMBRAL.html) |
+| [T3](T3-hera.md) | **HERA · marca e Instagram** | Cadencia | 3 | [abrir](t3-hera/TALLER.html) |
+| [T4](T4-verder.md) | **Auditor GEO** | 3.789 líneas, 0 clientes | 3 | [abrir](t4-verder/TALLER.html) |
+| [T5](T5-skin-lab.md) | **HERA Skin Lab** | 3 personas ajenas | 1,5 | [abrir](t5-skin-lab/TALLER.html) |
+| [T6](T6-kierck.md) | **Kierck** | Biblia en construcción | 1,5 | — |
+| [T7](T7-encargos.md) | **Encargos y campaña** | 4 encargos vivos | 1,5 | — |
+| [T8](T8-direccion.md) | **Dirección** | Viernes | 1,5 | — |
+| [T9](T9-envios-revistas.md) | **Envíos a revistas** | Ventana de 26 días | 1,5 | — |
+| [T10](T10-bus-beasts.md) | **The Bus Beasts** | **En pausa a propósito** | 0 | — |
+| [La ronda](LA-RONDA.md) | **El bloque B4, cada día** | Reparte T3, T4 y T5 | 6 | — |
 
 Total: **30 h/semana = 6 h/día × 5 días**, en 20 bloques de 90 minutos.
 

@@ -36,6 +36,18 @@
 - **Dos días seguidos por debajo del mínimo**: se convoca la revisión semanal antes de tiempo
   y se ajusta la carga a la baja. El sistema se dobla; no se abandona.
 
+## La regla de los hilos
+
+> **El hilo es donde se piensa. El repositorio es donde queda.**
+
+Cada conversación con una IA empieza sin memoria de las anteriores. Lo único que viaja
+entre ellas es lo que está escrito en este repositorio. Por eso, al cerrar cualquier hilo
+—de la novela, de la serie, del auditor, de un encargo— **lo decidido se escribe aquí**.
+
+Sin esa regla se abren sistemas paralelos que dejan de hablarse: pasó el 5 de septiembre,
+con un índice maestro que traía proyectos que el sistema de talleres no conocía, y talleres
+que el índice no había visto nunca.
+
 ## Reglas de higiene profesional
 
 - Nada de trabajo fuera de la ventana 09:00–16:30 salvo publicación programada.
