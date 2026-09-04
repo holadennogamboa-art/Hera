@@ -160,33 +160,40 @@ footer a{color:var(--soft)}
 
 <script>
 const PROY = {
+ envios:{n:"Envíos a revistas", id:"T9 · ventana de 26 días", est:["e-tuyo","Te espera a ti"],
+   paso:"<b>Bloquear la edición de lectura en Vercel.</b> Mientras esté pública, estás fuera.",
+   donde:"Kenyon y Brooklyn Review exigen obra inédita. Una web pública cuenta como publicada.",
+   cifra:"<u>10</u> min de trabajo · <u>26</u> días de ventana", pct:0,
+   min:"Abre Vercel y mira si puedes ponerle contraseña. Solo mirar.",
+   dur:"10 min", nec:"poca energía", donde2:"vercel.com",
+   porque:"Un editor que busque el título te elimina sin leer una línea. No es un riesgo futuro: ya estás descalificado mientras esa URL responda. Es lo más barato y lo más caro de no hacer."},
  gde:{n:"Golpe de estado", id:"T1 · novela", est:["e-marcha","En marcha"],
    paso:"Reescribir el <b>párrafo 9</b> del capítulo 7 en el taller.",
    donde:"Párrafo 8 cerrado. El capítulo 7 ya tiene final: la crónica se calla.",
-   cifra:"<u>8</u> / 132 párrafos", pct:6,
+   cifra:"<u>11</u> / 132 párrafos", pct:8,
    min:"Abre el taller y lee el párrafo 9 en voz alta. Nada más.",
    dur:"90 min", nec:"cabeza fresca", donde2:"taller-gde.vercel.app",
    paso2:"Seguir con el <b>párrafo 10</b>, o pasar los materiales de envío a limpio.",
    min2:"Relee lo que escribiste en B1. Si aguanta, sigue. Si no, déjalo."},
  va:{n:"Verde agua", id:"T2 · serie", est:["e-tuyo","Te espera a ti"],
-   paso:"Escribir <b>la carrera</b>: lo que se ve y se oye antes de que pase nada.",
-   donde:"Biblia cerrada, episodio 1 diseñado entero. Cero palabras escritas.",
-   cifra:"<u>0</u> / 4 escenas de la intro", pct:0,
-   min:"Escribe una sola frase de lo que se oye mientras corre. Una.",
+   paso:"<b>Transcribir las cinco notas de voz.</b> Sin eso, el material solo existe en el móvil.",
+   donde:"Saliste a correr a grabar el sonido real. Craneado el desplome y la estética visual.",
+   cifra:"<u>5</u> notas grabadas · <u>0</u> transcritas", pct:10,
+   min:"Abre una nota en Notas de voz y toca el icono de texto. Una sola.",
    dur:"90 min", nec:"cabeza fresca", donde2:"t2-verde-agua/TALLER.html",
    paso2b:"", paso2:"El momento: <b>sin método, sin objeto</b>, y la cámara subiendo a aérea.",
    min2:"Escribe cuántos segundos aguanta el plano alto antes de que entre la voz."},
  geo:{n:"Auditor GEO", id:"T4 · servicio", est:["e-espera","Esperando respuesta"],
-   paso:"<b>node cliente.mjs labicicletacafe.com</b> y mandar el paquete entero.",
-   donde:"Reestructurado el 2-sep: 3.789 líneas, cliente.mjs y publicar.mjs. SI SI BAGELS sin respuesta.",
-   cifra:"<u>8</u> auditados · <u>1</u> contacto · <u>0</u> clientes", pct:12,
-   min:"Lanza cliente.mjs con La Bicicleta y mira lo que deja. Sin mandar nada.",
+   paso:"Enviar <b>Peñalver</b>. El paquete ya está listo, solo hay que mandarlo.",
+   donde:"El informe enseña 0 de 9 → 7 de 9. Nueve fallos propios corregidos con datos reales.",
+   cifra:"<u>27</u> auditados · <u>4</u> correos · <u>0</u> clientes · <u>11</u> sin tocar", pct:30,
+   min:"Abre el correo de Peñalver y léelo. Si suena a ti, mándalo.",
    dur:"90 min", nec:"energía media", donde2:"~/geo-auditor",
    paso2:"Publicar los informes con <b>publicar.mjs</b> y comprar el dominio: 10 € al año.",
    min2:"Mira si el dominio que quieres está libre. Nada más."},
  skin:{n:"HERA Skin Lab", id:"T5 · producto", est:["e-marcha","Primera señal"],
-   paso:"Contestar a <b>Mikel</b> y preguntarle qué haría que lo usara otra vez.",
-   donde:"Mikel, Vicky y Stephania lo han probado. Mikel: «no canta a IA, ¿lo sacas pronto?».",
+   paso:"Grabar el <b>plano de la lupa 4×</b>. Mikel te dio el titular: no canta a IA.",
+   donde:"Contestado a Mikel el 5-sep, esperando respuesta. Tres personas ajenas lo han probado.",
    cifra:"<u>3</u> personas ajenas lo han probado · antes <u>0</u>", pct:20,
    min:"Contéstale a Mikel con una línea. Solo eso.",
    dur:"20 min", nec:"poca energía", donde2:"Instagram / WhatsApp",
@@ -202,7 +209,7 @@ const PROY = {
    min2:"Escribe un solo pie de foto. El que más claro tengas."},
  kierck:{n:"Kierck", id:"T6 · serie", est:["e-parado","Aparcado a propósito"],
    paso:"Escribir <b>la primera frase de ella</b>. De ahí sale el tono de la serie.",
-   donde:"Biblia con las decisiones firmes tomadas. Falta esa frase.",
+   donde:"Kierck = Kierkegaard: el individuo frente al sistema. El nombre ya ancla la lente.",
    cifra:"<u>1</u> decisión pendiente", pct:0,
    min:"Escribe cinco versiones malas de esa frase. Malas a propósito.",
    dur:"90 min", nec:"cabeza fresca", donde2:"T6-kierck.md"},
@@ -214,6 +221,7 @@ const PROY = {
    dur:"90 min", nec:"energía media", donde2:"T7-encargos.md"}
 };
 
+const URGENTE='envios';
 const DIAS = {
  1:["gde","gde","hera","ronda"], 2:["va","va","geo","ronda"],
  3:["gde","hera","skin","ronda"], 4:["va","va","enc","ronda"],
@@ -238,7 +246,10 @@ document.getElementById('fecha').textContent =
   NOMDIA[dow]+' '+hoy.toLocaleDateString('es-ES',{day:'numeric',month:'long'});
 
 function lista(){
-  return (DIAS[dow]||[]).filter(k=>!st.saltados.includes(k));
+  const base=(DIAS[dow]||[]).filter(k=>!st.saltados.includes(k));
+  // lo urgente va primero mientras no se marque hecho ni se salte
+  if(!st.saltados.includes(URGENTE)&&!st.urgenteHecho)return [URGENTE].concat(base);
+  return base;
 }
 function item(k,j){
   if(k==='ronda')return RONDA; if(k==='libre')return LIBRE;
@@ -294,7 +305,7 @@ function pinta(){
   }).join('');
   document.getElementById('btnfoco').textContent=st.foco?'Ver todos los proyectos':'Solo este proyecto';
 }
-function hecho(){st.i++;guarda();pinta();scrollTo({top:0})}
+function hecho(){if(lista()[st.i]===URGENTE){st.urgenteHecho=1}else{st.i++}guarda();pinta();scrollTo({top:0})}
 function saltar(){const L=lista();if(L[st.i]&&L[st.i]!=='ronda'){st.saltados.push(L[st.i])}else{st.i++}guarda();pinta()}
 function foco(){const L=lista(),k=L[st.i];st.foco=st.foco?null:(PROY[k]?k:null);guarda();pinta()}
 function reiniciar(){localStorage.removeItem(K);location.reload()}
