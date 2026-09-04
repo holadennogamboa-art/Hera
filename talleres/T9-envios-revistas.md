@@ -53,7 +53,11 @@ secuencia narrativa. Nada del pipeline generativo, nada de Skin Lab.
 ## Definición de terminado
 
 - [ ] Web bloqueada y comprobada en incógnito.
-- [ ] Decidido qué va a Kenyon.
+- [x] **«The Receipt» revisado**: 1.321 palabras, 5,3 páginas a doble espacio. Cabe en
+      Kenyon (máx. 30) y **no llega al mínimo de Brooklyn Review** (3.000–7.000).
+- [ ] Decidir: «The Receipt» a la general de Kenyon, y/o traducir un fragmento del
+      psiquiátrico para el folio de Caretaking, que es el que encaja de verdad con el tema.
+- [ ] Aplicar las tres correcciones de [`t9-envios/REVISION-the-receipt.md`](t9-envios/REVISION-the-receipt.md).
 - [ ] Fragmento en inglés montado como pieza autónoma.
 - [ ] Enviado a Kenyon marcando el folio de Caretaking.
 - [ ] Serie de 5 fotografías reales en PDF.
