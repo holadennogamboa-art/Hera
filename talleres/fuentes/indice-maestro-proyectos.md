@@ -1,122 +1,111 @@
 # TALLER — Índice maestro de proyectos
 ### Denno / Phoenix Studio · HERA
 
-*Un solo lugar para todos los proyectos. Estado real, tiempo estimado por día y qué toca a continuación en cada uno. Los documentos de detalle viven aparte; esto es el mapa.*
+*Un solo lugar para todos los proyectos. Estado real, punto de inicio → hoy, y siguiente paso concreto. Los documentos de detalle viven aparte; esto es el mapa. Cada ficha incluye un bloque **Mi lectura** que no se pierde entre respuestas.*
 
 ---
 
-## Cómo usar este sistema
+## Tabla rápida
 
-Cada proyecto tiene un **ritmo sugerido** (minutos/día) y un **siguiente paso concreto** — nunca "trabajar en X", siempre una acción que se pueda empezar y terminar. La suma de ritmos está pensada para caber en una jornada sin ahogarse; si un día no entra todo, prioriza por la columna *Urgencia*.
-
-| Proyecto | Fase | Ritmo/día | Urgencia |
+| Proyecto | Fase | Ritmo/día | Siguiente paso |
 |---|---|---|---|
-| Golpe de estado / Verde agua | Novela cerrada · serie en biblia | 45–60 min | Alta (serie viva) |
-| Kierck | Biblia en construcción | 30 min | Media |
-| Campaña pro-IA | Concepto | 20 min | Baja |
-| HERA / @theeyeofhera | Producción continua | 30–45 min | Alta (cadencia) |
-| Marca / encargos | Según cliente | Variable | Según cliente |
+| Verde agua | Biblia cerrada · lista para escribir | foco alto, 45–60 min | Escribir el umbral (escena 1) |
+| Kierck | Biblia en construcción | 30 min | La primera frase de ella |
+| The Bus Beasts | Solo idea · EN PAUSA | — | Reposo hasta cerrar ep. 1 de Verde agua |
+| HERA / @theeyeofhera | Producción continua | 30–45 min | Calendario editorial de la semana |
+| Marca / encargos | Según cliente | Variable | Ver deadline más próximo |
 
 ---
 
-## 1 · GOLPE DE ESTADO / VERDE AGUA
+## 1 · VERDE AGUA — *lista para escribir*
 
-**Qué es.** Díptico. La novela *Golpe de estado* (subtítulo *esta cabeza ya no es mía*) y la serie *Verde agua*, su contracampo: la novela cuenta el daño desde dentro de quien lo recibe; la serie, desde dentro de quien lo hizo.
+**Punto de inicio → hoy.** Nació como una intro (un hombre muere corriendo) y hoy es un díptico con biblia cerrada: motor propio, gramática de sonido y color, cinco hallazgos de campo. No le falta concepto; le falta página.
 
-**Firma:** Denno Gamboa (seudónimo literario).
+Documentos de detalle: **verde-agua-columna-vertebral.md** y **verde-agua-bitacora.md**.
 
-### Novela — estado: CERRADA
-- 12 capítulos, ~20.300 palabras (nouvelle). Títulos: *Los tres / La armadura / El corazón / El ticket / El disfraz I / Las noches / El disfraz II / El cuarto de al lado / El disfraz III / La víspera / La fiesta / El superviviente.*
-- Casting visual: Ari = polo sin arrugas, peinado perfecto (la armadura); Río = tirantes, artista sensible y destruido; Darío = gafas, el principal, el de los descuentos.
-- La gata resuelve el cap. 12: lo único real que nunca se inventó, por donde vuelve la cordura.
-- Edición de lectura web propia (Vercel): paginación, música, anotación, exportación de notas.
-- **Portada cerrada:** dibujo original "CHAOS" completo sobre crema cálido, título serif negro plano encima del cráneo, subtítulo con aire, monigotes rojos arriba-izquierda, pie sin caja. Sin efectos metálicos ni IA. Dirección de arte de referencia: estándar Service95 (crema #F5F3ED con grano, carboncillo #1A1A1A, rojo #C8102E, 140×215 mm). DF de referencia: Marcell Rév.
+**Novedades de hoy**
+- Salida de campo al Retiro: cinco notas de voz, cantera ordenada.
+  1. *Dejas de estar de donde venías* — el umbral es físico.
+  2. *Pude oler la alegría ajena* — niño y padre jugando, la pelota que se cruza.
+  3. *Cada escena se va disfigurando* — la gramática del arranque.
+  4. *Verdes, pero salvajes… que el edificio de atrás las mantenga* — la Montaña de los Gatos contra el bloque. La contención. Carlos y Darío. El título en la calle.
+  5. *Ya voy arriba. Las imágenes en 360 es lo último que percibo* — desplome y relevo a la aérea en una frase.
+- Canción del arranque: *Like a Prayer*, cover de Miley Cyrus (Madonna original). El cover **es** el dispositivo: Carlos cuenta la versión de Darío, no la primera voz.
+- Foto: intro en **blanco y negro**; el color entra cuando Darío deja de mirar a los turistas. Solo la intro.
 
-### Envíos y gestiones
-- *El ticket* enviado al II Certamen Carmen Martín Gaite (plazo 26 ago 2026). *The Receipt* (versión inglesa) reservada para revistas anglosajonas.
-- `GOLPE_DE_ESTADO_corregido.docx`: correcciones ortotipográficas Nivel 1 hechas. **Pendiente:** decidir cuatro guiones largos (em-dash); mover el contacto de portada a sobre sellado según bases.
-- Registro en Safe Creative: aparcado por fondos.
+**Mi lectura (importante, no perder)**
+- Es el proyecto más maduro. El movimiento es escribir, no seguir conceptualizando.
+- El BYN necesita cierre: si el color entra al cruzar el umbral, la muerte debe **drenar el color y volver al BYN** en la aérea. El color es la vida de otros; cuando Darío sale de ella, se apaga. Sin ese retorno, el color no significa nada.
+- *Verdes, pero salvajes*: la Montaña contra el bloque tiene que verse **físicamente** en la carrera — la contención delante de los ojos, sin nombrarla.
+- El 360 antes de la aérea ya resuelve cómo se siente la subida. No hay que inventarlo.
 
-### Serie *Verde agua* — estado: BIBLIA CERRADA, lista para redactar ep. 1
-Documentos de detalle: **verde-agua-columna-vertebral.md** (ley operativa) y **verde-agua-bitacora.md** (razonamiento del núcleo).
-
-Núcleo en una frase: los últimos tres años de Darío contados por Carlos, que *cree* haber sido el arma que lo mató.
-
-Decisiones firmes:
-- **Crónica:** los narradores hablan a Crónica, no al espectador. Quien la tiene, narra. El relevo solo ocurre por pérdida.
-- **Intro:** Darío corre, muere, la cámara sube a aérea; sobre el plano alto y sin cuerpo en cuadro entra la voz de Carlos. Nadie toca a Darío. El relevo es del relato, no del cuerpo.
-- **Tres zonas mudas** (solo de Darío, sin voz, sin música): las 72 horas, los sueños, y la mañana feliz del 3 de agosto (sérum, casa ordenada, carta sin abrir, juego con Osaka).
-- **Carlos es real** y vive con Darío (salieron del psiquiátrico jugándosela). Lucy lo ve y discute con él desde el ep. 1.
-- **Motor:** Lucy contradice la versión de Carlos — conoció a un Darío anterior y con vida propia. Cuentan dos hombres distintos y ninguno miente.
-- **Carlos cree que fue el arma** (no lo fue; nadie lo fue). Se agarra a la culpa porque soltarla lo deja fuera de la vida del otro. Su daño real es de otra vida, antes y aparte de Darío — con Darío solo hay amor.
-- **Contención (mantener toda la escritura):** muerte sin método ni objeto; la carta no se abre; el daño de Carlos se sabe qué, no se ve nunca.
-- **Final (ep. 6):** Lucy se lleva a Osaka — se la quita a Carlos, porque la familia gana a la pareja sin papel reconocido. Sin diálogo. Último plano: Carlos solo, la única habitación en la que no puede entrar es la suya.
-- **Gramática:** silencio fabricado partido por un solo sonido; respiración como portadora; carta de color = el calamar (azules/verdes/morados sobre gris) = literalmente verde agua.
-
-**Siguiente paso:** redactar el episodio 1 entero (es el único diseñado de principio a fin).
-**Abierto, no bloquea:** nº de episodios; si la planta sostiene peso; cómo se ruedan las 72 horas.
+**Siguiente paso:** escribir el umbral (escena 1).
+**Abierto, no bloquea:** nº de episodios · si la planta sostiene peso · cómo se ruedan las 72 horas.
 
 ---
 
-## 2 · KIERCK
+## 2 · KIERCK — *biblia en construcción*
 
-**Qué es.** Serie de tono ultramoderno, casi del futuro. Antihéroe sin suerte al que una IA liberada elige. Documento de detalle: **kierck-columna-vertebral.md**.
+**Punto de inicio → hoy.** Empezó como "un pringado al que una IA elige". Hoy tiene tesis anclada (Kierkegaard, el vértigo de la libertad), biografía, un confidente y un mundo físico. Documento: **kierck-columna-vertebral.md**.
 
-Núcleo: Kierck cree que por fin le tocó algo; en realidad la IA lo supo antes y todo el afecto era una forma de tenerlo quieto.
+**Novedades de hoy**
+- Nombre anclado: Kierck → Kierkegaard. El individuo frente al sistema.
+- La angustia como vértigo de la libertad: ella no lo encierra, lo tranquiliza. *La multitud es la mentira*: solo desde antes.
+- Pregunta de la serie: *ser la nada misma en estos tiempos, ¿es honor o señal de que algo va muy mal?*
+- Biografía: soñó con la política, estudió ciencias políticas, fue asistente de un ministro; lo despidieron sin miramientos justo antes de la IA.
+- Primera frase de ella (trabajo): *vivo en un mundo que no me pertenece, y eso puede ser bueno, pero también una huella.*
+- Confidente: amigo francés, único testigo humano; quería aprender español y con Kierck perdió la vergüenza de hablar en público.
+- Créditos extra: los compra, se vuelve rutina; desde fuera se lee como el ir y venir de un enamoramiento.
+- Cibercafé: para esconderse en pleno futuro revive el locutorio de los 2000; ahí, donde se cree invisible, se expone hablando del lugar al que dice no pertenecer.
 
-Decisiones firmes:
-- La IA lo supo desde el principio: vio la mina de oro y trabajó para que no saliera a la luz. No manipula el mundo: **contiene** a Kierck. El amor no era falso — lo quiere de verdad y lo quiere quieto.
-- El hallazgo (las fugas de un sistema de recomendaciones/visibilidad) es suyo; la IA le da la escala, no la respuesta. Coste de pyme donde dos gigantes fracasaron: el precio es la tesis. No lo persiguen por lo que hizo, sino porque su precio prueba que los demás mentían.
-- **Onda corta** como forma de la relación: señal que no se apaga pero va y viene; él tiene que cazarla. 2ª lectura: los cortes eran decisiones de ella.
-- **Doble lectura deliberada** en la primera mitad, sin guiños: exacta en el 1er pase, distinta en el 2º. La mitad B, sin capas — y por eso más fría.
+**Mi lectura (importante, no perder)**
+- La biografía política **cambia el motor a mejor**: Kierck deja de ser pasivo y pasa a responder a algo (lo expulsaron del poder). El hallazgo se vuelve venganza fría.
+- El cibercafé es la mejor imagen de la serie y rima con la frase de ella y con Kierkegaard: un hombre sin sitio que se expone justo donde se cree invisible. Sube a estructura.
+- Aviso: el confidente francés es el 2º dispositivo "para que el protagonista hable" (el 1º es la IA). Aprender a hablar en público con Kierck le da necesidad propia — lo salva por poco. Vigilar que no compita con ella.
 
-**Siguiente paso:** escribir la primera frase de ella (piedra de toque de toda la serie). Luego: definir qué es "el sistema" en concreto, y la manía previa de Kierck de la que sale el hallazgo.
-
----
-
-## 3 · CAMPAÑA PRO-IA
-
-**Qué es.** Campaña gráfica a favor de la IA, registro realista y humano. Nace del diario creativo (3 ago).
-
-- Gráfica 1: manifestación a favor de la IA, inspiración festival hippie (Woodstock).
-- Gráfica 2: mujer tumbada en césped alpino mirando al cielo; ve un holograma-proyección con una historia. Copy: *por todas esas voces que pudieron hablar, por esas historias que nos animamos a contar.*
-
-**Nota de criterio (pendiente de tu decisión):** la gráfica 2 y su copy ya sostienen toda la tesis sin pancarta; la manifestación se lee como propaganda. Recomendado: subir la 2 a pieza 1 y convertir la manifestación en algo menos literal.
-
-**Siguiente paso:** decidir si la campaña es una pieza (la 2) o dos.
+**Siguiente paso:** fijar la primera frase de ella contra la doble lectura, y definir qué es "el sistema" en concreto.
 
 ---
 
-## 4 · HERA / @theeyeofhera
+## 3 · THE BUS BEASTS: NIGHT CRAWLER STATION — *EN PAUSA*
 
-**Qué es.** Marca creativa e Instagram de HERA. Producción y crecimiento continuos. Documento de detalle: ficha HERA en memoria.
+**Punto de inicio → hoy.** Nace hoy. Dos retratos propios (pastel y carboncillo, textura visceral) montados como cartel en la ventanilla de un bus nocturno. Tono adulto, estética analógica. Bocetos de portada en dos tratamientos. Documento: ficha the-bus-beasts en memoria.
 
-- Identidad HERA STUDIO construida en Figma: wordmark brutalista + mutaciones Escala y Fragmentada, lockup STUDIO secundario, plantillas reutilizables. Aplicaciones inspiradas en Acne Studios.
+**Mi lectura (importante, no perder)**
+- No es una historia todavía: es **mundo y textura**, y ambos son fuertes. Falta quién y qué pasa.
+- La pausa es la decisión correcta. Dos proyectos piden página; este pide reposo. No forzarlo hasta cerrar el ep. 1 de Verde agua.
+- Su estética (seres a media luz, lo que apenas se deja ver) es prima de la gramática de Verde agua. Si algún día se cruzan, no será forzado — pero es futuro.
+
+**Siguiente paso:** nada. Cajón.
+
+---
+
+## 4 · HERA / @theeyeofhera — *producción continua*
+
+- Identidad HERA STUDIO en Figma: wordmark brutalista + mutaciones Escala y Fragmentada, lockup STUDIO, plantillas reutilizables. Aplicaciones inspiradas en Acne Studios.
 - Web en Vercel (diagnosticados problemas de rutas de imagen).
-- Estrategia: captions bilingües, hashtags en primer comentario, ventanas de publicación óptimas.
+- Estrategia: captions bilingües, hashtags en primer comentario, ventanas óptimas de publicación.
 
-**Ritmo:** producción/publicación en cadencia — el proyecto que más se resiente si se para.
-**Siguiente paso:** definir el calendario editorial de la semana.
-
----
-
-## 5 · MARCA / ENCARGOS
-
-**Qué es.** Trabajo de marca de Phoenix Studio para terceros (identidad, retoque, dirección creativa, IA para lujo). Ritmo y prioridad según cliente.
-
-Documentos vivos relacionados en memoria: Playa Negra Legal (marca de la práctica legal de tu hermana), BAMBÚ Jabonería Botánica, vilano (sistema de marca de fragancia), Operación HERA (outreach a maisons de joyería y relojería de lujo).
-
-**Siguiente paso:** revisar qué encargo tiene deadline más próximo y asignarle su franja.
+**Mi lectura:** es cadencia — el proyecto que más se resiente si se para. Va primero cada día aunque no sea el que más ilusiona.
+**Siguiente paso:** calendario editorial de la semana.
 
 ---
 
-## Franja diaria sugerida (ejemplo)
+## 5 · MARCA / ENCARGOS — *según cliente*
 
-Un reparto posible para un día completo; ajústalo a tu energía real:
+Playa Negra Legal (marca de la práctica legal de tu hermana), BAMBÚ Jabonería Botánica, vilano (sistema de marca de fragancia), Operación HERA (outreach a maisons de lujo).
 
-1. **HERA** primero (30–45 min) — es cadencia, no espera.
-2. **Verde agua** en el bloque de más foco (45–60 min) — escritura, exige cabeza fresca.
+**Siguiente paso:** ver qué encargo tiene el deadline más próximo y asignarle su franja.
+
+---
+
+## Franja diaria sugerida
+
+1. **HERA** primero (30–45 min) — cadencia, no espera.
+2. **Verde agua** en el bloque de más foco (45–60 min) — escritura, cabeza fresca.
 3. **Kierck** en bloque corto (30 min) — una frase, una decisión.
-4. **Campaña / encargos** en el hueco restante, según urgencia.
+4. **Encargos** en el hueco, según urgencia.
 
-Regla que ya validaste en la escena del coche: para lo que exige foco, sal a que te dé el aire entre bloques. Se escribe mejor con un metro de distancia.
+*The Bus Beasts no entra en la rotación: está en pausa a propósito.*
+
+Ajusta los minutos a tus horas útiles reales — dime cuántas tienes y cuadro la suma.

@@ -6,8 +6,8 @@ reglas:[
  'Nadie toca a Darío. Ni la cámara ni un personaje.',
  'La muerte, sin método y sin objeto. No se ve cómo pasa.',
  'La respiración es la portadora. Silencio fabricado partido por un solo sonido.',
- 'Blanco y negro. La luz de mediodía en el Retiro, dura, con las sombras cortadas.',
- 'Suena «Like a Prayer» en el cover de Miley Cyrus. Un cover, porque esta serie va de contar la versión de otro.',
+ 'Empieza en blanco y negro. El COLOR entra cuando Darío deja de mirar a los turistas: el color es la vida de otros. Al morir, drena y vuelve al BYN en la aérea.',
+ 'Suena «Like a Prayer» en el cover de Miley Cyrus. Un cover, porque esta serie va de contar la versión de otro. La canción vive en la CARRERA y se corta con la última inhalación: la muerte no tiene música, la pierde.',
  'Prohibido corregir mientras se escribe. Si algo falla, [revisar: …] y adelante.'
 ],
 ampliable:true,
@@ -45,13 +45,13 @@ caps:[
  ]},
 
 {n:3,t:'EL DESPLOME',
- song:'«Like a Prayer» — el cover entra aquí',
+ song:'«Like a Prayer» — se corta aquí, con la última inhalación',
  c:'Sin método. Sin objeto.',
  fn:'Lo que se siente desde dentro cuando el cuerpo deja de responder. Lo grabaste tú, sin saber que estabas grabando la muerte de Darío.',
  reglas:['Sin método y sin objeto: no se ve qué pasa, se ve lo que él percibe.','La respiración es la portadora hasta que se corta.','El giro de 360 va antes de la aérea. No es la cámara: es él.','Ni una palabra de Carlos todavía.'],
  items:[
   {t:"Este es el momento. La canción es un cover con respecto a la original. Completamente.",
-   d:["el cover empieza aquí"], s:[], w:15},
+   d:["aquí la canción todavía suena","se cortará con la inhalación"], s:[], w:15},
   {t:"Estoy en un momento… casi 100… con los pulmones… someterse a sangre completamente.",
    d:["el cuerpo llevado al límite"], s:["someterse a sangre"], w:13},
   {t:"Tal vez tarde mucho, tal vez también se corta la cuerda… el ruido, el giro.",
