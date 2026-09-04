@@ -1,0 +1,40 @@
+<!-- Plantilla del taller. Copiar, cambiar el <script src=datos.js> y listo. -->
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El taller</title>
+<link rel="stylesheet" href="../motor/motor.css">
+</head><body>
+<header>
+ <div class="brand" id="brand"></div>
+ <div class="bar"><i id="gb"></i></div><div class="pct" id="gp">0 / 0</div>
+ <button onclick="document.getElementById('rl').classList.add('on')">Las reglas</button>
+</header>
+<div class="wrap">
+ <div class="caps" id="caps"></div>
+ <div class="head" id="head"></div>
+ <div class="nav">
+  <button onclick="mov(-1)">←</button><span class="n" id="pos"></span>
+  <div class="dots" id="dots"></div><button onclick="mov(1)">→</button>
+ </div>
+ <div class="pane">
+  <div class="box"><div class="lab"><span id="rlab">La consigna</span><span id="rw"></span></div>
+   <div class="ref" id="ref"></div><div class="tags" id="tags"></div></div>
+  <div class="box"><div class="lab"><span>Tu versión</span><span id="mw"></span></div>
+   <div class="chk" id="chk"><input type="checkbox" id="chkin"><label for="chkin">Marcar este paso como hecho</label></div>
+   <textarea id="ta" placeholder="Escribe aquí…"></textarea></div>
+ </div>
+</div>
+<div class="foot">
+ <button class="p" onclick="hecho()">Marcar hecho y seguir →</button>
+ <button onclick="conectar()" id="fsb">Conectar carpeta</button>
+ <button onclick="exportar()">Exportar unidad</button>
+ <span class="st" id="st">guardando en este navegador</span>
+</div>
+<div class="rules" id="rl" onclick="if(event.target===this)this.classList.remove('on')"><div>
+ <h3>Las reglas que no se rompen</h3><ol id="rls"></ol>
+ <button style="margin-top:16px" onclick="document.getElementById('rl').classList.remove('on')">Cerrar</button>
+</div></div>
+<script src="datos-umbral.js"></script>
+<script>document.getElementById('brand').innerHTML=D.meta.titulo+'<small>'+D.meta.sub+'</small>';</script>
+<script src="../motor/motor.js"></script>
+</body></html>

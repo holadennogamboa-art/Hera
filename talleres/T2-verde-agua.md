@@ -89,9 +89,13 @@ Madonna, 1989). Un cover, porque la serie va de contar la versión de otro.
 
 - Biblia: **cerrada**. Documentos: `verde-agua-columna-vertebral.md` (ley operativa) y
   `verde-agua-bitacora.md` (razonamiento del núcleo).
-- Episodio 1: *(anotar avance)*
+- Episodio 1: **0 de 15 pasos** del arranque. El taller ya está montado con tu material.
 - Material fuente: *The Architecture* (manuscrito autobiográfico).
 
-## Taller vivo
+## Talleres vivos
 
-[`t2-verde-agua/TALLER.html`](t2-verde-agua/TALLER.html)
+- **[`t2-verde-agua/UMBRAL.html`](t2-verde-agua/UMBRAL.html)** — el taller del arranque, con
+  el mismo sistema que *Golpe de estado*: a la izquierda, **lo que grabaste corriendo**; a
+  la derecha, tu versión. 15 pasos en cuatro unidades: el umbral, la montaña, el desplome y
+  el relevo. Aquí no se inventa nada: se reescribe material propio.
+- [`t2-verde-agua/TALLER.html`](t2-verde-agua/TALLER.html) — el taller general del episodio.

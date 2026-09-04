@@ -60,7 +60,7 @@ function pintar() {
   $('ref').innerHTML = (it.b ? '<div class="brief"><b>Qué toca aquí.</b> ' + it.b + '</div>' : '') +
     (it.t ? '<div class="reftxt"></div>' : '');
   if (it.t) $('ref').querySelector('.reftxt').textContent = it.t;
-  $('rlab').textContent = it.t ? 'El borrador — solo referencia' : 'La consigna';
+  $('rlab').textContent = it.t ? (D.meta.reflabel || 'El borrador — solo referencia') : 'La consigna';
   $('rw').textContent = it.w ? it.w + ' palabras' : '';
   $('tags').innerHTML =
     (it.s || []).map(s => '<span class="tag s">no toques: «' + s + '»</span>').join('') +
