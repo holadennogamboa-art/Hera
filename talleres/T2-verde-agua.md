@@ -82,7 +82,8 @@ Cinco hallazgos que salieron de correr y no habrían salido de una silla:
    desplome y el relevo a la aérea, en una frase.
 
 Dirección de foto anotada por el autor: la intro en **blanco y negro**.
-Pendiente: qué canción, sabiendo que es **un cover, no la original**.
+**Canción del arranque decidida:** «Like a Prayer», el cover de Miley Cyrus (original de
+Madonna, 1989). Un cover, porque la serie va de contar la versión de otro.
 
 ## Estado actual
 

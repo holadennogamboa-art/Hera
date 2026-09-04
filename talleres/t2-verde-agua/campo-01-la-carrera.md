@@ -99,6 +99,16 @@ haga falta —*disfigurando*, *bruto*, *la cuerda*— y se escribe la escena en 
 
 ## Pendiente
 
-- La canción del arranque: **un cover, no la original**. Decidir cuál.
+- ~~La canción del arranque~~ **DECIDIDA: «Like a Prayer», el cover de Miley Cyrus.**
+  Original de Madonna, 1989.
+
+  **Por qué funciona más allá del gusto:** la serie entera va de que Carlos cuenta la
+  versión de Darío, no Darío. Un cover es eso mismo — la voz que oyes no es la primera
+  voz. Y la letra va de caer de rodillas y oír una voz que llama, en la escena de un
+  hombre que cae corriendo. El dispositivo de la serie suena antes de explicarse.
+
+  ⚠️ **Derechos:** para producir hay que licenciar dos cosas, la composición (Madonna y
+  Patrick Leonard) y la grabación concreta del cover. En la biblia y en el pitch se puede
+  citar sin problema; en un piloto rodado, no.
 - El blanco y negro: si la intro es BYN y el resto no, eso es una decisión de serie, no de
   escena. Anotarla en la biblia.
