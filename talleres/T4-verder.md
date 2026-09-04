@@ -48,6 +48,42 @@ cd ~/geo-auditor && ANTHROPIC_API_KEY="…" node consultar.mjs "SI SI BAGELS" \
 Auditar y prospectar es **gratis**. Solo medir en los asistentes gasta: unos 47.000 tokens
 y 5 búsquedas web por consulta.
 
+## Estado al 5-sep
+
+La herramienta cambió de sitio: ya no dice qué está mal, **prepara el cliente entero con un
+comando**. Auditoría, código corregido, informe que abre el cliente y correo con su lista.
+
+Lo que más pesa de lo nuevo:
+
+- **El informe del cliente.** Una página con su nombre y su logo que enseña qué sabe hoy un
+  asistente de él y qué sabría después. SI SI BAGELS pasa de **0 de 9 a 7 de 9**. No es una
+  promesa: se calcula con las mismas reglas en los dos lados.
+- **El correo:** de 67 caracteres de asunto a 26, y de describir problemas a entregar un enlace.
+- **El registro de contactos:** cada día te dice a quién responder, a quién seguir y a quién
+  dejar estar.
+- **Publicación con comprobación:** antes de dar un correo por bueno, abre el enlace como lo
+  abriría un desconocido y se niega si pide contraseña o no está subido.
+
+**Nueve fallos propios corregidos**, todos encontrados mirando datos reales. Los tres que
+más habrían dolido:
+
+1. El marcado **empeoraba** a Hotel Orfila —de 69 % a 57 %— porque tiraba lo que ya tenía
+   declarado. Ahora hereda y sube a 80 %.
+2. A ocho negocios les asignaba «falta la dirección» cuando en realidad no tenían ningún
+   dato: les vendía el síntoma menor.
+3. El correo de Txirimiri iba a llamar «una fotografía» a un icono de WordPress. Un dato
+   falso y adiós credibilidad.
+
+**Comercial:** 2 correos fuera (SI SI BAGELS el 3, No Classica el 5), 2 paquetes listos,
+**27 negocios auditados** en Chueca, La Latina y Lavapiés con contacto verificado.
+
+### Qué toca
+
+- [ ] **Peñalver** — se puede enviar ya.
+- [ ] Subir el ZIP y mandar **Txirimiri**.
+- [ ] **Día 8:** seguimiento de SI SI BAGELS si no han contestado. El registro avisa.
+- [ ] Cuando quieras: **11 negocios** con correo verificado sin tocar.
+
 ## Estado real
 
 **Funciona · sin cliente todavía.**
@@ -58,7 +94,7 @@ y 5 búsquedas web por consulta.
 - Medición en Claude: verificada con dos negocios reales y 21 consultas.
 - ChatGPT, Perplexity y Gemini: código escrito y endpoints verificados, pero **ninguno ha
   devuelto todavía una respuesta correcta**. Cada uno necesita su clave de pago.
-- **Ningún cliente ha pagado.** Es una herramienta que funciona, no un negocio en marcha.
+- **Ningún cliente ha pagado todavía.** Cuatro correos fuera y ninguna respuesta aún.
 - Sin crédito de API: se agotaron los 5 dólares a mitad de la última medición.
 
 ## Definición de terminado (fase actual)

@@ -9,3 +9,6 @@ fecha,bloque,taller,proyecto,entregable_previsto,estado,minutos,nota
 2026-09-02,B4,ronda,Todos,La ronda,perdido,0,Sin correo del dia. La ronda no se repone: es diaria.
 2026-09-02,extra,T5,Skin Lab,Primeras personas ajenas,hecho,0,Mikel Vicky y Stephania lo probaron. Mikel: no canta a IA y pregunta si lo saco pronto. Se rompe el cero de usuarios ajenos.
 2026-09-02,extra,T4,Auditor GEO,Reestructuracion,hecho,0,De 2890 a 3789 lineas. Nuevos cliente.mjs (paquete completo) y publicar.mjs (informes en ruta aleatoria sin indexar).
+2026-09-05,extra,T4,Auditor GEO,Informe de cliente y 9 fallos corregidos,hecho,0,SI SI BAGELS 0/9 a 7/9 en el informe. 27 negocios auditados con contacto. 2 correos fuera (No Classica). Peñalver y Txirimiri listos.
+2026-09-05,extra,T2,Verde agua,Grabar el sonido de la carrera,hecho,0,Cinco notas de voz. Craneado el desplome y la estetica visual. Pendiente transcribir.
+2026-09-05,extra,T9,Envios,Ventana de revistas detectada,pendiente,0,La edicion web publica descalifica de Kenyon y Brooklyn Review. Bloquearla es lo primero.

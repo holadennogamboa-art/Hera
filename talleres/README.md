@@ -26,6 +26,7 @@ entregables medibles, revisión semanal y un archivo de lo hecho.
 | [T5](T5-skin-lab.md) | **HERA Skin Lab** | En producción. 24 renders, todos tuyos. Nadie ajeno ha renderizado. | 3 | [abrir](t5-skin-lab/TALLER.html) |
 | [T6](T6-kierck.md) | **Kierck** | Biblia en construcción. Falta la primera frase de ella. | 1,5 | — |
 | [T7](T7-encargos.md) | **Encargos y campaña pro-IA** | Cuatro encargos vivos y una decisión pendiente. | 1,5 | — |
+| [T9](T9-envios-revistas.md) | **Envíos a revistas** | Kenyon y Brooklyn Review. 26 días. La web pública descalifica. | — | — |
 | [T8](T8-direccion.md) | **Dirección** | Métricas, revisión semanal, archivo. | 1,5 | — |
 | [La ronda](LA-RONDA.md) | **El bloque B4, todos los días** | Reparte T3, T4 y T5. Es donde el trabajo hecho se convierte en trabajo cobrado. | 6 | — |
 
@@ -60,6 +61,7 @@ funcionaba en *Golpe de estado*, con su motor extraído para poder reutilizarla.
 - [`HOY.html`](HOY.html) — **se abre cada mañana.** Pulsas «Arranco ahora» y calcula los bloques desde esa hora.
 - [`HORARIO.md`](HORARIO.md) — la rotación semanal y las reglas de reposición.
 - [`PROTOCOLO.md`](PROTOCOLO.md) — rituales de apertura y cierre, reglas de foco, qué hacer los días malos.
+- [`HITOS.md`](HITOS.md) — **cosas que se pueden tocar pronto.** Cinco esta semana, hora y cuarto en total.
 - [`LA-RONDA.md`](LA-RONDA.md) — el bloque B4, minuto a minuto. El más importante y el que primero se cae.
 - [`fuentes/`](fuentes/) — los dossieres de origen: universo Golpe de estado / Verde agua, Skin Lab e índice maestro.
 - [`REVISION-SEMANAL.md`](REVISION-SEMANAL.md) — la reunión del viernes conmigo mismo (plantilla).

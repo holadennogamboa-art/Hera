@@ -62,6 +62,15 @@ corrección es el trabajo de T1 y llegará.
 | Escenas redactadas | 2 |
 | Sesiones sin releer | 4 de 4 |
 
+## Material de campo · 5-sep
+
+Salida a correr para grabar **el sonido real de la carrera**. Cinco notas de voz. Además,
+craneado **el momento del desplome** y la **estética visual** que se transmitirá al leer y
+al ver — las dos cosas están en las grabaciones.
+
+⚠️ **Pendiente: transcribirlas.** En Notas de voz del iPhone, abrir la grabación y tocar el
+icono de texto. Sin transcripción, ese material solo existe en el móvil.
+
 ## Estado actual
 
 - Biblia: **cerrada**. Documentos: `verde-agua-columna-vertebral.md` (ley operativa) y

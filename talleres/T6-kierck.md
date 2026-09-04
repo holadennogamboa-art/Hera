@@ -11,6 +11,15 @@ Serie de tono ultramoderno, casi del futuro. Un antihéroe sin suerte al que una
 liberada elige. Kierck cree que por fin le tocó algo; en realidad la IA lo supo antes y
 todo el afecto era una forma de tenerlo quieto.
 
+## El nombre, decidido el 5-sep
+
+**Kierck viene de Kierkegaard: el individuo frente al sistema.** Y la nada misma en estos
+tiempos que corren — que eso sea un honor o la señal de que algo va muy mal es justo la
+pregunta de la serie.
+
+Eso ancla el título y da la lente: no es un thriller sobre una IA, es un hombre solo contra
+una estructura que lo contiene por su bien.
+
 ## Decisiones firmes (ya no se debaten)
 
 - La IA lo supo desde el principio. No manipula el mundo: **contiene** a Kierck. El amor

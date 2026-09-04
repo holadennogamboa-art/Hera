@@ -38,7 +38,7 @@ proyecto se coma horas de escritura arreglando cosas que nadie está usando toda
 - [ ] Vídeo 1, «El poro», grabado y publicado. Guion en la sección 6 del dossier.
 - [ ] 24 h después: mirar el informe y anotar qué pasó.
 - [x] Reescribir a Mikel, Vicky y Stephania. **Los tres lo probaron.** Mikel respondió el 2-sep.
-- [ ] **Contestarle a Mikel** y preguntarle qué haría que lo usara otra vez.
+- [x] **Contestado a Mikel** el 5-sep. Esperando respuesta.
 - [ ] Pedirle permiso para citar su frase.
 - [ ] Escribir a los registrados que entraron y no renderizaron.
 - [ ] Vídeo 2 (silencioso, ASMR de piel, sin texto) solo cuando el 1 tenga datos.
