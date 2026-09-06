@@ -34,16 +34,19 @@ Son revistas en inglés y la novela está en español. Tienes *The Receipt* —l
 inglesa de *El ticket*— reservada justo para esto. Kenyon acepta traducción propia si
 afirmas tener los derechos de primera publicación en inglés, y los tienes: es obra inédita.
 
-## Dónde está la ventaja real
+## Decisión tomada · 6-sep
 
-**Kenyon publica en 2027 un folio temático: *Caretaking and the Giving of Care*.**
+**A Kenyon va «The Receipt». El psiquiátrico se queda fuera.**
 
-*Golpe de estado* y *Verde agua* son literalmente eso: el psiquiátrico, Carlos, la gata,
-Lucy, el hermano que repite al padre disfrazado de cuidado. Marcando el folio en vez de la
-convocatoria general compites contra una fracción de la gente, y con un editor que busca
-exactamente tu material.
+Kenyon admite **un solo envío por género** en toda la convocatoria. Mandar «The Receipt»
+y un fragmento del psiquiátrico como ficción descartaba los dos. Se elige el que está
+terminado.
 
-Eso vale más que cualquier noche corrigiendo comas.
+El folio de *Caretaking and the Giving of Care* sigue siendo la puerta que mejor encaja
+con *Golpe de estado* y *Verde agua* —el psiquiátrico, Carlos, la gata, Lucy, el hermano
+que repite al padre disfrazado de cuidado—, pero no compite con esto: **es material
+guardado para la próxima convocatoria**, no descartado. Traducirlo con calma vale más que
+montarlo a contrarreloj para perder las dos plazas.
 
 ## Aviso que afecta a HERA
 
@@ -56,7 +59,7 @@ secuencia narrativa. Nada del pipeline generativo, nada de Skin Lab.
 | Cuándo | Qué |
 |---|---|
 | **Hoy** | ~~Bloquear la web~~ ✔ · **Envío a Kenyon preparado**: `t9-envios/kenyon/` |
-| **Semana 1** | Montar el fragmento de Kenyon como pieza autónoma, en inglés, marcado para el folio de Caretaking. **Gratis, sin tasa.** |
+| **Semana 1** | **Subir «The Receipt» a Submittable.** Gratis, sin tasa. Un solo envío: no se manda nada más de ficción. |
 | **Semana 2** | Brooklyn Review: ficción de 3.000–7.000 palabras (3 $ de tasa) y la serie visual de 5 imágenes en un solo PDF. |
 | **Semana 3** | Envíos y *Ode to Them* en paralelo. |
 
@@ -65,10 +68,11 @@ secuencia narrativa. Nada del pipeline generativo, nada de Skin Lab.
 - [ ] Web bloqueada y comprobada en incógnito.
 - [x] **«The Receipt» revisado**: 1.321 palabras, 5,3 páginas a doble espacio. Cabe en
       Kenyon (máx. 30) y **no llega al mínimo de Brooklyn Review** (3.000–7.000).
-- [ ] Decidir: «The Receipt» a la general de Kenyon, y/o traducir un fragmento del
-      psiquiátrico para el folio de Caretaking, que es el que encaja de verdad con el tema.
-- [ ] Aplicar las tres correcciones de [`t9-envios/REVISION-the-receipt.md`](t9-envios/REVISION-the-receipt.md).
-- [ ] Fragmento en inglés montado como pieza autónoma.
-- [ ] Enviado a Kenyon marcando el folio de Caretaking.
+- [x] **Decidido**: «The Receipt» a Kenyon. El psiquiátrico queda fuera de esta
+      convocatoria (un solo envío por género) y se guarda para la siguiente.
+- [x] Aplicadas las tres correcciones. Manuscrito y carta en
+      [`t9-envios/kenyon/`](t9-envios/kenyon/).
+- [ ] Abrir el .docx en Word y comprobar doble espacio y encabezado.
+- [ ] Enviado a Kenyon.
 - [ ] Serie de 5 fotografías reales en PDF.
 - [ ] Enviado a Brooklyn Review.
