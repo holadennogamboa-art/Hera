@@ -22,7 +22,7 @@ dejan de hablarse.
 | [T2](T2-verde-agua.md) | **Verde agua** | Biblia cerrada, taller montado | 6 | El umbral, paso 1 de 15 |
 | [T3](T3-hera.md) | **HERA · marca** | Cadencia | 3 | Calendario editorial de la semana |
 | [T4](T4-verder.md) | **Auditor GEO** | Funciona, sin clientes | 3 | Enviar Peñalver |
-| [T5](T5-skin-lab.md) | **HERA Skin Lab** | 3 usuarios ajenos | 1,5 | Esperar a Mikel · grabar la lupa 4× |
+| [T5](T5-skin-lab.md) | **HERA Skin Lab** | **1ª conversión completa** | 1,5 | Preguntar a vicky por qué no descargó |
 | [T6](T6-kierck.md) | **Kierck** | Biblia en construcción | 1,5 | Fijar la primera frase de ella |
 | [T7](T7-encargos.md) | **Encargos y campaña** | Según cliente | 1,5 | El deadline más próximo |
 | [T8](T8-direccion.md) | **Dirección** | — | 1,5 | Revisión del viernes |
@@ -44,7 +44,7 @@ dejan de hablarse.
 
 ## Lo que espera a otros (no son tareas tuyas)
 
-- Mikel, sobre Skin Lab.
+- Mikel, sobre citar su frase.
 - SI SI BAGELS y No Classica, sobre el auditor.
 - El registro de propiedad intelectual de Madrid, en trámite.
 
@@ -67,7 +67,8 @@ Detalladas en [`fuentes/biblias/REVISION-05-SEP.md`](fuentes/biblias/REVISION-05
 |---|---|
 | Párrafos de novela | 11 de 132 |
 | Pasos del umbral escritos | 0 de 15 |
-| Personas ajenas usando algo tuyo | 3 |
+| Personas ajenas que han renderizado | 2 confirmadas · 1 conversión completa |
+| Renders totales | 35 · 34 con IA · 0 errores |
 | Correos comerciales fuera | 4 · respuestas 0 |
 | Negocios auditados | 27 · con contacto verificado |
 | Clientes que pagan | 0 |
