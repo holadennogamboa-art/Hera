@@ -18,6 +18,16 @@ publicada**. Un editor que busque el título te elimina sin leer.
 razón por la que este paso valía la pena: los despliegues viejos siguen sirviendo el libro
 aunque hayas dejado de mirarlos.
 
+## Las bases de Kenyon, comprobadas el 5-sep
+
+- **Ventana abierta: 1–30 de septiembre de 2026.** Quedan 25 días.
+- Sin tasa. Por Submittable. Respuesta en hasta seis meses.
+- Ficción hasta **7.500 palabras** (no 30 páginas, como se dijo antes). «The Receipt» tiene
+  1.321 y cabe de sobra.
+- **Una sola pieza por género.** No caben «The Receipt» y el fragmento del folio si las dos
+  van como ficción: hay que elegir o comprobar si el folio es categoría aparte.
+- Envíos simultáneos permitidos, avisando si te aceptan en otro sitio.
+
 ## El idioma
 
 Son revistas en inglés y la novela está en español. Tienes *The Receipt* —la versión
@@ -45,7 +55,7 @@ secuencia narrativa. Nada del pipeline generativo, nada de Skin Lab.
 
 | Cuándo | Qué |
 |---|---|
-| **Hoy** | Bloquear la web. Decidir Kenyon: *The Receipt* o capítulos nuevos traducidos (permiten 30 páginas a doble espacio, caben dos o tres como fragmento de obra mayor). |
+| **Hoy** | ~~Bloquear la web~~ ✔ · **Envío a Kenyon preparado**: `t9-envios/kenyon/` |
 | **Semana 1** | Montar el fragmento de Kenyon como pieza autónoma, en inglés, marcado para el folio de Caretaking. **Gratis, sin tasa.** |
 | **Semana 2** | Brooklyn Review: ficción de 3.000–7.000 palabras (3 $ de tasa) y la serie visual de 5 imágenes en un solo PDF. |
 | **Semana 3** | Envíos y *Ode to Them* en paralelo. |
