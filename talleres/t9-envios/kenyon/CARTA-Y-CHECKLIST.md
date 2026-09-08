@@ -11,7 +11,7 @@
 | **Ventana** | **1 – 30 de septiembre de 2026.** Está abierta. Quedan 25 días. |
 | **Portal** | Submittable · `thekenyonreview.submittable.com` |
 | **Tasa** | **Ninguna** para la convocatoria general |
-| **Límite de ficción** | hasta **7.500 palabras** · «The Receipt» tiene 1.321 ✔ |
+| **Límite de ficción** | hasta **7.500 palabras** · «The Receipt» tiene 1.186 ✔ |
 | **Flash fiction** | hasta 1.000 palabras por pieza — **no aplica**, la tuya pasa de ahí |
 | **Envíos simultáneos** | Permitidos, avisando por Submittable si te la aceptan en otro sitio |
 | **Respuesta** | hasta seis meses. Si pasan seis meses sin noticias, puedes preguntar a kenyonreview@kenyon.edu |
@@ -64,7 +64,7 @@ la carta no vende el texto, solo lo presenta.
 
 > Dear Editors,
 >
-> Please consider «The Receipt», a short story of approximately 1,300 words.
+> Please consider «The Receipt», a short story of approximately 1,200 words.
 >
 > It is a standalone excerpt from my novel-in-progress *Golpe de estado*, translated from
 > the Spanish by the author. First English-language publication rights are available.
@@ -95,6 +95,15 @@ submission; I will notify you immediately if it is accepted elsewhere.»*
 
 ---
 
+## Cómo se rellena el formulario
+
+| Campo | Qué poner |
+|---|---|
+| **Title** | `THE RECEIPT` |
+| **Word Count** | `1200` — solo cifras, **sin coma ni punto** |
+| **Cover Letter** | La carta de aquí arriba |
+| **Submissions Category** | **General Submission** |
+
 ## Checklist antes de pulsar enviar
 
 - [ ] **Comprobar que la obra sigue retirada.** Buscar el título en Google en una ventana de
@@ -102,9 +111,9 @@ submission; I will notify you immediately if it is accepted elsewhere.»*
 - [ ] Abrir el `.docx` en Word y verificar doble espacio, encabezado y numeración.
 - [ ] Confirmar que **no queda ningún rastro de «Berlin Literary Review»** en el nombre del
       archivo ni en las propiedades del documento.
-- [ ] Mirar en Submittable si el folio de *Caretaking* es una categoría aparte de la
-      convocatoria general de ficción.
-- [ ] Decidir: solo una pieza de ficción. «The Receipt» o el fragmento del folio.
+- [x] **Comprobado**: los folios temáticos son una casilla dentro del mismo formulario
+      (*Submissions Category*), no un envío aparte. Se manda una pieza y se elige categoría.
+- [x] Decidido: **General Submission**.
 - [ ] Añadir **kenyonreview@kenyon.edu** y **notifications@email.submittable.com** a
       contactos, para que su correspondencia no caiga en spam.
 - [ ] Verificar tu email en Submittable antes de intentar subir nada.
