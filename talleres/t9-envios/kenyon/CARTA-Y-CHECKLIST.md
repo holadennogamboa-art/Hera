@@ -14,7 +14,11 @@
 | **Límite de ficción** | hasta **7.500 palabras** · «The Receipt» tiene 1.321 ✔ |
 | **Flash fiction** | hasta 1.000 palabras por pieza — **no aplica**, la tuya pasa de ahí |
 | **Envíos simultáneos** | Permitidos, avisando por Submittable si te la aceptan en otro sitio |
-| **Respuesta** | hasta seis meses |
+| **Respuesta** | hasta seis meses. Si pasan seis meses sin noticias, puedes preguntar a kenyonreview@kenyon.edu |
+| **Pago** | **0,08 $ por palabra publicada** de prosa (mín. 80 $, máx. 450 $). ~1.200 palabras ≈ **96 $**. Se cobra **al publicar**, no al aceptar. |
+| **Derechos** | El autor **conserva el copyright**. Contrato al aceptar. |
+| **Libro de estilo** | **Chicago Manual of Style** y Webster's New Collegiate. Rayas pegadas a la palabra, sin espacios. |
+| **Retirada** | Si te la aceptan en otro sitio, avisas por Submittable y la retiras. **No puedes sustituirla por otra pieza.** |
 
 ### ⚠️ Una sola pieza por género
 
@@ -40,6 +44,8 @@ Míralo en el portal antes de decidir.)*
 2. **Quitada la repetición**: «…which between professionals is a higher form of affection».
    Se conserva la del reloj, que es mejor: saber la hora de alguien y no su nombre.
 3. **Quitado el inciso** «in a just world». El párrafo ya lo demuestra sin decirlo.
+4. **Rayas cerradas** (6 en total): de « — » a «—», que es lo que pide el Chicago Manual
+   of Style, el libro de estilo declarado por Kenyon. Tipografía, no prosa.
 
 **Formato de manuscrito aplicado:** Times New Roman 12, doble espacio, sangría de primera
 línea, márgenes de una pulgada, encabezado `Gamboa / THE RECEIPT / nº de página`, datos de
@@ -99,6 +105,9 @@ submission; I will notify you immediately if it is accepted elsewhere.»*
 - [ ] Mirar en Submittable si el folio de *Caretaking* es una categoría aparte de la
       convocatoria general de ficción.
 - [ ] Decidir: solo una pieza de ficción. «The Receipt» o el fragmento del folio.
+- [ ] Añadir **kenyonreview@kenyon.edu** y **notifications@email.submittable.com** a
+      contactos, para que su correspondencia no caiga en spam.
+- [ ] Verificar tu email en Submittable antes de intentar subir nada.
 - [ ] Pegar la carta y la bio en el formulario.
 - [ ] Marcar si es envío simultáneo.
 - [ ] **Enviar antes del 30 de septiembre.**
