@@ -72,7 +72,8 @@ secuencia narrativa. Nada del pipeline generativo, nada de Skin Lab.
       convocatoria (un solo envío por género) y se guarda para la siguiente.
 - [x] Aplicadas las tres correcciones. Manuscrito y carta en
       [`t9-envios/kenyon/`](t9-envios/kenyon/).
-- [ ] Abrir el .docx en Word y comprobar doble espacio y encabezado.
-- [ ] Enviado a Kenyon.
+- [x] Abrir el .docx en Word y comprobar doble espacio y encabezado.
+- [x] **ENVIADO a Kenyon el 8-sep-2026**, categoria General Submission, por Submittable.
+      Respuesta hasta seis meses: **marzo de 2027**. Nada que hacer hasta entonces.
 - [ ] Serie de 5 fotografías reales en PDF.
 - [ ] Enviado a Brooklyn Review.
