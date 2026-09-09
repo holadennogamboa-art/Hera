@@ -14,7 +14,7 @@ arregla escribiendo más código. Se arreglan aquí.
 |---|---|---|
 | 5 | `./hera-stats.sh`. Solo dos líneas: **han procesado** y **han descargado**. Se anota el número y se cierra. | Skin Lab |
 | 20 | Auditar dos o tres negocios con `node lote.mjs` o el panel. Guardar los que salgan mal. Es gratis y no gasta crédito. | Auditor GEO |
-| 15 | **Un correo.** Uno al día, escrito sobre datos reales de esa web. Uno bueno vale más que diez genéricos. | Auditor GEO |
+| 15 | **Un correo.** Se abre [`t7-encargos/COLA-DE-ENVIO.md`](t7-encargos/COLA-DE-ENVIO.md) y se manda el primero sin marcar. **No se elige.** Los martes y jueves, en su lugar, un negocio local sobre datos reales de su web. | T7 / Auditor GEO |
 | 10 | Responder lo que haya llegado del día anterior. Correos, DMs, comentarios. | Todos |
 | 30 | Publicar lo que toque e interactuar con cuentas concretas. Nada masivo, nada automatizado. | HERA / Skin Lab |
 | 10 | Cierre: anotar en la bitácora y dejar preparado el correo de mañana. | — |
@@ -24,6 +24,8 @@ arregla escribiendo más código. Se arreglan aquí.
 1. **El mínimo absoluto son los 15 minutos del correo.** Si un día se cae todo lo demás,
    ese correo se manda igual. Es lo único que puede convertir dos herramientas terminadas
    en un negocio.
+   **Y no se decide a quién:** la cola ya está ordenada. Decidir es la parte que falla.
+   La auditoría del 9 de septiembre lo midió: 37 días, 7 correos, 0 seguimientos.
 2. **Se cuentan los contactos.** Diez negocios por semana, escritos en la bitácora con
    fecha. Un «no» también se anota: es información.
 3. **Se mira, no se toca.** Ver las métricas no autoriza a abrir el código. Si los datos
@@ -31,6 +33,10 @@ arregla escribiendo más código. Se arreglan aquí.
 4. **Tiempo acotado.** A las 16:30 se cierra aunque queden cosas. Mañana hay otra ronda.
 
 ## Lo que hoy está esperando en la ronda
+
+- **Los diez de la cola.** CANADA, Iconoclast, Chopard, Cuyana, Cult Gaia. Contactos
+  verificados y publicados por ellos, textos escritos, cero enviados. Es el activo más
+  caro que tienes parado.
 
 - **SI SI BAGELS.** Informe, marcado y borrador de correo hechos. No tienen correo
   público: Instagram `@sisi.bagels` o en persona en Calle del Espíritu Santo 38, Malasaña

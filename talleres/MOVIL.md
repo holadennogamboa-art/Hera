@@ -22,6 +22,7 @@ Así son tres iconos, no tres búsquedas.
 |---|---|---|
 | **T2 · Verde agua** | Escribir los 15 pasos del umbral | El enlace de arriba. Guardado en servidor. |
 | **La ronda** | Un correo al día, respuestas, publicar | Mail e Instagram |
+| **T7 · Outreach** | **La cola: un correo al día, diez días, diez correos** | Mail |
 | **T4 · Auditor** | **Enviar** Peñalver y Txirimiri (ya están escritos) | Mail |
 | **T3 · HERA** | Publicar, historias, responder | Instagram |
 | **T5 · Skin Lab** | Probar la app, escribir a vicky | Safari |
@@ -54,7 +55,25 @@ Y «Borrar historial y datos» lo borra todo al instante.
 Yo puedo leer lo que hayas escrito en el umbral y volcarlo al repositorio. Solo tienes
 que decírmelo: **«recoge el umbral»**.
 
+## Estos diez días tienen un trabajo claro
+
+La [auditoría del 9 de septiembre](fuentes/AUDITORIA-09-SEP.md) dice que en 37 días
+salieron **7 correos, 0 seguimientos y 0 respuestas**, con veinte contactos verificados
+esperando y los textos ya escritos.
+
+**Mandar correos es justo lo que mejor se hace desde el móvil.** No necesitas el Mac para
+nada de esto. La [cola](t7-encargos/COLA-DE-ENVIO.md) tiene diez envíos numerados y
+estos son diez días: uno al día y vuelves con la cola vacía.
+
+Empieza por el nº 1, Alba Barneda de CANADA. Sale con el enlace a `/studio`, no espera a
+la pieza de versionado.
+
+Y dos arreglos de dos minutos que llevan meses en rojo y son de teléfono puro: **tu
+nombre en el perfil de Instagram** (sigue «THE_EYEHERA») y **el correo en la bio** (sigue
+«Inquiries: DM»).
+
 ## El mínimo de un día malo
 
-Un paso del umbral, o un correo. **Veinticinco minutos cuentan como día trabajado.**
+Un correo de la cola. Nada más. **Veinticinco minutos cuentan como día trabajado**, y
+un correo son treinta segundos.
 Diez días son diez pasos si haces uno al día; el umbral entero tiene quince.
