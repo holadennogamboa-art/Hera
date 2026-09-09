@@ -7,9 +7,14 @@
 
 | | |
 |---|---|
+| **Una cosa · el correo de hoy** | https://claude.ai/code/artifact/a143569b-87be-41cd-8efa-8dbc3c26fa69 |
 | **El hilo** | https://claude.ai/code/session_01HSYkqQbxm73vex2RPsJzdT |
 | **El umbral de Verde agua** | https://claude.ai/code/artifact/eafb8ad7-080a-4d59-af27-029d498510f3 |
-| **El panel de una cosa** | https://claude.ai/code/artifact/83affe2a-7474-4236-afb0-78bb4f6b05b6 |
+
+**«Una cosa» es por donde se entra.** Enseña un solo correo, el de hoy, con a quién y por
+dónde entrar. Se marca «Enviado» y desaparece hasta mañana. El panel viejo
+(`PANEL-UNA-COSA.html`) está desfasado —marca «envíos» como urgente y eso ya salió— y era
+para el escritorio: estos diez días no lo uses.
 
 Ábrelos y **añádelos a la pantalla de inicio** (Compartir → Añadir a pantalla de inicio).
 Así son tres iconos, no tres búsquedas.

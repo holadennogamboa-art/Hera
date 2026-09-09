@@ -1,0 +1,230 @@
+<title>Un correo al día</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F5F5F2; --panel:#FFFFFF; --ink:#141614; --ink-2:#4E534D;
+  --grey:#7F847C; --line:#DFE0DA; --line-2:#EAEBE5;
+  --acc:#3B4A12; --acc-fill:#C8F751; --acc-ink:#1E2608;
+  --done:#5B7A3A; --done-soft:#EAF2DA;
+  --shadow:0 1px 2px rgba(20,22,20,.07);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#111310; --panel:#191C17; --ink:#EEF0EA; --ink-2:#B0B5AA;
+  --grey:#868B80; --line:#2C3028; --line-2:#232720;
+  --acc:#C8F751; --acc-fill:#C8F751; --acc-ink:#1E2608;
+  --done:#9FC96A; --done-soft:#1D2714;
+  --shadow:0 1px 2px rgba(0,0,0,.45);
+}}
+:root[data-theme="dark"]{
+  --ground:#111310; --panel:#191C17; --ink:#EEF0EA; --ink-2:#B0B5AA;
+  --grey:#868B80; --line:#2C3028; --line-2:#232720;
+  --acc:#C8F751; --acc-fill:#C8F751; --acc-ink:#1E2608;
+  --done:#9FC96A; --done-soft:#1D2714;
+  --shadow:0 1px 2px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);margin:0;padding:0 0 40px;
+  font-family:Archivo,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:600px;margin:0 auto;padding:0 18px}
+
+header{padding:22px 0 0}
+.linea{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.kicker{font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey);font-weight:700}
+.cont{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;
+  color:var(--grey);font-variant-numeric:tabular-nums}
+.barra{display:flex;gap:3px;margin:10px 0 0}
+.barra i{flex:1;height:4px;background:var(--line);border-radius:2px}
+.barra i.ok{background:var(--done)}
+.barra i.now{background:var(--ink)}
+
+/* la unica tarjeta */
+.carta{margin:22px 0 0;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.carta .cinta{background:var(--acc-fill);color:var(--acc-ink);
+  padding:9px 18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700}
+.carta .cuerpo{padding:20px 18px 22px}
+.quien{font-family:Newsreader,Georgia,serif;font-size:30px;line-height:1.15;
+  font-weight:500;margin:0;text-wrap:balance}
+.donde{font-size:14px;color:var(--ink-2);margin:6px 0 0}
+.mail{display:block;margin:14px 0 0;font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:14px;color:var(--ink);background:var(--line-2);border:1px solid var(--line);
+  border-radius:8px;padding:12px 14px;word-break:break-all;text-decoration:none}
+.mail.sinmail{color:var(--ink-2);font-style:normal}
+.angulo{margin:16px 0 0;padding:14px 16px;border-left:3px solid var(--line);
+  background:var(--line-2);border-radius:0 8px 8px 0}
+.angulo .et{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey);font-weight:700;display:block;margin-bottom:6px}
+.angulo p{margin:0;font-family:Newsreader,Georgia,serif;font-size:16px;line-height:1.55;
+  color:var(--ink)}
+.acciones{display:flex;flex-direction:column;gap:10px;margin:20px 0 0}
+button{font-family:inherit;font-size:15px;font-weight:600;padding:15px 12px;
+  border-radius:9px;cursor:pointer;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink)}
+button.principal{background:var(--acc-fill);border-color:var(--acc-fill);color:var(--acc-ink)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+.hecho{margin:22px 0 0;padding:22px 18px;background:var(--done-soft);
+  border:1px solid var(--line);border-radius:12px}
+.hecho h2{font-family:Newsreader,Georgia,serif;font-size:24px;font-weight:500;margin:0 0 8px}
+.hecho p{margin:0;font-size:14px;line-height:1.6;color:var(--ink-2)}
+
+.luego{margin:26px 0 0}
+.luego h3{font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey);font-weight:700;margin:0 0 10px}
+a.tile{display:block;padding:15px 16px;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;margin-bottom:8px;text-decoration:none;color:var(--ink)}
+a.tile b{display:block;font-size:15px;font-weight:600}
+a.tile span{display:block;font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+
+.resto{margin:26px 0 0}
+.resto summary{cursor:pointer;font-size:12px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--grey);padding:10px 0}
+.fila{display:flex;gap:11px;align-items:center;padding:11px 13px;border:1px solid var(--line);
+  background:var(--panel);border-radius:9px;margin-bottom:6px}
+.fila .n{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;
+  color:var(--grey);width:20px;flex:none}
+.fila .q{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fila .e{font-size:11px;font-weight:600;color:var(--grey);display:flex;
+  align-items:center;gap:6px;flex:none}
+.fila .e i{width:9px;height:9px;border:1.5px solid var(--grey);border-radius:50%;display:block}
+.fila.ok .e{color:var(--done)}
+.fila.ok .e i{background:var(--done);border-color:var(--done);border-radius:2px}
+
+.nota{font-size:12px;line-height:1.6;color:var(--grey);margin:26px 0 0}
+.estado{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;
+  color:var(--grey);margin:16px 0 0}
+.estado.local{color:#8A5A1F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .estado.local{color:#D9A867}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="linea">
+    <span class="kicker">Una cosa</span>
+    <span class="cont" id="cont"></span>
+  </div>
+  <div class="barra" id="barra"></div>
+</header>
+
+<div id="zona"></div>
+
+<div class="luego">
+  <h3>Cuando ese correo esté fuera</h3>
+  <a class="tile" href="https://claude.ai/code/artifact/eafb8ad7-080a-4d59-af27-029d498510f3">
+    <b>El umbral · Verde agua</b>
+    <span>Un paso de los quince. Guarda a salvo, no en el navegador.</span></a>
+  <a class="tile" href="https://claude.ai/code/session_01HSYkqQbxm73vex2RPsJzdT">
+    <b>El hilo</b>
+    <span>Dictarme correcciones, la bitácora, cualquier cosa del repositorio.</span></a>
+</div>
+
+<details class="resto">
+  <summary>Ver la cola entera</summary>
+  <div id="lista"></div>
+</details>
+
+<p class="nota">Antes de empezar, contrasta la cola con tu carpeta de Enviados. Si alguno
+salió ya de Proton sin apuntarse, márcalo aquí y no lo mandes dos veces.</p>
+<p class="estado" id="estado">…</p>
+</div>
+
+<script>
+const C=[
+{q:'Alba Barneda',d:'CANADA · managing partner',m:'alba@canadacanada.com',
+ a:'El dolor de los entregables: «los entregables conforman el 95% del trabajo que hace postproducción». Literal suyo, verificado a mano. Sale con el enlace a /studio — no espera a la pieza de versionado.'},
+{q:'Louis de Meckenheim',d:'Chopard · seguimiento',m:'',
+ a:'Su correo es del 3 de agosto y lleva 37 días sin seguimiento. Dos líneas: sigo interesado, esto es nuevo. Busca el hilo en Enviados.'},
+{q:'Felix Mondino',d:'Iconoclast · Head of Print · seguimiento',m:'felix@iconoclastimage.tv',
+ a:'Enviado el 18 de agosto, el único correo del método nuevo. Veintidós días sin seguimiento.'},
+{q:'Maria Vives',d:'CANADA · head of photography',m:'maria@canadacanada.com',
+ a:'Puerta B: fotografía y moda. Es tu terreno exacto, quince años haciéndolo.'},
+{q:'Wendy',d:'Cuyana · seguimiento',m:'',
+ a:'Del lote de agosto, en silencio. Búscalo en Enviados.'},
+{q:'Callum Harrison',d:'CANADA · special projects',m:'callum@canadacanada.com',
+ a:'Puerta C: su punto ciego con la IA. Entra por el problema, no por la herramienta.'},
+{q:'Calvin Leung',d:'Cult Gaia · seguimiento',m:'',
+ a:'Del lote de agosto, en silencio. Búscalo en Enviados.'},
+{q:'Ilona Klaver',d:'Iconoclast',m:'ilona@iconoclastimage.tv',
+ a:'Segunda puerta en Iconoclast, distinta persona y distinto ángulo que Felix.'},
+{q:'Víctor Mata',d:'CANADA',m:'victor@canadacanada.com',a:'Tercera pasada en CANADA.'},
+{q:'Bernard Amsellem',d:'Iconoclast',m:'bernard@iconoclast.tv',
+ a:'Ojo: su dominio es iconoclast.tv, distinto del de Felix e Ilona. Compruébalo antes.'}
+];
+const K='cola-t7-v1'; const $=id=>document.getElementById(id);
+let ok={}, post={}, ref=null;
+try{const r=localStorage.getItem(K); if(r){const o=JSON.parse(r); ok=o.ok||{}; post=o.post||{};}}catch(_){}
+
+// el primero sin enviar y sin aplazar; si todos los que quedan estan aplazados, el primero de esos
+const idx=()=>{
+  for(let k=0;k<C.length;k++) if(!ok[k]&&!post[k]) return k;
+  for(let k=0;k<C.length;k++) if(!ok[k]) return k;
+  return -1;
+};
+const hora=()=>new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function local(){try{localStorage.setItem(K,JSON.stringify({ok,post,upd:Date.now()}));}catch(_){}}
+async function remoto(){
+  if(!ref){ $('estado').classList.add('local');
+            $('estado').textContent='Guardado solo en este móvil'; return; }
+  try{ await ref.set({ok:ok,post:post,upd:new Date().toISOString()});
+       $('estado').classList.remove('local');
+       $('estado').textContent='Guardado a salvo · '+hora();
+  }catch(e){ $('estado').classList.add('local');
+       $('estado').textContent='Sin conexión — guardado en el móvil'; }
+}
+
+function pinta(){
+  const i=idx(), n=Object.keys(ok).filter(k=>ok[k]).length;
+  $('cont').textContent=n+' de '+C.length+' fuera';
+  $('barra').innerHTML=C.map((_,k)=>
+    '<i class="'+(ok[k]?'ok':(k===i?'now':''))+'"></i>').join('');
+
+  if(i===-1){
+    $('zona').innerHTML='<div class="hecho"><h2>La cola está vacía.</h2>'+
+      '<p>Diez correos fuera y los primeros seguimientos hechos. En los 37 días anteriores '+
+      'salieron siete y ningún seguimiento. Díselo al hilo y montamos la siguiente.</p></div>';
+  }else{
+    const c=C[i];
+    $('zona').innerHTML=
+      '<div class="carta"><div class="cinta">Hoy · correo '+(i+1)+' de '+C.length+'</div>'+
+      '<div class="cuerpo">'+
+      '<h1 class="quien">'+esc(c.q)+'</h1>'+
+      '<p class="donde">'+esc(c.d)+'</p>'+
+      (c.m
+        ? '<a class="mail" href="mailto:'+esc(c.m)+'">'+esc(c.m)+'</a>'
+        : '<span class="mail sinmail">Sin dirección aquí — abre el hilo en Enviados</span>')+
+      '<div class="angulo"><span class="et">Por dónde entrar</span><p>'+esc(c.a)+'</p></div>'+
+      '<div class="acciones">'+
+      '<button class="principal" id="ya">Enviado ✓</button>'+
+      '<button id="salta">Hoy no puedo — mañana</button>'+
+      '</div></div></div>';
+    $('ya').onclick=()=>{ ok[i]=true; post={}; local(); pinta(); remoto(); window.scrollTo(0,0); };
+    $('salta').onclick=()=>{ post[i]=true; local(); pinta(); remoto(); window.scrollTo(0,0); };
+  }
+
+  $('lista').innerHTML=C.map((c,k)=>
+    '<div class="fila'+(ok[k]?' ok':'')+'"><span class="n">'+(k+1)+'</span>'+
+    '<span class="q">'+esc(c.q)+' · '+esc(c.d)+'</span>'+
+    '<span class="e"><i></i>'+(ok[k]?'fuera':(post[k]?'aplazado':'pendiente'))+'</span></div>').join('');
+}
+pinta();
+$('estado').classList.add('local');
+$('estado').textContent='Guardado solo en este móvil…';
+
+(async()=>{
+  try{
+    const d=await claude.use('db'); if(!d){ $('estado').textContent='Guardado solo en este móvil'; return; }
+    ref=d.doc('cola/estado');
+    const s=await ref.get();
+    if(s.exists){ const r=s.data()||{}; const ro=r.ok||{}, rp=r.post||{};
+      Object.keys(ro).forEach(k=>{ if(ro[k]) ok[k]=true; });
+      Object.keys(rp).forEach(k=>{ if(rp[k]&&!ok[k]) post[k]=true; });
+      local(); pinta(); }
+    $('estado').classList.remove('local');
+    $('estado').textContent='Guardado a salvo · '+hora();
+  }catch(e){ $('estado').textContent='Guardado solo en este móvil'; }
+})();
+</script>
