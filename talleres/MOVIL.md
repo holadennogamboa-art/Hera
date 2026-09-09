@@ -16,8 +16,20 @@ dónde entrar. Se marca «Enviado» y desaparece hasta mañana. El panel viejo
 (`PANEL-UNA-COSA.html`) está desfasado —marca «envíos» como urgente y eso ya salió— y era
 para el escritorio: estos diez días no lo uses.
 
-Ábrelos y **añádelos a la pantalla de inicio** (Compartir → Añadir a pantalla de inicio).
-Así son tres iconos, no tres búsquedas.
+Ábrelos y **añádelos a la pantalla de inicio**. Así son tres iconos, no tres búsquedas.
+
+### Si usas Chrome (no Safari)
+
+1. **Inicia sesión en claude.ai dentro de Chrome.** Chrome no comparte la sesión con
+   Safari: si no entras, las páginas no abren y el guardado en servidor no funciona.
+   Hazlo **antes de irte**, con wifi.
+2. **Añadir a pantalla de inicio** está en el menú de Compartir de Chrome, no en los tres
+   puntos.
+3. **Al tocar una dirección de correo**, Chrome puede abrir Gmail o Mail en vez de Proton.
+   Por eso cada dirección lleva al lado un botón **Copiar**: si te abre el correo
+   equivocado, cópiala y pégala en Proton.
+4. En iPhone y iPad, Chrome usa el mismo motor que Safari por debajo. **El aviso del
+   almacenamiento de abajo vale igual.**
 
 ---
 

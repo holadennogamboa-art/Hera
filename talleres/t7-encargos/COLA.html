@@ -52,6 +52,11 @@ header{padding:22px 0 0}
   font-size:14px;color:var(--ink);background:var(--line-2);border:1px solid var(--line);
   border-radius:8px;padding:12px 14px;word-break:break-all;text-decoration:none}
 .mail.sinmail{color:var(--ink-2);font-style:normal}
+.mailfila{display:flex;gap:8px;align-items:stretch;margin:14px 0 0}
+.mailfila .mail{margin:0;flex:1;display:flex;align-items:center}
+.copiar{flex:none;padding:0 14px;font-size:13px;font-weight:600;border-radius:8px;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.copiar.hecho2{background:var(--done-soft);border-color:var(--done);color:var(--done)}
 .angulo{margin:16px 0 0;padding:14px 16px;border-left:3px solid var(--line);
   background:var(--line-2);border-radius:0 8px 8px 0}
 .angulo .et{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
@@ -194,13 +199,23 @@ function pinta(){
       '<h1 class="quien">'+esc(c.q)+'</h1>'+
       '<p class="donde">'+esc(c.d)+'</p>'+
       (c.m
-        ? '<a class="mail" href="mailto:'+esc(c.m)+'">'+esc(c.m)+'</a>'
+        ? '<div class="mailfila"><a class="mail" href="mailto:'+esc(c.m)+'">'+esc(c.m)+'</a>'+
+          '<button class="copiar" id="cp">Copiar</button></div>'
         : '<span class="mail sinmail">Sin dirección aquí — abre el hilo en Enviados</span>')+
       '<div class="angulo"><span class="et">Por dónde entrar</span><p>'+esc(c.a)+'</p></div>'+
       '<div class="acciones">'+
       '<button class="principal" id="ya">Enviado ✓</button>'+
       '<button id="salta">Hoy no puedo — mañana</button>'+
       '</div></div></div>';
+    const cp=$('cp');
+    if(cp) cp.onclick=async()=>{
+      try{ await navigator.clipboard.writeText(c.m); }
+      catch(_){ const t=document.createElement('textarea'); t.value=c.m;
+        document.body.appendChild(t); t.select();
+        try{document.execCommand('copy');}catch(__){} document.body.removeChild(t); }
+      cp.textContent='Copiada ✓'; cp.classList.add('hecho2');
+      setTimeout(()=>{cp.textContent='Copiar'; cp.classList.remove('hecho2');},2000);
+    };
     $('ya').onclick=()=>{ ok[i]=true; post={}; local(); pinta(); remoto(); window.scrollTo(0,0); };
     $('salta').onclick=()=>{ post[i]=true; local(); pinta(); remoto(); window.scrollTo(0,0); };
   }
