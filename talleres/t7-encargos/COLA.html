@@ -57,6 +57,17 @@ header{padding:22px 0 0}
 .copiar{flex:none;padding:0 14px;font-size:13px;font-weight:600;border-radius:8px;
   border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
 .copiar.hecho2{background:var(--done-soft);border-color:var(--done);color:var(--done)}
+.borrador{margin:16px 0 0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.borrador .cab{background:var(--line-2);padding:10px 14px;font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--grey);font-weight:700}
+.borrador .asunto{padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px}
+.borrador .asunto b{color:var(--grey);font-weight:600;font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px}
+.borrador pre{margin:0;padding:14px;font-family:Newsreader,Georgia,serif;font-size:15px;
+  line-height:1.6;white-space:pre-wrap;word-wrap:break-word;color:var(--ink);
+  background:var(--panel);max-height:260px;overflow-y:auto}
+.aviso{font-size:12px;line-height:1.55;color:var(--grey);padding:10px 14px 12px;
+  background:var(--line-2);border-top:1px solid var(--line);margin:0}
 .angulo{margin:16px 0 0;padding:14px 16px;border-left:3px solid var(--line);
   background:var(--line-2);border-radius:0 8px 8px 0}
 .angulo .et{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
@@ -138,24 +149,34 @@ salió ya de Proton sin apuntarse, márcalo aquí y no lo mandes dos veces.</p>
 <script>
 const C=[
 {q:'Alba Barneda',d:'CANADA · managing partner',m:'alba@canadacanada.com',
- a:'El dolor de los entregables: «los entregables conforman el 95% del trabajo que hace postproducción». Literal suyo, verificado a mano. Sale con el enlace a /studio — no espera a la pieza de versionado.'},
+ a:'El dolor de los entregables: «los entregables conforman el 95% del trabajo que hace postproducción». Literal suyo, verificado a mano. Sale con el enlace a /studio — no espera a la pieza de versionado.',
+ s:'Los entregables, el 95% del trabajo', b:'Hola Alba:\n\nTe leí decir que los entregables conforman el 95% del trabajo que hace postproducción. Llevo quince años en el otro lado de esa frase: he hecho imágenes de moda y lujo, y el volumen de adaptaciones y versiones siempre ha sido la parte que nadie quiere y que se come el calendario.\n\nAhora trabajo con un pipeline propio para resolver esa capa: versionado y adaptaciones a escala, manteniendo el criterio visual de la pieza original. No es una herramienta que os quiera vender: es una forma de trabajar que puedo aplicar a vuestros entregables.\n\nAquí está mi trabajo: [tu enlace a /studio]\n\nSi os encaja, me gustaría enseñároslo con una pieza vuestra.\n\nUn saludo,\nDenno Gamboa\nPhoenix Studio · Madrid'},
 {q:'Louis de Meckenheim',d:'Chopard · seguimiento',m:'',
- a:'Su correo es del 3 de agosto y lleva 37 días sin seguimiento. Dos líneas: sigo interesado, esto es nuevo. Busca el hilo en Enviados.'},
+ a:'Su correo es del 3 de agosto y lleva 37 días sin seguimiento. Dos líneas: sigo interesado, esto es nuevo. Busca el hilo en Enviados.',
+ s:'Retomando', b:'Hola Louis:\n\nTe escribí a principios de agosto sobre [lo que le propusiste — míralo en Enviados].\n\nDesde entonces he montado [lo nuevo: la pieza, /studio, lo que sea]. Te lo dejo por si ahora encaja mejor: [tu enlace a /studio]\n\nSi no es el momento, dímelo y no insisto.\n\nUn saludo,\nDenno Gamboa'},
 {q:'Felix Mondino',d:'Iconoclast · Head of Print · seguimiento',m:'felix@iconoclastimage.tv',
- a:'Enviado el 18 de agosto, el único correo del método nuevo. Veintidós días sin seguimiento.'},
+ a:'Enviado el 18 de agosto, el único correo del método nuevo. Veintidós días sin seguimiento.',
+ s:'Following up', b:'Hi Felix,\n\nI wrote to you on 18 August about [what you proposed — check Sent].\n\nAdding one thing since then: [what\'s new]. My work is here: [your /studio link]\n\nIf print isn\'t where this fits, I\'d rather know than keep writing.\n\nBest,\nDenno Gamboa\nPhoenix Studio · Madrid'},
 {q:'Maria Vives',d:'CANADA · head of photography',m:'maria@canadacanada.com',
- a:'Puerta B: fotografía y moda. Es tu terreno exacto, quince años haciéndolo.'},
+ a:'Puerta B: fotografía y moda. Es tu terreno exacto, quince años haciéndolo.',
+ s:'Moda y fotografía', b:'Hola Maria:\n\nQuince años haciendo imagen de moda y lujo, ahora desde Madrid con estudio propio. Te escribo a ti y no a producción porque lo que hago es exactamente lo tuyo.\n\nTrabajo la capa de entregables: versiones y adaptaciones a escala sin perder el criterio de la pieza original. Alba lo puso en números — el 95% del trabajo de postproducción.\n\nMi trabajo está aquí: [tu enlace a /studio]\n\n¿Te encaja una llamada corta?\n\nUn saludo,\nDenno Gamboa\nPhoenix Studio · Madrid'},
 {q:'Wendy',d:'Cuyana · seguimiento',m:'',
- a:'Del lote de agosto, en silencio. Búscalo en Enviados.'},
+ a:'Del lote de agosto, en silencio. Búscalo en Enviados.',
+ s:'Retomando', b:'Hola Wendy:\n\nTe escribí en agosto sobre [lo que le propusiste — míralo en Enviados].\n\nTe dejo mi trabajo actualizado por si ahora encaja: [tu enlace a /studio]\n\nSi no es el momento, dímelo sin problema.\n\nUn saludo,\nDenno Gamboa'},
 {q:'Callum Harrison',d:'CANADA · special projects',m:'callum@canadacanada.com',
- a:'Puerta C: su punto ciego con la IA. Entra por el problema, no por la herramienta.'},
+ a:'Puerta C: su punto ciego con la IA. Entra por el problema, no por la herramienta.',
+ s:'Vuestro punto ciego con la IA', b:'Hola Callum:\n\nOs escribo por special projects porque lo que traigo no entra en una categoría existente.\n\nLlevo quince años haciendo imagen de moda y lujo, y desde hace dos trabajo con un pipeline generativo propio. No como truco de campaña: como forma de resolver la capa de entregables, que según Alba es el 95% del trabajo de postproducción.\n\nLa mayoría de quien os ofrece esto viene de la tecnología y no sabe de imagen. Yo vengo de la imagen.\n\nAquí está mi trabajo: [tu enlace a /studio]\n\nUn saludo,\nDenno Gamboa\nPhoenix Studio · Madrid'},
 {q:'Calvin Leung',d:'Cult Gaia · seguimiento',m:'',
- a:'Del lote de agosto, en silencio. Búscalo en Enviados.'},
+ a:'Del lote de agosto, en silencio. Búscalo en Enviados.',
+ s:'Retomando', b:'Hola Calvin:\n\nTe escribí en agosto sobre [lo que le propusiste — míralo en Enviados].\n\nTe dejo mi trabajo actualizado por si ahora encaja: [tu enlace a /studio]\n\nSi no es el momento, dímelo sin problema.\n\nUn saludo,\nDenno Gamboa'},
 {q:'Ilona Klaver',d:'Iconoclast',m:'ilona@iconoclastimage.tv',
- a:'Segunda puerta en Iconoclast, distinta persona y distinto ángulo que Felix.'},
-{q:'Víctor Mata',d:'CANADA',m:'victor@canadacanada.com',a:'Tercera pasada en CANADA.'},
+ a:'Segunda puerta en Iconoclast, distinta persona y distinto ángulo que Felix.',
+ s:'Deliverables at scale', b:'Hi Ilona,\n\nFifteen years making images for fashion and luxury houses, now running my own studio in Madrid.\n\nWhat I do is the deliverables layer: versions and adaptations at scale, without losing the original piece\'s eye. It\'s the part that eats the calendar and that nobody wants.\n\nMy work: [your /studio link]\n\nHappy to show it on a piece of yours if that\'s useful.\n\nBest,\nDenno Gamboa\nPhoenix Studio · Madrid'},
+{q:'Víctor Mata',d:'CANADA',m:'victor@canadacanada.com',a:'Tercera pasada en CANADA.',
+ s:'Entregables y versionado', b:'Hola Víctor:\n\nQuince años haciendo imagen de moda y lujo, ahora con estudio propio en Madrid.\n\nTrabajo la capa de entregables: versiones y adaptaciones a escala manteniendo el criterio de la pieza original. Alba lo puso en números — el 95% del trabajo de postproducción.\n\nMi trabajo: [tu enlace a /studio]\n\nUn saludo,\nDenno Gamboa\nPhoenix Studio · Madrid'},
 {q:'Bernard Amsellem',d:'Iconoclast',m:'bernard@iconoclast.tv',
- a:'Ojo: su dominio es iconoclast.tv, distinto del de Felix e Ilona. Compruébalo antes.'}
+ a:'Ojo: su dominio es iconoclast.tv, distinto del de Felix e Ilona. Compruébalo antes.',
+ s:'Deliverables at scale', b:'Hi Bernard,\n\nFifteen years making images for fashion and luxury houses, now running my own studio in Madrid.\n\nWhat I do is the deliverables layer: versions and adaptations at scale, keeping the original piece\'s eye intact.\n\nMy work: [your /studio link]\n\nBest,\nDenno Gamboa\nPhoenix Studio · Madrid'}
 ];
 const K='cola-t7-v1'; const $=id=>document.getElementById(id);
 let ok={}, post={}, ref=null;
@@ -203,10 +224,26 @@ function pinta(){
           '<button class="copiar" id="cp">Copiar</button></div>'
         : '<span class="mail sinmail">Sin dirección aquí — abre el hilo en Enviados</span>')+
       '<div class="angulo"><span class="et">Por dónde entrar</span><p>'+esc(c.a)+'</p></div>'+
+      (c.b ? '<div class="borrador"><div class="cab">El borrador — hazlo tuyo antes de enviar</div>'+
+        '<div class="asunto"><b>Asunto</b>'+esc(c.s)+'</div>'+
+        '<pre>'+esc(c.b)+'</pre>'+
+        '<p class="aviso">Lo que va entre corchetes lo rellenas tú. Cambia lo que no suene a ti: '+
+        'esto es un punto de partida para no empezar en blanco, no un texto para mandar tal cual.</p></div>' : '')+
       '<div class="acciones">'+
+      (c.b ? '<button id="cpm">Copiar el correo entero</button>' : '')+
       '<button class="principal" id="ya">Enviado ✓</button>'+
       '<button id="salta">Hoy no puedo — mañana</button>'+
       '</div></div></div>';
+    const cpm=$('cpm');
+    if(cpm) cpm.onclick=async()=>{
+      const t='Asunto: '+c.s+'\n\n'+c.b;
+      try{ await navigator.clipboard.writeText(t); }
+      catch(_){ const e=document.createElement('textarea'); e.value=t;
+        document.body.appendChild(e); e.select();
+        try{document.execCommand('copy');}catch(__){} document.body.removeChild(e); }
+      cpm.textContent='Copiado ✓';
+      setTimeout(()=>{cpm.textContent='Copiar el correo entero';},2000);
+    };
     const cp=$('cp');
     if(cp) cp.onclick=async()=>{
       try{ await navigator.clipboard.writeText(c.m); }

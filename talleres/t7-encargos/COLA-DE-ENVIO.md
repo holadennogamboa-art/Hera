@@ -4,6 +4,9 @@
 > salieron 7 correos, 0 seguimientos y 0 respuestas, con veinte contactos verificados
 > esperando. El diagnóstico ya estaba escrito el 17 de agosto y se repitió dos veces.
 
+**Versión de móvil, con los borradores dentro:**
+https://claude.ai/code/artifact/a143569b-87be-41cd-8efa-8dbc3c26fa69
+
 ## Por qué existe este archivo
 
 El cuello de botella no es la estrategia, ni los contactos, ni los textos: los tres están
@@ -11,6 +14,15 @@ resueltos. Es **pulsar enviar**. Y pulsar enviar falla porque cada día había q
 a quién, con qué ángulo y desde qué documento.
 
 **Aquí no se decide nada.** Se abre, se manda el primero sin marca, y se marca.
+
+Y desde el 10 de septiembre, **cada tarjeta lleva asunto y cuerpo escritos**. Antes solo
+llevaba el ángulo, que es como no llevar nada: al abrirla seguías teniendo que redactar
+desde cero, que es justo el punto donde se para. Los borradores son un punto de partida
+para no empezar en blanco — lo que va entre corchetes lo rellenas tú, y lo que no suene a
+ti se cambia.
+
+**El correo a CANADA del que habla la auditoría está en tus documentos, no aquí.** Si lo
+encuentras, usa el tuyo: será mejor que el mío.
 
 ---
 
