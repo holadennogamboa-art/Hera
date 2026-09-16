@@ -1,7 +1,7 @@
 # ESTADO — fuente única
 
 > Se regenera cada **viernes en el bloque de Dirección**. Todo lo que no esté aquí, no
-> existe para el sistema. Última actualización: **5 de septiembre de 2026**.
+> existe para el sistema. Última actualización: **16 de septiembre de 2026**.
 
 ## La regla que hace que esto funcione
 
@@ -19,14 +19,14 @@ dejan de hablarse.
 | # | Frente | Estado | h/sem | Siguiente paso concreto |
 |---|--------|--------|-------|-------------------------|
 | [T1](T1-golpe-de-estado.md) | **Golpe de estado** | Novela cerrada, corrigiendo | 4,5 | Párrafo 12 del capítulo 7 |
-| [T2](T2-verde-agua.md) | **Verde agua** | Biblia cerrada, taller montado | 6 | El umbral, paso 1 de 15 |
+| [T2](T2-verde-agua.md) | **Verde agua** | Taller montado, sin abrir | 6 | El umbral, paso 1 de 15 |
 | [T3](T3-hera.md) | **HERA · marca** | Cadencia | 3 | Calendario editorial de la semana |
 | [T4](T4-verder.md) | **Auditor GEO** | Funciona, sin clientes | 3 | Enviar Peñalver |
 | [T5](T5-skin-lab.md) | **HERA Skin Lab** | **1ª conversión completa** | 1,5 | Preguntar a vicky por qué no descargó |
 | [T6](T6-kierck.md) | **Kierck** | Biblia en construcción | 1,5 | Fijar la primera frase de ella |
 | [T7](T7-encargos.md) | **Encargos y outreach** | **Atascado en enviar** | 1,5 | [La cola](t7-encargos/COLA-DE-ENVIO.md), correo nº 1 |
 | [T8](T8-direccion.md) | **Dirección** | — | 1,5 | Revisión del viernes |
-| [T9](T9-envios-revistas.md) | **Envíos a revistas** | Ventana de 26 días | 1,5 | Decidir qué va a Kenyon |
+| [T9](T9-envios-revistas.md) | **Envíos a revistas** | **Kenyon enviado ✔** | 1,5 | Nada hasta marzo. No mirar. |
 | [T10](T10-bus-beasts.md) | **The Bus Beasts** | **EN PAUSA** | 0 | Nada. Cajón. |
 | [La ronda](LA-RONDA.md) | **B4, todos los días** | — | 6 | Reparte T3, T4 y T5 |
 
@@ -36,9 +36,9 @@ dejan de hablarse.
 
 ## Lo urgente, por orden
 
-0. **Abrir [la cola](t7-encargos/COLA-DE-ENVIO.md) y mandar el número 1.** Alba Barneda,
-   CANADA. El correo lleva escrito desde el 31 de agosto. Es el punto donde se atasca
-   todo el sistema comercial.
+0. ~~Mandar el número 1 de la cola.~~ **Hecho el 10 de septiembre: Alba Barneda, CANADA.**
+   Era el correo que llevaba cinco semanas bloqueado. Ahora toca el **nº 2, Chopard**,
+   aplazado desde ese mismo día.
 1. **Enviar Peñalver.** El paquete está hecho. Solo hay que mandarlo.
 2. **Subir el ZIP y mandar Txirimiri.**
 3. **Día 8: seguimiento de SI SI BAGELS** si no han contestado.
@@ -72,9 +72,11 @@ Detalladas en [`fuentes/biblias/REVISION-05-SEP.md`](fuentes/biblias/REVISION-05
 | Pasos del umbral escritos | 0 de 15 |
 | Personas ajenas que han renderizado | 2 confirmadas · 1 conversión completa |
 | Renders totales | 35 · 34 con IA · 0 errores |
-| Correos comerciales fuera | **7 en 37 días · respuestas 0 · seguimientos 0** |
+| Correos comerciales fuera | **8 · respuestas 0 · seguimientos 0** |
+| Cola de envío | **1 de 10 fuera** · el nº 2 aplazado desde el 10-sep |
+| Pasos del umbral escritos | **0 de 15** · la página no se ha abierto |
 | Contactos verificados sin usar | **~20** |
-| Último envío con constancia | 18 de agosto · Iconoclast |
+| Último envío con constancia | **10 de septiembre · Alba Barneda, CANADA** |
 | Negocios auditados | 27 · con contacto verificado |
 | Clientes que pagan | 0 |
 | Hitos de la semana | 1 de 5 |
