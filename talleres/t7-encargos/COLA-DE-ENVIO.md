@@ -26,20 +26,39 @@ encuentras, usa el tuyo: será mejor que el mío.
 
 ---
 
+## Estado al 20 de septiembre — **5 de 10 fuera**
+
+Enviados el 10 y el 16: **Alba Barneda, Maria Vives y Callum Harrison** (las tres puertas
+de CANADA) y **Felix Mondino e Ilona Klaver** (las dos de Iconoclast). El de Felix es el
+**primer seguimiento** que sale del sistema: en los 37 días anteriores no hubo ninguno.
+
+### El patrón, que es el hallazgo
+
+Salieron **los cinco que tenían el correo entero escrito.**
+Se cayeron **los cinco que obligaban a ir a buscar algo**: los tres seguimientos de agosto
+—Chopard, Cuyana, Cult Gaia— piden abrir la carpeta de Enviados y releer qué se propuso;
+Bernard Amsellem pedía verificar un dominio distinto.
+
+No es falta de constancia: es que una tarea de búsqueda disfrazada de envío **no es un
+envío de treinta segundos**, y el bloque de quince minutos no la absorbe. Los cinco que
+quedan no se arreglan con más voluntad: se arreglan **preparándolos en el Mac**, con
+Enviados abierto, hasta que no haya nada que buscar. Entonces se mandan solos, como los
+otros cinco.
+
 ## La cola
 
 Uno al día. En orden. No se salta, no se elige, no se «prepara mejor».
 
 | # | A quién | Correo | El ángulo | Hecho |
 |---|---|---|---|---|
-| 1 | **Alba Barneda** · CANADA, managing partner | `alba@canadacanada.com` | El dolor de los entregables: *«los entregables conforman el 95% del trabajo que hace postproducción»*, literal suyo. **Redactado desde agosto.** | ☐ |
+| 1 | ✅ ~~**Alba Barneda**~~ · CANADA, managing partner | `alba@canadacanada.com` | El dolor de los entregables: *«los entregables conforman el 95% del trabajo que hace postproducción»*, literal suyo. **Redactado desde agosto.** | ☐ |
 | 2 | **Louis de Meckenheim** · Chopard | *(el del 3-ago)* | Seguimiento. 37 días de silencio. Dos líneas: sigo interesado, esto es nuevo. | ☐ |
-| 3 | **Felix Mondino** · Iconoclast, Head of Print | `felix@iconoclastimage.tv` | Seguimiento del 18-ago. Es el único envío del método nuevo. | ☐ |
-| 4 | **Maria Vives** · CANADA, head of photography | `maria@canadacanada.com` | Puerta B: fotografía y moda. Tu terreno. | ☐ |
+| 3 | ✅ ~~**Felix Mondino**~~ · Iconoclast, Head of Print | `felix@iconoclastimage.tv` | Seguimiento del 18-ago. Es el único envío del método nuevo. | ☐ |
+| 4 | ✅ ~~**Maria Vives**~~ · CANADA, head of photography | `maria@canadacanada.com` | Puerta B: fotografía y moda. Tu terreno. | ☐ |
 | 5 | **Wendy** · Cuyana | *(el del lote de agosto)* | Seguimiento. | ☐ |
-| 6 | **Callum Harrison** · CANADA, special projects | `callum@canadacanada.com` | Puerta C: su punto ciego con la IA. | ☐ |
+| 6 | ✅ ~~**Callum Harrison**~~ · CANADA, special projects | `callum@canadacanada.com` | Puerta C: su punto ciego con la IA. | ☐ |
 | 7 | **Calvin Leung** · Cult Gaia | *(el del lote de agosto)* | Seguimiento. | ☐ |
-| 8 | **Ilona Klaver** · Iconoclast | `ilona@iconoclastimage.tv` | Segunda puerta en Iconoclast. | ☐ |
+| 8 | ✅ ~~**Ilona Klaver**~~ · Iconoclast | `ilona@iconoclastimage.tv` | Segunda puerta en Iconoclast. | ☐ |
 | 9 | **Víctor Mata** · CANADA | `victor@canadacanada.com` | — | ☐ |
 | 10 | **Bernard Amsellem** · Iconoclast | `bernard@iconoclast.tv` | Ojo: dominio distinto de Felix e Ilona. | ☐ |
 

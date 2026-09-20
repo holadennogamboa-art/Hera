@@ -1,7 +1,7 @@
 # ESTADO — fuente única
 
 > Se regenera cada **viernes en el bloque de Dirección**. Todo lo que no esté aquí, no
-> existe para el sistema. Última actualización: **16 de septiembre de 2026**.
+> existe para el sistema. Última actualización: **20 de septiembre de 2026**.
 
 ## La regla que hace que esto funcione
 
@@ -36,9 +36,11 @@ dejan de hablarse.
 
 ## Lo urgente, por orden
 
-0. ~~Mandar el número 1 de la cola.~~ **Hecho el 10 de septiembre: Alba Barneda, CANADA.**
-   Era el correo que llevaba cinco semanas bloqueado. Ahora toca el **nº 2, Chopard**,
-   aplazado desde ese mismo día.
+0. **Rotar la clave de Gemini.** Lleva expuesta desde agosto: siete semanas. Diez minutos
+   y se acaba. Es lo único de esta lista que puede costarte dinero mientras duermes.
+0b. **Preparar los cinco que quedan de la cola**, en el Mac y con Enviados abierto. No se
+   trata de mandarlos: se trata de dejarlos escritos enteros, que es lo que hizo que los
+   otros cinco salieran.
 1. **Enviar Peñalver.** El paquete está hecho. Solo hay que mandarlo.
 2. **Subir el ZIP y mandar Txirimiri.**
 3. **Día 8: seguimiento de SI SI BAGELS** si no han contestado.
@@ -72,11 +74,12 @@ Detalladas en [`fuentes/biblias/REVISION-05-SEP.md`](fuentes/biblias/REVISION-05
 | Pasos del umbral escritos | 0 de 15 |
 | Personas ajenas que han renderizado | 2 confirmadas · 1 conversión completa |
 | Renders totales | 35 · 34 con IA · 0 errores |
-| Correos comerciales fuera | **8 · respuestas 0 · seguimientos 0** |
-| Cola de envío | **1 de 10 fuera** · el nº 2 aplazado desde el 10-sep |
+| Correos comerciales fuera | **12 · respuestas 0** |
+| Seguimientos enviados | **1** (Felix Mondino, 16-sep) — antes eran cero |
+| Cola de envío | **5 de 10 fuera** · los 5 que quedan exigen buscar en Enviados |
 | Pasos del umbral escritos | **0 de 15** · la página no se ha abierto |
 | Contactos verificados sin usar | **~20** |
-| Último envío con constancia | **10 de septiembre · Alba Barneda, CANADA** |
+| Último envío con constancia | **16 de septiembre · Ilona Klaver, Iconoclast** |
 | Negocios auditados | 27 · con contacto verificado |
 | Clientes que pagan | 0 |
 | Hitos de la semana | 1 de 5 |
