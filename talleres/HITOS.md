@@ -1,45 +1,37 @@
-# HITOS — cosas que se pueden tocar pronto
+# HITOS — semana del 21 al 25 de septiembre
 
-> Pedido el 3-sep: objetivos tangibles y cercanos, para que salir bien alimente el ánimo
-> en vez de depender de él. La regla es simple: **un hito es algo que depende solo de ti,
-> se ve terminado, y cabe en una semana o menos.**
+> Pequeños, alcanzables y con final visible. Se marcan aquí, no en la cabeza.
 
-Nada de «terminar la novela» ni «conseguir clientes». Eso son destinos, no hitos.
+## El lunes 21, bloque a bloque
 
-## Esta semana · los cinco que ya casi están
+Rotación del lunes: **T1 · T1 · T3 · la ronda.**
 
-| # | Hito | Cuánto | Depende de |
-|---|---|---|---|
-| 1 | ~~**Web de la novela retirada**~~ · **hecho el 5-sep**, las dos URLs | ✔ | — |
-| 2 | **Peñalver enviado** — el paquete ya está listo | 15 min | solo de ti |
-| 3 | **Txirimiri enviado** tras subir el ZIP | 30 min | solo de ti |
-| 4 | **Clave de Gemini rotada** — lleva expuesta desde agosto | 10 min | solo de ti |
-| 5 | **Registro de PI confirmado** — mirar si salió del trámite | 5 min | de la administración |
+| Bloque | Qué | Por qué este y no otro |
+|---|---|---|
+| **B1** · T1 | **Párrafo 12 del capítulo 7.** Uno. | Llevas 11 de 132 y el 12 lleva esperando desde el 5 de septiembre. Empezar por lo que ya estaba empezado cuesta menos que abrir un frente nuevo. |
+| **B2** · T1 | Decidir el **párrafo 11**, el de la paliza buscada: se queda, o baja al 9 o al 11. | Es una decisión tuya que lleva quince días abierta y bloquea el capítulo. |
+| **B3** · T3 | **Rotar la clave de Gemini** (10 min) · luego calendario editorial de la semana. | La clave lleva expuesta desde agosto. Siete semanas. Es lo único de la lista que puede costarte dinero mientras duermes. |
+| **B4** · ronda | **Preparar los cinco que quedan de la cola**, con Enviados abierto. No mandarlos: escribirlos enteros. | Es lo que hizo que salieran los otros cinco. |
 
-Cinco cosas, hora y cuarto en total, y cuatro dependen solo de ti. **Una hecha, cuatro van.** Marca las cinco antes
-del viernes y la semana cuenta como buena, pase lo que pase con lo demás.
+## Los cinco hitos de la semana
 
-## El mes · hitos que se ven desde fuera
+- [ ] **La clave de Gemini rotada.** Lunes B3. Diez minutos.
+- [ ] **Los cinco correos de la cola, escritos enteros.** Lunes B4. Cuando no haya nada que
+      buscar, se mandan solos.
+- [ ] **Peñalver y Txirimiri enviados.** Llevan hechos desde principios de mes.
+- [ ] **El umbral abierto.** Un paso de quince. Uno. Lleva dos intentos en cero.
+- [ ] **Las cinco correcciones de las biblias.** Son decisiones tuyas, no trabajo: se
+      dictan en el hilo y yo las escribo.
 
-- **Un cliente que responde.** No que pague: que conteste. Con 4 correos fuera y 11
-  contactos verificados sin tocar, es cuestión de volumen.
-- **Capítulo 7 cerrado.** Vas por 11 de 19 párrafos. Tres por sesión son dos semanas.
-- **Una escena de Verde agua escrita entera.** Una. La intro.
-- **Vídeo 1 publicado.** Con la frase de Mikel de titular.
-- **Enviado a Kenyon**, marcando el folio de Caretaking. Gratis.
+## Lo que NO toca esta semana
 
-## Cómo se usan
+- **Kenyon.** Enviado el 8. Respuesta hasta marzo. No se mira.
+- **Los cinco correos preparados** no se mandan el mismo lunes: se mandan uno al día en la
+  ronda, del martes al sábado.
+- **The Bus Beasts.** Sigue en el cajón.
 
-1. **Un hito por bloque, máximo.** Si terminas antes, se para. No se encadenan.
-2. **Se marcan el mismo día.** El registro es la recompensa; sin marcarlo, el trabajo
-   desaparece y solo queda la sensación de que falta todo.
-3. **Los que dependen de otros no se cuentan como propios.** Que SI SI BAGELS conteste no
-   es un hito tuyo. Que le escribas, sí.
-4. **Cuando uno se cumpla, no se sustituye por otro más grande.** Se tacha y se descansa
-   un rato. Esa pausa es parte del método, no una pérdida de tiempo.
+## Lo que se abre solo el 30 de septiembre
 
-## Por qué así
-
-Los proyectos grandes no dan señal durante meses. Sin señal, el ánimo se sostiene solo con
-voluntad, y la voluntad se agota. Los hitos pequeños generan la prueba de que el sistema
-funciona — y esa prueba es lo que hace que mañana sea más fácil sentarse.
+Los cinco correos del 10 y el 16 cumplen catorce días de silencio a finales de mes. Tu
+propia regla dice que un silencio de catorce días pide seguimiento, no un contacto nuevo.
+**Ese día se prepara la segunda ronda, no antes.**
