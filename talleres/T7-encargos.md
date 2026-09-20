@@ -33,3 +33,19 @@ literal — o dejarla fuera. **Decidir si la campaña es una pieza o dos, y segu
 - [ ] Decidida la campaña: una pieza o dos.
 - [ ] Cada encargo con su estado escrito y su próximo paso concreto.
 - [ ] Ningún encargo con deadline pasado sin avisar al cliente.
+
+
+## El caso Bulgari — la referencia
+
+[`fuentes/CASO-BULGARI.md`](fuentes/CASO-BULGARI.md) reconstruye los veintitrés días del
+pitch de Bulgari, del primer correo a Laura al rechazo del 9 de julio.
+
+**Lo que hay que llevarse:** te dijeron el motivo del rechazo **el 30 de junio**, nueve
+días antes —*«we avoid excessive darkness that create mystical or dramatic visuals»*— y el
+9 de julio te rechazaron con esas mismas palabras. Corregiste los cinco puntos verificables
+y fallaste el único que había que interpretar.
+
+**El control nuevo, obligatorio antes de cada entrega:** la **prueba del adjetivo**.
+Subrayar los adjetivos del cliente, escribirlos donde se trabaja, y antes de mandar
+preguntarse si un desconocido describiría la pieza con el adjetivo del cliente o con el
+tuyo. Si es el tuyo, está mal aunque sea mejor.

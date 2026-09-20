@@ -29,6 +29,27 @@
 5. **El cierre te quita de encima el peso del seguimiento.** Das salida, y por eso no
    suena a insistencia.
 
+## Del caso Bulgari — lo que hay que decir cuando ya hay conversación
+
+Ver [`CASO-BULGARI.md`](CASO-BULGARI.md) entero. Estas tres frases son suyas y funcionaron:
+
+> *«I'll keep it focused and show you concrete work rather than slides.»*
+> — convierte una llamada de cortesía en una prueba.
+
+> *«Human-directed by design — AI accelerates, but the eye, the taste and every final
+> decision are human.»*
+> — es lo que te metió en la conversación de compliance de LVMH en vez de dejarte fuera.
+
+> **El HERA Passport**: entrega certificada, confidencial y con trazabilidad humana.
+> — lo inventaste bajo presión el 25 de junio y es un diferenciador real. Tiene que estar
+> en `/studio`, no solo en tu cabeza.
+
+## Un solo nombre
+
+En el hilo de Bulgari firmaste de tres maneras distintas: *Creative Technologist & Digital
+Art Director · HERA Studio*, *HERA — Virtual Production Maison* y *HERA · estudio de
+producción visual*. **Elige una y no la cambies a mitad de una conversación.**
+
 ## Lo que no se hace
 
 - Firmar como «Phoenix Studio». El estudio es **HERA**.
