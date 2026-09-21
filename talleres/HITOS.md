@@ -8,7 +8,7 @@ Rotación del lunes: **T1 · T1 · T3 · la ronda.**
 
 | Bloque | Qué | Por qué este y no otro |
 |---|---|---|
-| **B1** · T1 | **Párrafo 12 del capítulo 7.** Uno. | Llevas 11 de 132 y el 12 lleva esperando desde el 5 de septiembre. Empezar por lo que ya estaba empezado cuesta menos que abrir un frente nuevo. |
+| **B1** · T1 | **Párrafo 13 del capítulo 7.** Uno. | Corrección del 21-sep: el 12 ya estaba escrito el 3 de septiembre y marcado «se queda». El 13 es el primero que no existe. Arranca donde acaba el 12: Río sale por la puerta. |
 | **B2** · T1 | Decidir el **párrafo 11**, el de la paliza buscada: se queda, o baja al 9 o al 11. | Es una decisión tuya que lleva quince días abierta y bloquea el capítulo. |
 | **B3** · T3 | **Rotar la clave de Gemini** (10 min) · luego calendario editorial de la semana. | La clave lleva expuesta desde agosto. Siete semanas. Es lo único de la lista que puede costarte dinero mientras duermes. |
 | **B4** · ronda | **Preparar los cinco que quedan de la cola**, con Enviados abierto. No mandarlos: escribirlos enteros. | Es lo que hizo que salieran los otros cinco. |
