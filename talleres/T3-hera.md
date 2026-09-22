@@ -65,3 +65,23 @@ funcionando y documentadas.
 - [ ] Unificar las páginas de entrada de `app/`.
 - [ ] Documentar `lab/` y `flow/`.
 - [ ]
+
+
+## El Passport — rediseño del 22 de septiembre
+
+[`t3-hera/PASSPORT-rediseno.html`](t3-hera/PASSPORT-rediseno.html) ·
+vista: https://claude.ai/artifact/BzfXjzjTnozGruqjvmPxhi
+
+La tesis pasa a *«We don't hide the machine. We sign it.»*, alineada con el artículo 50 del
+AI Act (en vigor desde el 2 de agosto). La zona legible por máquina del pasaporte es a la
+vez el símbolo y el marcado que pide la ley.
+
+**Geo-Lock = fidelidad del producto.** Forma, proporción, grabado y costura bloqueados a la
+pieza real, comprobados versión a versión. Se presenta como recuento (*24/24*), no como
+porcentaje: un recuento se puede enseñar, un 99,9 % hay que justificarlo.
+
+**Se retiraron:** *anti-AI protection*, *certified intellectual property titles* y el
+*99.9 %* sin método.
+
+**No se publica hasta que sea verdad:** Content Credentials probadas en una pieza real y el
+método de Geo-Lock escrito. El código de `/studio` no está en este repositorio.
