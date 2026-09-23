@@ -11,8 +11,10 @@
 | **El hilo** | https://claude.ai/code/session_01HSYkqQbxm73vex2RPsJzdT |
 | **El umbral de Verde agua** | https://claude.ai/code/artifact/eafb8ad7-080a-4d59-af27-029d498510f3 |
 
-**«Una cosa» es por donde se entra.** Enseña un solo correo, el de hoy, con a quién y por
-dónde entrar. Se marca «Enviado» y desaparece hasta mañana. El panel viejo
+**«Una cosa» es por donde se entra.** Desde el 23 de septiembre enseña **el bloque que toca
+ahora**, uno solo, con qué hacer y cómo saber que está hecho. Al marcarlo pasa al siguiente.
+En la ronda enseña el correo de la cola. **El plan lo carga Claude desde el hilo**: cuando
+cambia el taller, la página cambia sola, sin tocar nada. El panel viejo
 (`PANEL-UNA-COSA.html`) está desfasado —marca «envíos» como urgente y eso ya salió— y era
 para el escritorio: estos diez días no lo uses.
 
