@@ -124,8 +124,28 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--faint);font
 ::view-transition-old(ahora),::view-transition-new(ahora){animation-duration:.28s}
 @media (max-width:560px){.ahora{padding:22px 18px}.bq{grid-template-columns:40px 1fr}.bq .t{grid-column:2}.bq .sello{grid-column:2;width:44px;height:44px}}
 @media (prefers-reduced-motion:reduce){*,::view-transition-group(*){animation:none!important;transition:none!important}}
+
+/* ---- el oro liquido: shader de fondo que refleja tu estado ---- */
+#oro{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block}
+body.gl .grain{opacity:0}
+body.gl .ahora{background:linear-gradient(160deg,oklch(26% 0.045 275 / .48),oklch(19% 0.03 275 / .34));
+ backdrop-filter:blur(22px) saturate(1.25);-webkit-backdrop-filter:blur(22px) saturate(1.25);
+ border-color:oklch(78% 0.045 80 / .22)}
+body.gl .rescate,body.gl .logro,body.gl .bq,body.gl .pr{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+body.gl .bq.on{background:oklch(24% 0.012 85 / .8)}
+body.gl .logros,body.gl .bloques{background:oklch(30% 0.008 85 / .5)}
+body.gl header{border-color:oklch(78% 0.045 80 / .15)}
+/* titular editorial: la palabra clave, enorme y en serif */
+.ahora h1{font-size:clamp(32px,5vw,62px);line-height:1.02;letter-spacing:-.025em;max-width:20ch}
+.ahora h1 b{font-size:1.12em;line-height:.9}
+/* brillo que sigue al puntero sobre la tarjeta, como vidrio */
+.ahora::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
+ background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),oklch(90% 0.05 85 / .10),transparent 60%)}
+.ahora:hover::after{opacity:1}
+@media (hover:none){.ahora::after{display:none}}
 </style>
 
+<canvas id="oro" aria-hidden="true"></canvas>
 <div class="grain" aria-hidden="true"></div>
 <div class="wrap">
 <header><div class="marca">HERA<span>UNA COSA A LA VEZ</span></div><div class="fecha" id="fecha"></div></header>
@@ -189,6 +209,56 @@ const C=[
  s:'Versioning without rebuilding the set', b:'Hi Bernard,\n\nI come from this side of the craft: image retoucher at Carolina Herrera, Product Manager at Zara Woman, colour at Bymatallana (New York), and published editorials under my own credit.\n\nI now run HERA, a visual production studio in Madrid. I take a piece that\'s already been shot and turn it into every version you need — formats, markets, durations — without rebuilding the set. The skin and fabric retouching is signed by me, not spat out by a machine.\n\nIf it\'s not the moment, tell me and I won\'t insist.\n\nDenno Gamboa\nHERA · visual production studio · Madrid\nhera-vercel.vercel.app/studio'}
 ];
 const $=id=>document.getElementById(id);
+/* ---------- oro liquido ---------- */
+const ORO=(()=>{
+  const cv=document.getElementById('oro'); const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let gl=null; try{gl=cv.getContext('webgl',{antialias:false,alpha:false,powerPreference:'low-power'});}catch(_){}
+  if(!gl){cv.remove();return {energia(){},ondear(){}};}
+  document.body.classList.add('gl');
+  const vs='attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+  const fs=`precision highp float;uniform vec2 r;uniform float t,e;uniform vec3 rp;
+  float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+  float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
+  void main(){vec2 uv=gl_FragCoord.xy/r;float k=r.x/r.y;vec2 p=vec2(uv.x*k,uv.y);
+   float rt=t-rp.z; if(rt>0.&&rt<2.4){vec2 c=vec2(rp.x*k,rp.y);float d=distance(p,c);
+    float w=sin(d*30.-rt*10.)*exp(-d*2.)*exp(-rt*1.5)*.07;p+=normalize(p-c+1e-4)*w;}
+   float sp=.018+.05*e;
+   vec2 q=vec2(fbm(p*1.5+t*sp),fbm(p*1.5-t*sp+3.1));
+   float f=fbm(p*1.25+q*1.9+vec2(t*sp*.6,-t*sp*.4));
+   vec3 negro=vec3(.047,.047,.043),noche=vec3(.075,.08,.15),oro=vec3(.80,.72,.58);
+   vec3 col=mix(negro,noche,smoothstep(.3,.8,q.x));
+   float g=smoothstep(.44,.9,f)*(.30+.6*e);
+   col=mix(col,oro,g);
+   col+=oro*pow(max(0.,1.-length(uv-vec2(.5,1.05))),3.)*.10*e;
+   col*=1.-.45*length(uv-vec2(.5,.45));
+   col+=(h(gl_FragCoord.xy+fract(t)*91.)-.5)*.04;
+   gl_FragColor=vec4(col,1.);}`;
+  function sh(tp,src){const o=gl.createShader(tp);gl.shaderSource(o,src);gl.compileShader(o);return o;}
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){cv.remove();document.body.classList.remove('gl');return {energia(){},ondear(){}};}
+  gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const la=gl.getAttribLocation(pr,'a');gl.enableVertexAttribArray(la);gl.vertexAttribPointer(la,2,gl.FLOAT,false,0,0);
+  const U={r:gl.getUniformLocation(pr,'r'),t:gl.getUniformLocation(pr,'t'),e:gl.getUniformLocation(pr,'e'),rp:gl.getUniformLocation(pr,'rp')};
+  let E=.15,Eobj=.15,rip=[.5,.5,-99],t0=performance.now(),raf=0;
+  function size(){const d=Math.min(devicePixelRatio||1,1.5)*.6;cv.width=Math.round(innerWidth*d);cv.height=Math.round(innerHeight*d);gl.viewport(0,0,cv.width,cv.height);}
+  function frame(){const t=(performance.now()-t0)/1000;E+=(Eobj-E)*.03;
+    gl.uniform2f(U.r,cv.width,cv.height);gl.uniform1f(U.t,quieto?7:t);gl.uniform1f(U.e,E);gl.uniform3f(U.rp,rip[0],rip[1],rip[2]);
+    gl.drawArrays(gl.TRIANGLES,0,3);}
+  function loop(){frame();raf=requestAnimationFrame(loop);}
+  size();addEventListener('resize',()=>{size();if(quieto)frame();});
+  if(quieto){frame();}else{loop();document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(raf);if(!document.hidden)loop();});}
+  return {
+    energia(v){Eobj=v;if(quieto){E=v;frame();}},
+    ondear(el){if(quieto||!el)return;const r=el.getBoundingClientRect();
+      rip=[(r.left+r.width/2)/innerWidth,1-(r.top+r.height/2)/innerHeight,(performance.now()-t0)/1000];}
+  };
+})();
+/* brillo de vidrio que sigue al puntero */
+document.addEventListener('pointermove',ev=>{const a=document.getElementById('ahora');if(!a)return;const r=a.getBoundingClientRect();
+  a.style.setProperty('--mx',(ev.clientX-r.left)+'px');a.style.setProperty('--my',(ev.clientY-r.top)+'px');});
+
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const b2=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
 const hoy=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
@@ -222,7 +292,7 @@ function pinta(){
     $('ey').textContent='Día cumplido';$('eyn').textContent=B.length+' de '+B.length;
     $('titulo').textContent='Los '+B.length+' bloques de hoy están hechos.';
     $('porque').textContent='Cierra. No abras nada más. Mañana ya está cargado y no tienes que decidir nada.';
-    $('meta').innerHTML='';$('acc').innerHTML='';$('reloj').classList.remove('on');$('empuje').classList.remove('on');
+    $('meta').innerHTML='';$('acc').innerHTML='';$('reloj').classList.remove('on');$('empuje').classList.remove('on');ORO.energia(1);
   }else{
     const x=B[i];
     $('ey').textContent='Ahora mismo · '+x.b;$('eyn').textContent=(i+1)+' de '+B.length;
@@ -232,12 +302,12 @@ function pinta(){
     $('meta').innerHTML='<span><b>Proyecto</b> · '+esc(x.f)+'</span><span><b>Dura</b> · '+esc(x.dur||'90 min')+'</span>'+(x.u?'<span><b>Empieza en</b> · <a class="ir" href="'+esc(x.u)+'" target="_blank" rel="noopener">'+esc(x.ul||'abrir')+'</a></span>':'');
     $('minima').innerHTML=b2(x.min||'Abre lo que toca y lee la primera línea. Nada más.');
     if(x.cola) pintaCorreo();
-    const empezado=P.s[i];
+    const empezado=P.s[i];ORO.energia(empezado?.55:.15);
     $('acc').innerHTML=(empezado?'':'<button class="lima" id="bE">Empezar ahora</button>')+
       (x.cola?'':'<button class="'+(empezado?'lima':'')+'" id="bH">Hecho · siguiente</button>')+
       '<button class="small" id="bS">Hoy no puedo con esto</button>';
-    if($('bE'))$('bE').onclick=()=>{P.s[i]=Date.now();guarda();conTransicion(pinta);};
-    if($('bH'))$('bH').onclick=()=>{P.h[i]=true;guarda();conTransicion(pinta);scrollTo({top:0});};
+    if($('bE'))$('bE').onclick=()=>{ORO.ondear($('bE'));P.s[i]=Date.now();guarda();conTransicion(pinta);};
+    if($('bH'))$('bH').onclick=()=>{ORO.ondear($('bH'));P.h[i]=true;guarda();conTransicion(pinta);scrollTo({top:0});};
     $('bS').onclick=()=>{P.h[i]='saltado';guarda();conTransicion(pinta);scrollTo({top:0});};
     reloj();
   }
@@ -276,7 +346,7 @@ function pintaCorreo(){
     '<button class="lima" id="cE">Enviado ✓</button><button class="small" id="cA">Este no, el siguiente</button></div></div>';
   if($('cD'))$('cD').onclick=()=>copiar(c.m,$('cD'),'Copiar');
   if($('cM'))$('cM').onclick=()=>copiar('Asunto: '+c.s+'\n\n'+c.b,$('cM'),'Copiar el correo entero');
-  $('cE').onclick=()=>{ok[i]=true;const B=PLAN[hoy()]||[];const P=D();for(let k=0;k<B.length;k++)if(B[k].cola&&!P.h[k]){P.h[k]=true;break;}guarda();pinta();scrollTo({top:0});};
+  $('cE').onclick=()=>{ORO.ondear($('cE'));ok[i]=true;const B=PLAN[hoy()]||[];const P=D();for(let k=0;k<B.length;k++)if(B[k].cola&&!P.h[k]){P.h[k]=true;break;}guarda();pinta();scrollTo({top:0});};
   $('cA').onclick=()=>{post[i]=true;guarda();pinta();};
 }
 let tick=null;
