@@ -1,109 +1,134 @@
 <title>Una cosa a la vez</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Karla:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,500;100,700;125,900&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
 <style>
-/* Un solo mundo, a proposito: el panel oscuro que Denno ya usa. */
+/* HERA desde dentro: el mismo mundo que el Passport y /studio. Un solo tema, a proposito. */
 :root{
- --bg:#11140F; --surface:#191D16; --surface2:#20251C; --line:#2C3327;
- --ink:#E8EDE2; --soft:#8B9481; --faint:#5D6656;
- --lime:#C8F751; --lime-dim:#8FAF3A; --amber:#E0A340; --rust:#C4623F; --slate:#6E7A66;
- --display:"Archivo",system-ui,sans-serif; --body:"Karla",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+ --bg:oklch(17% 0.004 90); --surface:oklch(20.5% 0.006 90); --surface2:oklch(23.5% 0.008 85);
+ --line:oklch(30% 0.008 85); --ink:oklch(93% 0.012 85); --soft:oklch(70% 0.014 80); --faint:oklch(52% 0.012 80);
+ --gold:oklch(78% 0.045 80); --gold-dim:oklch(60% 0.04 78); --gold-ink:oklch(20% 0.02 80);
+ --card:oklch(22% 0.035 275); --card2:oklch(26% 0.045 275); --card-line:oklch(36% 0.04 275);
+ --amber:oklch(76% 0.13 70); --paper:oklch(92% 0.015 85);
+ --display:"Archivo",system-ui,sans-serif; --serif:"Instrument Serif",Georgia,serif;
+ --body:"DM Sans",system-ui,sans-serif; --mono:"Space Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box}
-html,body{background:var(--bg);color:var(--ink)}
+html,body{background:var(--bg);color:var(--ink);overflow-x:clip}
 body{margin:0;font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1100px;margin:0 auto;padding:26px 18px 90px}
-header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:22px}
-.marca{font-family:var(--display);font-weight:900;font-size:19px}
-.marca span{color:var(--lime)}
-.fecha{font-family:var(--mono);font-size:12.5px;color:var(--soft)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.08;mix-blend-mode:screen;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:26px 18px 90px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.marca{font-family:var(--display);font-stretch:125%;font-weight:900;font-size:20px;letter-spacing:.02em}
+.marca span{font-family:var(--mono);font-stretch:100%;font-weight:400;font-size:11px;letter-spacing:.28em;color:var(--gold);margin-left:12px;vertical-align:3px}
+.fecha{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
 
-.ahora{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--lime);border-radius:3px;padding:28px 28px 24px;margin-bottom:12px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin:0 0 12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.eyebrow span:last-child{color:var(--faint)}
-.ahora h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,40px);line-height:1.12;margin:0 0 14px;text-wrap:balance;max-width:24ch}
-.porque{color:var(--soft);margin:0 0 18px;max-width:64ch;font-size:15.5px}
-.hecho-si{margin:0 0 20px;padding:12px 14px;border-left:3px solid var(--lime-dim);background:var(--surface2);font-size:14.5px;color:var(--ink);max-width:64ch}
-.hecho-si b{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime-dim);display:block;margin-bottom:3px;font-weight:400}
-.meta{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px;color:var(--faint);margin:0 0 20px;padding-top:14px;border-top:1px solid var(--line)}
+/* la pagina de datos del dia: tarjeta de pasaporte */
+.ahora{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 15% 0%,var(--card2),var(--card) 62%);
+ border:1px solid var(--card-line);border-radius:3px;padding:30px 30px 26px;margin-bottom:12px;view-transition-name:ahora;
+ box-shadow:0 40px 90px -50px rgba(0,0,0,.9)}
+.ahora::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;
+ background:repeating-radial-gradient(circle at 88% 20%,transparent 0 11px,oklch(78% 0.045 80 / .08) 11px 12px),
+ repeating-radial-gradient(circle at 8% 100%,transparent 0 15px,oklch(75% 0.05 275 / .06) 15px 16px)}
+.ahora > *{position:relative}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.eyebrow span:last-child{color:var(--soft)}
+.ahora h1{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:clamp(27px,3.7vw,42px);line-height:1.08;letter-spacing:-.015em;margin:0 0 16px;text-wrap:balance;max-width:24ch}
+.ahora h1 b{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--gold);letter-spacing:0}
+.porque{color:var(--soft);margin:0 0 18px;max-width:64ch;font-size:15.5px;text-wrap:pretty}
+.porque b{color:var(--ink);font-weight:500}
+.hecho-si{margin:0 0 20px;padding:12px 14px;border-left:2px solid var(--gold);background:oklch(100% 0 0 / .03);font-size:14.5px;max-width:64ch}
+.hecho-si b{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;font-weight:400}
+.meta{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--faint);margin:0 0 20px;padding-top:14px;border-top:1px solid var(--card-line)}
 .meta b{color:var(--soft);font-weight:400}
-a.ir{color:var(--lime);font-family:var(--mono);font-size:12.5px}
+a.ir{color:var(--gold);font-family:var(--mono);font-size:11.5px}
 .acciones{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-button{font-family:var(--body);font-size:15px;font-weight:700;cursor:pointer;border-radius:2px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:13px 20px}
-button:hover{border-color:var(--soft)}
-button:focus-visible,a:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
-button.lima{background:var(--lime);color:#0F1409;border-color:var(--lime)}
-button.small{font-size:13.5px;padding:9px 14px;font-weight:500}
+button{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;border-radius:1px;border:1px solid var(--card-line);background:transparent;color:var(--ink);padding:15px 20px}
+button:hover{border-color:var(--gold)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+button.lima{background:var(--gold);color:var(--gold-ink);border-color:var(--gold);font-weight:700}
+button.lima:hover{background:var(--paper);border-color:var(--paper)}
+button.small{font-size:11px;padding:11px 14px}
 
-/* el reloj: cuenta hacia arriba, nunca hacia abajo */
-.reloj{display:none;align-items:center;gap:12px;margin:0 0 18px;padding:12px 14px;background:var(--surface2);border:1px solid var(--lime-dim);border-radius:2px;font-family:var(--mono);font-size:13px;color:var(--ink)}
-.reloj.on{display:flex}
-.reloj .t{font-size:22px;font-weight:700;color:var(--lime);font-variant-numeric:tabular-nums}
-.reloj .m{color:var(--soft)}
-.reloj.cumplido{border-color:var(--lime)}
-.empuje{display:none;margin:0 0 16px;font-size:14.5px;color:var(--amber);border-left:3px solid var(--amber);padding:8px 12px;background:rgba(224,163,64,.06)}
-.empuje.on{display:block}
+.reloj{display:none;align-items:baseline;gap:14px;margin:0 0 18px;padding:14px 16px;border:1px solid var(--gold-dim);background:oklch(0% 0 0 / .18);font-family:var(--mono);font-size:12px;color:var(--soft);letter-spacing:.06em}
+.reloj.on{display:flex;flex-wrap:wrap}
+.reloj .t{font-size:28px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;letter-spacing:0}
+.reloj.cumplido{border-color:var(--gold);background:oklch(78% 0.045 80 / .07)}
+.reloj .wl{margin-left:auto;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.empuje{display:none;margin:0 0 16px;font-size:14.5px;color:var(--amber);border-left:2px solid var(--amber);padding:8px 12px;background:oklch(76% 0.13 70 / .06)}
+.empuje.on{display:block} .empuje b{color:var(--ink)}
 
-.rescate{background:var(--surface2);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:2px;padding:16px 20px;margin-bottom:30px}
-.rescate summary{cursor:pointer;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);list-style:none}
+.rescate{border:1px solid var(--line);border-left:2px solid var(--amber);border-radius:1px;padding:15px 20px;margin-bottom:34px;background:var(--surface)}
+.rescate summary{cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);list-style:none}
 .rescate summary::-webkit-details-marker{display:none}
 .rescate summary::before{content:"▸ "} .rescate details[open] summary::before{content:"▾ "}
 .rescate details[open] summary{margin-bottom:10px}
-.rescate p{margin:0 0 8px;font-size:14.5px;color:var(--soft)} .rescate b{color:var(--ink)}
+.rescate p{margin:0 0 8px;font-size:14.5px;color:var(--soft)} .rescate b{color:var(--ink);font-weight:500}
 
-/* el correo, cuando el bloque es la ronda */
-.correo{margin:0 0 18px;border:1px solid var(--line);border-radius:2px;background:var(--surface2)}
-.correo .cab{padding:14px 16px;border-bottom:1px solid var(--line)}
-.correo .quien{font-family:var(--display);font-weight:700;font-size:20px;margin:0}
-.correo .donde{font-size:13.5px;color:var(--soft);margin:2px 0 0}
+.correo{margin:0 0 18px;border:1px solid var(--card-line);background:oklch(0% 0 0 / .2)}
+.correo .cab{padding:14px 16px;border-bottom:1px solid var(--card-line)}
+.correo .quien{font-family:var(--serif);font-size:26px;line-height:1.1;margin:0}
+.correo .donde{font-size:13.5px;color:var(--soft);margin:3px 0 0}
 .fila-mail{display:flex;gap:8px;margin-top:10px}
-.fila-mail code{flex:1;font-family:var(--mono);font-size:13px;padding:9px 11px;border:1px solid var(--line);background:var(--bg);word-break:break-all}
-.angulo{padding:12px 16px;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--soft)}
-.angulo b{color:var(--ink)}
-.asunto{padding:10px 16px;border-bottom:1px solid var(--line);font-size:14px}
-.asunto i{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-right:8px}
+.fila-mail code{flex:1;font-family:var(--mono);font-size:12.5px;padding:10px 11px;border:1px solid var(--card-line);background:var(--bg);word-break:break-all}
+.angulo{padding:12px 16px;border-bottom:1px solid var(--card-line);font-size:14.5px;color:var(--soft)} .angulo b{color:var(--ink);font-weight:500}
+.asunto{padding:10px 16px;border-bottom:1px solid var(--card-line);font-size:14px}
+.asunto i{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-right:8px}
 .correo pre{margin:0;padding:14px 16px;white-space:pre-wrap;font-family:var(--body);font-size:15px;line-height:1.6;color:var(--ink);max-height:280px;overflow-y:auto}
 
-h2{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:0 0 4px}
-.h2sub{color:var(--faint);font-size:13.5px;margin:0 0 14px}
-section{margin-bottom:36px}
+h2{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim);margin:0 0 6px;display:flex;gap:12px;align-items:center}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.h2sub{color:var(--faint);font-size:14px;margin:0 0 16px;font-family:var(--serif);font-style:italic;font-size:17px}
+section{margin-bottom:40px}
 
-/* lo ya conseguido */
 .logros{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
-.logro{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
-.logro .f{font-family:var(--mono);font-size:11px;color:var(--lime-dim);letter-spacing:.06em}
-.logro .q{font-size:14.5px;line-height:1.4}
+.logro{background:var(--surface);padding:15px 16px;display:flex;flex-direction:column;gap:5px}
+.logro .f{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--gold-dim);text-transform:uppercase}
+.logro .q{font-size:14.5px;line-height:1.4;color:var(--soft)} .logro .q b{color:var(--ink);font-weight:500}
 
-.bloques{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:2px;overflow:hidden}
-.bq{background:var(--surface);padding:14px 18px;display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:center}
+/* el dia: cada bloque hecho recibe un sello */
+.bloques{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.bq{position:relative;background:var(--surface);padding:15px 18px;display:grid;grid-template-columns:52px 1fr auto;gap:16px;align-items:center;min-height:64px}
 .bq .n{font-family:var(--mono);font-size:12px;color:var(--faint)}
 .bq .q{font-size:15px} .bq .q i{font-style:normal;color:var(--soft);font-size:13.5px;display:block}
-.bq .t{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
-.bq.on{background:var(--surface2);box-shadow:inset 3px 0 0 var(--lime)} .bq.on .n,.bq.on .t{color:var(--lime)}
-.bq.ya{opacity:.42} .bq.ya .q{text-decoration:line-through}
+.bq .t{font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap}
+.bq.on{background:var(--surface2);box-shadow:inset 2px 0 0 var(--gold)} .bq.on .n,.bq.on .t{color:var(--gold)}
+.bq.ya .q,.bq.ya .n{opacity:.45}
+.sello{width:52px;height:52px;border:1.5px solid var(--gold);border-radius:50%;display:grid;place-items:center;text-align:center;
+ font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;line-height:1.3;color:var(--gold);transform:rotate(-12deg);opacity:.9}
+.sello.skip{border-color:var(--faint);color:var(--faint);border-style:dashed}
+@starting-style{.sello{transform:rotate(-30deg) scale(1.6);opacity:0}}
+.sello{transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s}
 
-.proys{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
-.pr{background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:16px 18px 14px;display:flex;flex-direction:column;gap:10px}
+/* el registro del dia, legible por maquina: la misma franja del Passport */
+.mrz{margin:0 0 40px;background:var(--paper);color:oklch(22% 0.03 275);padding:14px 18px 16px;font-family:var(--mono);font-weight:700;
+ font-size:clamp(9px,1.45vw,13px);letter-spacing:.1em;line-height:1.7;white-space:pre;overflow-x:auto}
+.mrz small{display:block;font-weight:400;font-size:9.5px;letter-spacing:.24em;color:oklch(45% 0.03 275);margin-bottom:6px;white-space:normal}
+
+.proys{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.pr{container-type:inline-size;background:var(--surface);border:1px solid var(--line);padding:17px 18px 15px;display:flex;flex-direction:column;gap:10px}
 .pr-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.pr h3{font-family:var(--display);font-weight:700;font-size:17px;margin:0}
-.pr .id{font-family:var(--mono);font-size:11px;color:var(--faint);display:block;font-weight:400;letter-spacing:.1em;margin-bottom:3px}
-.estado{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:2px;white-space:nowrap;border:1px solid}
-.e-marcha{color:var(--lime);border-color:var(--lime-dim);background:rgba(200,247,81,.07)}
-.e-espera{color:var(--amber);border-color:rgba(224,163,64,.5);background:rgba(224,163,64,.07)}
-.e-tuyo{color:var(--rust);border-color:rgba(196,98,63,.5);background:rgba(196,98,63,.08)}
-.e-parado{color:var(--slate);border-color:var(--line)}
-.paso{font-size:15px;line-height:1.45} .paso b{color:var(--lime)}
-.cifra{font-family:var(--mono);font-size:12.5px;color:var(--soft)}
+.pr h3{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.05;margin:0}
+.pr .id{font-family:var(--mono);font-size:10px;color:var(--faint);display:block;letter-spacing:.14em;margin-bottom:5px;text-transform:uppercase}
+.estado{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;white-space:nowrap;border:1px solid}
+.e-marcha{color:var(--gold);border-color:var(--gold-dim)}
+.e-espera{color:var(--amber);border-color:oklch(76% 0.13 70 / .5)}
+.e-tuyo{color:var(--paper);border-color:var(--paper)}
+.e-parado{color:var(--faint);border-color:var(--line)}
+@container (max-width:280px){.pr-top{flex-direction:column}}
+.paso{font-size:15px;line-height:1.45} .paso b{color:var(--gold);font-weight:500}
+.cifra{font-family:var(--mono);font-size:11.5px;color:var(--soft)}
 .donde2{font-size:13.5px;color:var(--soft);border-top:1px solid var(--line);padding-top:9px;margin-top:auto}
-.donde2 em{font-style:normal;color:var(--faint);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:3px}
+.donde2 em{font-style:normal;color:var(--faint);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:3px}
 footer{border-top:1px solid var(--line);padding-top:16px;color:var(--faint);font-size:13.5px}
-.est{font-family:var(--mono);font-size:11.5px}
-.est.local{color:var(--amber)}
-@media (max-width:560px){.ahora{padding:22px 18px}.bq{grid-template-columns:40px 1fr}.bq .t{grid-column:2}}
-@media (prefers-reduced-motion:no-preference){button{transition:background .12s,border-color .12s}}
+.est{font-family:var(--mono);font-size:11px} .est.local{color:var(--amber)}
+::view-transition-old(ahora),::view-transition-new(ahora){animation-duration:.28s}
+@media (max-width:560px){.ahora{padding:22px 18px}.bq{grid-template-columns:40px 1fr}.bq .t{grid-column:2}.bq .sello{grid-column:2;width:44px;height:44px}}
+@media (prefers-reduced-motion:reduce){*,::view-transition-group(*){animation:none!important;transition:none!important}}
 </style>
 
+<div class="grain" aria-hidden="true"></div>
 <div class="wrap">
-<header><div class="marca">UNA COSA<span>.</span></div><div class="fecha" id="fecha"></div></header>
+<header><div class="marca">HERA<span>UNA COSA A LA VEZ</span></div><div class="fecha" id="fecha"></div></header>
 
 <div class="ahora" id="ahora">
   <p class="eyebrow"><span id="ey">Ahora mismo</span><span id="eyn"></span></p>
@@ -112,7 +137,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--faint);font
   <div id="correo"></div>
   <div class="hecho-si" id="hechosi" hidden><b>Está hecho cuando</b><span id="hechosit"></span></div>
   <p class="empuje" id="empuje"></p>
-  <div class="reloj" id="reloj"><span class="t" id="rt">0:00</span><span class="m" id="rm">en marcha</span></div>
+  <div class="reloj" id="reloj"><span class="t" id="rt">0:00</span><span class="m" id="rm">en marcha</span><span class="wl" id="wl"></span></div>
   <div class="meta" id="meta"></div>
   <div class="acciones" id="acc"></div>
 </div>
@@ -123,8 +148,9 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--faint);font
   <p><b>Si hoy no hay nada:</b> un correo de la cola. Treinta segundos. Lo demás espera a mañana.</p>
 </details></div>
 
-<section><h2>Lo que ya has conseguido</h2><p class="h2sub">Esto no es lo que falta. Es lo que ya existe porque lo hiciste tú.</p><div class="logros" id="logros"></div></section>
+<section><h2>Lo que ya has conseguido</h2><p class="h2sub">No es lo que falta. Es lo que ya existe porque lo hiciste tú.</p><div class="logros" id="logros"></div></section>
 <section><h2>El día</h2><p class="h2sub" id="diasub"></p><div class="bloques" id="bloques"></div></section>
+<div class="mrz" id="mrz" aria-label="Registro del día, legible por máquina"></div>
 <section><h2>Los proyectos</h2><p class="h2sub">Cada uno con su siguiente paso concreto y dónde lo dejaste.</p><div class="proys" id="proys"></div></section>
 
 <footer>El plan lo carga Claude desde el hilo y esta página se actualiza sola. <span class="est" id="est">…</span></footer>
@@ -210,16 +236,34 @@ function pinta(){
     $('acc').innerHTML=(empezado?'':'<button class="lima" id="bE">Empezar ahora</button>')+
       (x.cola?'':'<button class="'+(empezado?'lima':'')+'" id="bH">Hecho · siguiente</button>')+
       '<button class="small" id="bS">Hoy no puedo con esto</button>';
-    if($('bE'))$('bE').onclick=()=>{P.s[i]=Date.now();guarda();pinta();};
-    if($('bH'))$('bH').onclick=()=>{P.h[i]=true;guarda();pinta();scrollTo({top:0});};
-    $('bS').onclick=()=>{P.h[i]='saltado';guarda();pinta();scrollTo({top:0});};
+    if($('bE'))$('bE').onclick=()=>{P.s[i]=Date.now();guarda();conTransicion(pinta);};
+    if($('bH'))$('bH').onclick=()=>{P.h[i]=true;guarda();conTransicion(pinta);scrollTo({top:0});};
+    $('bS').onclick=()=>{P.h[i]='saltado';guarda();conTransicion(pinta);scrollTo({top:0});};
     reloj();
   }
   $('diasub').textContent=B.length?(B.length+' bloques. Uno a la vez, en este orden. Vas por el '+(i===-1?B.length:i+1)+'.'):'';
-  $('bloques').innerHTML=B.map((x,k)=>'<div class="bq '+(P.h[k]?'ya':(k===i?'on':''))+'"><div class="n">'+esc(x.b)+'</div><div class="q">'+esc(x.f)+'<i>'+esc(String(x.t).replace(/\*\*/g,''))+'</i></div><div class="t">'+(P.h[k]==='saltado'?'saltado':esc(x.dur||'90 min'))+'</div></div>').join('');
+  $('bloques').innerHTML=B.map((x,k)=>'<div class="bq '+(P.h[k]?'ya':(k===i?'on':''))+'"><div class="n">'+esc(x.b)+'</div><div class="q">'+esc(x.f)+'<i>'+esc(String(x.t).replace(/\*\*/g,''))+'</i></div>'+(P.h[k]?'<div class="sello'+(P.h[k]==='saltado'?' skip':'')+'">'+(P.h[k]==='saltado'?'HOY<br>NO':'HERA<br>HECHO')+'</div>':'<div class="t">'+esc(x.dur||'90 min')+'</div>')+'</div>').join('');
+  mrz(B,P);
   $('logros').innerHTML=(INFO.logros||[]).map(l=>'<div class="logro"><span class="f">'+esc(l.f)+'</span><span class="q">'+b2(l.q)+'</span></div>').join('');
   $('proys').innerHTML=(INFO.proyectos||[]).map(p=>'<article class="pr"><div class="pr-top"><h3><span class="id">'+esc(p.id)+'</span>'+esc(p.n)+'</h3><span class="estado '+esc(p.e)+'">'+esc(p.el)+'</span></div><p class="paso">'+b2(p.paso)+'</p>'+(p.cifra?'<div class="cifra">'+b2(p.cifra)+'</div>':'')+'<div class="donde2"><em>Dónde lo dejaste</em>'+b2(p.donde)+'</div></article>').join('');
 }
+function mrz(B,P){
+  const f=hoy().replace(/-/g,''); const pad=x=>(x+'<'.repeat(44)).slice(0,44);
+  const hechos=B.map((x,k)=>P.h[k]===true?x.b:(P.h[k]==='saltado'?x.b+'X':'')).filter(Boolean).join('<');
+  const n=B.filter((_,k)=>P.h[k]===true).length;
+  const l1=pad('D<HERA<<'+f+'<<'+(n===B.length&&B.length?'CUMPLIDO':'EN<CURSO'));
+  const l2=pad((hechos||'SIN<SELLOS')+'<<'+n+'OF'+B.length+'<<'+(ok?Object.keys(ok).length:0)+'MAIL');
+  $('mrz').innerHTML='<small>Registro del día · legible por máquina</small>'+esc(l1)+'\n'+esc(l2);
+}
+function conTransicion(fn){ if(document.startViewTransition&&!matchMedia('(prefers-reduced-motion: reduce)').matches) document.startViewTransition(fn); else fn(); }
+let wake=null;
+async function mantenerPantalla(on){
+  try{
+    if(on&&!wake&&'wakeLock' in navigator){wake=await navigator.wakeLock.request('screen');$('wl').textContent='pantalla encendida';wake.addEventListener('release',()=>{wake=null;});}
+    if(!on&&wake){await wake.release();wake=null;}
+  }catch(_){ $('wl').textContent=''; }
+}
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') reloj(); });
 function pintaCorreo(){
   const i=colaIdx();
   if(i===-1){$('correo').innerHTML='<div class="correo"><div class="cab"><p class="quien">La cola está vacía.</p><p class="donde">Diez de diez. Díselo al hilo y se monta la siguiente.</p></div></div>';return;}
@@ -241,16 +285,16 @@ function reloj(){
   const B=PLAN[hoy()]||[],P=D();let i=-1;for(let k=0;k<B.length;k++)if(!P.h[k]){i=k;break;}
   const r=$('reloj'),e=$('empuje');
   const f=()=>{
-    if(i<0){r.classList.remove('on');e.classList.remove('on');return;}
+    if(i<0){r.classList.remove('on');e.classList.remove('on');mantenerPantalla(false);return;}
     const s=P.s[i];
     if(s){
-      e.classList.remove('on');r.classList.add('on');
+      e.classList.remove('on');r.classList.add('on');mantenerPantalla(true);
       const m=Math.floor((Date.now()-s)/60000), sec=Math.floor((Date.now()-s)/1000)%60;
       $('rt').textContent=m+':'+String(sec).padStart(2,'0');
       if(m>=25){r.classList.add('cumplido');$('rm').textContent='día trabajado ✓ — lo que venga ahora ya es extra';}
       else{r.classList.remove('cumplido');$('rm').textContent='en marcha · a los 25 min el día ya cuenta';}
     }else{
-      r.classList.remove('on');
+      r.classList.remove('on');mantenerPantalla(false);
       const m=Math.floor((Date.now()-abierto)/60000);
       if(m>=6){e.classList.add('on');e.innerHTML='Llevas '+m+' minutos con esto abierto sin empezar. No hace falta ganas: pulsa <b>Empezar ahora</b> y haz solo la versión de dos minutos.';}
       else e.classList.remove('on');
