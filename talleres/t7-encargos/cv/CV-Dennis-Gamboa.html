@@ -1,0 +1,188 @@
+<title>Dennis Gamboa CV</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800;125,900;100,500;100,600&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Un solo mundo, pensado para imprimirse: papel, tinta y un oro que aguanta en impresora. */
+:root{
+  --paper:#FBFAF7; --desk:#E9E6DF; --ink:#16150F; --ink-2:#4A4740; --ink-3:#8A857A;
+  --gold:#8E7447; --gold-soft:#EFE7D8; --rule:#DAD5CA; --fill:#B4541F;
+}
+*{box-sizing:border-box}
+html,body{background:var(--desk);color:var(--ink);margin:0}
+body{font-family:"DM Sans",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:32px 16px 48px}
+.hint{max-width:210mm;margin:0 auto 14px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-2);line-height:1.6}
+.hint b{color:var(--fill);font-weight:700}
+
+.sheet{width:210mm;min-height:297mm;margin:0 auto;background:var(--paper);
+  padding:15mm 16mm 12mm;box-shadow:0 1px 2px rgba(0,0,0,.06),0 24px 60px -28px rgba(0,0,0,.35);
+  display:flex;flex-direction:column}
+
+/* ---- cabecera ---- */
+header{display:grid;grid-template-columns:1fr auto;gap:10mm;align-items:end;padding-bottom:7mm;border-bottom:1.5px solid var(--ink)}
+h1{margin:0;font-family:Archivo,sans-serif;font-stretch:125%;font-weight:900;font-size:40px;line-height:.92;letter-spacing:-.02em}
+.role{margin:9px 0 0;font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.contact{list-style:none;margin:0;padding:0;text-align:right;font-size:10.5px;line-height:1.75;color:var(--ink-2)}
+.contact a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+
+.thesis{margin:7mm 0 0;font-family:"Instrument Serif",Georgia,serif;font-size:23px;line-height:1.22;letter-spacing:-.005em;max-width:150mm;text-wrap:balance}
+.thesis em{color:var(--gold)}
+
+/* ---- cuerpo a dos columnas; el orden del documento es lineal para los lectores automaticos ---- */
+.body{display:grid;grid-template-columns:1fr 57mm;gap:9mm;margin-top:7mm;flex:1}
+h2{margin:0 0 3.2mm;font-family:"Space Mono",monospace;font-weight:700;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);display:flex;gap:8px;align-items:center}
+h2::after{content:"";flex:1;height:1px;background:var(--rule)}
+section{margin-bottom:6.2mm}
+
+.caps{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm}
+.cap{border-top:2px solid var(--ink);padding-top:2.6mm}
+.cap .k{font-family:"Space Mono",monospace;font-size:8.5px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.cap h3{margin:1.4mm 0 1.2mm;font-family:Archivo,sans-serif;font-stretch:100%;font-weight:600;font-size:12.5px;line-height:1.2}
+.cap p{margin:0;font-size:9.8px;line-height:1.5;color:var(--ink-2)}
+
+.proof{margin:0;padding:0;list-style:none;display:grid;gap:2.8mm}
+.proof li{display:grid;grid-template-columns:4mm 1fr;font-size:10.4px;line-height:1.5;color:var(--ink)}
+.proof li::before{content:"";width:5px;height:5px;background:var(--gold);transform:translateY(5px) rotate(45deg)}
+.proof b{font-weight:600}
+
+.job{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:2.6mm 0;border-bottom:1px solid var(--rule)}
+.job:first-of-type{padding-top:0}
+.job h3{margin:0;font-size:11.4px;font-weight:600;line-height:1.3}
+.job h3 span{font-weight:400;color:var(--ink-2)}
+.job .when{font-family:"Space Mono",monospace;font-size:9.5px;color:var(--ink-3);white-space:nowrap}
+.job p{grid-column:1/-1;margin:.6mm 0 0;font-size:9.9px;line-height:1.5;color:var(--ink-2)}
+
+aside section{margin-bottom:6mm}
+.tags{display:flex;flex-wrap:wrap;gap:1.6mm}
+.tags span{font-size:9.4px;line-height:1;padding:1.6mm 2.2mm;border:1px solid var(--rule);border-radius:1px;color:var(--ink)}
+dl.kv{margin:0;display:grid;gap:2mm}
+dl.kv div{display:grid;gap:.4mm}
+dl.kv dt{font-family:"Space Mono",monospace;font-size:8.4px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+dl.kv dd{margin:0;font-size:10.2px;line-height:1.45}
+.ai{background:var(--gold-soft);padding:3.4mm 3.6mm;border-left:2px solid var(--gold)}
+.ai p{margin:0;font-size:9.9px;line-height:1.55;color:var(--ink)}
+.ai p+p{margin-top:1.6mm;color:var(--ink-2)}
+.note{font-size:9.6px;line-height:1.55;color:var(--ink-2);margin:0}
+
+/* huecos que tiene que rellenar Denno: visibles en pantalla, nunca se imprimen como si fueran datos */
+.fill{color:var(--fill);border-bottom:1px dashed var(--fill);font-style:normal}
+
+/* ---- la firma: la zona legible por maquina del Passport, aplicada a una persona ---- */
+.mrz{margin-top:auto;padding-top:5mm;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr auto;gap:6mm;align-items:end}
+.mrz code{font-family:"Space Mono",monospace;font-weight:700;font-size:9.6px;letter-spacing:.1em;line-height:1.6;color:var(--ink);white-space:pre;overflow:hidden}
+.mrz small{font-family:"Space Mono",monospace;font-size:7.6px;letter-spacing:.14em;color:var(--ink-3);text-align:right;line-height:1.6;text-transform:uppercase}
+
+a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+@media (max-width:820px){
+  body{padding:0}
+  .hint{padding:14px 16px 0}
+  .sheet{width:100%;min-height:0;padding:22px 18px;box-shadow:none}
+  header{grid-template-columns:1fr} .contact{text-align:left}
+  h1{font-size:34px} .thesis{font-size:21px}
+  .body{grid-template-columns:1fr}
+  .caps{grid-template-columns:1fr}
+  .mrz{grid-template-columns:1fr} .mrz code{font-size:8px;overflow-x:auto} .mrz small{text-align:left}
+}
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:#fff;padding:0}
+  .hint{display:none}
+  .sheet{box-shadow:none;margin:0;width:210mm;height:296.5mm;min-height:0;overflow:hidden;break-after:avoid}
+  .fill{color:var(--ink);border:0}
+}
+</style>
+
+<p class="hint">Vista de trabajo. Lo que está en <b>naranja subrayado</b> son datos que solo tú tienes —fechas y confirmaciones—. Rellénalos antes de enviarlo. Para el PDF: Imprimir → Guardar como PDF, tamaño A4, sin márgenes.</p>
+
+<main class="sheet">
+  <header>
+    <div>
+      <h1>Dennis<br>Gamboa</h1>
+      <p class="role">Creative Technologist · AI Art Director · Luxury</p>
+    </div>
+    <ul class="contact">
+      <li>Madrid · <i class="fill">¿remoto? ¿reubicación?</i></li>
+      <li><a href="mailto:dennis.gamboa@gmail.com">dennis.gamboa@gmail.com</a></li>
+      <li>+34 674 892 369</li>
+      <li><a href="https://hera-vercel.vercel.app/studio">hera-vercel.vercel.app/studio</a></li>
+      <li><a href="#">linkedin.com/in/<i class="fill">tu-usuario</i></a></li>
+    </ul>
+  </header>
+
+  <p class="thesis">I turn one shoot into every version a luxury campaign needs — <em>with the product untouched and the AI declared.</em></p>
+
+  <div class="body">
+    <div>
+      <section>
+        <h2>What I do</h2>
+        <div class="caps">
+          <div class="cap"><div class="k">01 · Versioning</div><h3>One shoot, every format.</h3>
+            <p>A master already shot becomes every version a campaign needs — formats, markets, durations — without rebuilding the set.</p></div>
+          <div class="cap"><div class="k">02 · Geo-Lock</div><h3>The product, untouched.</h3>
+            <p>Shape, proportion, setting and stitching locked to the real piece and checked version by version. Skin, fabric and colour retouched by hand.</p></div>
+          <div class="cap"><div class="k">03 · Provenance</div><h3>AI declared, never hidden.</h3>
+            <p>Deliveries built for Article 50 of the EU AI Act: use of AI declared, provenance traceable, confidential by default.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selected proof</h2>
+        <ul class="proof">
+          <li><span><b>Final round of a competitive pitch</b> for a high-jewellery maison of the LVMH group — Holiday Season 2026 campaign visuals. NDA signed, test delivered in two days, responsible-AI compliance answered point by point for the group’s committee.</span></li>
+          <li><span><b>Founded HERA</b>, a visual production studio in Madrid, and built its tools in-house: an AI retouching app and a GEO audit that measures how AI assistants recommend a business.</span></li>
+          <li><span><b>Generative AI applied to brand campaign content at Hogarth (WPP)</b>, the content-production arm of the world’s largest advertising group.</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        <div class="job"><h3>Founder &amp; Creative Director <span>· HERA, Madrid</span></h3><span class="when"><i class="fill">20XX</i> — now</span>
+          <p>Visual production studio for luxury: campaign versioning, product-faithful retouching and the HERA Passport, a provenance record delivered with every asset.</p></div>
+        <div class="job"><h3>Creative Technologist <span>· Hogarth (WPP)</span></h3><span class="when"><i class="fill">20XX — 20XX</i></span>
+          <p>Applied generative AI to brand campaign content inside a global production workflow.</p></div>
+        <div class="job"><h3>Product Manager <span>· Inditex — Zara Woman</span></h3><span class="when"><i class="fill">20XX — 20XX</i></span>
+          <p>Product management at the scale of the world’s largest fashion retailer.</p></div>
+        <div class="job"><h3>Creative Image Retoucher <span>· Carolina Herrera</span></h3><span class="when"><i class="fill">20XX — 20XX</i></span>
+          <p>Campaign and product image retouching for a luxury house.</p></div>
+        <div class="job"><h3>Colour <span>· Bymatallana, New York</span></h3><span class="when"><i class="fill">20XX — 20XX</i></span>
+          <p>Colour work for fashion imagery.</p></div>
+      </section>
+    </div>
+
+    <aside>
+      <section class="ai">
+        <h2>How I use AI</h2>
+        <p>AI accelerates. The eye, the taste and every final decision are human.</p>
+        <p>I never use it on product design — that belongs to the maison’s craft. I use it to multiply what has already been shot, and I declare where.</p>
+      </section>
+
+      <section>
+        <h2>Craft</h2>
+        <div class="tags"><span>Luxury retouching</span><span>Colour</span><span>Art direction</span><span>Campaign versioning</span><span>Product fidelity</span><span>Generative AI pipelines</span><span>Content provenance · C2PA</span><span>EU AI Act · Art. 50</span><span>GEO</span></div>
+      </section>
+
+      <section>
+        <h2>Tools</h2>
+        <div class="tags"><span>Photoshop</span><span>Google Flow</span><span><i class="fill">confirma el resto</i></span></div>
+      </section>
+
+      <section>
+        <h2>Languages</h2>
+        <dl class="kv">
+          <div><dt>Spanish</dt><dd>Native</dd></div>
+          <div><dt>English</dt><dd>Professional working proficiency</dd></div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Also</h2>
+        <p class="note">Writer. Literary fiction in Spanish and English; a novel in progress and a short story currently on submission.</p>
+      </section>
+    </aside>
+  </div>
+
+  <div class="mrz">
+    <code>P&lt;GAMBOA&lt;&lt;DENNIS&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+CREATIVE&lt;TECHNOLOGIST&lt;&lt;AI&lt;DECLARED&lt;&lt;MAD&lt;&lt;&lt;&lt;&lt;</code>
+    <small>Facts verified by me.<br>Layout designed with AI — declared.</small>
+  </div>
+</main>
