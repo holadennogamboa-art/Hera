@@ -74,6 +74,10 @@ colgando del mismo máster**. Es literalmente tu oferta.
 
 ## 3 · 🟠 El GEO ha subido de categoría
 
+> **Corregido el 23-sep:** el plan del propio auditor decidió **no vender el auditor a
+> marcas de lujo** y centrarse en hoteles de 4 y 5 estrellas. Esa decisión, tomada con
+> más datos, manda sobre la idea de venta de abajo.
+
 En **VivaTech 2026**, la prensa de moda lo resumió así: **ChatGPT se ha convertido en el
 nuevo escaparate de las marcas.** Louis Vuitton presentó una app dentro de ChatGPT para
 descubrir colecciones hablando en lenguaje natural. L'Oréal habló abiertamente de GEO.

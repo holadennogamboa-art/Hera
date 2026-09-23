@@ -1,7 +1,7 @@
 # ESTADO — fuente única
 
 > Se regenera cada **viernes en el bloque de Dirección**. Todo lo que no esté aquí, no
-> existe para el sistema. Última actualización: **20 de septiembre de 2026**.
+> existe para el sistema. Última actualización: **23 de septiembre de 2026**.
 
 ## La regla que hace que esto funcione
 
@@ -21,8 +21,8 @@ dejan de hablarse.
 | [T1](T1-golpe-de-estado.md) | **Golpe de estado** | Novela cerrada, corrigiendo | 4,5 | Párrafo 12 del capítulo 7 |
 | [T2](T2-verde-agua.md) | **Verde agua** | Taller montado, sin abrir | 6 | El umbral, paso 1 de 15 |
 | [T3](T3-hera.md) | **HERA · marca** | Cadencia | 3 | Calendario editorial de la semana |
-| [T4](T4-verder.md) | **Auditor GEO** | Funciona, sin clientes | 3 | Enviar Peñalver |
-| [T5](T5-skin-lab.md) | **HERA Skin Lab** | **1ª conversión completa** | 1,5 | Preguntar a vicky por qué no descargó |
+| [T4](T4-verder.md) | **Auditor GEO** | **Giro a hoteles 4-5★** | 3 | Comprar heraaistudio.com |
+| [T5](T5-skin-lab.md) | **HERA Skin Lab** | Remodelada · sin público nuevo | 1,5 | Primer antes/después en Stories |
 | [T6](T6-kierck.md) | **Kierck** | Biblia en construcción | 1,5 | Fijar la primera frase de ella |
 | [T7](T7-encargos.md) | **Encargos y outreach** | **Atascado en enviar** | 1,5 | [La cola](t7-encargos/COLA-DE-ENVIO.md), correo nº 1 |
 | [T8](T8-direccion.md) | **Dirección** | — | 1,5 | Revisión del viernes |
@@ -41,8 +41,8 @@ dejan de hablarse.
 0b. **Preparar los cinco que quedan de la cola**, en el Mac y con Enviados abierto. No se
    trata de mandarlos: se trata de dejarlos escritos enteros, que es lo que hizo que los
    otros cinco salieran.
-1. **Enviar Peñalver.** El paquete está hecho. Solo hay que mandarlo.
-2. **Subir el ZIP y mandar Txirimiri.**
+1. ~~Peñalver y Txirimiri~~ — **aparcados**: el plan del auditor del 23-sep deja los restaurantes y va a hoteles de 4 y 5 estrellas. Ver `fuentes/INFORME-AUDITOR-GEO-23-SEP.html`.
+2. **Comprar heraaistudio.com** (jueves) y cambiar el remitente de Gmail a «Denno Gamboa» (viernes).
 3. **Día 8: seguimiento de SI SI BAGELS** si no han contestado.
 4. **Rotar la clave de Gemini.** Expuesta desde agosto.
 5. **Decidir qué va a Kenyon.** La ventana corre.
@@ -83,6 +83,28 @@ Detalladas en [`fuentes/biblias/REVISION-05-SEP.md`](fuentes/biblias/REVISION-05
 | Negocios auditados | 27 · con contacto verificado |
 | Clientes que pagan | 0 |
 | Hitos de la semana | 1 de 5 |
+
+## Lo que traen los informes del 23-sep
+
+**Auditor GEO** ([informe](fuentes/INFORME-AUDITOR-GEO-23-SEP.html)). Solo salieron dos
+correos a negocios, el 3 y el 4: con dos, que no conteste nadie pasa el 89 % de las veces,
+así que el canal no está probado. Lo que los hundía: el remitente «AI Studio Departamento
+GEO», un formato de spam de SEO y enlaces de netlify.app. **Giro:** hoteles independientes
+de 4 y 5 estrellas en Madrid, primero una medición que el hotel puede comprobar solo, desde
+un dominio propio. **A las marcas de lujo no se les vende el auditor** — esto corrige la
+idea 3 del radar del 22-sep, que proponía usarlo como puerta con ellas.
+
+**Skin Lab** ([dossier](fuentes/DOSSIER-SKIN-LAB-23-SEP.md)). Remodelación grande el 23:
+máscara de piel, medidor de poro (126–131 %), instalable, antes/después para Instagram y
+**marca de agua invisible y credenciales de contenido** en cada descarga (art. 50) — la
+firma espera al certificado en Google Cloud. Es la primera pieza donde el Passport ya es
+técnicamente real. **Pero en 22 días no ha entrado nadie nuevo.** Lo siguiente es de
+cámara: Stories y el vídeo 1.
+
+⚠️ **El guion del vídeo y el pie dicen «quince años retocando para marcas de lujo».** Tu
+propio CV empieza en Nacho Ricci, hacia 2014, y tus puestos en lujo son posteriores. Esa
+cifra no aguanta una comprobación: **cámbiala por los nombres** (Carolina Herrera,
+Zara, Hogarth) antes de publicar.
 
 ## Lo que la auditoría del 9-sep destapó
 

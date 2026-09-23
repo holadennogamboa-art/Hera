@@ -1,0 +1,765 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Auditor GEO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --papel:#F6F7F4;
+  --papel-alto:#FFFFFF;
+  --papel-hondo:#ECEEE9;
+  --tinta:#16202B;
+  --tinta-media:#4A5560;
+  --tinta-tenue:#7E8A85;
+  --linea:#DCE0D8;
+  --linea-fuerte:#C3C9BC;
+  --acero:#2C6E9B;
+  --acero-suave:#E4EDF3;
+  --ambar:#9A6516;
+  --ambar-suave:#F5EBD9;
+  --musgo:#3F7A52;
+  --granate:#A33B4A;
+  --sombra:0 1px 2px rgba(22,32,43,.04), 0 8px 24px -12px rgba(22,32,43,.10);
+  --ancho:70ch;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --papel:#12171B;
+    --papel-alto:#181E23;
+    --papel-hondo:#0D1215;
+    --tinta:#E6EAE4;
+    --tinta-media:#A3ACA6;
+    --tinta-tenue:#78827C;
+    --linea:#28312F;
+    --linea-fuerte:#3A4441;
+    --acero:#6FB3DC;
+    --acero-suave:#16303F;
+    --ambar:#D9A855;
+    --ambar-suave:#33280F;
+    --musgo:#79C08D;
+    --granate:#E4808C;
+    --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --papel:#12171B;
+  --papel-alto:#181E23;
+  --papel-hondo:#0D1215;
+  --tinta:#E6EAE4;
+  --tinta-media:#A3ACA6;
+  --tinta-tenue:#78827C;
+  --linea:#28312F;
+  --linea-fuerte:#3A4441;
+  --acero:#6FB3DC;
+  --acero-suave:#16303F;
+  --ambar:#D9A855;
+  --ambar-suave:#33280F;
+  --musgo:#79C08D;
+  --granate:#E4808C;
+  --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--papel);
+  color:var(--tinta);
+  font:400 17px/1.65 Newsreader,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased;
+}
+.hoja{max-width:var(--ancho);margin:0 auto;padding:64px 28px 120px;display:flex;flex-direction:column;gap:56px}
+
+h1,h2,h3,.grotesk{font-family:"Familjen Grotesk",system-ui,-apple-system,sans-serif}
+h1{font-size:clamp(30px,6vw,42px);line-height:1.08;font-weight:600;letter-spacing:-.025em;margin:0;text-wrap:balance}
+h2{font-size:23px;line-height:1.2;font-weight:600;letter-spacing:-.015em;margin:0;text-wrap:balance}
+h3{font-size:17px;line-height:1.3;font-weight:600;letter-spacing:-.005em;margin:0}
+p{margin:0}
+a{color:var(--acero)}
+:focus-visible{outline:2px solid var(--acero);outline-offset:3px;border-radius:3px}
+
+.rotulo{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:10.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--tinta-tenue);
+}
+
+/* ── Cabecera ── */
+.cabecera{display:flex;flex-direction:column;gap:18px;padding-bottom:36px;border-bottom:2px solid var(--tinta)}
+.cabecera .linea-sup{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.entradilla{font-size:19px;line-height:1.55;color:var(--tinta-media);max-width:56ch}
+.estado{
+  display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+  padding:5px 12px;border:1px solid var(--musgo);border-radius:2px;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
+  color:var(--musgo);text-transform:uppercase;
+}
+.estado::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--musgo)}
+
+/* ── Cifras ── */
+.cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea)}
+.cifra{background:var(--papel-alto);padding:16px 14px;display:flex;flex-direction:column;gap:3px}
+.cifra b{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.cifra span{font-size:12.5px;line-height:1.35;color:var(--tinta-tenue);font-family:"Familjen Grotesk",sans-serif}
+
+/* ── Secciones ── */
+section{display:flex;flex-direction:column;gap:20px}
+.encabezado-seccion{display:flex;flex-direction:column;gap:6px;padding-bottom:12px;border-bottom:1px solid var(--linea)}
+.texto{display:flex;flex-direction:column;gap:14px}
+.texto p{max-width:66ch}
+
+/* ── La regla ── */
+.regla{
+  background:var(--papel-alto);border:1px solid var(--linea-fuerte);
+  border-left:3px solid var(--tinta);padding:26px 28px;
+  display:flex;flex-direction:column;gap:14px;box-shadow:var(--sombra);
+}
+.regla q{font-size:21px;line-height:1.45;font-style:italic;quotes:"«" "»"}
+.regla q::before,.regla q::after{color:var(--tinta-tenue)}
+
+/* ── Binomio hecho / señal ── */
+.binomio{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.binomio{grid-template-columns:1fr}}
+.marca{padding:18px 20px;border-radius:2px;display:flex;flex-direction:column;gap:8px}
+.marca.hecho{background:var(--acero-suave);border:1px solid var(--acero)}
+.marca.senal{background:var(--ambar-suave);border:1px dashed var(--ambar)}
+.marca .rotulo{color:inherit;opacity:.85}
+.marca.hecho{color:var(--acero)}
+.marca.senal{color:var(--ambar)}
+.marca p{font-size:15px;line-height:1.5;color:var(--tinta-media)}
+
+/* ── Comandos ── */
+.comando{background:var(--papel-hondo);border:1px solid var(--linea);border-radius:2px;overflow:hidden}
+.comando header{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:9px 14px;border-bottom:1px solid var(--linea);background:var(--papel-alto);
+}
+.comando header .rotulo{color:var(--tinta-media)}
+.comando pre{
+  margin:0;padding:14px;overflow-x:auto;
+  font:500 13px/1.7 "IBM Plex Mono",ui-monospace,monospace;color:var(--tinta);
+}
+.copiar{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--linea-fuerte);color:var(--tinta-media);
+  padding:4px 9px;border-radius:2px;cursor:pointer;
+}
+.copiar:hover{border-color:var(--acero);color:var(--acero)}
+.comando .nota{padding:0 14px 12px;font-size:14px;color:var(--tinta-tenue);max-width:60ch}
+
+/* ── Cronología ── */
+.crono{display:flex;flex-direction:column;gap:0}
+.hito{display:grid;grid-template-columns:82px 1fr;gap:20px;padding:20px 0;border-top:1px solid var(--linea)}
+.hito:first-child{border-top:none;padding-top:4px}
+.hito .fecha{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;
+  color:var(--tinta-tenue);letter-spacing:.02em;padding-top:3px;font-variant-numeric:tabular-nums;
+}
+.hito .cuerpo{display:flex;flex-direction:column;gap:7px}
+.hito p{font-size:16px;line-height:1.55;color:var(--tinta-media);max-width:58ch}
+@media(max-width:520px){
+  .hito{grid-template-columns:1fr;gap:6px}
+  .hito .fecha{padding-top:0}
+}
+
+/* ── Defectos ── */
+.defectos{border:1px solid var(--linea);border-radius:2px;overflow:hidden}
+.defecto{display:grid;grid-template-columns:1fr;gap:5px;padding:14px 18px;background:var(--papel-alto);border-top:1px solid var(--linea)}
+.defecto:first-child{border-top:none}
+.defecto b{font-family:"Familjen Grotesk",sans-serif;font-size:15px;font-weight:600}
+.defecto span{font-size:14.5px;line-height:1.5;color:var(--tinta-media)}
+.defecto.grave{background:var(--papel-hondo);border-left:3px solid var(--granate)}
+.defecto.grave b{color:var(--granate)}
+
+/* ── Estado ── */
+.balance{display:grid;grid-template-columns:1fr;gap:12px}
+.fila{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start}
+.fila .pip{width:9px;height:9px;border-radius:50%;margin-top:8px}
+.pip.si{background:var(--musgo)}
+.pip.no{background:var(--linea-fuerte);border:1px solid var(--tinta-tenue)}
+.fila p{font-size:16px;line-height:1.55;color:var(--tinta-media)}
+.fila b{color:var(--tinta);font-family:"Familjen Grotesk",sans-serif;font-weight:600;font-size:16px}
+
+/* ── Pasos ── */
+.pasos{display:flex;flex-direction:column;gap:2px}
+.paso{display:grid;grid-template-columns:34px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--linea)}
+.paso .num{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--acero);
+  padding-top:2px;font-variant-numeric:tabular-nums;
+}
+.paso .cuerpo{display:flex;flex-direction:column;gap:8px}
+.paso p{font-size:16px;line-height:1.55;color:var(--tinta-media);max-width:58ch}
+.paso .coste{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tinta-tenue);letter-spacing:.03em}
+
+/* ── Tabla ── */
+.tabla-caja{overflow-x:auto;border:1px solid var(--linea)}
+table{width:100%;border-collapse:collapse;font-family:"Familjen Grotesk",sans-serif;font-size:14.5px;background:var(--papel-alto)}
+th{
+  text-align:left;padding:10px 14px;background:var(--papel-hondo);
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-tenue);
+  border-bottom:1px solid var(--linea);white-space:nowrap;
+}
+td{padding:11px 14px;border-bottom:1px solid var(--linea);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--papel-hondo);padding:1.5px 5px;border-radius:2px;border:1px solid var(--linea)}
+
+/* ── Ritmo diario ── */
+.ritmo{background:var(--papel-alto);border:1px solid var(--linea-fuerte);padding:26px 28px;display:flex;flex-direction:column;gap:18px;box-shadow:var(--sombra)}
+.franjas{display:flex;flex-direction:column;gap:12px}
+.franja{display:grid;grid-template-columns:76px 1fr;gap:16px;align-items:baseline}
+.franja .t{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--acero);font-variant-numeric:tabular-nums}
+.franja p{font-size:15.5px;line-height:1.5;color:var(--tinta-media)}
+@media(max-width:520px){.franja{grid-template-columns:1fr;gap:2px}}
+
+.pie{border-top:1px solid var(--linea);padding-top:22px;font-size:14px;color:var(--tinta-tenue);max-width:62ch}
+.pie code{font-size:.9em}
+
+.siguiente{background:var(--papel-alto);border:1.5px solid var(--acero);border-radius:2px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.siguiente .rotulo{color:var(--acero)}
+.siguiente h3{font-size:22px;line-height:1.2}
+.siguiente p{font-size:16px;line-height:1.55;color:var(--tinta-media);max-width:60ch}
+.enlaces{display:flex;flex-direction:column;border-top:1px solid var(--linea)}
+.enlaces a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--linea);text-decoration:none;color:var(--tinta)}
+.enlaces a:hover span:first-child{color:var(--acero)}
+.enlaces .q{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--tinta-tenue);white-space:nowrap}
+</style>
+
+<div class="hoja">
+
+<header class="cabecera">
+  <div class="linea-sup">
+    <span class="rotulo">Taller · proyecto activo</span>
+    <span class="rotulo">Actualizado 23 sep 2026</span>
+  </div>
+  <h1>Auditor GEO</h1>
+  <p class="entradilla">Analiza la web de un negocio y mide si los asistentes de IA lo recomiendan. Todo lo que informa se puede comprobar abriendo el código del cliente.</p>
+  <span class="estado">Giro a hoteles · siguiente paso: el dominio</span>
+</header>
+
+<div class="cifras">
+  <div class="cifra"><b>4.261</b><span>líneas de código</span></div>
+  <div class="cifra"><b>11</b><span>sectores</span></div>
+  <div class="cifra"><b>23</b><span>reglas de auditoría</span></div>
+  <div class="cifra"><b>120</b><span>tipos de schema.org</span></div>
+  <div class="cifra"><b>4</b><span>asistentes</span></div>
+</div>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Informe · del 6 al 23 de septiembre</span>
+    <h2>Lo último</h2>
+  </div>
+  <div class="texto">
+    <p>Todo lo que ha pasado desde la última actualización de esta ficha, en orden. Las tres últimas entradas son las que cambian el proyecto.</p>
+  </div>
+  <div class="crono">
+    <div class="hito">
+      <span class="fecha">7 sep</span>
+      <div class="cuerpo">
+        <h3>El panel de tu hermana, rehecho</h3>
+        <p>No entendió qué había que hacer, y el fallo era del panel: le pedía dos cosas a la vez, y la segunda era una herramienta técnica de Google. Ahora le pide una sola, encontrar el correo, con un ejemplo resuelto y tres sitios donde mirar. El enlace compartido apunta ya a la versión nueva; se comprobó sin sesión iniciada, como lo ve ella.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">9 sep</span>
+      <div class="cuerpo">
+        <h3>Los informes, en un sitio nuevo</h3>
+        <p>La subida creó <code>statuesque-pithivier-680928.netlify.app</code> con los cuatro informes, el de Txirimiri incluido. El sitio anterior sigue en pie para que no se rompa ningún enlace ya enviado. El informe de Peñalver está preparado pero no subido: hoy su enlace da 404.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">9 sep</span>
+      <div class="cuerpo">
+        <h3>Peñalver: el hallazgo dejó de ser cierto</h3>
+        <p>Antes de enviarlo se comprobó otra vez: habían quitado el muro de verificación y los rastreadores ya entran. El correo se anuló sin llegar a salir. Hay otro hallazgo comprobado a mano —declaran como logo el icono de la pestaña del navegador, teniendo el logo real cargado—, pero no se ha enviado.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">23 sep</span>
+      <div class="cuerpo">
+        <h3>Por qué no contestó nadie</h3>
+        <p>Revisado tu Gmail, solo los correos a negocios: salieron dos en total, el 3 y el 4, sin rebotes y sin seguimiento. Con dos correos, que no conteste nadie pasa el 89&nbsp;% de las veces, así que el canal todavía no está probado. Lo que sí los hundía: el remitente «AI Studio Departamento GEO», un formato idéntico al spam de SEO, los enlaces de netlify.app y dos huecos sin rellenar en el de No Classica.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">23 sep</span>
+      <div class="cuerpo">
+        <h3>Lo que dice el mercado</h3>
+        <p>ChatGPT saca casi todo lo que sabe de hoteles de Google, sobre todo de la ficha de Google Maps; el marcado, que es lo que vendíamos, es la sexta palanca de siete. Las agencias españolas cobran de 1.600&nbsp;€ al mes para arriba por seguir a un hotel boutique. Y el lujo se ha movido: Louis Vuitton tiene app dentro de ChatGPT y L'Oréal habla en público de GEO.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">23 sep</span>
+      <div class="cuerpo">
+        <h3>El giro</h3>
+        <p>Propuesta: hoteles independientes de 4 y 5 estrellas en Madrid, empezando por los de lujo. Primero se enseña una medición que el hotel puede comprobar solo; después, el arreglo. Desde un dominio propio y con tu nombre. Los restaurantes se aparcan, y a las marcas de lujo no se les vende el auditor. Todo, con el porqué de cada decisión, en <a href="https://claude.ai/artifact/MyQZi3sPCuTTDfSTR6NCmm" target="_blank" rel="noopener">el plan</a>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="siguiente">
+    <span class="rotulo">Siguiente paso · solo este</span>
+    <h3>Comprar heraaistudio.com</h3>
+    <p>Libre la última vez que se comprobó, el 23 de septiembre a las 8:33. Sin dominio no hay correo con tu nombre, ni web, ni enlaces que den confianza; y es también lo que le faltaba a HERA para enviar. Todo lo demás cuelga de aquí.</p>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Por qué existe</span>
+    <h2>Nació de un error que casi cuesta un cliente</h2>
+  </div>
+  <div class="texto">
+    <p>Una herramienta hecha con otra IA generó una captura con datos sobre el Gran Hotel Inglés que no aguantaban una comprobación. Al abrir el código de su web a mano, la mitad era falso.</p>
+    <p>El contacto se salvó porque la auditoría se rehízo manualmente. De ahí sale la única norma que gobierna todo este proyecto.</p>
+  </div>
+
+  <div class="regla">
+    <span class="rotulo">Norma innegociable</span>
+    <q>El programa no estima, no puntúa a ojo y no rellena huecos. Todo lo que informa se puede comprobar abriendo el código de la web.</q>
+  </div>
+
+  <p style="color:var(--tinta-media);max-width:64ch">Cada hallazgo separa dos cosas que nunca se mezclan, y se etiqueta con su grado de certeza:</p>
+
+  <div class="binomio">
+    <div class="marca hecho">
+      <span class="rotulo">Hecho verificado</span>
+      <p>Comprobado contra la respuesta del servidor. El cliente puede abrir su código y encontrarlo literal.</p>
+    </div>
+    <div class="marca senal">
+      <span class="rotulo">Señal · confirmar</span>
+      <p>Un patrón detectado. Exige que un humano lo confirme antes de usarlo con un cliente.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Arranque</span>
+    <h2>Cómo entrar y probarlo</h2>
+  </div>
+
+  <div class="comando">
+    <header><span class="rotulo">1 · Abrir el panel</span><button class="copiar" data-cmd="cd ~/geo-auditor && node servidor.mjs">Copiar</button></header>
+    <pre>cd ~/geo-auditor &amp;&amp; node servidor.mjs</pre>
+    <p class="nota">Abre <code>localhost:4321</code>. Escribes una web, pulsas Analizar. Gratis, sin claves, sin límite.</p>
+  </div>
+
+  <div class="comando">
+    <header><span class="rotulo">2 · Preparar un cliente entero</span><button class="copiar" data-cmd="cd ~/geo-auditor && node cliente.mjs sisibagels.com">Copiar</button></header>
+    <pre>cd ~/geo-auditor &amp;&amp; node cliente.mjs sisibagels.com</pre>
+    <p class="nota">Deja el paquete completo: la auditoría, el marcado listo para pegar, el <b>informe que abre el cliente</b> y el correo con su lista de comprobaciones. Es el comando que usarás cada día.</p>
+  </div>
+
+  <div class="comando">
+    <header><span class="rotulo">3 · Publicar los informes</span><button class="copiar" data-cmd="cd ~/geo-auditor && node publicar.mjs">Copiar</button></header>
+    <pre>cd ~/geo-auditor &amp;&amp; node publicar.mjs</pre>
+    <p class="nota">Prepara la carpeta <code>publico/</code> para arrastrarla a un alojamiento. Cada informe queda en una ruta aleatoria, sin indexar: son documentos con datos de un negocio, dirigidos a una persona.</p>
+  </div>
+
+  <div class="comando">
+    <header><span class="rotulo">4 · Auditar desde la terminal</span><button class="copiar" data-cmd="cd ~/geo-auditor && node audit.mjs sisibagels.com --html --parche">Copiar</button></header>
+    <pre>cd ~/geo-auditor &amp;&amp; node audit.mjs sisibagels.com --html --parche</pre>
+    <p class="nota">Deja en <code>informes/</code> el informe en HTML, los datos en JSON y el marcado corregido listo para pegar.</p>
+  </div>
+
+  <div class="comando">
+    <header><span class="rotulo">5 · Prospectar una lista entera</span><button class="copiar" data-cmd="cd ~/geo-auditor && node lote.mjs mi-lista.txt">Copiar</button></header>
+    <pre>cd ~/geo-auditor &amp;&amp; node lote.mjs mi-lista.txt</pre>
+    <p class="nota">Un dominio por línea. Devuelve la tabla ordenada por quién está peor. Con <code>--csv</code> para hoja de cálculo.</p>
+  </div>
+
+  <div class="comando">
+    <header><span class="rotulo">6 · Medir en los asistentes · consume crédito</span><button class="copiar" data-cmd='cd ~/geo-auditor && ANTHROPIC_API_KEY="tu-clave" node consultar.mjs "SI SI BAGELS" --sector=gastronomia --ciudad=Madrid --repeticiones=3'>Copiar</button></header>
+    <pre>cd ~/geo-auditor &amp;&amp; ANTHROPIC_API_KEY="tu-clave" \
+  node consultar.mjs "SI SI BAGELS" \
+  --sector=gastronomia --ciudad=Madrid --repeticiones=3</pre>
+    <p class="nota">Unos 48.500 tokens y 4 búsquedas web por pregunta, alrededor de 0,35&nbsp;$ con Opus&nbsp;5. Con <code>--estado</code> ves qué asistentes tienes configurados.</p>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Qué hace</span>
+    <h2>Dos herramientas en una</h2>
+  </div>
+  <div class="texto">
+    <p><b>La auditoría</b> descarga la web y comprueba, una por una: la cadena de redirecciones, el certificado, si el DNS resuelve, si hay un cortafuegos que rechaza rastreadores, si el dominio está aparcado. Después mira si <code>robots.txt</code> bloquea a alguno de los trece rastreadores de IA que comprueba. Luego lee el marcado: qué entidad declara el negocio, cuántas de las propiedades de su sector están puestas, y descarga el logotipo para medir sus píxeles reales en lugar de fiarse del nombre del fichero. Por último contrasta lo que dice la página con lo que declara el código: galardones, dirección y teléfono que están escritos pero no declarados.</p>
+    <p><b>La medición</b> pregunta a los asistentes lo que preguntaría un cliente, con búsqueda web activada, y cuenta cuántas veces sale el negocio. El recuento es búsqueda exacta de texto: no hay una IA interpretando a otra. Se guarda la respuesta entera y las URL que el asistente consultó, para que el cliente pueda abrirlas.</p>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Estado real</span>
+    <h2>Qué funciona y qué no</h2>
+  </div>
+  <div class="balance">
+    <div class="fila"><span class="pip si"></span><p><b>La auditoría de webs.</b> Probada contra hoteles, restaurantes, museos, clínicas, despachos y tiendas. Reconoce lo que está bien hecho: el Hotel Orfila sale con 69 % y cero problemas críticos.</p></div>
+    <div class="fila"><span class="pip si"></span><p><b>El panel web y el modo lote.</b> Funcionando.</p></div>
+    <div class="fila"><span class="pip si"></span><p><b>La medición en Claude.</b> Verificada con dos negocios reales y 21 consultas.</p></div>
+    <div class="fila"><span class="pip si"></span><p><b>Los informes ya están en internet.</b> En rutas no adivinables y sin indexar. Antes de dar un correo por listo, la app abre el enlace como lo abriría un desconocido y se niega si pide contraseña o no está subido.</p></div>
+    <div class="fila"><span class="pip no"></span><p><b>ChatGPT, Perplexity y Gemini.</b> El código está escrito y sus cuatro endpoints verificados, pero ninguno ha devuelto todavía una respuesta correcta. Cada uno necesita su clave de pago.</p></div>
+    <div class="fila"><span class="pip no"></span><p><b>Ningún cliente ha pagado aún.</b> Salieron dos correos y no contestó nadie; los seguimientos no se enviaron. Con dos no se puede juzgar nada: la regla del plan es no sacar conclusiones antes de 50 contactos.</p></div>
+    <div class="fila"><span class="pip no"></span><p><b>Sin crédito de API.</b> Se agotó a mitad de la última medición, tras gastar unos 5,20&nbsp;$ en total. Cada pregunta cuesta unos 0,35&nbsp;$ con Opus&nbsp;5 y 0,17&nbsp;$ con Sonnet&nbsp;5. Auditar y prospectar no cuesta nada.</p></div>
+    <div class="fila"><span class="pip no"></span><p><b>Sin dominio propio.</b> Es el primer paso del plan: heraaistudio.com está libre. Con él coinciden el remitente, la web y los enlaces de los informes, y se puede configurar SPF, DKIM y DMARC.</p></div>
+    <div class="fila"><span class="pip no"></span><p><b>La app mide la palanca pequeña.</b> Audita el marcado de la web, que es la sexta de siete. Falta leer la ficha de Google, que es la primera, y comparar nombre, dirección y teléfono entre web, marcado y Google. Está en el plan.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Cronología</span>
+    <h2>De dónde viene</h2>
+  </div>
+  <div class="crono">
+    <div class="hito">
+      <span class="fecha">28 ago</span>
+      <div class="cuerpo">
+        <h3>El motor</h3>
+        <p>Se construye la auditoría entera calibrándola contra el Gran Hotel Inglés, cuyo código ya se había revisado a mano. Confirma lo que se sabía —el logo declarado es una foto del brunch de 512×381— y encuentra algo que se había pasado: su dominio de marca hace dos saltos hasta el de otro grupo hotelero.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">28 ago</span>
+      <div class="cuerpo">
+        <h3>Once sectores</h3>
+        <p>El hotel era el piloto. Se saca el catálogo a un registro propio para que sirva a comercios, clínicas, talleres, academias o museos: añadir un sector es añadir una entrada, sin tocar el motor.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">29 ago</span>
+      <div class="cuerpo">
+        <h3>Los cuatro asistentes</h3>
+        <p>Se monta la medición. Cada API se verifica en su documentación antes de escribir una línea, y los cuatro endpoints se prueban con claves falsas: los cuatro responden autenticación, así que las peticiones están bien construidas.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">29 ago</span>
+      <div class="cuerpo">
+        <h3>Primera medición real</h3>
+        <p>Casa Lucio, Madrid. Aparece en 2 de 3 consultas y el asistente consulta 67 fuentes reales. Funciona.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">29 ago</span>
+      <div class="cuerpo">
+        <h3>SI SI BAGELS</h3>
+        <p>Se audite el objetivo comercial y se prepara el paquete: informe, marcado de sus tres locales y borrador de correo. Todos los datos salen de su propia web.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">30 ago</span>
+      <div class="cuerpo">
+        <h3>El dato sólido</h3>
+        <p>Doce consultas. Sale un patrón limpio: aparecen las cuatro veces cuando se pregunta por bagels, ninguna de las cuatro cuando se pregunta por brunch en su propio barrio.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="texto">
+    <p><b>El dato sólido, en detalle.</b> SI SI BAGELS es una bagelería con tres locales en Madrid y un tercer puesto en el BagelFest de Nueva York. Su SEO clásico está bien trabajado: el título y la descripción mencionan los tres barrios y el premio. Lo que falta es la capa que leen los asistentes, donde su web solo declara <code>"@type": "WebSite"</code> con la descripción vacía.</p>
+  </div>
+
+  <div class="tabla-caja">
+    <table>
+      <thead><tr><th>Pregunta</th><th>Aparece</th><th>Puestos</th></tr></thead>
+      <tbody>
+        <tr><td>¿Dónde comer buenos bagels en Madrid?</td><td class="num">4 de 4</td><td class="num">5.º 2.º 4.º 2.º</td></tr>
+        <tr><td>Brunch o desayuno en Malasaña</td><td class="num">0 de 4</td><td class="num">—</td></tr>
+        <tr><td>Mejores cafeterías de especialidad</td><td class="num">0 de 1</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="texto">
+    <p>Mismo negocio, misma web, misma semana. La diferencia está en la pregunta: quien busca «bagels» los encuentra porque el nombre lleva la palabra; quien busca «dónde desayunar en Malasaña» no, porque en el código no consta que estén allí. En esa pregunta salen Toma Café y HanSo Café las cuatro veces.</p>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Control de calidad</span>
+    <h2>Catorce defectos encontrados y corregidos</h2>
+  </div>
+  <div class="texto">
+    <p>Todos salieron de comprobar los datos reales, no de suponer. Esta lista es la razón por la que la herramienta se puede poner delante de un cliente.</p>
+  </div>
+  <div class="defectos">
+    <div class="defecto grave">
+      <b>Decía «no aparece» cuando sí aparecía</b>
+      <span>El negocio se escribe «SI SI BAGELS» y el asistente lo escribía «SISI». La comparación no lo reconocía. Habría hecho abrir un correo comercial con una mentira.</span>
+    </div>
+    <div class="defecto grave">
+      <b>Iba a llamar «fotografía» a un icono</b>
+      <span>El correo de Txirimiri describía como fotografía lo que es el icono de móvil que genera WordPress. Un solo dato falso y el cliente deja de creerse el resto. Ahora se nombra lo que el fichero es.</span>
+    </div>
+    <div class="defecto">
+      <b>Se rendía justo con el mejor cliente posible</b>
+      <span>Si una web estaba bloqueada, no generaba nada. Pero un negocio al que ningún asistente puede entrar es el caso más vendible que existe: ahora genera correo, sin informe porque no hay web que enseñar.</span>
+    </div>
+    <div class="defecto">
+      <b>Comprobaba solo el primer enlace publicado</b>
+      <span>Un informe recién generado pasaba por bueno sin estar subido, y habría dado un 404 en el correo. Ahora se comprueban todos y dice cuáles faltan.</span>
+    </div>
+    <div class="defecto grave">
+      <b>Rellenaba la ciudad con un dato plausible y falso</b>
+      <span>Se probó a deducir la localidad del texto junto al código postal y devolvía «Centro» en lugar de «Madrid». Se borró la función entera: un hueco visible hace menos daño.</span>
+    </div>
+    <div class="defecto">
+      <b>Atribuía a un hotel el robots.txt de otro dominio</b>
+      <span>Un dominio estaba en venta y redirigía a un parking. Ahora se detecta y se dice que no hay web que auditar.</span>
+    </div>
+    <div class="defecto">
+      <b>Afirmaba un sector con un solo punto de evidencia</b>
+      <span>Dijo «belleza y bienestar» de una tienda de bagels. Ahora, por debajo del umbral, no afirma nada.</span>
+    </div>
+    <div class="defecto">
+      <b>Colaba encabezados como si fueran negocios</b>
+      <span>«Dos estrellas» y «Reserva con antelación» aparecían en la lista de competidores. El filtro se validó contra datos reales: conserva 22 de 22 restaurantes y elimina 26 de 26 basuras.</span>
+    </div>
+    <div class="defecto">
+      <b>Contaba «HanSo Café» y «Hanso Café» por separado</b>
+      <span>Partía el recuento. Agrupados, ese local aparece en 9 de 9 consultas.</span>
+    </div>
+    <div class="defecto">
+      <b>No encontraba galardones con guiones</b>
+      <span><code>GHI-Michelin-Key.webp</code> no casaba con «Michelin Key». Se perdían dos distinciones.</span>
+    </div>
+    <div class="defecto">
+      <b>Perdía el logo cuando la referencia estaba anidada</b>
+      <span>Habría informado «sin imagen» siendo falso.</span>
+    </div>
+    <div class="defecto">
+      <b>Se caía ante un certificado roto o un 403</b>
+      <span>Ahora los diagnostica: son hallazgos, no errores del programa.</span>
+    </div>
+    <div class="defecto">
+      <b>Ignoraba el logo si no había entidad del sector</b>
+      <span>Justo el caso que importa: el hallazgo estrella no salía.</span>
+    </div>
+    <div class="defecto">
+      <b>Mostraba <code>&amp;amp;</code> sin descodificar</b>
+      <span>Habría salido así en un informe a un cliente.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Captación</span>
+    <h2>Lo que se vende ahora</h2>
+  </div>
+  <div class="texto">
+    <p>Primero, una medición que el hotel puede comprobar él solo en diez segundos: «Pregunté cuarenta veces a cuatro asistentes lo que pregunta un huésped antes de reservar en Madrid. Salisteis en tantas. Estos hoteles salieron en vuestro lugar.» Después, las causas en orden de peso: la ficha de Google, estar en varias fuentes, las reseñas, las fotos y, en sexto lugar, el marcado.</p>
+    <p>Precios propuestos: diagnóstico gratis, puesta a punto por 900&nbsp;€ y seguimiento por 390&nbsp;€ al mes, con los tres primeros hoteles a mitad de precio a cambio de poder contarlo. El plan completo, con el porqué de cada decisión y la regla para saber si funciona, está en su ficha: <a href="https://claude.ai/artifact/MyQZi3sPCuTTDfSTR6NCmm" target="_blank" rel="noopener">Cómo se ficha un cliente</a>.</p>
+  </div>
+  <div class="binomio">
+    <div class="marca senal">
+      <span class="rotulo">Lo que se promete</span>
+      <p>Medir cada mes qué dicen los asistentes, con cada respuesta guardada, y arreglar en orden de peso lo que depende de nosotros.</p>
+    </div>
+    <div class="marca hecho">
+      <span class="rotulo">Lo que no</span>
+      <p>Que ChatGPT vaya a recomendarlos. No está en nuestra mano y prometerlo deja un cliente enfadado al mes siguiente.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">En marcha</span>
+    <h2>Dónde está cada negocio</h2>
+  </div>
+  <div class="crono">
+    <div class="hito">
+      <span class="fecha">3 sep</span>
+      <div class="cuerpo">
+        <h3>SI SI BAGELS · enviado, sin respuesta</h3>
+        <p>A <code>hola@sisibagels.com</code>. El gancho fue la medición: salen cuando se pregunta por bagels y no cuando se pregunta por brunch en su barrio. El seguimiento no se envió y, con los restaurantes aparcados, se deja estar.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">4 sep</span>
+      <div class="cuerpo">
+        <h3>No Classica · enviado, sin respuesta</h3>
+        <p>A <code>cristian@noclassica.com</code>. Salió con «[zona]» y «[enlace]» sin rellenar, y el enlace llegó aparte, 34 minutos después. Se deja estar.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">9 sep</span>
+      <div class="cuerpo">
+        <h3>La Taberna de Peñalver · no enviado</h3>
+        <p>El muro que era su hallazgo ya no existe. Queda otro, comprobado a mano, y un informe sin subir. Aparcado con el resto de restaurantes.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">9 sep</span>
+      <div class="cuerpo">
+        <h3>Txirimiri · no enviado</h3>
+        <p>Informe en línea y enlace comprobado. Aparcado.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">29 sep</span>
+      <div class="cuerpo">
+        <h3>Hotel Orfila · falta medirlo</h3>
+        <p>Informe publicado: 69&nbsp;% de cobertura y ningún problema crítico. Se mide el 29 junto al Gran Hotel Inglés.</p>
+      </div>
+    </div>
+    <div class="hito">
+      <span class="fecha">1 oct</span>
+      <div class="cuerpo">
+        <h3>Gran Hotel Inglés · primer contacto del plan nuevo</h3>
+        <p>Auditado (20&nbsp;% de cobertura) y con relación previa. Se le lleva la medición hecha y el informe nuevo, no una promesa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Lo siguiente</span>
+    <h2>Por dónde seguir</h2>
+  </div>
+  <div class="pasos">
+    <div class="paso">
+      <span class="num">01</span>
+      <div class="cuerpo">
+        <h3>Comprar heraaistudio.com</h3>
+        <p>Sin él no hay correo con tu nombre, ni web propia, ni enlaces que den confianza. También desbloquea HERA.</p>
+        <span class="coste">5 MIN · JUE 24 SEP</span>
+      </div>
+    </div>
+    <div class="paso">
+      <span class="num">02</span>
+      <div class="cuerpo">
+        <h3>Cambiar el nombre en Gmail</h3>
+        <p>De «AI Studio Departamento GEO» a «Denno Gamboa». Es lo primero que lee quien recibe tu correo.</p>
+        <span class="coste">1 MIN · VIE 25 SEP</span>
+      </div>
+    </div>
+    <div class="paso">
+      <span class="num">03</span>
+      <div class="cuerpo">
+        <h3>La web y los informes, en el dominio</h3>
+        <p>Una sola página: qué medimos, un informe de ejemplo, quién eres, precios y contacto. La hago yo; tú la miras en el móvil.</p>
+        <span class="coste">VIE 25 SEP · LA HAGO YO</span>
+      </div>
+    </div>
+    <div class="paso">
+      <span class="num">04</span>
+      <div class="cuerpo">
+        <h3>El correo con tu dominio</h3>
+        <p><code>denno@heraaistudio.com</code>, paso a paso conmigo.</p>
+        <span class="coste">20 MIN · LUN 28 SEP</span>
+      </div>
+    </div>
+    <div class="paso">
+      <span class="num">05</span>
+      <div class="cuerpo">
+        <h3>Crédito y clave nueva</h3>
+        <p>Recargar crédito en la consola de Anthropic y, de paso, borrar la clave que se pegó en agosto y crear otra.</p>
+        <span class="coste">10 MIN · MAR 29 SEP</span>
+      </div>
+    </div>
+    <div class="paso">
+      <span class="num">06</span>
+      <div class="cuerpo">
+        <h3>Medir los dos hoteles y hacer el informe nuevo</h3>
+        <p>Gran Hotel Inglés y Orfila. Primero el resultado; después, las causas en orden de peso.</p>
+        <span class="coste">29–30 SEP · LO HAGO YO</span>
+      </div>
+    </div>
+    <div class="paso">
+      <span class="num">07</span>
+      <div class="cuerpo">
+        <h3>Escribir al Gran Hotel Inglés</h3>
+        <p>Con la medición hecha, a la persona que ya conoces.</p>
+        <span class="coste">15 MIN · JUE 1 OCT</span>
+      </div>
+    </div>
+    <div class="paso">
+      <span class="num">08</span>
+      <div class="cuerpo">
+        <h3>El panel nuevo de tu hermana</h3>
+        <p>Deja de buscar correos de bares: busca quién lleva marketing o revenue en veinte hoteles.</p>
+        <span class="coste">VIE 2 OCT</span>
+      </div>
+    </div>
+    <div class="paso">
+      <span class="num">09</span>
+      <div class="cuerpo">
+        <h3>Cinco contactos al día</h3>
+        <p>LinkedIn primero, después el correo, siempre a una persona con nombre. Solo cinco.</p>
+        <span class="coste">DESDE EL LUN 5 OCT</span>
+      </div>
+    </div>
+  </div>
+  <div class="texto">
+    <p>A los 50 contactos, hacia mediados de noviembre, se decide con la regla del plan. FITUR es del 20 al 22 de enero en IFEMA, y la meta es llegar con tres casos. La versión con casillas para ir marcando está en <a href="https://claude.ai/artifact/MyQZi3sPCuTTDfSTR6NCmm#calendario" target="_blank" rel="noopener">el plan</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Ritmo</span>
+    <h2>Cuánto tiempo al día</h2>
+  </div>
+  <div class="ritmo">
+    <p style="color:var(--tinta-media)">Con el plan nuevo, lo diario es comercial y corto:</p>
+    <div class="franjas">
+      <div class="franja"><span class="t">30 min</span><p><b>Cinco contactos.</b> Mirar el perfil, conectar en LinkedIn, escribir. A una persona con nombre, nunca a info@.</p></div>
+      <div class="franja"><span class="t">10 min</span><p><b>Responder.</b> Lo que haya llegado del día anterior.</p></div>
+      <div class="franja"><span class="t">1 h</span><p><b>Tu hermana.</b> Nombres de quién lleva marketing o revenue en cada hotel, de lunes a viernes.</p></div>
+    </div>
+    <p style="color:var(--tinta-media)"><b>40 minutos al día tuyos.</b> Si un día no hay tiempo, un solo contacto bien hecho mantiene el proyecto vivo.</p>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Pendiente</span>
+    <h2>Tres cosas fuera del trabajo diario</h2>
+  </div>
+  <div class="balance">
+    <div class="fila"><span class="pip no"></span><p><b>Cambiar la clave de Anthropic.</b> La actual se pegó en un chat. Se crea otra en <code>console.anthropic.com</code> y se borra la vieja. Está en el calendario, el 29.</p></div>
+    <div class="fila"><span class="pip no"></span><p><b>Recargar crédito.</b> Solo hace falta para medir en los asistentes. Auditar webs y prospectar no cuesta nada.</p></div>
+    <div class="fila"><span class="pip no"></span><p><b>Decidir el modelo de la medición.</b> Hoy usa Opus&nbsp;5, a unos 0,35&nbsp;$ por pregunta; con Sonnet&nbsp;5 serían 0,17&nbsp;$. Antes de decidir, se comparan los dos con las mismas diez preguntas.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="encabezado-seccion">
+    <span class="rotulo">Todo en un sitio</span>
+    <h2>Las fichas del proyecto</h2>
+  </div>
+  <div class="enlaces">
+    <a href="https://claude.ai/artifact/MyQZi3sPCuTTDfSTR6NCmm" target="_blank" rel="noopener"><span>Cómo se ficha un cliente · el plan revisado</span><span class="q">23 sep</span></a>
+    <a href="https://claude.ai/code/artifact/8e30a28a-57f5-4695-9e07-f7d11b7bb571" target="_blank" rel="noopener"><span>Los doce correos · el panel de tu hermana</span><span class="q">7 sep</span></a>
+    <a href="https://claude.ai/code/artifact/8e333731-9349-47d8-9cbd-d001dce921a6" target="_blank" rel="noopener"><span>Chueca, La Latina y Lavapiés · lista aparcada</span><span class="q">3 sep</span></a>
+    <a href="https://statuesque-pithivier-680928.netlify.app" target="_blank" rel="noopener"><span>Informes en línea · portada neutra, sin índice</span><span class="q">9 sep</span></a>
+  </div>
+</section>
+
+<p class="pie">Todo vive en <code>~/geo-auditor</code>, guardado con control de versiones. La nota de continuación está en <code>SIGUIENTE.md</code> y los registros de cada medición, con las respuestas literales y sus fuentes, en <code>informes/consultas/</code>.</p>
+
+</div>
+
+<script>
+document.querySelectorAll('.copiar').forEach(function(b){
+  b.addEventListener('click', async function(){
+    var original = b.textContent;
+    try {
+      await navigator.clipboard.writeText(b.dataset.cmd);
+      b.textContent = 'Copiado';
+    } catch (e) {
+      b.textContent = 'Selecciónalo';
+    }
+    setTimeout(function(){ b.textContent = original; }, 1800);
+  });
+});
+</script>
+
+</body></html>
