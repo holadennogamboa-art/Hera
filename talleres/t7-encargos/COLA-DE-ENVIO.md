@@ -82,6 +82,23 @@ a escribir, no una razón para no escribir hoy.
 auditoría las da abreviadas (`maria@`, `callum@`) y yo he completado el dominio. Un rebote
 gasta un día de cola.
 
+### Cerrados
+
+- **IWC · Christian Knoop** — 26 de mayo. No: solo equipo interno, y han excluido la IA del
+  diseño de relojes. Contestó con educación y dejó abierta una candidatura si se abre un
+  puesto. **No se insiste.** La lección está en `VOZ-OUTREACH.md`.
+
+### Corrección de fechas
+
+El seguimiento de **Chopard** no es del 3 de agosto, como decía la auditoría: el primer
+correo salió el **11 de junio** y el segundo, con el acceso privado `CHOPARD-PRIVE`, el
+**12 de junio**. Son más de tres meses de silencio, no 37 días.
+
+**El clic que marcó Mailsuite no es de Louis.** El enlace aparece «clicado» el 11 de junio a
+las 10:00, el mismo minuto del envío. Nadie abre un correo y pulsa un enlace en el mismo
+minuto en que llega: eso es casi seguro el **escáner de seguridad** de Chopard, que abre
+los enlaces de los correos externos antes de entregarlos. No es una señal de interés.
+
 ### No tocar todavía
 - **Carolina Herrera** — Eduardo Lozano y Jodie Chan rebotaron. Puig valida destinatarios.
   La vía real es LinkedIn o un ex-compañero tuyo.
