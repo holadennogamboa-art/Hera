@@ -1,0 +1,409 @@
+<title>El umbral</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F6F6F4; --panel:#FFFFFF; --ink:#151A18; --ink-2:#4A534F;
+  --grey:#7C837F; --line:#DEE0DC; --line-2:#EBECE9;
+  --agua:#1F6F60; --agua-soft:#E4F0EC; --agua-line:#8FC3B6;
+  --warn:#8A5A1F; --warn-soft:#F6ECDC;
+  --shadow:0 1px 2px rgba(20,26,24,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#101312; --panel:#181C1B; --ink:#EDF0EE; --ink-2:#AEB6B2;
+  --grey:#868E8A; --line:#2B3130; --line-2:#232827;
+  --agua:#6FC6B1; --agua-soft:#14302A; --agua-line:#2F6155;
+  --warn:#D9A867; --warn-soft:#2E2517;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --ground:#101312; --panel:#181C1B; --ink:#EDF0EE; --ink-2:#AEB6B2;
+  --grey:#868E8A; --line:#2B3130; --line-2:#232827;
+  --agua:#6FC6B1; --agua-soft:#14302A; --agua-line:#2F6155;
+  --warn:#D9A867; --warn-soft:#2E2517;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);
+  font-family:Archivo,"Helvetica Neue",Arial,sans-serif;
+  margin:0;padding:0 0 96px;-webkit-text-size-adjust:100%}
+.wrap{max-width:660px;margin:0 auto;padding:0 18px}
+
+/* ---- barra superior ---- */
+.top{position:sticky;top:0;z-index:20;background:var(--ground);
+  border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:56px}
+.paso{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;
+  color:var(--ink);font-weight:500;white-space:nowrap}
+.unidad{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--grey);font-weight:600;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;flex:1}
+.btn-idx{border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  font-family:inherit;font-size:12px;font-weight:600;padding:7px 11px;
+  border-radius:6px;cursor:pointer}
+.btn-idx:focus-visible,.nav button:focus-visible,textarea:focus-visible,
+.fila:focus-visible,.cerrar:focus-visible{outline:2px solid var(--agua);outline-offset:2px}
+
+/* ---- barra de progreso: 15 marcas ---- */
+.marcas{display:flex;gap:3px;padding:0 18px 10px;max-width:660px;margin:0 auto}
+.marcas i{flex:1;height:3px;background:var(--line);border-radius:2px}
+.marcas i.hecho{background:var(--agua)}
+.marcas i.aqui{background:var(--ink)}
+
+/* ---- estado de guardado ---- */
+.guardado{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;
+  color:var(--grey);padding:10px 0 0}
+.guardado.local{color:var(--warn)}
+
+/* ---- cabecera del paso ---- */
+h1{font-family:Newsreader,Georgia,serif;font-weight:500;font-size:26px;
+  line-height:1.2;margin:18px 0 4px;text-wrap:balance}
+.sub{font-size:13px;color:var(--ink-2);line-height:1.5;margin:0 0 4px}
+.cancion{font-size:12px;color:var(--grey);margin:8px 0 0;line-height:1.5}
+
+details.ctx{margin:16px 0 0;border:1px solid var(--line);border-radius:8px;
+  background:var(--panel);box-shadow:var(--shadow)}
+details.ctx summary{cursor:pointer;padding:12px 14px;font-size:12px;
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+details.ctx .cuerpo{padding:0 14px 14px}
+details.ctx p{font-size:14px;line-height:1.6;color:var(--ink-2);margin:0 0 10px}
+details.ctx ul{margin:0;padding-left:18px}
+details.ctx li{font-size:14px;line-height:1.6;color:var(--ink-2);margin-bottom:6px}
+
+/* ---- la referencia: blanco y negro, es el pasado ---- */
+.ref{margin:22px 0 0;padding:16px;border-left:3px solid var(--line);
+  background:var(--line-2);border-radius:0 8px 8px 0}
+.ref .et{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey);font-weight:700;display:block;margin-bottom:8px}
+.ref p{font-family:Newsreader,Georgia,serif;font-size:17px;line-height:1.55;
+  color:var(--ink-2);margin:0;font-style:italic}
+.ref .intoc{margin:12px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.ref .intoc span{font-size:12px;background:var(--panel);border:1px solid var(--line);
+  color:var(--ink);padding:4px 8px;border-radius:4px;font-weight:500}
+.ref .nota{font-size:12px;color:var(--grey);margin:10px 0 0;line-height:1.5}
+
+.consigna{margin:22px 0 0;padding:16px;border:1px solid var(--agua-line);
+  border-radius:8px;background:var(--agua-soft)}
+.consigna .et{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--agua);font-weight:700;display:block;margin-bottom:8px}
+.consigna p{font-family:Newsreader,Georgia,serif;font-size:17px;line-height:1.55;
+  margin:0;color:var(--ink)}
+
+/* ---- donde entra el color ---- */
+.et-esc{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey);font-weight:700;display:block;margin:26px 0 8px}
+textarea{width:100%;min-height:280px;resize:vertical;
+  font-family:Newsreader,Georgia,serif;font-size:18px;line-height:1.65;
+  color:var(--ink);background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--line);
+  border-radius:0 8px 8px 0;padding:16px;box-shadow:var(--shadow)}
+textarea.vivo{border-left-color:var(--agua)}
+textarea::placeholder{color:var(--grey)}
+.cuenta{display:flex;justify-content:space-between;align-items:baseline;
+  gap:12px;margin-top:8px;font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--grey);font-variant-numeric:tabular-nums}
+.cuenta b{color:var(--agua);font-weight:500}
+
+/* ---- navegacion inferior, al alcance del pulgar ---- */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--ground);
+  border-top:1px solid var(--line);padding:10px 0 max(10px,env(safe-area-inset-bottom))}
+.nav .wrap{display:flex;gap:10px}
+.nav button{flex:1;font-family:inherit;font-size:15px;font-weight:600;
+  padding:15px 10px;border-radius:8px;cursor:pointer;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink)}
+.nav button.sig{background:var(--agua);border-color:var(--agua);color:var(--ground)}
+.nav button:disabled{opacity:.4;cursor:default}
+
+/* ---- indice ---- */
+.hoja{position:fixed;inset:0;z-index:40;background:var(--ground);
+  overflow-y:auto;padding-bottom:40px}
+.hoja[hidden]{display:none}
+.hoja .cab{position:sticky;top:0;background:var(--ground);
+  border-bottom:1px solid var(--line)}
+.hoja .cab .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.hoja h2{font-family:Newsreader,Georgia,serif;font-size:19px;font-weight:500;margin:0}
+.cerrar{border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  font-family:inherit;font-size:13px;font-weight:600;padding:8px 12px;
+  border-radius:6px;cursor:pointer}
+.grupo{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey);font-weight:700;margin:24px 0 8px}
+.fila{display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  padding:13px 14px;border:1px solid var(--line);background:var(--panel);
+  border-radius:8px;margin-bottom:6px;cursor:pointer;font-family:inherit;color:var(--ink)}
+.fila .num{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;
+  color:var(--grey);width:22px;flex:none;font-variant-numeric:tabular-nums}
+.fila .txt{flex:1;font-size:14px;line-height:1.4;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.fila .est{font-size:11px;font-weight:600;letter-spacing:.04em;flex:none;
+  display:flex;align-items:center;gap:6px;color:var(--grey)}
+.fila .est .sig{width:9px;height:9px;border:1.5px solid var(--grey);border-radius:50%}
+.fila.escrito .est{color:var(--agua)}
+.fila.escrito .est .sig{background:var(--agua);border-color:var(--agua);border-radius:2px}
+.fila.marcha .est{color:var(--ink-2)}
+.fila.marcha .est .sig{border-color:var(--ink-2);
+  background:linear-gradient(90deg,var(--ink-2) 50%,transparent 50%)}
+.fila.actual{border-color:var(--ink);border-width:2px}
+
+.reglas{margin:26px 0 0;padding:16px;border:1px solid var(--line);
+  border-radius:8px;background:var(--panel)}
+.reglas h3{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--grey);margin:0 0 10px;font-weight:700}
+.reglas li{font-size:13px;line-height:1.6;color:var(--ink-2);margin-bottom:9px}
+.pie{font-size:12px;line-height:1.6;color:var(--grey);margin:28px 0 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="top">
+  <div class="wrap">
+    <span class="paso" id="paso">paso 1</span>
+    <span class="unidad" id="unidad">El umbral</span>
+    <button class="btn-idx" id="abrir">Los pasos</button>
+  </div>
+</div>
+<div class="marcas" id="marcas"></div>
+
+<main class="wrap">
+  <div class="guardado" id="guardado">…</div>
+  <h1 id="titulo"></h1>
+  <p class="sub" id="sub"></p>
+  <p class="cancion" id="cancion"></p>
+
+  <details class="ctx">
+    <summary id="ctxet">De qué va esta unidad</summary>
+    <div class="cuerpo">
+      <p id="fn"></p>
+      <ul id="ureglas"></ul>
+    </div>
+  </details>
+
+  <div id="fuente"></div>
+
+  <span class="et-esc">Tu escena</span>
+  <textarea id="ta" placeholder="Escribe aquí. No corrijas mientras escribes."></textarea>
+  <div class="cuenta">
+    <span id="cuenta">0 palabras</span>
+    <span id="meta"></span>
+  </div>
+
+  <div class="reglas">
+    <h3>Las siete reglas del taller</h3>
+    <ul id="reglas"></ul>
+  </div>
+
+  <p class="pie">Lo que escribas aquí se guarda solo, sin botón. Al volver a Madrid lo
+  recojo y lo paso al repositorio.</p>
+</main>
+
+<div class="nav">
+  <div class="wrap">
+    <button id="ant">← Anterior</button>
+    <button id="sig" class="sig">Siguiente →</button>
+  </div>
+</div>
+
+<div class="hoja" id="hoja" hidden>
+  <div class="cab"><div class="wrap">
+    <h2>Los pasos</h2>
+    <button class="cerrar" id="cerrar">Cerrar</button>
+  </div></div>
+  <div class="wrap" id="lista"></div>
+</div>
+
+<script>
+const REGLAS=[
+ 'Esto no se inventa: se reescribe. A la izquierda está lo que dijiste corriendo el 4 de septiembre.',
+ 'Nadie toca a Darío. Ni la cámara ni un personaje.',
+ 'La muerte, sin método y sin objeto. No se ve cómo pasa.',
+ 'La respiración es la portadora. Silencio fabricado partido por un solo sonido.',
+ 'Empieza en blanco y negro. El COLOR entra cuando Darío deja de mirar a los turistas: el color es la vida de otros. Al morir, drena y vuelve al BYN en la aérea.',
+ 'Suena «Like a Prayer» en el cover de Miley Cyrus. Un cover, porque esta serie va de contar la versión de otro. La canción vive en la CARRERA y se corta con la última inhalación: la muerte no tiene música, la pierde.',
+ 'Prohibido corregir mientras se escribe. Si algo falla, [revisar: …] y adelante.'
+];
+const UNI=[
+{n:0,t:'PRELUDIO',song:'—',c:'Antes del episodio 1 · la voz del autor',
+ fn:'Una introducción personal a Verde agua. No es la primera escena: es la puerta a todo el universo que hay detrás, y lo que conecta las historias entre sí. Lo escribiste a mano; aquí se pasa.',
+ reglas:['Se pasa tal cual está en el papel. Primero entero, sin corregir. Luego se mira.','Si en el papel dudabas entre dos palabras, escribe las dos con una barra: mar / agua. Esa duda también es información.','Las tachaduras que te importen, entre corchetes: [tachado: …]. No se pierde nada de lo que pensaste.','Aquí la voz puede ser la tuya, no la de la crónica ni la de Carlos. Es el único sitio donde el autor habla.'],
+ items:[
+  {b:"Pasa aquí el preludio tal como lo escribiste a mano. Entero, sin corregir.",largo:true}
+ ]},
+{n:1,t:'EL UMBRAL',song:'«Like a Prayer» — Miley Cyrus, cover de Madonna (1989)',
+ c:'Episodio 1 · secuencia de apertura',
+ fn:'Darío entra en el Retiro y empieza a correr. Todavía no pasa nada, y esa es la idea: el espectador tiene que creer que está viendo una mañana cualquiera.',
+ reglas:['Aquí no hay ni un indicio de lo que va a pasar. Ni música que avise, ni plano que se detenga de más.','Todo lo que se cruza es de otros: la alegría es ajena y se ve desde fuera.','Es la última vez que el mundo está entero.'],
+ items:[
+  {t:"Logro entrar al retiro. Siento de inmediato que algo cambia completamente. Dejas de estar de donde venías.",d:["el umbral es físico"],s:["Dejas de estar de donde venías"],w:20},
+  {t:"Me recibe un grupo de turistas típicos con su mochila y su vestuario, esos que están preparados para cualquier cambio, o como te sorprenda el día.",d:["gente preparada para todo, salvo para esto"],s:[],w:26},
+  {t:"Me detiene de tirón una pelota que se atraviesa en mi camino. Un niño y su padre jugando; por segundo pude oler la alegría ajena. Le pasó la pelota por su par.",d:["un padre y un hijo, en una serie sobre padres"],s:["oler la alegría ajena"],w:31},
+  {t:"Y enseguida, un grupo de amigos en césped y su manta de picnic con tantos patrones y texturas.",d:["patrones y texturas — es lo que se disfigura después"],s:[],w:19},
+  {t:"Son segundos, porque desde el tirón arranque y cada escena alrededor se va disfigurando.",d:["la gramática visual del arranque"],s:["se va disfigurando"],w:15}]},
+{n:2,t:'LA MONTAÑA',song:'—',c:'La pausa antes de que se rompa',
+ fn:'Darío se detiene delante de la Montaña de los Gatos. Es la única vez que para, y sin saberlo está mirando la serie entera: una cosa viva que pierde la forma, sostenida por una estructura de hormigón detrás.',
+ reglas:['No se explica el símbolo. Se enseña y se sigue corriendo.','La montaña y el edificio están en el mismo plano, o no vale.','Si en la escena aparece la palabra «metáfora», está mal escrita.'],
+ items:[
+  {t:"Hago una pausa, ya que en cuanto veo esa figura imponente. Necesito detenerme para observar su atuendo actual: un montículo de piedra con grutas, vegetación frondosa, flores de temporada y pequeñas figuras de animales en su base.",d:["la única parada de toda la secuencia"],s:["su atuendo actual"],w:36},
+  {t:"Tan duro. Tan fuerte, tan bruto. Mientras que ella a veces tan salvaje, pero nunca pierde la pose.",d:["el edificio contra la montaña"],s:["tan bruto","nunca pierde la pose"],w:18},
+  {t:"En agosto sueña estar. No están cuidadas. Pero hoy están salvajes. Verdes, pero salvajes. Perdía un poco la forma. Pero siento que todo está pensado para que ya pierda las formas. Que el edificio de atrás las mantenga.",d:["la tesis: la contención","Carlos y Darío"],s:["Verdes, pero salvajes","Que el edificio de atrás las mantenga"],w:38}]},
+{n:3,t:'EL DESPLOME',song:'«Like a Prayer» — se corta aquí, con la última inhalación',
+ c:'Sin método. Sin objeto.',
+ fn:'Lo que se siente desde dentro cuando el cuerpo deja de responder. Lo grabaste tú, sin saber que estabas grabando la muerte de Darío.',
+ reglas:['Sin método y sin objeto: no se ve qué pasa, se ve lo que él percibe.','La respiración es la portadora hasta que se corta.','El giro de 360 va antes de la aérea. No es la cámara: es él.','Ni una palabra de Carlos todavía.'],
+ items:[
+  {t:"Este es el momento. La canción es un cover con respecto a la original. Completamente.",d:["aquí la canción todavía suena","se cortará con la inhalación"],s:[],w:15},
+  {t:"Estoy en un momento… casi 100… con los pulmones… someterse a sangre completamente.",d:["el cuerpo llevado al límite"],s:["someterse a sangre"],w:13},
+  {t:"Tal vez tarde mucho, tal vez también se corta la cuerda… el ruido, el giro.",d:["el corte de sonido"],s:["se corta la cuerda","el ruido, el giro"],w:15},
+  {t:"Creo que ya voy arriba. Y estas imágenes en 360 es lo último que percibo.",d:["el relevo a la aérea empieza dentro de él"],s:["ya voy arriba","es lo último que percibo"],w:16}]},
+{n:4,t:'EL RELEVO',song:'—',c:'Nadie toca a Darío',
+ fn:'La cámara sube. Cuando ya no hay cuerpo en cuadro, entra la voz de Carlos hablándole a Crónica. El relevo es del relato, no del cuerpo.',
+ reglas:['Nadie se acerca. Nadie lo toca. Ni un transeúnte, ni una ambulancia en cuadro.','La voz entra cuando el cuerpo ya no se ve. Ni un segundo antes.','Carlos le habla a Crónica, no al espectador.','De cómo suenen sus primeras frases sale el tono de los seis episodios.'],
+ items:[
+  {b:"La subida: cuántos segundos aguanta el plano alto, y qué se sigue oyendo del parque mientras sube."},
+  {b:"Las primeras frases de Carlos a Crónica. Escribe cinco versiones antes de quedarte con una."},
+  {b:"Lo primero que Carlos decide NO contar. Aquí empieza su versión, y una versión se define por lo que omite."}]}
+];
+
+const P=[];
+UNI.forEach(u=>u.items.forEach((it,j)=>P.push({u,it,j})));
+
+const K='umbral-va-v1';
+const $=id=>document.getElementById(id);
+let txt={}, i=0, db=null, ref=null, tmr=null, sucio=false;
+
+try{const r=localStorage.getItem(K); if(r){const o=JSON.parse(r); txt=o.txt||{}; i=o.i||0;}}catch(_){}
+if(i<0||i>=P.length) i=0;
+
+const pal=s=>{const m=String(s||'').trim().match(/[^\s]+/g); return m?m.length:0;};
+
+function guardaLocal(){
+  try{localStorage.setItem(K,JSON.stringify({txt,i,upd:Date.now()}));}catch(_){}
+}
+function marcaEstado(t){ $('guardado').textContent=t; }
+
+async function guardaRemoto(){
+  if(!ref){ marcaEstado('Guardado solo en este móvil · '+hora());
+            $('guardado').classList.add('local'); return; }
+  try{
+    await ref.set({txt:txt, i:i, upd:new Date().toISOString()});
+    $('guardado').classList.remove('local');
+    marcaEstado('Guardado '+hora());
+    sucio=false;
+  }catch(e){
+    $('guardado').classList.add('local');
+    marcaEstado('Sin conexión — guardado en el móvil · '+hora());
+  }
+}
+function hora(){return new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});}
+
+function programa(){
+  sucio=true; guardaLocal(); marcaEstado('Escribiendo…');
+  clearTimeout(tmr); tmr=setTimeout(guardaRemoto,1500);
+}
+
+function pinta(){
+  const {u,it,j}=P[i];
+  $('paso').textContent='paso '+(i+1)+'/'+P.length;
+  $('unidad').textContent=u.t;
+  $('titulo').textContent=u.t;
+  $('sub').textContent=u.c;
+  $('cancion').textContent=u.song==='—'?'Sin música en esta unidad.':'Suena: '+u.song;
+  $('ctxet').textContent='De qué va «'+u.t+'»';
+  $('fn').textContent=u.fn;
+  $('ureglas').innerHTML=u.reglas.map(r=>'<li>'+esc(r)+'</li>').join('');
+
+  let h='';
+  if(it.b){
+    h='<div class="consigna"><span class="et">La consigna</span><p>'+esc(it.b)+'</p></div>';
+  }else{
+    h='<div class="ref"><span class="et">Lo que grabaste corriendo — solo referencia</span>'+
+      '<p>'+esc(it.t)+'</p>';
+    if(it.s&&it.s.length){
+      h+='<div class="intoc">'+it.s.map(s=>'<span>'+esc(s)+'</span>').join('')+'</div>'+
+         '<p class="nota">Estas frases son tuyas y no se tocan: entran tal cual.</p>';
+    }
+    if(it.d&&it.d.length){
+      h+='<p class="nota">'+it.d.map(esc).join(' · ')+'</p>';
+    }
+    h+='</div>';
+  }
+  $('fuente').innerHTML=h;
+
+  $('ta').value=txt[i]||'';
+  $('ta').style.minHeight=it.largo?'62vh':'';
+  $('meta').textContent=it.w?('referencia: '+it.w+' palabras'):'';
+  cuenta();
+  $('ant').disabled=(i===0);
+  $('sig').textContent=(i===P.length-1)?'Volver al principio':'Siguiente →';
+  pintaMarcas();
+  window.scrollTo(0,0);
+}
+function cuenta(){
+  const n=pal($('ta').value);
+  $('cuenta').textContent=n===1?'1 palabra':n+' palabras';
+  $('ta').classList.toggle('vivo',n>0);
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function estado(k){const n=pal(txt[k]); return n===0?'':(n<8?'marcha':'escrito');}
+function pintaMarcas(){
+  $('marcas').innerHTML=P.map((_,k)=>{
+    const e=estado(k); const cls=(k===i)?'aqui':(e==='escrito'?'hecho':'');
+    return '<i class="'+cls+'"></i>';
+  }).join('');
+}
+function pintaLista(){
+  let h=''; let ult=null;
+  P.forEach((p,k)=>{
+    if(p.u.t!==ult){ h+='<div class="grupo">'+esc(p.u.t)+'</div>'; ult=p.u.t; }
+    const e=estado(k);
+    const et=e==='escrito'?'escrito':(e==='marcha'?'empezado':'sin empezar');
+    const t=p.it.b?p.it.b:p.it.t;
+    h+='<button class="fila '+e+(k===i?' actual':'')+'" data-k="'+k+'">'+
+       '<span class="num">'+(k+1)+'</span>'+
+       '<span class="txt">'+esc(t)+'</span>'+
+       '<span class="est"><span class="sig"></span>'+et+'</span></button>';
+  });
+  $('lista').innerHTML=h;
+  $('lista').querySelectorAll('.fila').forEach(b=>{
+    b.onclick=()=>{ i=+b.dataset.k; $('hoja').hidden=true; guardaLocal(); pinta(); };
+  });
+}
+
+$('ta').addEventListener('input',()=>{ txt[i]=$('ta').value; cuenta(); pintaMarcas(); programa(); });
+$('ant').onclick=()=>{ if(i>0){i--; guardaLocal(); pinta(); guardaRemoto();} };
+$('sig').onclick=()=>{ i=(i+1)%P.length; guardaLocal(); pinta(); guardaRemoto(); };
+$('abrir').onclick=()=>{ pintaLista(); $('hoja').hidden=false; };
+$('cerrar').onclick=()=>{ $('hoja').hidden=true; };
+document.addEventListener('visibilitychange',()=>{ if(document.hidden&&sucio) guardaRemoto(); });
+window.addEventListener('pagehide',()=>{ guardaLocal(); });
+
+$('reglas').innerHTML=REGLAS.map(r=>'<li>'+esc(r)+'</li>').join('');
+pinta();
+marcaEstado('Guardando solo en este móvil…');
+$('guardado').classList.add('local');
+
+(async()=>{
+  try{
+    const d=await claude.use('db');
+    if(!d){ marcaEstado('Guardado solo en este móvil'); return; }
+    db=d; ref=db.doc('umbral/estado');
+    const snap=await ref.get();
+    if(snap.exists){
+      const rem=snap.data()||{};
+      const rt=rem.txt||{};
+      // el servidor manda salvo donde este movil tenga texto y el servidor no
+      let mezcla={}; 
+      for(let k=0;k<P.length;k++){
+        const a=rt[k]||'', b=txt[k]||'';
+        mezcla[k]= pal(a)>=pal(b) ? a : b;
+      }
+      txt=mezcla;
+      if(typeof rem.i==='number' && !localStorage.getItem(K)) i=rem.i;
+      $('ta').value=txt[i]||'';
+  $('ta').style.minHeight=it.largo?'62vh':'';
+      cuenta(); pintaMarcas(); guardaLocal();
+    }
+    $('guardado').classList.remove('local');
+    marcaEstado('Guardado a salvo · '+hora());
+  }catch(e){
+    marcaEstado('Guardado solo en este móvil');
+  }
+})();
+</script>
