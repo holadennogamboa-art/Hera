@@ -17,6 +17,19 @@ Necesito algo de tiempo para observar mi entorno; ya no tengo dónde ocultarme, 
 
 ---
 
+## Decisión del autor: el estribillo
+
+La repetición es **deliberada**: funciona como el estribillo de una canción.
+
+- *«Necesito algo de tiempo para…»* abre los dos párrafos.
+- *«he viajado demasiado para cambiar esta existencia solitaria»* vuelve entera.
+
+**No se corrige en ninguna revisión.** Y ya tiene lo que hace que un estribillo esté vivo:
+vuelve igual pero no idéntico —la primera vez es *para reflexionar*, la segunda *para
+observar mi entorno*. Esa pequeña variación es el movimiento de la carta.
+
+Encaja con la serie: la canción vive en la carrera, y el Prelude ya está escrito como una.
+
 ## El universo, según esta decisión
 
 **Darío** es el hilo que atraviesa las tres obras:
