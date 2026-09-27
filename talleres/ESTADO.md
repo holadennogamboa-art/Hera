@@ -21,8 +21,8 @@ dejan de hablarse.
 | [T1](T1-golpe-de-estado.md) | **Golpe de estado** | Novela cerrada, corrigiendo | 4,5 | Párrafo 12 del capítulo 7 |
 | [T2](T2-verde-agua.md) | **Verde agua** | Taller montado, sin abrir | 6 | El umbral, paso 1 de 15 |
 | [T3](T3-hera.md) | **HERA · marca** | Cadencia | 3 | Calendario editorial de la semana |
-| [T4](T4-verder.md) | **Auditor GEO** | **Giro a hoteles 4-5★** | 3 | Comprar heraaistudio.com |
-| [T5](T5-skin-lab.md) | **HERA Skin Lab** | Remodelada · sin público nuevo | 1,5 | Primer antes/después en Stories |
+| [T4](T4-verder.md) | **Auditor GEO** | **Hoteles 4-5★ · web viva · GHI 6/10, Orfila 0/8** | 3 | Correo denno@heraaistudio.com (iCloud+) → informe GHI → escribir GHI 1 oct |
+| [T5](T5-skin-lab.md) | **HERA Skin Lab** | **heraskinlab.com · Glow · Lucía y karla embudo completo** | 1,5 | Publicar vídeo Glow → escribir a Lucía, karla y vicky |
 | [T6](T6-kierck.md) | **Kierck** | Biblia en construcción | 1,5 | Fijar la primera frase de ella |
 | [T7](T7-encargos.md) | **Encargos y outreach** | **Atascado en enviar** | 1,5 | [La cola](t7-encargos/COLA-DE-ENVIO.md), correo nº 1 |
 | [T8](T8-direccion.md) | **Dirección** | — | 1,5 | Revisión del viernes |
