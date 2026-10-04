@@ -160,6 +160,7 @@ body.gl header{border-color:oklch(78% 0.045 80 / .15)}
   <div class="reloj" id="reloj"><span class="t" id="rt">0:00</span><span class="m" id="rm">en marcha</span><span class="wl" id="wl"></span></div>
   <div class="meta" id="meta"></div>
   <div class="acciones" id="acc"></div>
+  <div class="correo" id="pide" hidden><div class="cab"><p class="donde" id="pidest">Claude está escribiendo…</p></div><pre id="pidet"></pre><div class="acciones" style="padding:12px 16px;border-top:1px solid var(--line)"><button class="small" id="pideC">Copiar</button><button class="small" id="pideS">Parar</button></div></div>
 </div>
 
 <div class="rescate"><details><summary>Si no arrancas</summary>
@@ -306,9 +307,13 @@ function pinta(){
     $('acc').innerHTML=(empezado?'':'<button class="lima" id="bE">Empezar ahora</button>')+
       (x.cola?'':'<button class="'+(empezado?'lima':'')+'" id="bH">Hecho · siguiente</button>')+
       (empezado&&'documentPictureInPicture' in window?'<button class="small" id="bF">Ventana flotante</button>':'')+
+      (/Claude/.test((x.t||'')+(x.q||''))?'<button class="lima" id="bC">✦ Pídeselo a Claude</button>':'')+
+      (window.Notification&&Notification.permission==='default'?'<button class="small" id="bN">Avisarme</button>':'')+
       (empezado&&VOZ?'<button class="small" id="bV">🎙 Dónde lo dejo</button>':'')+
       '<button class="small" id="bS">Hoy no puedo con esto</button>'+(P.n&&P.n[i]?'<p class="porque" style="width:100%;margin:8px 0 0"><b>Lo dejaste en:</b> '+esc(P.n[i])+'</p>':'');
     if($('bF'))$('bF').onclick=()=>flotante(x,i);
+    if($('bC'))$('bC').onclick=()=>pideClaude(x,$('bC'));
+    if($('bN'))$('bN').onclick=()=>{try{Notification.requestPermission().then(()=>pinta());}catch(_){}};
     if($('bV'))$('bV').onclick=()=>dictar(i,$('bV'));
     if($('bE'))$('bE').onclick=()=>{ORO.ondear($('bE'));P.s[i]=Date.now();guarda();conTransicion(pinta);};
     if($('bH'))$('bH').onclick=()=>{ORO.ondear($('bH'));P.h[i]=true;guarda();conTransicion(pinta);scrollTo({top:0});};
@@ -375,6 +380,46 @@ async function flotante(x,i){
     pip.addEventListener('pagehide',()=>{clearInterval(iv);pip=null;});
   }catch(_){}
 }
+/* Pídeselo a Claude: el borrador sale aquí, en tu voz (capacidad sample) */
+let ctrl=null;
+async function pideClaude(x,btn){
+  const sample=await claude.use('sample'); const box=$('pide'),out=$('pidet'),st=$('pidest');
+  if(!sample){btn.hidden=true;return;}
+  const pr=(INFO.proyectos||[]).find(p=>p.n===x.f||String(x.f).includes(p.n)||p.n.includes(x.f))||{};
+  const prompt=`Eres el asistente de Denno Gamboa (HERA AI Studio, Madrid; correo denno@heraaistudio.com). Redacta el mensaje que pide esta tarea, listo para copiar y enviar.
+Reglas de su voz: español natural de España salvo que el destinatario escriba en inglés; frases cortas; nada de adjetivos de folleto ni tono de IA; una sola idea por mensaje; cierre «Si no es el momento, dímelo y no insisto.»; firma «Denno Gamboa · HERA AI Studio». No inventes datos, cifras ni fechas: si falta uno, déjalo como [corchete]. Nunca nombres a la maison del NDA: di «una maison del grupo LVMH».
+TAREA: ${x.t.replace(/\*\*/g,'')}
+CONTEXTO: ${(x.q||'').replace(/\*\*/g,'')}
+PROYECTO: ${pr.n||x.f} · ${pr.cifra||''} · ${pr.donde||''}
+Si es un correo, da primero «Asunto:» y luego el cuerpo. Si es LinkedIn, máximo 300 caracteres. Solo el mensaje, sin comentarios.`;
+  box.hidden=false;out.textContent='';st.textContent='Claude está pensando…';
+  ctrl=new AbortController();$('pideS').onclick=()=>ctrl&&ctrl.abort();
+  $('pideC').onclick=()=>copiar(out.textContent,$('pideC'),'Copiar');
+  try{const r=await sample(prompt,{signal:ctrl.signal,cache:false,onText:({text})=>{out.textContent=text;st.textContent='Escribiendo…';}});
+    out.textContent=r.text;st.textContent='Borrador listo. Léelo, cambia lo que no sea tuyo y envía.';}
+  catch(e){if(e&&e.text)out.textContent=e.text;
+    st.textContent=e&&e.code==='not_granted'?'Sin permiso: pídelo en el hilo.':e&&e.code==='cancelled'?'Parado.':e&&e.code==='rate_limited'?'Demasiadas peticiones: espera un minuto.':'No ha salido. Pídelo en el hilo.';}
+  ctrl=null;
+}
+/* Avisos: 10 min antes de una hora fija (12:00, 9:30…), a los 25 min y al acabar el bloque */
+const avisado=new Set();
+function avisa(clave,txt){
+  if(avisado.has(clave))return;avisado.add(clave);
+  try{if(window.Notification&&Notification.permission==='granted')new Notification('HERA · Una cosa',{body:txt,tag:clave});}catch(_){}
+  try{const a=new AudioContext(),o=a.createOscillator(),g=a.createGain();o.frequency.value=660;g.gain.setValueAtTime(.08,a.currentTime);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+1.2);o.connect(g).connect(a.destination);o.start();o.stop(a.currentTime+1.2);}catch(_){}
+  if(document.hidden){const t0=document.title;document.title='● '+txt;addEventListener('focus',()=>document.title=t0,{once:true});}
+}
+function vigila(){
+  const B=PLAN[hoy()]||[],P=D(),now=new Date();
+  B.forEach((x,k)=>{if(P.h[k])return;const m=String(x.t).match(/(\d{1,2}):(\d{2})/);if(!m)return;
+    const h=new Date();h.setHours(+m[1],+m[2],0,0);const d=(h-now)/60000;
+    if(d<=10&&d>-5)avisa(hoy()+k+'hora',m[0]+' · '+String(x.t).replace(/\*\*/g,''));});
+  let i=-1;for(let k=0;k<B.length;k++)if(!P.h[k]){i=k;break;}
+  if(i>=0&&P.s[i]){const min=(Date.now()-P.s[i])/60000,dur=parseInt(B[i].dur)||90;
+    if(min>=25)avisa(hoy()+i+'25','25 minutos: el día ya cuenta. Sigue si puedes.');
+    if(min>=dur)avisa(hoy()+i+'fin','Bloque cumplido. Marca «Hecho» y pasa al siguiente.');}
+}
+setInterval(()=>{try{vigila();}catch(_){}},30000);
 let tick=null;
 function reloj(){
   clearInterval(tick);
