@@ -143,6 +143,15 @@ body.gl header{border-color:oklch(78% 0.045 80 / .15)}
  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),oklch(90% 0.05 85 / .10),transparent 60%)}
 .ahora:hover::after{opacity:1}
 @media (hover:none){.ahora::after{display:none}}
+.ocio{background:var(--surface);border:1px solid var(--line);padding:18px}
+body.gl .ocio{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
+.ocio h3{font-family:var(--serif);font-weight:400;font-size:28px;margin:0}.ocio .aut{color:var(--soft);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.barra{height:3px;background:var(--line);margin:14px 0 6px}.barra i{display:block;height:100%;background:var(--gold)}
+.ocio input,.ocio textarea,.ocio select{font:inherit;font-size:15px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:9px 10px;width:100%}
+.ocio .fila{display:grid;grid-template-columns:110px 110px 1fr;gap:8px;margin:12px 0 8px}
+.ocio textarea{min-height:76px;resize:vertical}
+.nota{border-top:1px solid var(--line);padding:11px 0;font-size:14.5px;color:var(--soft)}.nota b{font-family:var(--mono);font-size:10.5px;color:var(--gold-dim);letter-spacing:.1em;margin-right:8px;font-weight:400}.nota .para{color:var(--gold)}
+@media (max-width:560px){.ocio .fila{grid-template-columns:1fr 1fr}.ocio .fila select{grid-column:1/-1}}
 </style>
 
 <canvas id="oro" aria-hidden="true"></canvas>
@@ -174,6 +183,7 @@ body.gl header{border-color:oklch(78% 0.045 80 / .15)}
 <div class="mrz" id="mrz" aria-label="Registro del día, legible por máquina"></div>
 <section><h2>Los proyectos</h2><p class="h2sub">Cada uno con su siguiente paso concreto y dónde lo dejaste.</p><div class="proys" id="proys"></div></section>
 
+<section><h2>Ocio · lo que lees</h2><p class="h2sub">Leer también es trabajo de fondo. Lo que subrayas aquí vuelve a tus proyectos.</p><div class="ocio" id="ocio"></div></section>
 <footer>El plan lo carga Claude desde el hilo y esta página se actualiza sola. <span class="est" id="est">…</span></footer>
 </div>
 
@@ -420,6 +430,34 @@ function vigila(){
     if(min>=dur)avisa(hoy()+i+'fin','Bloque cumplido. Marca «Hecho» y pasa al siguiente.');}
 }
 setInterval(()=>{try{vigila();}catch(_){}},30000);
+/* Ocio: el libro, por dónde vas y lo que te llevas */
+let OCIO={libro:{t:'El año del pensamiento mágico',a:'Joan Didion',pag:0,total:0},notas:[]}, oref=null;
+try{const r=JSON.parse(localStorage.getItem(K+'-ocio')||'null');if(r)OCIO=r;}catch(_){}
+async function guardaOcio(){try{localStorage.setItem(K+'-ocio',JSON.stringify(OCIO));}catch(_){} if(oref)try{await oref.set(OCIO);}catch(_){}}
+function pintaOcio(){
+  const L=OCIO.libro,pc=L.total?Math.min(100,Math.round(L.pag/L.total*100)):0;
+  const ps=(INFO.proyectos||[]).map(p=>p.n);
+  $('ocio').innerHTML='<span class="aut">'+esc(L.a)+(L.fin?' · terminado el '+esc(L.fin):'')+'</span><h3>'+esc(L.t)+'</h3>'+
+   '<div class="barra"><i style="width:'+pc+'%"></i></div><div class="cifra">'+(L.total?'Página '+L.pag+' de '+L.total+' · '+pc+' %':'Pon el total de páginas de tu edición para ver el avance')+'</div>'+
+   '<div class="fila"><input id="oP" type="number" inputmode="numeric" placeholder="Voy por la pág." value="'+(L.pag||'')+'"><input id="oT" type="number" inputmode="numeric" placeholder="Total págs." value="'+(L.total||'')+'"><select id="oX"><option value="">¿Para qué proyecto?</option>'+ps.map(n=>'<option>'+esc(n)+'</option>').join('')+'<option>Para todo</option></select></div>'+
+   '<textarea id="oN" placeholder="Una frase, una imagen, lo que te ha hecho pensar. Cita entre comillas."></textarea>'+
+   '<div class="acciones" style="margin:10px 0 6px"><button class="lima" id="oG">Guardar</button>'+(VOZ?'<button class="small" id="oV">🎙 Dictar</button>':'')+(OCIO.notas.length>=3?'<button class="small" id="oQ">✦ Qué me llevo</button>':'')+(L.fin?'':'<button class="small" id="oF">Lo terminé</button>')+'</div>'+
+   '<pre id="oR" class="nota" style="white-space:pre-wrap;font-family:var(--body)" hidden></pre>'+
+   OCIO.notas.slice().reverse().map(n=>'<div class="nota"><b>'+esc(n.f)+(n.p?' · p. '+esc(n.p):'')+'</b>'+esc(n.q)+(n.para?' <span class="para">→ '+esc(n.para)+'</span>':'')+'</div>').join('');
+  $('oG').onclick=()=>{L.pag=+$('oP').value||L.pag;L.total=+$('oT').value||L.total;const q=$('oN').value.trim();
+    if(q)OCIO.notas.push({f:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short'}),p:L.pag||'',q,para:$('oX').value});
+    guardaOcio();pintaOcio();};
+  if($('oV'))$('oV').onclick=()=>{const r=new VOZ();r.lang='es-ES';$('oV').textContent='🎙 Escuchando…';r.onresult=e=>{$('oN').value+=(($('oN').value?' ':'')+e.results[0][0].transcript);};r.onend=r.onerror=()=>{if($('oV'))$('oV').textContent='🎙 Dictar';};try{r.start();}catch(_){}};
+  if($('oF'))$('oF').onclick=()=>{L.fin=new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long'});if(L.total)L.pag=L.total;guardaOcio();pintaOcio();};
+  if($('oQ'))$('oQ').onclick=async()=>{const sample=await claude.use('sample'),o=$('oR');if(!sample){$('oQ').hidden=true;return;}
+    o.hidden=false;o.textContent='Claude está leyendo tus notas…';
+    const pr=`Denno es escritor y director creativo (HERA, Madrid). Proyectos: ${(INFO.proyectos||[]).map(p=>p.n+' ('+String(p.donde||'').replace(/\*\*/g,'')+')').join('; ')}.
+Está leyendo «${L.t}» de ${L.a}. Estas son SUS notas de lectura:
+${OCIO.notas.map(n=>'- p.'+(n.p||'?')+': '+n.q+(n.para?' [para '+n.para+']':'')).join('\n')}
+Devuelve, en español y en frases secas, sin adjetivos de más: por cada proyecto donde encaje, 1–2 ideas concretas que puede llevarse (una técnica de escritura, una imagen, una decisión de estructura), siempre partiendo de SUS notas. No escribas su prosa por él: diagnostica y señala, él reescribe. Formato: «Proyecto — idea». Máximo 8 líneas.`;
+    try{const r=await sample(pr,{cache:false,onText:({text})=>{o.textContent=text;}});o.textContent=r.text;}
+    catch(e){o.textContent=e&&e.code==='not_granted'?'Sin permiso. Pídelo en el hilo.':'No ha salido. Pídelo en el hilo.';}};
+}
 let tick=null;
 function reloj(){
   clearInterval(tick);
@@ -443,17 +481,20 @@ function reloj(){
   };
   f(); tick=setInterval(f,1000);
 }
-pinta(); est('· conectando…',true);
+pinta(); pintaOcio(); est('· conectando…',true);
 (async()=>{
   try{
     const db=await claude.use('db'); if(!db){est('· guardado solo en este dispositivo',true);return;}
     const plan=db.doc('plan/dias'), info=db.doc('panel/info'); pref=db.doc('plan/progreso'); cref=db.doc('cola/estado');
-    const [a,b,c,d]=await Promise.all([plan.get(),info.get(),pref.get(),cref.get()]);
+    oref=db.doc('ocio/lectura');
+    const [a,b,c,d,o]=await Promise.all([plan.get(),info.get(),pref.get(),cref.get(),oref.get()]);
+    if(o.exists)OCIO=o.data(); else guardaOcio();
+    oref.onSnapshot(s=>{if(s.exists&&document.activeElement.closest&&!document.activeElement.closest('#ocio')){OCIO=s.data();pintaOcio();}},()=>{});
     if(a.exists&&a.data().dias)PLAN=a.data().dias;
     if(b.exists)INFO=b.data();
     if(c.exists){const r=c.data().dias||{};Object.keys(r).forEach(f=>{const x=prog[f]||{h:{},s:{}};prog[f]={h:Object.assign({},r[f].h||{},x.h),s:Object.assign({},r[f].s||{},x.s),n:Object.assign({},r[f].n||{},x.n||{})};});}
     if(d.exists){const r=d.data();Object.keys(r.ok||{}).forEach(k=>{if(r.ok[k])ok[k]=true});Object.keys(r.post||{}).forEach(k=>{if(r.post[k]&&!ok[k])post[k]=true});}
-    local();pinta();est('· plan al día');
+    local();pinta();pintaOcio();est('· plan al día');
     plan.onSnapshot(s=>{if(s.exists&&s.data().dias){PLAN=s.data().dias;local();pinta();}},()=>{});
     info.onSnapshot(s=>{if(s.exists){INFO=s.data();local();pinta();}},()=>{});
   }catch(e){est('· guardado solo en este dispositivo',true);}
