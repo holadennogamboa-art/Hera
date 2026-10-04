@@ -305,14 +305,18 @@ function pinta(){
     const empezado=P.s[i];ORO.energia(empezado?.55:.15);
     $('acc').innerHTML=(empezado?'':'<button class="lima" id="bE">Empezar ahora</button>')+
       (x.cola?'':'<button class="'+(empezado?'lima':'')+'" id="bH">Hecho · siguiente</button>')+
-      '<button class="small" id="bS">Hoy no puedo con esto</button>';
+      (empezado&&'documentPictureInPicture' in window?'<button class="small" id="bF">Ventana flotante</button>':'')+
+      (empezado&&VOZ?'<button class="small" id="bV">🎙 Dónde lo dejo</button>':'')+
+      '<button class="small" id="bS">Hoy no puedo con esto</button>'+(P.n&&P.n[i]?'<p class="porque" style="width:100%;margin:8px 0 0"><b>Lo dejaste en:</b> '+esc(P.n[i])+'</p>':'');
+    if($('bF'))$('bF').onclick=()=>flotante(x,i);
+    if($('bV'))$('bV').onclick=()=>dictar(i,$('bV'));
     if($('bE'))$('bE').onclick=()=>{ORO.ondear($('bE'));P.s[i]=Date.now();guarda();conTransicion(pinta);};
     if($('bH'))$('bH').onclick=()=>{ORO.ondear($('bH'));P.h[i]=true;guarda();conTransicion(pinta);scrollTo({top:0});};
     $('bS').onclick=()=>{P.h[i]='saltado';guarda();conTransicion(pinta);scrollTo({top:0});};
     reloj();
   }
   $('diasub').textContent=B.length?(B.length+' bloques. Uno a la vez, en este orden. Vas por el '+(i===-1?B.length:i+1)+'.'):'';
-  $('bloques').innerHTML=B.map((x,k)=>'<div class="bq '+(P.h[k]?'ya':(k===i?'on':''))+'"><div class="n">'+esc(x.b)+'</div><div class="q">'+esc(x.f)+'<i>'+esc(String(x.t).replace(/\*\*/g,''))+'</i></div>'+(P.h[k]?'<div class="sello'+(P.h[k]==='saltado'?' skip':'')+'">'+(P.h[k]==='saltado'?'HOY<br>NO':'HERA<br>HECHO')+'</div>':'<div class="t">'+esc(x.dur||'90 min')+'</div>')+'</div>').join('');
+  $('bloques').innerHTML=B.map((x,k)=>'<div class="bq '+(P.h[k]?'ya':(k===i?'on':''))+'"><div class="n">'+esc(x.b)+'</div><div class="q">'+esc(x.f)+'<i>'+esc(String(x.t).replace(/\*\*/g,''))+'</i></div>'+(P.h[k]?'<div class="sello'+(P.h[k]==='saltado'?' skip':'')+'">'+(P.h[k]==='saltado'?'HOY<br>NO':'HERA<br>HECHO')+'</div>':'<div class="t">'+esc(x.dur||'90 min')+'</div>')+'</div>'+(P.n&&P.n[k]?'<div class="q" style="padding:0 0 10px 64px;opacity:.75"><i>Lo dejaste en: '+esc(P.n[k])+'</i></div>':'')).join('');
   mrz(B,P);
   $('logros').innerHTML=(INFO.logros||[]).map(l=>'<div class="logro"><span class="f">'+esc(l.f)+'</span><span class="q">'+b2(l.q)+'</span></div>').join('');
   $('proys').innerHTML=(INFO.proyectos||[]).map(p=>'<article class="pr"><div class="pr-top"><h3><span class="id">'+esc(p.id)+'</span>'+esc(p.n)+'</h3><span class="estado '+esc(p.e)+'">'+esc(p.el)+'</span></div><p class="paso">'+b2(p.paso)+'</p>'+(p.cifra?'<div class="cifra">'+b2(p.cifra)+'</div>':'')+'<div class="donde2"><em>Dónde lo dejaste</em>'+b2(p.donde)+'</div></article>').join('');
@@ -349,6 +353,28 @@ function pintaCorreo(){
   $('cE').onclick=()=>{ORO.ondear($('cE'));ok[i]=true;const B=PLAN[hoy()]||[];const P=D();for(let k=0;k<B.length;k++)if(B[k].cola&&!P.h[k]){P.h[k]=true;break;}guarda();pinta();scrollTo({top:0});};
   $('cA').onclick=()=>{post[i]=true;guarda();pinta();};
 }
+/* Voz: dicta dónde lo dejas, sin teclear (Web Speech API) */
+const VOZ=window.SpeechRecognition||window.webkitSpeechRecognition;
+function dictar(i,btn){
+  const r=new VOZ();r.lang='es-ES';r.interimResults=false;btn.textContent='🎙 Escuchando…';
+  r.onresult=e=>{const P=D();P.n=P.n||{};P.n[i]=e.results[0][0].transcript;guarda();pinta();};
+  r.onerror=r.onend=()=>{btn.textContent='🎙 Dónde lo dejo';};
+  try{r.start();}catch(_){btn.textContent='🎙 Dónde lo dejo';}
+}
+/* Ventana flotante: la tarea y el reloj quedan encima de cualquier app (Document Picture-in-Picture, Chrome) */
+let pip=null;
+async function flotante(x,i){
+  try{
+    if(pip){pip.close();pip=null;return;}
+    pip=await documentPictureInPicture.requestWindow({width:340,height:190});
+    const d=pip.document;
+    d.body.innerHTML='<style>body{margin:0;padding:16px;font:15px/1.35 system-ui;background:#0e0d0b;color:#efe6d2}b{color:#d8b56a}.t{font:600 34px ui-monospace,monospace;color:#d8b56a;margin:8px 0}button{font:inherit;padding:8px 14px;border-radius:99px;border:0;background:#d8b56a;color:#0e0d0b;cursor:pointer}</style><div>'+b2(x.t)+'</div><div class="t" id="t">0:00</div><button id="h">Hecho</button>';
+    const s=D().s[i],up=()=>{const g=Math.floor((Date.now()-s)/1000);d.getElementById('t').textContent=Math.floor(g/60)+':'+String(g%60).padStart(2,'0');};
+    up();const iv=setInterval(up,1000);
+    d.getElementById('h').onclick=()=>{const P=D();P.h[i]=true;guarda();pinta();pip.close();};
+    pip.addEventListener('pagehide',()=>{clearInterval(iv);pip=null;});
+  }catch(_){}
+}
 let tick=null;
 function reloj(){
   clearInterval(tick);
@@ -380,7 +406,7 @@ pinta(); est('· conectando…',true);
     const [a,b,c,d]=await Promise.all([plan.get(),info.get(),pref.get(),cref.get()]);
     if(a.exists&&a.data().dias)PLAN=a.data().dias;
     if(b.exists)INFO=b.data();
-    if(c.exists){const r=c.data().dias||{};Object.keys(r).forEach(f=>{const x=prog[f]||{h:{},s:{}};prog[f]={h:Object.assign({},r[f].h||{},x.h),s:Object.assign({},r[f].s||{},x.s)};});}
+    if(c.exists){const r=c.data().dias||{};Object.keys(r).forEach(f=>{const x=prog[f]||{h:{},s:{}};prog[f]={h:Object.assign({},r[f].h||{},x.h),s:Object.assign({},r[f].s||{},x.s),n:Object.assign({},r[f].n||{},x.n||{})};});}
     if(d.exists){const r=d.data();Object.keys(r.ok||{}).forEach(k=>{if(r.ok[k])ok[k]=true});Object.keys(r.post||{}).forEach(k=>{if(r.post[k]&&!ok[k])post[k]=true});}
     local();pinta();est('· plan al día');
     plan.onSnapshot(s=>{if(s.exists&&s.data().dias){PLAN=s.data().dias;local();pinta();}},()=>{});
