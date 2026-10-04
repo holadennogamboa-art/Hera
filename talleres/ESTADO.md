@@ -3,6 +3,8 @@
 > Se regenera cada **viernes en el bloque de Dirección**. Todo lo que no esté aquí, no
 > existe para el sistema. Última actualización: **23 de septiembre de 2026**.
 
+> **4 oct · calendario de envíos:** web de la novela ya fuera de Vercel. The Receipt → Berlin esta semana. Golpe → Castillo-Puche (20 nov) y Juan March (20 ene). Verde agua → Writers Campus Series Mania (oct, requiere prueba de experiencia). Ver fuentes/CALENDARIO-ENVIOS-OTONO-2026.md
+
 ## La regla que hace que esto funcione
 
 > **El hilo es donde se piensa. El repositorio es donde queda.**
@@ -21,8 +23,8 @@ dejan de hablarse.
 | [T1](T1-golpe-de-estado.md) | **Golpe de estado** | Novela cerrada, corrigiendo | 4,5 | Párrafo 12 del capítulo 7 |
 | [T2](T2-verde-agua.md) | **Verde agua** | Taller montado, sin abrir | 6 | El umbral, paso 1 de 15 |
 | [T3](T3-hera.md) | **HERA · marca** | Cadencia | 3 | Calendario editorial de la semana |
-| [T4](T4-verder.md) | **Auditor GEO** | **Hoteles 4-5★ · web viva · GHI 6/10, Orfila 0/8** | 3 | Correo denno@heraaistudio.com (iCloud+) → informe GHI → escribir GHI 1 oct |
-| [T5](T5-skin-lab.md) | **HERA Skin Lab** | **heraskinlab.com · Glow · Lucía y karla embudo completo** | 1,5 | Publicar vídeo Glow → escribir a Lucía, karla y vicky |
+| [T4](T4-verder.md) | **Auditor GEO** | **Hoteles 4-5★ · web viva · GHI 6/10, Orfila 0/8** | 3 | Lun 5 visita SI SI · mar 6 correo a Raúl Lizón (GHI) · mié 7 Orfila |
+| [T5](T5-skin-lab.md) | **HERA Skin Lab** | **heraskinlab.com · Glow · Lucía y karla embudo completo** | 1,5 | Publicar insignia o vídeo Glow (desde el 28 nadie nuevo) |
 | [T6](T6-kierck.md) | **Kierck** | Biblia en construcción | 1,5 | Fijar la primera frase de ella |
 | [T7](T7-encargos.md) | **Encargos y outreach** | **Atascado en enviar** | 1,5 | [La cola](t7-encargos/COLA-DE-ENVIO.md), correo nº 1 |
 | [T8](T8-direccion.md) | **Dirección** | — | 1,5 | Revisión del viernes |

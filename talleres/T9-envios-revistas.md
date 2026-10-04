@@ -77,3 +77,6 @@ secuencia narrativa. Nada del pipeline generativo, nada de Skin Lab.
       Respuesta hasta seis meses: **marzo de 2027**. Nada que hacer hasta entonces.
 - [ ] Serie de 5 fotografías reales en PDF.
 - [ ] Enviado a Brooklyn Review.
+
+## 4 oct · calendario otoño
+Ver fuentes/CALENDARIO-ENVIOS-OTONO-2026.md. Web de la novela ya retirada de Vercel. Esta semana: enviar The Receipt a Berlin Literary Review. Castillo-Puche hacia 20 nov, Juan March hacia 20 ene.

@@ -170,3 +170,8 @@ se ofrece el diagnóstico; no se promete que arreglar el código cambie el resul
 Web viva (heraaistudio.com hasta 23-sep-2027). 15 hoteles auditados. Medición 25 sep: Gran Hotel Inglés 6/10, Orfila 0/8.
 **Siguiente:** correo denno@heraaistudio.com (iCloud+ → dominio personalizado → captura DNS). Luego: informe GHI → escribir GHI 1 oct → aviso legal (falta NIF y dirección) → 14 hoteles de tu hermana → 5 contactos/día desde 5 oct, empieza Orfila. Precios: diagnóstico gratis, 900 € set-up, 390 €/mes, mitad los 3 primeros.
 Fuente: fuentes/INFORME-AUDITOR-GEO-26-SEP.md
+
+## 4 oct
+Correo denno@heraaistudio.com listo. Informes publicados: SI SI BAGELS, Gran Hotel Inglés, Orfila. Hermana: 1.ª lista (12 de 14), 2.ª (15 con encanto).
+Semana: lun 5 12:00 visita SI SI (Espíritu Santo; heraaistudio.com/r/0c4904f487/) · mar 6 9:30 correo a Raúl Lizón (GHI) · mié 7 LinkedIn a Covadonga Perera (Orfila) · jue/vie 3 contactos/día · diario 5 min Gmail + spam iCloud.
+Sin fecha: aviso legal (NIF, dirección), post LinkedIn, FITUR con tres casos.

@@ -134,3 +134,7 @@ Renders 24 · errores 0 · registrados 5 · han renderizado 2 · han descargado 
 Viva en heraskinlab.com. Modo Glow lanzado 25 sep. 62 renders, 0 errores. Lucía y karla completaron el embudo. Descargas firmadas C2PA (cert. de prueba). 8 vídeos listos en HERA PARA PUBLICAR.
 **Siguiente:** publicar Glow → escribir a Lucía, karla, vicky (prueba Glow) → Estefani, Rose, Mikel. Vigilar saldo Gemini (5 €). Código: promover c976ff8, rotar clave Gemini, cert. reconocido.
 Fuente: fuentes/DOSSIER-SKIN-LAB-26-SEP.md
+
+## 2 oct
+Arreglo iPhone funcionó: karla volvió el 27 y se llevó su foto Glow firmada. 70 renders (65 Editorial, 5 Glow). Se llevaron foto: 3. Desde el 28 nadie nuevo.
+**Siguiente (tuyo):** publicar la insignia o el vídeo Glow. Técnico, no urgente: medidor de tono en Glow (medir antes del brillo); un render cayó a local el 30.
