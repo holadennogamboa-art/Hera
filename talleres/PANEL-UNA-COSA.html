@@ -312,6 +312,7 @@ function pinta(){
     if(x.h){$('hechosi').hidden=false;$('hechosit').innerHTML=b2(x.h);}
     $('meta').innerHTML='<span><b>Proyecto</b> · '+esc(x.f)+'</span><span><b>Dura</b> · '+esc(x.dur||'90 min')+'</span>'+(x.u?'<span><b>Empieza en</b> · <a class="ir" href="'+esc(x.u)+'" target="_blank" rel="noopener">'+esc(x.ul||'abrir')+'</a></span>':'');
     $('minima').innerHTML=b2(x.min||'Abre lo que toca y lee la primera línea. Nada más.');
+    if(x.mat){$('correo').innerHTML='<div class="correo"><div class="cab"><p class="donde">Todo lo que necesitas, aquí</p></div><pre id="matT">'+esc(x.mat)+'</pre><div class="acciones" style="padding:12px 16px;border-top:1px solid var(--line)"><button class="small" id="matC">Copiar todo</button></div></div>';$('matC').onclick=()=>copiar(x.mat,$('matC'),'Copiar todo');}
     if(x.cola) pintaCorreo();
     const empezado=P.s[i];ORO.energia(empezado?.55:.15);
     $('acc').innerHTML=(empezado?'':'<button class="lima" id="bE">Empezar ahora</button>')+
