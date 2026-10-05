@@ -80,3 +80,6 @@ secuencia narrativa. Nada del pipeline generativo, nada de Skin Lab.
 
 ## 4 oct · calendario otoño
 Ver fuentes/CALENDARIO-ENVIOS-OTONO-2026.md. Web de la novela ya retirada de Vercel. Esta semana: enviar The Receipt a Berlin Literary Review. Castillo-Puche hacia 20 nov, Juan March hacia 20 ene.
+
+## 5 oct
+**The Receipt enviado a The Berlin Literary Review** (13:04, nº F24E362T1, 5,38 €). Respuesta ~90 días. Ahora está en Kenyon (desde 8 sep) y Berlin: si una acepta, avisar a la otra.
