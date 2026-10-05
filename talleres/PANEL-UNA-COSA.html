@@ -152,6 +152,47 @@ body.gl .ocio{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
 .ocio textarea{min-height:76px;resize:vertical}
 .nota{border-top:1px solid var(--line);padding:11px 0;font-size:14.5px;color:var(--soft)}.nota b{font-family:var(--mono);font-size:10.5px;color:var(--gold-dim);letter-spacing:.1em;margin-right:8px;font-weight:400}.nota .para{color:var(--gold)}
 @media (max-width:560px){.ocio .fila{grid-template-columns:1fr 1fr}.ocio .fila select{grid-column:1/-1}}
+/* ---- motion layer: reproductor, comandos, selector, racha ---- */
+:root{--spring:cubic-bezier(.34,1.56,.64,1);--ease:cubic-bezier(.2,.8,.2,1)}
+.pista{position:relative;flex-basis:100%;height:6px;border-radius:99px;background:oklch(100% 0 0 / .08);margin-top:6px;overflow:visible}
+.pista i{position:absolute;inset:0 auto 0 0;border-radius:99px;background:linear-gradient(90deg,var(--gold-dim),var(--gold));transition:width 1s linear}
+.pista b{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 4px oklch(78% 0.045 80 / .18),0 0 18px var(--gold);transition:left 1s linear}
+.reloj .resta{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--faint)}
+button{transition:transform .35s var(--spring),background .3s,border-color .3s,width .4s var(--ease),border-radius .4s var(--ease)}
+button:active{transform:scale(.94)}
+button.morf{border-radius:99px!important;background:var(--paper)!important;color:var(--gold-ink)!important;transform:scale(1.04)}
+.seg{position:relative;display:inline-flex;padding:4px;border-radius:99px;background:oklch(100% 0 0 / .05);border:1px solid var(--line);margin:0 0 14px}
+.seg button{position:relative;z-index:1;border:0;background:none;border-radius:99px;padding:9px 18px;font-size:10.5px;color:var(--soft)}
+.seg button[aria-pressed=true]{color:var(--gold-ink)}
+.seg .pill{position:absolute;top:4px;bottom:4px;border-radius:99px;background:var(--gold);transition:left .45s var(--spring),width .45s var(--spring)}
+.semana{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.dia{background:var(--surface);padding:12px 12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+body.gl .dia{background:oklch(18% 0.006 90 / .72)}
+.dia.hoy{box-shadow:inset 0 2px 0 var(--gold)}
+.dia h4{margin:0 0 4px;font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim)}
+.dia p{margin:0;font-size:12.5px;line-height:1.3;color:var(--soft);display:flex;gap:6px}
+.dia p.ok{color:var(--faint);text-decoration:line-through} .dia p span{font-family:var(--mono);font-size:10px;color:var(--faint);flex:none;padding-top:2px}
+.racha{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:end;background:var(--surface);border:1px solid var(--line);padding:18px 20px}
+body.gl .racha{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
+.racha .num{font-family:var(--display);font-weight:700;font-size:clamp(44px,7vw,68px);line-height:.9;font-variant-numeric:tabular-nums;color:var(--ink)}
+.racha .num small{display:block;font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:8px}
+.racha svg{width:100%;height:110px;overflow:visible;min-width:0}
+.racha .ln{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.racha .ar{fill:url(#rg);opacity:.5} .racha .gr{stroke:var(--line);stroke-width:1}
+.racha .tip{font-family:var(--mono);font-size:10px;fill:var(--gold-ink)} .racha .tipb{fill:var(--gold)}
+.racha .ax{font-family:var(--mono);font-size:9px;fill:var(--faint)}
+@media (max-width:560px){.racha{grid-template-columns:1fr}}
+.cmdk{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;border-radius:99px;background:oklch(20% 0.02 275 / .8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:oklch(78% 0.045 80 / .3);padding:13px 18px}
+.paleta[hidden],.semana[hidden],.bloques[hidden]{display:none!important}
+.paleta{position:fixed;inset:0;z-index:30;display:grid;place-items:start center;padding:12vh 16px 16px;background:oklch(10% 0 0 / .55);backdrop-filter:blur(6px)}
+.paleta .caja{width:min(560px,100%);background:oklch(21% 0.02 275 / .96);border:1px solid var(--card-line);border-radius:14px;overflow:hidden;box-shadow:0 40px 100px -30px #000;transform-origin:top center;animation:cae .32s var(--spring)}
+@keyframes cae{from{transform:scale(.94) translateY(-8px);opacity:0}}
+.paleta input{width:100%;border:0;border-bottom:1px solid var(--card-line);background:none;color:var(--ink);font:500 17px var(--body);padding:16px 18px;outline:none}
+.paleta ul{list-style:none;margin:0;padding:6px;max-height:50vh;overflow:auto}
+.paleta li{display:flex;justify-content:space-between;gap:12px;padding:11px 12px;border-radius:9px;cursor:pointer;font-size:15px;color:var(--soft)}
+.paleta li kbd{font-family:var(--mono);font-size:10px;color:var(--faint)}
+.paleta li.on{background:oklch(78% 0.045 80 / .14);color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.pista i,.pista b,.seg .pill{transition:none}.paleta .caja{animation:none}}
 </style>
 
 <canvas id="oro" aria-hidden="true"></canvas>
@@ -166,7 +207,7 @@ body.gl .ocio{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
   <div id="correo"></div>
   <div class="hecho-si" id="hechosi" hidden><b>Está hecho cuando</b><span id="hechosit"></span></div>
   <p class="empuje" id="empuje"></p>
-  <div class="reloj" id="reloj"><span class="t" id="rt">0:00</span><span class="m" id="rm">en marcha</span><span class="wl" id="wl"></span></div>
+  <div class="reloj" id="reloj"><span class="t" id="rt">0:00</span><span class="m" id="rm">en marcha</span><span class="wl" id="wl"></span><span class="resta" id="resta"></span><div class="pista" id="pista"><i id="pf" style="width:0"></i><b id="pk" style="left:0"></b></div></div>
   <div class="meta" id="meta"></div>
   <div class="acciones" id="acc"></div>
   <div class="correo" id="pide" hidden><div class="cab"><p class="donde" id="pidest">Claude está escribiendo…</p></div><pre id="pidet"></pre><div class="acciones" style="padding:12px 16px;border-top:1px solid var(--line)"><button class="small" id="pideC">Copiar</button><button class="small" id="pideS">Parar</button></div></div>
@@ -179,13 +220,16 @@ body.gl .ocio{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
 </details></div>
 
 <section><h2>Lo que ya has conseguido</h2><p class="h2sub">No es lo que falta. Es lo que ya existe porque lo hiciste tú.</p><div class="logros" id="logros"></div></section>
-<section><h2>El día</h2><p class="h2sub" id="diasub"></p><div class="bloques" id="bloques"></div></section>
+<section><h2>Tu racha</h2><p class="h2sub">Bloques cerrados, día a día. La línea solo puede subir si empiezas.</p><div class="racha" id="racha"></div></section>
+<section><h2>El día</h2><div class="seg" id="seg" role="group" aria-label="Vista"><span class="pill" id="segp"></span><button id="sgH" aria-pressed="true">Hoy</button><button id="sgS" aria-pressed="false">Semana</button></div><p class="h2sub" id="diasub"></p><div class="bloques" id="bloques"></div><div class="semana" id="semana" hidden></div></section>
 <div class="mrz" id="mrz" aria-label="Registro del día, legible por máquina"></div>
 <section><h2>Los proyectos</h2><p class="h2sub">Cada uno con su siguiente paso concreto y dónde lo dejaste.</p><div class="proys" id="proys"></div></section>
 
 <section><h2>Ocio · lo que lees</h2><p class="h2sub">Leer también es trabajo de fondo. Lo que subrayas aquí vuelve a tus proyectos.</p><div class="ocio" id="ocio"></div></section>
 <footer>El plan lo carga Claude desde el hilo y esta página se actualiza sola. <span class="est" id="est">…</span></footer>
 </div>
+<button class="cmdk" id="cmdk" aria-label="Comandos">⌘K · Comandos</button>
+<div class="paleta" id="paleta" hidden><div class="caja"><input id="pin" placeholder="Escribe: hecho, claude, dictar, semana…" autocomplete="off"><ul id="pls"></ul></div></div>
 
 <script>
 const C=[
@@ -327,13 +371,13 @@ function pinta(){
     if($('bN'))$('bN').onclick=()=>{try{Notification.requestPermission().then(()=>pinta());}catch(_){}};
     if($('bV'))$('bV').onclick=()=>dictar(i,$('bV'));
     if($('bE'))$('bE').onclick=()=>{ORO.ondear($('bE'));P.s[i]=Date.now();guarda();conTransicion(pinta);};
-    if($('bH'))$('bH').onclick=()=>{ORO.ondear($('bH'));P.h[i]=true;guarda();conTransicion(pinta);scrollTo({top:0});};
+    if($('bH'))$('bH').onclick=()=>morfa($('bH'),()=>{P.h[i]=true;guarda();conTransicion(pinta);scrollTo({top:0});});
     $('bS').onclick=()=>{P.h[i]='saltado';guarda();conTransicion(pinta);scrollTo({top:0});};
     reloj();
   }
   $('diasub').textContent=B.length?(B.length+' bloques. Uno a la vez, en este orden. Vas por el '+(i===-1?B.length:i+1)+'.'):'';
   $('bloques').innerHTML=B.map((x,k)=>'<div class="bq '+(P.h[k]?'ya':(k===i?'on':''))+'"><div class="n">'+esc(x.b)+'</div><div class="q">'+esc(x.f)+'<i>'+esc(String(x.t).replace(/\*\*/g,''))+'</i></div>'+(P.h[k]?'<div class="sello'+(P.h[k]==='saltado'?' skip':'')+'">'+(P.h[k]==='saltado'?'HOY<br>NO':'HERA<br>HECHO')+'</div>':'<div class="t">'+esc(x.dur||'90 min')+'</div>')+'</div>'+(P.n&&P.n[k]?'<div class="q" style="padding:0 0 10px 64px;opacity:.75"><i>Lo dejaste en: '+esc(P.n[k])+'</i></div>':'')).join('');
-  mrz(B,P);
+  mrz(B,P);racha();if(vista==='sem')semana();pista();
   $('logros').innerHTML=(INFO.logros||[]).map(l=>'<div class="logro"><span class="f">'+esc(l.f)+'</span><span class="q">'+b2(l.q)+'</span></div>').join('');
   $('proys').innerHTML=(INFO.proyectos||[]).map(p=>'<article class="pr"><div class="pr-top"><h3><span class="id">'+esc(p.id)+'</span>'+esc(p.n)+'</h3><span class="estado '+esc(p.e)+'">'+esc(p.el)+'</span></div><p class="paso">'+b2(p.paso)+'</p>'+(p.cifra?'<div class="cifra">'+b2(p.cifra)+'</div>':'')+'<div class="donde2"><em>Dónde lo dejaste</em>'+b2(p.donde)+'</div></article>').join('');
 }
@@ -459,6 +503,55 @@ Devuelve, en español y en frases secas, sin adjetivos de más: por cada proyect
     try{const r=await sample(pr,{cache:false,onText:({text})=>{o.textContent=text;}});o.textContent=r.text;}
     catch(e){o.textContent=e&&e.code==='not_granted'?'Sin permiso. Pídelo en el hilo.':'No ha salido. Pídelo en el hilo.';}};
 }
+/* ---------- motion layer ---------- */
+function morfa(btn,fn){if(!btn)return fn();btn.classList.add('morf');btn.textContent='✓ Hecho';ORO.ondear(btn);setTimeout(fn,matchMedia('(prefers-reduced-motion: reduce)').matches?0:520);}
+function pista(){const B=PLAN[hoy()]||[],P=D();let i=-1;for(let k=0;k<B.length;k++)if(!P.h[k]){i=k;break;}
+  if(i<0||!P.s[i])return;const dur=(parseInt(B[i].dur)||90)*60,g=Math.floor((Date.now()-P.s[i])/1000),f=Math.min(1,g/dur),r=Math.max(0,dur-g);
+  $('pf').style.width=(f*100)+'%';$('pk').style.left=(f*100)+'%';$('resta').textContent=r?'−'+Math.floor(r/60)+':'+String(r%60).padStart(2,'0'):'cumplido';}
+setInterval(pista,1000);
+let vista='hoy';
+function seg(){const b=vista==='hoy'?$('sgH'):$('sgS'),p=$('segp');p.style.left=b.offsetLeft+'px';p.style.width=b.offsetWidth+'px';
+  $('sgH').setAttribute('aria-pressed',vista==='hoy');$('sgS').setAttribute('aria-pressed',vista==='sem');
+  $('bloques').hidden=vista!=='hoy';$('diasub').hidden=vista!=='hoy';$('semana').hidden=vista!=='sem';if(vista==='sem')semana();}
+$('sgH').onclick=()=>{vista='hoy';seg();};$('sgS').onclick=()=>{vista='sem';seg();};
+addEventListener('resize',seg);if(document.fonts)document.fonts.ready.then(seg);
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function semana(){const d=new Date();d.setDate(d.getDate()-((d.getDay()+6)%7));let h='';
+  for(let k=0;k<7;k++){const f=iso(d),B=PLAN[f]||[],P=prog[f]||{h:{}};
+    h+='<div class="dia'+(f===hoy()?' hoy':'')+'"><h4>'+NOM[d.getDay()].slice(0,3)+' '+d.getDate()+'</h4>'+(B.length?B.map((x,j)=>'<p class="'+(P.h&&P.h[j]?'ok':'')+'"><span>'+esc(x.b)+'</span>'+esc(String(x.t).replace(/\*\*/g,''))+'</p>').join(''):'<p>Libre</p>')+'</div>';d.setDate(d.getDate()+1);}
+  $('semana').innerHTML=h;}
+function racha(){const N=14,d=new Date();d.setDate(d.getDate()-N+1);const v=[],lb=[];
+  for(let k=0;k<N;k++){const P=prog[iso(d)];v.push(P&&P.h?Object.values(P.h).filter(x=>x===true).length:0);lb.push(d.getDate());d.setDate(d.getDate()+1);}
+  const tot=Object.values(prog).reduce((a,P)=>a+(P&&P.h?Object.values(P.h).filter(x=>x===true).length:0),0);
+  const W=420,H=110,pad=14,mx=Math.max(4,...v),X=k=>pad+k*(W-2*pad)/(N-1),Y=y=>H-18-(y/mx)*(H-34);
+  const pts=v.map((y,k)=>[X(k),Y(y)]);let dd='M'+pts[0];for(let k=1;k<N;k++){const [a,b]=pts[k-1],[c,e]=pts[k],m=(a+c)/2;dd+=' C'+m+','+b+' '+m+','+e+' '+c+','+e;}
+  const [ex,ey]=pts[N-1];
+  $('racha').innerHTML='<div class="num"><span id="rn">0</span><small>bloques cerrados en total</small></div><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Bloques hechos por día, últimos 14 días"><defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--gold)"/><stop offset="1" stop-color="var(--gold)" stop-opacity="0"/></linearGradient></defs>'+
+   [0,.5,1].map(t=>'<line class="gr" x1="'+pad+'" x2="'+(W-pad)+'" y1="'+Y(mx*t)+'" y2="'+Y(mx*t)+'"/>').join('')+
+   '<path class="ar" d="'+dd+' L'+ex+','+(H-18)+' L'+pad+','+(H-18)+'Z"/><path class="ln" id="rl" d="'+dd+'"/><circle cx="'+ex+'" cy="'+ey+'" r="4.5" fill="var(--paper)"/>'+
+   '<rect class="tipb" x="'+(ex-40)+'" y="'+(ey-28)+'" width="40" height="18" rx="4"/><text class="tip" x="'+(ex-20)+'" y="'+(ey-15)+'" text-anchor="middle">hoy '+v[N-1]+'</text>'+
+   '<text class="ax" x="'+pad+'" y="'+H+'">'+lb[0]+'</text><text class="ax" x="'+(W-pad)+'" y="'+H+'" text-anchor="end">'+lb[N-1]+'</text></svg>';
+  const l=$('rl'),L=l.getTotalLength(),q=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!q){l.style.strokeDasharray=L;l.style.strokeDashoffset=L;l.getBoundingClientRect();l.style.transition='stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)';l.style.strokeDashoffset=0;}
+  const t0=performance.now(),go=t=>{const f=q?1:Math.min(1,(t-t0)/1100);$('rn').textContent=Math.round(tot*(1-Math.pow(1-f,3)));if(f<1)requestAnimationFrame(go);};requestAnimationFrame(go);}
+/* paleta de comandos */
+const CMD=[
+ ['Hecho · siguiente','H',()=>$('bH')&&$('bH').click()],['Empezar ahora','E',()=>$('bE')&&$('bE').click()],
+ ['Pídeselo a Claude','C',()=>$('bC')&&$('bC').click()],['Dictar dónde lo dejo','D',()=>$('bV')&&$('bV').click()],
+ ['Ventana flotante','F',()=>$('bF')&&$('bF').click()],['Hoy no puedo con esto','',()=>$('bS')&&$('bS').click()],
+ ['Ver la semana','S',()=>{vista='sem';seg();$('semana').scrollIntoView({behavior:'smooth'});}],['Ver hoy','',()=>{vista='hoy';seg();scrollTo({top:0,behavior:'smooth'});}],
+ ['Copiar el material','',()=>$('matC')&&$('matC').click()],['Ir a Ocio · lo que lees','L',()=>$('ocio').scrollIntoView({behavior:'smooth'})],
+ ['Ir a los proyectos','P',()=>$('proys').scrollIntoView({behavior:'smooth'})]];
+let sel=0,vis=[];
+function pl(){const q=$('pin').value.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');vis=CMD.filter(c=>c[0].toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q));sel=Math.min(sel,Math.max(0,vis.length-1));
+  $('pls').innerHTML=vis.map((c,k)=>'<li class="'+(k===sel?'on':'')+'" data-k="'+k+'">'+esc(c[0])+(c[1]?'<kbd>'+c[1]+'</kbd>':'')+'</li>').join('')||'<li>Nada con ese nombre</li>';}
+function abre(){$('paleta').hidden=false;$('pin').value='';sel=0;pl();$('pin').focus();}
+function cierra(){$('paleta').hidden=true;}
+function corre(k){const c=vis[k];cierra();if(c)c[2]();}
+$('cmdk').onclick=abre;$('paleta').onclick=e=>{if(e.target.id==='paleta')cierra();const li=e.target.closest('li[data-k]');if(li)corre(+li.dataset.k);};
+$('pin').oninput=()=>{sel=0;pl();};
+$('pin').onkeydown=e=>{if(e.key==='ArrowDown'){sel=Math.min(vis.length-1,sel+1);pl();e.preventDefault();}else if(e.key==='ArrowUp'){sel=Math.max(0,sel-1);pl();e.preventDefault();}else if(e.key==='Enter')corre(sel);else if(e.key==='Escape')cierra();};
+addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('paleta').hidden?abre():cierra();}});
 let tick=null;
 function reloj(){
   clearInterval(tick);
@@ -482,7 +575,7 @@ function reloj(){
   };
   f(); tick=setInterval(f,1000);
 }
-pinta(); pintaOcio(); est('· conectando…',true);
+pinta(); pintaOcio(); seg(); est('· conectando…',true);
 (async()=>{
   try{
     const db=await claude.use('db'); if(!db){est('· guardado solo en este dispositivo',true);return;}
