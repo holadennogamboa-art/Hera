@@ -193,6 +193,40 @@ body.gl .racha{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
 .paleta li kbd{font-family:var(--mono);font-size:10px;color:var(--faint)}
 .paleta li.on{background:oklch(78% 0.045 80 / .14);color:var(--ink)}
 @media (prefers-reduced-motion:reduce){.pista i,.pista b,.seg .pill{transition:none}.paleta .caja{animation:none}}
+/* ---- constelación y moodboard ---- */
+.const{position:relative;height:min(78vh,620px);border:1px solid var(--line);background:radial-gradient(80% 70% at 50% 45%,oklch(22% 0.04 275 / .55),oklch(15% 0.01 90 / .4));overflow:hidden;touch-action:none}
+.const svg{position:absolute;inset:0;width:100%;height:100%}
+.const .hilo{fill:none;stroke:oklch(78% 0.045 80 / .28);stroke-width:1.2;stroke-dasharray:3 7;animation:fluye 1.6s linear infinite}
+.const .hilo.on{stroke:var(--gold);stroke-width:2;stroke-dasharray:6 6}
+.const .hilo.dim{opacity:.12}
+@keyframes fluye{to{stroke-dashoffset:-20}}
+.const .nodo{cursor:grab}
+.const .nodo circle.halo{fill:oklch(78% 0.045 80 / .07);stroke:oklch(78% 0.045 80 / .25);transition:r .5s var(--spring)}
+.const .nodo circle.nuc{fill:var(--gold)} .const .nodo.e-espera circle.nuc{fill:var(--amber)} .const .nodo.e-tuyo circle.nuc{fill:var(--paper)} .const .nodo.e-parado circle.nuc{fill:var(--faint)}
+.const .nodo.libro circle.nuc{fill:oklch(72% 0.08 200)}
+.const .nodo text{font-family:var(--serif);font-size:19px;fill:var(--ink);paint-order:stroke;stroke:oklch(15% 0.01 90 / .8);stroke-width:4px}
+.const .nodo text.id{font-family:var(--mono);font-size:9px;letter-spacing:.14em;fill:var(--faint);stroke-width:3px}
+.const .nodo.dim{opacity:.25} .const .nodo.sel circle.halo{stroke:var(--gold);fill:oklch(78% 0.045 80 / .14)}
+.const .ficha{position:absolute;left:16px;bottom:16px;right:16px;max-width:430px;padding:14px 16px;background:oklch(18% 0.02 275 / .82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--card-line);border-radius:12px;font-size:14.5px;color:var(--soft);animation:cae .35s var(--spring)}
+.const .ficha b{color:var(--ink);font-weight:500} .const .ficha p{margin:6px 0 0}
+.const .ficha .h{display:flex;gap:8px;align-items:baseline;margin-top:8px;padding-top:8px;border-top:1px solid var(--card-line)} .const .ficha .h i{font-style:normal;color:var(--gold);font-family:var(--mono);font-size:11px}
+.const .ayuda{position:absolute;top:14px;left:16px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.const .chispa{position:absolute;top:10px;right:10px}
+@media (max-width:560px){.const .ayuda{display:none}.const .nodo text{font-size:14px}.const .chispa{left:10px;right:auto}}
+.mood{columns:4 210px;column-gap:10px}
+.pieza{break-inside:avoid;margin:0 0 10px;position:relative;border:1px solid var(--line);background:var(--surface);overflow:hidden;transition:transform .4s var(--spring),opacity .3s}
+body.gl .pieza{background:oklch(18% 0.006 90 / .78)}
+.pieza:hover{transform:translateY(-3px) rotate(-.4deg)}
+.pieza img{display:block;width:100%;height:auto}
+.pieza blockquote{margin:0;padding:22px 18px;font-family:var(--serif);font-size:22px;line-height:1.2;color:var(--ink)}
+.pieza .sw{height:120px}
+.pieza .pie{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--line)}
+.pieza .pie button{all:unset;cursor:pointer;color:var(--faint)} .pieza .pie button:hover{color:var(--amber)}
+.pieza.dim{opacity:.18}
+.mnuevo{display:grid;gap:8px;grid-template-columns:1fr 150px auto auto auto;margin:0 0 14px;align-items:stretch}
+.mnuevo input,.mnuevo select{font:inherit;font-size:15px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:9px 10px;min-width:0}
+.mnuevo input[type=color]{padding:2px;width:52px;height:auto}
+@media (max-width:640px){.mnuevo{grid-template-columns:1fr 1fr}.mnuevo input[type=text]{grid-column:1/-1}}
 </style>
 
 <canvas id="oro" aria-hidden="true"></canvas>
@@ -219,6 +253,12 @@ body.gl .racha{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
   <p><b>Si hoy no hay nada:</b> un correo de la cola. Treinta segundos. Lo demás espera a mañana.</p>
 </details></div>
 
+<section><h2>Constelación</h2><p class="h2sub">Tus proyectos no van por separado. Toca uno y verás de qué se alimenta y a quién alimenta.</p>
+<div class="const" id="const"><span class="ayuda">Arrastra · toca un astro · toca un hilo</span><button class="small chispa" id="chispa">✦ Buscar una conexión nueva</button><svg id="csvg" aria-label="Mapa de conexiones entre proyectos"></svg><div class="ficha" id="ficha" hidden></div></div></section>
+<section><h2>Moodboard</h2><p class="h2sub">Imágenes, frases y colores que te llaman. Cada pieza va a un proyecto, y la constelación los enciende juntos.</p>
+<form class="mnuevo" id="mform"><input type="text" id="mt" placeholder="Una frase, una cita, una palabra…"><select id="mp"></select><input type="color" id="mc" value="#c8b48a" aria-label="Color"><button class="small" type="button" id="mcol">+ Color</button><button class="lima" type="submit">+ Frase</button></form>
+<div class="acciones" style="margin:-4px 0 14px"><label class="small" id="mfl" style="font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--card-line);padding:11px 14px;cursor:pointer">+ Imagen<input type="file" id="mf" accept="image/*" multiple hidden></label><span class="cifra" id="mest"></span></div>
+<div class="mood" id="mood"></div></section>
 <section><h2>Lo que ya has conseguido</h2><p class="h2sub">No es lo que falta. Es lo que ya existe porque lo hiciste tú.</p><div class="logros" id="logros"></div></section>
 <section><h2>Tu racha</h2><p class="h2sub">Bloques cerrados, día a día. La línea solo puede subir si empiezas.</p><div class="racha" id="racha"></div></section>
 <section><h2>El día</h2><div class="seg" id="seg" role="group" aria-label="Vista"><span class="pill" id="segp"></span><button id="sgH" aria-pressed="true">Hoy</button><button id="sgS" aria-pressed="false">Semana</button></div><p class="h2sub" id="diasub"></p><div class="bloques" id="bloques"></div><div class="semana" id="semana" hidden></div></section>
@@ -552,6 +592,67 @@ $('cmdk').onclick=abre;$('paleta').onclick=e=>{if(e.target.id==='paleta')cierra(
 $('pin').oninput=()=>{sel=0;pl();};
 $('pin').onkeydown=e=>{if(e.key==='ArrowDown'){sel=Math.min(vis.length-1,sel+1);pl();e.preventDefault();}else if(e.key==='ArrowUp'){sel=Math.max(0,sel-1);pl();e.preventDefault();}else if(e.key==='Enter')corre(sel);else if(e.key==='Escape')cierra();};
 addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('paleta').hidden?abre():cierra();}});
+/* ---------- constelación + moodboard ---------- */
+let HILOS=[],MOOD=[],href=null,mref=null,ASSETS=null,foco=null;
+try{const r=JSON.parse(localStorage.getItem(K+'-cm')||'null');if(r){HILOS=r.h||[];MOOD=r.m||[];}}catch(_){}
+function gcm(){try{localStorage.setItem(K+'-cm',JSON.stringify({h:HILOS,m:MOOD}));}catch(_){} }
+async function gH(){gcm();if(href)try{await href.set({hilos:HILOS});}catch(_){}}
+async function gM(){gcm();if(mref)try{await mref.set({piezas:MOOD});}catch(_){}}
+const NS='http://www.w3.org/2000/svg';let N=[],sim=0;
+function nodos(){const ps=(INFO.proyectos||[]).map(p=>({k:p.n,n:p.n,id:p.id,e:p.e,paso:p.paso}));
+  if(OCIO&&OCIO.libro)ps.push({k:'libro',n:OCIO.libro.t,id:'Ocio · '+OCIO.libro.a,e:'libro',paso:'Lo que lees alimenta lo que escribes.'});
+  const box=$('const').getBoundingClientRect(),W=box.width,H=box.height,old=Object.fromEntries(N.map(n=>[n.k,n]));
+  N=ps.map((p,i)=>{const o=old[p.k],a=i/ps.length*Math.PI*2;return Object.assign(p,o?{x:o.x,y:o.y,vx:0,vy:0}:{x:W/2+Math.cos(a)*W*.3,y:H/2+Math.sin(a)*H*.3,vx:0,vy:0});});}
+function grado(k){return HILOS.filter(h=>h.a===k||h.b===k).length+MOOD.filter(m=>m.p===k).length*.5;}
+function paso(){const box=$('const').getBoundingClientRect(),W=box.width,H=box.height,idx=Object.fromEntries(N.map(n=>[n.k,n]));
+  for(const a of N){for(const b of N){if(a===b)continue;const dx=a.x-b.x,dy=a.y-b.y,d2=Math.max(400,dx*dx+dy*dy),f=5200/d2;a.vx+=dx/Math.sqrt(d2)*f;a.vy+=dy/Math.sqrt(d2)*f;}
+    a.vx+=(W/2-a.x)*.004;a.vy+=(H/2-a.y)*.004;}
+  for(const h of HILOS){const a=idx[h.a],b=idx[h.b];if(!a||!b)continue;const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,f=(d-Math.min(W,H)*.32)*.012;a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f;}
+  for(const n of N){if(n.drag)continue;n.vx*=.82;n.vy*=.82;const mg=W<560?95:80;n.x=Math.max(mg,Math.min(W-mg,n.x+n.vx));n.y=Math.max(50,Math.min(H-50,n.y+n.vy));}}
+function dibuja(){const svg=$('csvg'),idx=Object.fromEntries(N.map(n=>[n.k,n]));
+  const rel=foco?new Set(HILOS.filter(h=>h.a===foco||h.b===foco).flatMap(h=>[h.a,h.b])):null;
+  let g='<defs><marker id="pt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--gold)"/></marker></defs>';
+  HILOS.forEach((h,i)=>{const a=idx[h.a],b=idx[h.b];if(!a||!b)return;const mx=(a.x+b.x)/2-(b.y-a.y)*.18,my=(a.y+b.y)/2+(b.x-a.x)*.18;
+    const on=foco&&(h.a===foco||h.b===foco);g+='<path data-h="'+i+'" class="hilo'+(on?' on':foco?' dim':'')+'" d="M'+a.x+','+a.y+' Q'+mx+','+my+' '+b.x+','+b.y+'" marker-end="'+(on?'url(#pt)':'')+'"/>';
+    g+='<path data-h="'+i+'" d="M'+a.x+','+a.y+' Q'+mx+','+my+' '+b.x+','+b.y+'" stroke="transparent" stroke-width="16" fill="none" style="cursor:pointer"/>';});
+  N.forEach(n=>{const r=7+grado(n.k)*2.2,dim=rel&&!rel.has(n.k)&&n.k!==foco;
+    g+='<g class="nodo '+esc(n.e||'')+(n.k===foco?' sel':'')+(dim?' dim':'')+'" data-k="'+esc(n.k)+'" transform="translate('+n.x+','+n.y+')"><circle class="halo" r="'+(r*2.6)+'"/><circle class="nuc" r="'+r+'"/><text class="id" y="'+(-r*2.6-18)+'" text-anchor="middle">'+esc(n.id||'')+'</text><text y="'+(-r*2.6-4)+'" text-anchor="middle">'+esc(n.n)+'</text></g>';});
+  svg.innerHTML=g;}
+function anima(){let t=0;cancelAnimationFrame(sim);const q=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const f=()=>{paso();dibuja();if(++t<(q?1:240)||N.some(n=>n.drag))sim=requestAnimationFrame(f);};if(q){for(let i=0;i<200;i++)paso();dibuja();}else f();}
+function ficha(html){const f=$('ficha');f.innerHTML=html;f.hidden=!html;}
+function fichaNodo(k){const n=N.find(x=>x.k===k);if(!n)return;const hs=HILOS.filter(h=>h.a===k||h.b===k);
+  const m=MOOD.filter(x=>x.p===k).length;
+  ficha('<b>'+esc(n.n)+'</b><p>'+b2(n.paso||'')+'</p>'+(hs.length?hs.map(h=>'<div class="h"><i>'+(h.a===k?'alimenta a':'se alimenta de')+'</i><span><b>'+esc(h.a===k?(N.find(x=>x.k===h.b)||{}).n||h.b:(N.find(x=>x.k===h.a)||{}).n||h.a)+'</b> · '+esc(h.q)+'</span></div>').join(''):'<p>Todavía sin hilos. Pulsa <b>✦ Buscar una conexión nueva</b>.</p>')+(m?'<p>'+m+' pieza'+(m>1?'s':'')+' en el moodboard.</p>':''));}
+(function(){const svg=$('csvg');let dn=null,moved=false;
+  const pt=e=>{const r=svg.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};};
+  svg.addEventListener('pointerdown',e=>{const g=e.target.closest('.nodo');if(g){dn=N.find(n=>n.k===g.dataset.k);dn.drag=true;moved=false;svg.setPointerCapture(e.pointerId);anima();}});
+  svg.addEventListener('pointermove',e=>{if(!dn)return;const p=pt(e);dn.x=p.x;dn.y=p.y;moved=true;});
+  svg.addEventListener('pointerup',e=>{if(dn){dn.drag=false;if(!moved){foco=foco===dn.k?null:dn.k;foco?fichaNodo(foco):ficha('');pintaMood();}dn=null;anima();return;}
+    const hp=e.target.closest('[data-h]');if(hp){const h=HILOS[+hp.dataset.h];foco=null;ficha('<b>'+esc((N.find(x=>x.k===h.a)||{}).n||h.a)+'</b> → <b>'+esc((N.find(x=>x.k===h.b)||{}).n||h.b)+'</b><p>'+esc(h.q)+'</p><div class="acciones" style="margin-top:10px"><button class="small" id="hB">Quitar este hilo</button></div>');$('hB').onclick=()=>{HILOS.splice(+hp.dataset.h,1);gH();ficha('');anima();};dibuja();}
+    else if(e.target===svg){foco=null;ficha('');pintaMood();dibuja();}});})();
+$('chispa').onclick=async()=>{const sample=await claude.use('sample');if(!sample){$('chispa').hidden=true;return;}
+  ficha('<b>Buscando un hilo que aún no ves…</b>');
+  const ps=N.map(n=>'- '+n.k+': '+String(n.paso||'').replace(/\*\*/g,'')).join('\n');
+  const pr=`Denno (escritor y director creativo, HERA, Madrid) tiene estos proyectos:\n${ps}\nHilos que ya existen:\n${HILOS.map(h=>h.a+' → '+h.b+': '+h.q).join('\n')||'(ninguno)'}\nPiezas de su moodboard:\n${MOOD.map(m=>(m.t||m.c||'imagen')+' ['+(m.p||'')+']').join('\n')||'(ninguna)'}\nNotas de lectura:\n${(OCIO.notas||[]).map(n=>n.q).join('\n')||'(ninguna)'}\nPropón UNA conexión nueva y concreta entre dos de esos proyectos (usa los nombres exactos de la lista): qué puede llevarse uno del otro (una técnica, una imagen, un recurso, un cliente, una idea de estructura). No escribas su prosa. Una frase seca, sin adjetivos de más. Responde solo JSON: {"a":"origen","b":"destino","q":"la frase"}`;
+  try{const r=await sample.json(pr,{cache:false});const ks=N.map(n=>n.k);
+    if(!r||!ks.includes(r.a)||!ks.includes(r.b))throw{code:'x'};
+    ficha('<b>'+esc(r.a)+'</b> → <b>'+esc(r.b)+'</b><p>'+esc(r.q)+'</p><div class="acciones" style="margin-top:10px"><button class="lima small" id="hS">Tender este hilo</button><button class="small" id="hN">Otra</button></div>');
+    $('hS').onclick=()=>{HILOS.push({a:r.a,b:r.b,q:r.q});gH();foco=r.a;fichaNodo(r.a);anima();};$('hN').onclick=()=>$('chispa').click();}
+  catch(e){ficha(e&&e.code==='not_granted'?'Sin permiso para preguntar a Claude.':'No ha salido una conexión clara. Prueba otra vez.');}};
+function pintaMood(){const ps=N.length?N:[];
+  $('mp').innerHTML='<option value="">¿Para qué proyecto?</option>'+ps.map(n=>'<option value="'+esc(n.k)+'">'+esc(n.n)+'</option>').join('');
+  $('mood').innerHTML=MOOD.length?MOOD.map((m,i)=>'<figure class="pieza'+(foco&&m.p!==foco?' dim':'')+'">'+(m.img?'<img src="/_blob/'+esc(m.img)+'" alt="'+esc(m.t||'Imagen del moodboard')+'" loading="lazy">':m.c&&!m.t?'<div class="sw" style="background:'+esc(m.c)+'"></div>':'<blockquote'+(m.c?' style="border-left:6px solid '+esc(m.c)+'"':'')+'>'+esc(m.t)+'</blockquote>')+'<figcaption class="pie"><span>'+esc((N.find(n=>n.k===m.p)||{}).n||'Suelta')+(m.c&&!m.t&&!m.img?' · '+esc(m.c):'')+'</span><button data-del="'+i+'" aria-label="Quitar">quitar</button></figcaption></figure>').join(''):'<p class="h2sub">Vacío todavía. Sube una foto, escribe una frase o guarda un color: es tu tablero, crece contigo.</p>';
+  $('mood').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{MOOD.splice(+b.dataset.del,1);gM();pintaMood();anima();});}
+$('mform').onsubmit=e=>{e.preventDefault();const t=$('mt').value.trim();if(!t)return;MOOD.unshift({t,p:$('mp').value,c:''});$('mt').value='';gM();pintaMood();anima();};
+$('mcol').onclick=()=>{MOOD.unshift({c:$('mc').value,p:$('mp').value});gM();pintaMood();anima();};
+$('mf').onchange=async e=>{const fs=[...e.target.files];if(!fs.length)return;ASSETS=ASSETS||await claude.use('assets');
+  if(!ASSETS){$('mest').textContent='Subir imágenes no está disponible en esta vista.';return;}
+  for(const f of fs){$('mest').textContent='Subiendo '+f.name+'…';try{const r=await ASSETS.upload(f);MOOD.unshift({img:r.id,p:$('mp').value,t:''});gM();pintaMood();}
+    catch(err){$('mest').textContent=err&&err.code==='quota_exceeded'?'No queda espacio para más imágenes.':'No se pudo subir '+f.name+'.';}}
+  $('mest').textContent='';e.target.value='';anima();};
+function constelacion(){nodos();anima();pintaMood();}
+addEventListener('resize',()=>{nodos();anima();});
 let tick=null;
 function reloj(){
   clearInterval(tick);
@@ -575,12 +676,15 @@ function reloj(){
   };
   f(); tick=setInterval(f,1000);
 }
-pinta(); pintaOcio(); seg(); est('· conectando…',true);
+pinta(); pintaOcio(); seg(); constelacion(); est('· conectando…',true);
 (async()=>{
   try{
     const db=await claude.use('db'); if(!db){est('· guardado solo en este dispositivo',true);return;}
     const plan=db.doc('plan/dias'), info=db.doc('panel/info'); pref=db.doc('plan/progreso'); cref=db.doc('cola/estado');
-    oref=db.doc('ocio/lectura');
+    oref=db.doc('ocio/lectura');href=db.doc('panel/hilos');mref=db.doc('moodboard/tablero');
+    Promise.all([href.get(),mref.get()]).then(([h,m])=>{if(h.exists)HILOS=h.data().hilos||[];if(m.exists)MOOD=m.data().piezas||[];gcm();constelacion();});
+    href.onSnapshot(x=>{if(x.exists){HILOS=x.data().hilos||[];anima();}},()=>{});
+    mref.onSnapshot(x=>{if(x.exists){MOOD=x.data().piezas||[];pintaMood();}},()=>{});
     const [a,b,c,d,o]=await Promise.all([plan.get(),info.get(),pref.get(),cref.get(),oref.get()]);
     if(o.exists)OCIO=o.data(); else guardaOcio();
     oref.onSnapshot(s=>{if(s.exists&&document.activeElement.closest&&!document.activeElement.closest('#ocio')){OCIO=s.data();pintaOcio();}},()=>{});
@@ -588,7 +692,7 @@ pinta(); pintaOcio(); seg(); est('· conectando…',true);
     if(b.exists)INFO=b.data();
     if(c.exists){const r=c.data().dias||{};Object.keys(r).forEach(f=>{const x=prog[f]||{h:{},s:{}};prog[f]={h:Object.assign({},r[f].h||{},x.h),s:Object.assign({},r[f].s||{},x.s),n:Object.assign({},r[f].n||{},x.n||{})};});}
     if(d.exists){const r=d.data();Object.keys(r.ok||{}).forEach(k=>{if(r.ok[k])ok[k]=true});Object.keys(r.post||{}).forEach(k=>{if(r.post[k]&&!ok[k])post[k]=true});}
-    local();pinta();pintaOcio();est('· plan al día');
+    local();pinta();pintaOcio();constelacion();est('· plan al día');
     plan.onSnapshot(s=>{if(s.exists&&s.data().dias){PLAN=s.data().dias;local();pinta();}},()=>{});
     info.onSnapshot(s=>{if(s.exists){INFO=s.data();local();pinta();}},()=>{});
   }catch(e){est('· guardado solo en este dispositivo',true);}
