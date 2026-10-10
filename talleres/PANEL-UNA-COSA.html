@@ -196,7 +196,7 @@ body.gl .racha{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
 /* ---- constelación y moodboard ---- */
 .const{position:relative;height:min(78vh,620px);border:1px solid var(--line);background:radial-gradient(80% 70% at 50% 45%,oklch(22% 0.04 275 / .55),oklch(15% 0.01 90 / .4));overflow:hidden;touch-action:none}
 .const svg{position:absolute;inset:0;width:100%;height:100%}
-.const .hilo{fill:none;stroke:oklch(78% 0.045 80 / .28);stroke-width:1.2;stroke-dasharray:3 7;animation:fluye 1.6s linear infinite}
+.const .hilo{fill:none;stroke:oklch(82% 0.06 80 / .6);stroke-width:1.8;stroke-dasharray:4 6;animation:fluye 1.6s linear infinite}
 .const .hilo.on{stroke:var(--gold);stroke-width:2;stroke-dasharray:6 6}
 .const .hilo.dim{opacity:.12}
 @keyframes fluye{to{stroke-dashoffset:-20}}
@@ -211,7 +211,7 @@ body.gl .racha{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
 .const .ficha b{color:var(--ink);font-weight:500} .const .ficha p{margin:6px 0 0}
 .const .ficha .h{display:flex;gap:8px;align-items:baseline;margin-top:8px;padding-top:8px;border-top:1px solid var(--card-line)} .const .ficha .h i{font-style:normal;color:var(--gold);font-family:var(--mono);font-size:11px}
 .const .ayuda{position:absolute;top:14px;left:16px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
-.const .chispa{position:absolute;top:10px;right:10px}
+.const .chispa{position:absolute;top:10px;right:10px;z-index:2}
 @media (max-width:560px){.const .ayuda{display:none}.const .nodo text{font-size:14px}.const .chispa{left:10px;right:auto}}
 .mood{columns:4 210px;column-gap:10px}
 .pieza{break-inside:avoid;margin:0 0 10px;position:relative;border:1px solid var(--line);background:var(--surface);overflow:hidden;transition:transform .4s var(--spring),opacity .3s}
@@ -254,7 +254,7 @@ body.gl .pieza{background:oklch(18% 0.006 90 / .78)}
 </details></div>
 
 <section><h2>Constelación</h2><p class="h2sub">Tus proyectos no van por separado. Toca uno y verás de qué se alimenta y a quién alimenta.</p>
-<div class="const" id="const"><span class="ayuda">Arrastra · toca un astro · toca un hilo</span><button class="small chispa" id="chispa">✦ Buscar una conexión nueva</button><svg id="csvg" aria-label="Mapa de conexiones entre proyectos"></svg><div class="ficha" id="ficha" hidden></div></div></section>
+<div class="const" id="const"><span class="ayuda">Arrastra · toca un astro · toca un hilo</span><span class="chispa" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button class="small" id="hman">+ Tender un hilo</button><button class="small" id="chispa">✦ Que Claude proponga</button></span><svg id="csvg" aria-label="Mapa de conexiones entre proyectos"></svg><div class="ficha" id="ficha" hidden></div></div></section>
 <section><h2>Moodboard</h2><p class="h2sub">Imágenes, frases y colores que te llaman. Cada pieza va a un proyecto, y la constelación los enciende juntos.</p>
 <form class="mnuevo" id="mform"><input type="text" id="mt" placeholder="Una frase, una cita, una palabra…"><select id="mp"></select><input type="color" id="mc" value="#c8b48a" aria-label="Color"><button class="small" type="button" id="mcol">+ Color</button><button class="lima" type="submit">+ Frase</button></form>
 <div class="acciones" style="margin:-4px 0 14px"><label class="small" id="mfl" style="font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--card-line);padding:11px 14px;cursor:pointer">+ Imagen<input type="file" id="mf" accept="image/*" multiple hidden></label><span class="cifra" id="mest"></span></div>
@@ -620,17 +620,22 @@ function dibuja(){const svg=$('csvg'),idx=Object.fromEntries(N.map(n=>[n.k,n]));
   svg.innerHTML=g;}
 function anima(){let t=0;cancelAnimationFrame(sim);const q=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const f=()=>{paso();dibuja();if(++t<(q?1:240)||N.some(n=>n.drag))sim=requestAnimationFrame(f);};if(q){for(let i=0;i<200;i++)paso();dibuja();}else f();}
+function formHilo(a){const ks=N.map(n=>n);
+  const op=(sel)=>ks.map(n=>'<option value="'+esc(n.k)+'"'+(n.k===sel?' selected':'')+'>'+esc(n.n)+'</option>').join('');
+  ficha('<b>Tender un hilo</b><p>Qué se lleva un proyecto de otro.</p><div class="mnuevo" style="grid-template-columns:1fr 1fr;margin:10px 0 0"><select id="fa">'+op(a)+'</select><select id="fb">'+op(ks.find(n=>n.k!==a)&&ks.find(n=>n.k!==a).k)+'</select><input type="text" id="fq" placeholder="Qué alimenta a qué: una técnica, una imagen, una idea…" style="grid-column:1/-1"></div><div class="acciones" style="margin-top:10px"><button class="lima small" id="fS">Tender hilo</button></div>');
+  $('fS').onclick=()=>{const A=$('fa').value,B=$('fb').value,q=$('fq').value.trim();if(!q||A===B){$('fq').focus();return;}HILOS.push({a:A,b:B,q});gH();foco=A;fichaNodo(A);anima();};}
 function ficha(html){const f=$('ficha');f.innerHTML=html;f.hidden=!html;}
 function fichaNodo(k){const n=N.find(x=>x.k===k);if(!n)return;const hs=HILOS.filter(h=>h.a===k||h.b===k);
   const m=MOOD.filter(x=>x.p===k).length;
-  ficha('<b>'+esc(n.n)+'</b><p>'+b2(n.paso||'')+'</p>'+(hs.length?hs.map(h=>'<div class="h"><i>'+(h.a===k?'alimenta a':'se alimenta de')+'</i><span><b>'+esc(h.a===k?(N.find(x=>x.k===h.b)||{}).n||h.b:(N.find(x=>x.k===h.a)||{}).n||h.a)+'</b> · '+esc(h.q)+'</span></div>').join(''):'<p>Todavía sin hilos. Pulsa <b>✦ Buscar una conexión nueva</b>.</p>')+(m?'<p>'+m+' pieza'+(m>1?'s':'')+' en el moodboard.</p>':''));}
-(function(){const svg=$('csvg');let dn=null,moved=false;
+  ficha('<b>'+esc(n.n)+'</b><p>'+b2(n.paso||'')+'</p>'+(hs.length?hs.map(h=>'<div class="h"><i>'+(h.a===k?'alimenta a':'se alimenta de')+'</i><span><b>'+esc(h.a===k?(N.find(x=>x.k===h.b)||{}).n||h.b:(N.find(x=>x.k===h.a)||{}).n||h.a)+'</b> · '+esc(h.q)+'</span></div>').join(''):'<p>Todavía sin hilos. Pulsa <b>+ Tender un hilo desde aquí</b>.</p>')+(m?'<p>'+m+' pieza'+(m>1?'s':'')+' en el moodboard.</p>':'')+'<div class="acciones" style="margin-top:10px"><button class="small" id="fH">+ Tender un hilo desde aquí</button></div>');$('fH').onclick=()=>formHilo(k);}
+(function(){const svg=$('csvg');let dn=null,moved=false,sx=0,sy=0;
   const pt=e=>{const r=svg.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};};
-  svg.addEventListener('pointerdown',e=>{const g=e.target.closest('.nodo');if(g){dn=N.find(n=>n.k===g.dataset.k);dn.drag=true;moved=false;svg.setPointerCapture(e.pointerId);anima();}});
-  svg.addEventListener('pointermove',e=>{if(!dn)return;const p=pt(e);dn.x=p.x;dn.y=p.y;moved=true;});
+  svg.addEventListener('pointerdown',e=>{const g=e.target.closest('.nodo');if(g){dn=N.find(n=>n.k===g.dataset.k);dn.drag=true;moved=false;sx=e.clientX;sy=e.clientY;svg.setPointerCapture(e.pointerId);anima();}});
+  svg.addEventListener('pointermove',e=>{if(!dn)return;if(!moved&&Math.hypot(e.clientX-sx,e.clientY-sy)<8)return;const p=pt(e);dn.x=p.x;dn.y=p.y;moved=true;});
   svg.addEventListener('pointerup',e=>{if(dn){dn.drag=false;if(!moved){foco=foco===dn.k?null:dn.k;foco?fichaNodo(foco):ficha('');pintaMood();}dn=null;anima();return;}
     const hp=e.target.closest('[data-h]');if(hp){const h=HILOS[+hp.dataset.h];foco=null;ficha('<b>'+esc((N.find(x=>x.k===h.a)||{}).n||h.a)+'</b> → <b>'+esc((N.find(x=>x.k===h.b)||{}).n||h.b)+'</b><p>'+esc(h.q)+'</p><div class="acciones" style="margin-top:10px"><button class="small" id="hB">Quitar este hilo</button></div>');$('hB').onclick=()=>{HILOS.splice(+hp.dataset.h,1);gH();ficha('');anima();};dibuja();}
     else if(e.target===svg){foco=null;ficha('');pintaMood();dibuja();}});})();
+$('hman').onclick=()=>formHilo(foco||(N[0]&&N[0].k));
 $('chispa').onclick=async()=>{const sample=await claude.use('sample');if(!sample){$('chispa').hidden=true;return;}
   ficha('<b>Buscando un hilo que aún no ves…</b>');
   const ps=N.map(n=>'- '+n.k+': '+String(n.paso||'').replace(/\*\*/g,'')).join('\n');
