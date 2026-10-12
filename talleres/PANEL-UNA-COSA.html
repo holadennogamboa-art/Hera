@@ -190,6 +190,32 @@ body.gl .racha{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
 .alimenta .pz{display:flex;gap:8px;flex-wrap:wrap}
 .alimenta .pz img{height:64px;width:auto;border:1px solid var(--card-line)} .alimenta .pz span{font-family:var(--serif);font-size:16px;color:var(--ink);padding:8px 10px;border:1px solid var(--card-line);max-width:100%}
 .alimenta .nota{display:flex;gap:8px} .alimenta .nota input{flex:1;min-width:0;font:inherit;font-size:15px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:9px 10px}
+/* ---- interfaz de proyectos ---- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 12px}
+.stat{background:var(--surface);padding:14px 16px;min-width:0} body.gl .stat{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px)}
+.stat b{display:block;font:700 clamp(30px,4vw,42px)/1 var(--display);font-variant-numeric:tabular-nums} .stat span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.pcard{cursor:pointer;transition:transform .4s var(--spring),border-color .3s} .pcard:hover{transform:translateY(-3px);border-color:var(--gold-dim)} .pcard:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.barras{display:flex;align-items:flex-end;gap:3px;height:34px} .barras i{flex:1;min-width:0;background:var(--line);border-radius:1px;height:4px} .barras i.on{background:var(--gold)}
+.pie2{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.06em} .pie2 .viejo{color:var(--amber)}
+dialog#pd{margin:0 0 0 auto;padding:0;border:0;border-left:1px solid var(--card-line);height:100dvh;max-height:100dvh;width:min(600px,100%);max-width:100%;background:oklch(18% 0.02 275);color:var(--ink);overflow:auto;transition:transform .45s var(--ease),overlay .45s allow-discrete,display .45s allow-discrete}
+dialog#pd:not([open]){transform:translateX(100%)}
+@starting-style{dialog#pd[open]{transform:translateX(100%)}}
+dialog#pd::backdrop{background:oklch(10% 0 0 / .55);backdrop-filter:blur(4px)}
+.pdi{padding:22px 20px calc(40px + env(safe-area-inset-bottom,0px));display:grid;gap:18px}
+.pdi h3{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.05;margin:0}
+.pdi h6{margin:0 0 8px;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.pdi textarea,.pdi input,.pdi select{font:inherit;font-size:15px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:9px 10px;width:100%;min-width:0}
+.pdi textarea{min-height:70px;resize:vertical}
+.pdi .fil{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px} .pdi .fil input.w{grid-column:1/-1}
+.pdi .it{padding:9px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--soft);display:flex;gap:10px} .pdi .it b{color:var(--ink);font-weight:500} .pdi .it time{font-family:var(--mono);font-size:10.5px;color:var(--faint);flex:none;padding-top:2px;min-width:52px} .pdi .it .q{margin-left:auto;color:var(--gold);flex:none}
+.pdi .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.pdi .prox{padding:12px 14px;border-left:2px solid var(--gold);background:oklch(100% 0 0 / .03);font-size:14.5px}
+.cierre{margin:16px 0 0;padding:14px 16px;border:1px solid var(--gold-dim);background:oklch(78% 0.045 80 / .06);display:grid;gap:10px;animation:cae .35s var(--spring)}
+.cierre h5{margin:0;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.cierre .q3{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px;color:var(--soft)}
+.cierre .fl{display:grid;grid-template-columns:1fr 1fr;gap:8px} .cierre .fl input{grid-column:1/-1}
+.cierre select,.cierre input{font:inherit;font-size:15px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:9px 10px;min-width:0}
+@media (prefers-reduced-motion:reduce){dialog#pd{transition:none}.cierre{animation:none}}
 .paleta[hidden],.semana[hidden],.bloques[hidden]{display:none!important}
 .paleta{position:fixed;inset:0;z-index:30;display:grid;place-items:start center;padding:12vh 16px 16px;background:oklch(10% 0 0 / .55);backdrop-filter:blur(6px)}
 .paleta .caja{width:min(560px,100%);background:oklch(21% 0.02 275 / .96);border:1px solid var(--card-line);border-radius:14px;overflow:hidden;box-shadow:0 40px 100px -30px #000;transform-origin:top center;animation:cae .32s var(--spring)}
@@ -252,6 +278,7 @@ body.gl .pieza{background:oklch(18% 0.006 90 / .78)}
   <div class="meta" id="meta"></div>
   <div class="alimenta" id="alimenta" hidden></div>
   <div class="acciones" id="acc"></div>
+  <div class="cierre" id="cierre" hidden></div>
   <div class="correo" id="pide" hidden><div class="cab"><p class="donde" id="pidest">Claude está escribiendo…</p></div><pre id="pidet"></pre><div class="acciones" style="padding:12px 16px;border-top:1px solid var(--line)"><button class="small" id="pideC">Copiar</button><button class="small" id="pideS">Parar</button></div></div>
 </div>
 
@@ -271,11 +298,12 @@ body.gl .pieza{background:oklch(18% 0.006 90 / .78)}
 <section><h2>Tu racha</h2><p class="h2sub">Bloques cerrados, día a día. La línea solo puede subir si empiezas.</p><div class="racha" id="racha"></div></section>
 <section><h2>El día</h2><div class="seg" id="seg" role="group" aria-label="Vista"><span class="pill" id="segp"></span><button id="sgH" aria-pressed="true">Hoy</button><button id="sgS" aria-pressed="false">Semana</button></div><p class="h2sub" id="diasub"></p><div class="bloques" id="bloques"></div><div class="semana" id="semana" hidden></div></section>
 <div class="mrz" id="mrz" aria-label="Registro del día, legible por máquina"></div>
-<section><h2>Los proyectos</h2><p class="h2sub">Cada uno con su siguiente paso concreto y dónde lo dejaste.</p><div class="proys" id="proys"></div></section>
+<section><h2>Proyectos</h2><p class="h2sub">Cada bloque que cierras alimenta a su proyecto. Toca uno para abrirlo: su paso, su historial, lo que le llega de los demás y lo que tú le añades.</p><div class="stats" id="stats"></div><div class="proys" id="proys"></div></section>
 
 <section><h2>Ocio · lo que lees</h2><p class="h2sub">Leer también es trabajo de fondo. Lo que subrayas aquí vuelve a tus proyectos.</p><div class="ocio" id="ocio"></div></section>
 <footer>El plan lo carga Claude desde el hilo y esta página se actualiza sola. <span class="est" id="est">…</span></footer>
 </div>
+<dialog id="pd" aria-label="Proyecto"></dialog>
 <button class="cmdk" id="cmdk" aria-label="Comandos">⌘K · Comandos</button>
 <div class="paleta" id="paleta" hidden><div class="caja"><input id="pin" placeholder="Escribe: hecho, claude, dictar, semana…" autocomplete="off"><ul id="pls"></ul></div></div>
 
@@ -419,7 +447,7 @@ function pinta(){
     if($('bN'))$('bN').onclick=()=>{try{Notification.requestPermission().then(()=>pinta());}catch(_){}};
     if($('bV'))$('bV').onclick=()=>dictar(i,$('bV'));
     if($('bE'))$('bE').onclick=()=>{ORO.ondear($('bE'));P.s[i]=Date.now();guarda();conTransicion(pinta);};
-    if($('bH'))$('bH').onclick=()=>morfa($('bH'),()=>{P.h[i]=true;guarda();conTransicion(pinta);scrollTo({top:0});});
+    if($('bH'))$('bH').onclick=()=>morfa($('bH'),()=>{P.h[i]=true;PEND={d:hoy(),k:i,node:ALIAS[x.f]!==undefined?ALIAS[x.f]:x.f,t:x.t,q:0};guarda();conTransicion(pinta);});
     $('bS').onclick=()=>{P.h[i]='saltado';guarda();conTransicion(pinta);scrollTo({top:0});};
     reloj();CURX=x;
   }
@@ -427,7 +455,7 @@ function pinta(){
   $('bloques').innerHTML=B.map((x,k)=>'<div class="bq '+(P.h[k]?'ya':(k===i?'on':''))+'"><div class="n">'+esc(x.b)+'</div><div class="q">'+esc(x.f)+'<i>'+esc(String(x.t).replace(/\*\*/g,''))+'</i></div>'+(P.h[k]?'<div class="sello'+(P.h[k]==='saltado'?' skip':'')+'">'+(P.h[k]==='saltado'?'HOY<br>NO':'HERA<br>HECHO')+'</div>':'<div class="t">'+esc(x.dur||'90 min')+'</div>')+'</div>'+(P.n&&P.n[k]?'<div class="q" style="padding:0 0 10px 64px;opacity:.75"><i>Lo dejaste en: '+esc(P.n[k])+'</i></div>':'')).join('');
   mrz(B,P);racha();if(vista==='sem')semana();pista();pintaAlimenta();
   $('logros').innerHTML=(INFO.logros||[]).map(l=>'<div class="logro"><span class="f">'+esc(l.f)+'</span><span class="q">'+b2(l.q)+'</span></div>').join('');
-  $('proys').innerHTML=(INFO.proyectos||[]).map(p=>'<article class="pr"><div class="pr-top"><h3><span class="id">'+esc(p.id)+'</span>'+esc(p.n)+'</h3><span class="estado '+esc(p.e)+'">'+esc(p.el)+'</span></div><p class="paso">'+b2(p.paso)+'</p>'+(p.cifra?'<div class="cifra">'+b2(p.cifra)+'</div>':'')+'<div class="donde2"><em>Dónde lo dejaste</em>'+b2(p.donde)+'</div></article>').join('');
+  pintaProyectos();pintaCierre();
 }
 function mrz(B,P){
   const f=hoy().replace(/-/g,''); const pad=x=>(x+'<'.repeat(44)).slice(0,44);
@@ -668,7 +696,7 @@ function constelacion(){nodos();anima();pintaMood();}
 addEventListener('resize',()=>{nodos();anima();});
 /* Lo que alimenta a la tarea de ahora: hilos + moodboard + una idea rápida */
 let CURX=null;
-const ALIAS={'Golpe de estado':'Golpe de estado','Verde agua':'Verde agua','HERA':'HERA · Passport','Auditor GEO':'Auditor GEO','Skin Lab':'HERA Skin Lab','Envíos':'Revistas','Envíos a revistas':'Revistas','Kierck':'Kierck','Encargos':'La cola','La ronda':'La cola','Panel':'','Ocio':'libro','Lectura':'libro'};
+const ALIAS={'Golpe de estado':'Golpe de estado','Verde agua':'Verde agua','HERA':'HERA · Passport','Auditor GEO':'Auditor GEO','Skin Lab':'HERA Skin Lab','Envíos':'Revistas','Envíos a revistas':'Revistas','Kierck':'Kierck','Encargos':'La cola','La ronda':'','Panel':'','Ocio':'libro','Lectura':'libro'};
 const nomN=k=>(N.find(n=>n.k===k)||{}).n||(k==='libro'?'El año del pensamiento mágico':k);
 function pintaAlimenta(){const el=$('alimenta');if(!el)return;if(!CURX){el.hidden=true;return;}
   const k=ALIAS[CURX.f]!==undefined?ALIAS[CURX.f]:CURX.f;if(!k){el.hidden=true;return;}
@@ -681,6 +709,49 @@ function pintaAlimenta(){const el=$('alimenta');if(!el)return;if(!CURX){el.hidde
   h+='<form class="nota" id="alF"><input id="alI" type="text" placeholder="Una idea, una frase o algo que viste y sirve para esto" aria-label="Anotar una idea"><button class="small" type="submit">Anotar</button></form>';
   el.innerHTML=h;el.hidden=false;
   $('alF').onsubmit=e=>{e.preventDefault();const t=$('alI').value.trim();if(!t)return;MOOD.unshift({t,p:k});gM();pintaMood();anima();pintaAlimenta();setTimeout(()=>{const i=$('alI');if(i)i.focus();},30);};}
+/* ---------- interfaz de proyectos: panel, historial, cierre que realimenta ---------- */
+const CAL=['','a medias','sólido','de lo mejor'],QS=['','◔','●','✦'];let iref=null,PEND=null;
+function gInfo(){local();if(iref)try{iref.update({proyectos:INFO.proyectos});}catch(_){}}
+function mapea(x,nom){return ALIAS[x.f]===nom||x.f===nom;}
+function histProy(nom){const o=[];Object.keys(prog).sort().forEach(f=>{const B=PLAN[f]||[],P=prog[f]||{};B.forEach((x,k)=>{if(P.h&&P.h[k]===true&&mapea(x,nom))o.push({f,x,q:(P.q||{})[k],n:(P.n||{})[k]});});});return o;}
+const dif=f=>{const a=new Date();a.setHours(0,0,0,0);return Math.round((a-new Date(f+'T00:00:00'))/864e5);};
+const fmt=f=>new Date(f+'T00:00:00').toLocaleDateString('es-ES',{day:'numeric',month:'short'});
+function pintaProyectos(){const ps=INFO.proyectos||[],ini=(()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return iso(d);})();
+  let tot=0;const tc=new Set();Object.keys(prog).forEach(f=>{if(f<ini)return;const B=PLAN[f]||[],P=prog[f]||{};B.forEach((x,k)=>{if(P.h&&P.h[k]===true&&ALIAS[x.f]!==''){tot++;tc.add(ALIAS[x.f]||x.f);}});});
+  $('stats').innerHTML=[[tot,'bloques esta semana'],[tc.size+' / '+ps.length,'proyectos tocados'],[HILOS.length,'hilos tendidos'],[MOOD.length+((OCIO&&OCIO.notas)||[]).length,'ideas guardadas']].map(a=>'<div class="stat"><b>'+a[0]+'</b><span>'+a[1]+'</span></div>').join('');
+  $('proys').innerHTML=ps.map(p=>{const h=histProy(p.n),ar=Array(14).fill(0);h.forEach(e=>{const i=13-dif(e.f);if(i>=0&&i<14)ar[i]++;});
+    const last=h.length?dif(h[h.length-1].f):null,qs=h.filter(e=>e.q).map(e=>e.q),qa=qs.length?Math.round(qs.reduce((a,b)=>a+b,0)/qs.length):0;
+    const nh=HILOS.filter(x=>x.a===p.n||x.b===p.n).length,ni=MOOD.filter(m=>m.p===p.n).length;
+    return '<article class="pr pcard" tabindex="0" role="button" data-n="'+esc(p.n)+'" aria-label="Abrir '+esc(p.n)+'"><div class="pr-top"><h3><span class="id">'+esc(p.id)+'</span>'+esc(p.n)+'</h3><span class="estado '+esc(p.e)+'">'+esc(p.el)+'</span></div><p class="paso">'+b2(p.paso)+'</p><div class="barras" title="Bloques cerrados, últimos 14 días">'+ar.map(v=>'<i class="'+(v?'on':'')+'" style="height:'+(4+v*12)+'px"></i>').join('')+'</div><div class="pie2"><span class="'+(last!==null&&last>7?'viejo':'')+'">'+(last===null?'Sin bloques aún':last===0?'Hoy':'Hace '+last+' d')+'</span><span>'+h.length+' bloques'+(qa?' · '+QS[qa]:'')+'</span><span>'+nh+' hilos · '+ni+' ideas</span></div></article>';}).join('');
+  $('proys').querySelectorAll('.pcard').forEach(c=>{c.onclick=()=>abreProyecto(c.dataset.n);c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();abreProyecto(c.dataset.n);}};});}
+function proxBloque(nom){const f0=hoy();for(const f of Object.keys(PLAN).sort()){if(f<f0)continue;const B=PLAN[f],P=prog[f]||{h:{}};for(let k=0;k<B.length;k++)if(mapea(B[k],nom)&&!(P.h&&P.h[k]))return {f,x:B[k]};}return null;}
+function abreProyecto(nom){const d=$('pd'),i=(INFO.proyectos||[]).findIndex(p=>p.n===nom);if(i<0)return;const p=INFO.proyectos[i];
+  const h=histProy(nom).reverse().slice(0,12),pb=proxBloque(nom),de=HILOS.filter(x=>x.b===nom),a=HILOS.filter(x=>x.a===nom),pz=MOOD.filter(m=>m.p===nom);
+  const otros=(INFO.proyectos||[]).filter(x=>x.n!==nom).map(x=>'<option value="'+esc(x.n)+'">'+esc(x.n)+'</option>').join('')+'<option value="libro">'+esc(nomN('libro'))+'</option>';
+  d.innerHTML='<div class="pdi"><div class="top"><div><span class="id" style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase">'+esc(p.id)+'</span><h3>'+esc(p.n)+'</h3></div><button class="small" id="pdX">Cerrar</button></div>'+
+   '<div class="prox"><b>Siguiente bloque en el plan</b><br>'+(pb?esc(fmt(pb.f))+' · '+esc(String(pb.x.t).replace(/\*\*/g,'')):'Ninguno cargado. Pídeselo a Claude en el hilo.')+'</div>'+
+   '<div><h6>Siguiente paso</h6><textarea id="pdP">'+esc(p.paso)+'</textarea><h6 style="margin-top:12px">Dónde lo dejaste</h6><textarea id="pdD">'+esc(p.donde)+'</textarea><div class="acciones" style="margin-top:8px"><button class="lima small" id="pdG">Guardar</button><span class="cifra" id="pdE"></span></div></div>'+
+   '<div><h6>Bloques cerrados</h6>'+(h.length?h.map(e=>'<div class="it"><time>'+esc(fmt(e.f))+'</time><span><b>'+esc(String(e.x.t).replace(/\*\*/g,''))+'</b>'+(e.n?'<br>'+esc(e.n):'')+'</span><span class="q">'+(e.q?QS[e.q]:'')+'</span></div>').join(''):'<div class="it">Todavía ninguno. El primero que cierres queda aquí.</div>')+'</div>'+
+   '<div><h6>Hilos</h6>'+de.map(x=>'<div class="it"><time>viene de</time><span><b>'+esc(nomN(x.a))+'</b> · '+esc(x.q)+'</span></div>').join('')+a.map(x=>'<div class="it"><time>alimenta a</time><span><b>'+esc(nomN(x.b))+'</b> · '+esc(x.q)+'</span></div>').join('')+((de.length+a.length)?'':'<div class="it">Sin hilos todavía.</div>')+
+   '<div class="fil"><select id="pdDir"><option value="a">Alimenta a</option><option value="b">Se alimenta de</option></select><select id="pdT">'+otros+'</select><input class="w" type="text" id="pdQ" placeholder="Qué se lleva uno del otro: una técnica, una imagen, una idea"><button class="small" id="pdH">+ Tender hilo</button></div></div>'+
+   '<div><h6>Moodboard de este proyecto</h6><div class="pz" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">'+(pz.map(m=>m.img?'<img src="/_blob/'+esc(m.img)+'" alt="" style="height:80px;border:1px solid var(--card-line)">':m.t?'<span style="font-family:var(--serif);font-size:17px;border:1px solid var(--card-line);padding:8px 10px">'+esc(m.t)+'</span>':'<span style="width:48px;height:48px;background:'+esc(m.c)+'"></span>').join('')||'<span class="cifra">Vacío. Añade una frase o una imagen.</span>')+'</div><div class="fil" style="grid-template-columns:1fr auto"><input type="text" id="pdM" placeholder="Una frase o idea para este proyecto"><button class="small" id="pdMG">Añadir</button></div><label class="small" style="display:inline-block;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--card-line);padding:10px 14px;cursor:pointer">+ Imagen<input type="file" id="pdF" accept="image/*" multiple hidden></label></div></div>';
+  $('pdX').onclick=()=>d.close();
+  $('pdG').onclick=()=>{p.paso=$('pdP').value.trim()||p.paso;p.donde=$('pdD').value.trim();gInfo();pintaProyectos();pinta();$('pdE').textContent='Guardado ✓';};
+  $('pdH').onclick=()=>{const q=$('pdQ').value.trim(),t=$('pdT').value;if(!q)return $('pdQ').focus();HILOS.push($('pdDir').value==='a'?{a:nom,b:t,q}:{a:t,b:nom,q});gH();anima();pintaProyectos();pintaAlimenta();abreProyecto(nom);};
+  $('pdMG').onclick=()=>{const t=$('pdM').value.trim();if(!t)return;MOOD.unshift({t,p:nom});gM();pintaMood();anima();pintaProyectos();pintaAlimenta();abreProyecto(nom);};
+  $('pdF').onchange=async e=>{const fs=[...e.target.files];ASSETS=ASSETS||await claude.use('assets');if(!ASSETS)return;for(const f of fs){try{const r=await ASSETS.upload(f);MOOD.unshift({img:r.id,p:nom,t:''});}catch(_){}}gM();pintaMood();pintaProyectos();abreProyecto(nom);};
+  if(!d.open)d.showModal();}
+$('pd').addEventListener('click',e=>{if(e.target===$('pd'))$('pd').close();});
+/* cierre: al terminar un bloque, valorar y realimentar a otro proyecto */
+function pintaCierre(){const el=$('cierre');if(!el)return;if(!PEND){el.hidden=true;el.innerHTML='';return;}
+  if(el.dataset.k===PEND.d+PEND.k&&!el.hidden){el.querySelectorAll('[data-q]').forEach(b=>b.classList.toggle('lima',+b.dataset.q===PEND.q));return;}
+  el.dataset.k=PEND.d+PEND.k;const otros=(INFO.proyectos||[]).filter(p=>p.n!==PEND.node).map(p=>'<option value="'+esc(p.n)+'">'+esc(p.n)+'</option>').join('')+'<option value="libro">'+esc(nomN('libro'))+'</option>';
+  el.hidden=false;el.innerHTML='<h5>Bloque cerrado · '+esc(String(PEND.t).replace(/\*\*/g,''))+'</h5><div class="q3"><span>¿Cómo salió?</span>'+[1,2,3].map(v=>'<button class="small" data-q="'+v+'">'+QS[v]+' '+CAL[v]+'</button>').join('')+'</div>'+
+   (PEND.node?'<div><div class="q3" style="margin-bottom:6px"><span>¿Qué te llevas de esto a otro proyecto?</span></div><div class="fl"><select id="cT">'+otros+'</select><span></span><input type="text" id="cQ" placeholder="Una técnica, una imagen, una decisión que sirva allí"></div></div>':'')+
+   '<div class="acciones">'+(PEND.node?'<button class="lima small" id="cH">Tender hilo</button>':'')+'<button class="small" id="cX">Nada hoy, seguir</button></div>';
+  el.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const P=prog[PEND.d];P.q=P.q||{};P.q[PEND.k]=+b.dataset.q;PEND.q=+b.dataset.q;guarda();pintaProyectos();pintaCierre();});
+  if($('cH'))$('cH').onclick=()=>{const q=$('cQ').value.trim();if(!q)return $('cQ').focus();HILOS.push({a:PEND.node,b:$('cT').value,q});gH();anima();pintaProyectos();PEND=null;pintaCierre();pintaAlimenta();};
+  $('cX').onclick=()=>{PEND=null;pintaCierre();};}
 let tick=null;
 function reloj(){
   clearInterval(tick);
@@ -708,7 +779,7 @@ pinta(); pintaOcio(); seg(); constelacion(); est('· conectando…',true);
 (async()=>{
   try{
     const db=await claude.use('db'); if(!db){est('· guardado solo en este dispositivo',true);return;}
-    const plan=db.doc('plan/dias'), info=db.doc('panel/info'); pref=db.doc('plan/progreso'); cref=db.doc('cola/estado');
+    const plan=db.doc('plan/dias'), info=db.doc('panel/info');iref=info; pref=db.doc('plan/progreso'); cref=db.doc('cola/estado');
     oref=db.doc('ocio/lectura');href=db.doc('panel/hilos');mref=db.doc('moodboard/tablero');
     Promise.all([href.get(),mref.get()]).then(([h,m])=>{if(h.exists)HILOS=h.data().hilos||[];if(m.exists)MOOD=m.data().piezas||[];gcm();constelacion();});
     href.onSnapshot(x=>{if(x.exists){HILOS=x.data().hilos||[];anima();pintaAlimenta();}},()=>{});
@@ -718,7 +789,7 @@ pinta(); pintaOcio(); seg(); constelacion(); est('· conectando…',true);
     oref.onSnapshot(s=>{if(s.exists&&document.activeElement.closest&&!document.activeElement.closest('#ocio')){OCIO=s.data();pintaOcio();}},()=>{});
     if(a.exists&&a.data().dias)PLAN=a.data().dias;
     if(b.exists)INFO=b.data();
-    if(c.exists){const r=c.data().dias||{};Object.keys(r).forEach(f=>{const x=prog[f]||{h:{},s:{}};prog[f]={h:Object.assign({},r[f].h||{},x.h),s:Object.assign({},r[f].s||{},x.s),n:Object.assign({},r[f].n||{},x.n||{})};});}
+    if(c.exists){const r=c.data().dias||{};Object.keys(r).forEach(f=>{const x=prog[f]||{h:{},s:{}};prog[f]={h:Object.assign({},r[f].h||{},x.h),s:Object.assign({},r[f].s||{},x.s),n:Object.assign({},r[f].n||{},x.n||{}),q:Object.assign({},r[f].q||{},x.q||{})};});}
     if(d.exists){const r=d.data();Object.keys(r.ok||{}).forEach(k=>{if(r.ok[k])ok[k]=true});Object.keys(r.post||{}).forEach(k=>{if(r.post[k]&&!ok[k])post[k]=true});}
     local();pinta();pintaOcio();constelacion();est('· plan al día');
     plan.onSnapshot(s=>{if(s.exists&&s.data().dias){PLAN=s.data().dias;local();pinta();}},()=>{});
