@@ -8,7 +8,7 @@
  --gold:oklch(78% 0.045 80); --gold-dim:oklch(60% 0.04 78); --gold-ink:oklch(20% 0.02 80);
  --card:oklch(22% 0.035 275); --card2:oklch(26% 0.045 275); --card-line:oklch(36% 0.04 275);
  --amber:oklch(76% 0.13 70); --paper:oklch(92% 0.015 85);
- --display:"Archivo",system-ui,sans-serif; --serif:"Instrument Serif",Georgia,serif;
+ --display:"Archivo",system-ui,sans-serif; --serif:"Instrument Serif",Georgia,serif; color-scheme:dark;
  --body:"DM Sans",system-ui,sans-serif; --mono:"Space Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box}
@@ -260,6 +260,47 @@ body.gl .pieza{background:oklch(18% 0.006 90 / .78)}
 .mnuevo input,.mnuevo select{font:inherit;font-size:15px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:9px 10px;min-width:0}
 .mnuevo input[type=color]{padding:2px;width:52px;height:auto}
 @media (max-width:640px){.mnuevo{grid-template-columns:1fr 1fr}.mnuevo input[type=text]{grid-column:1/-1}}
+/* ---- motor autónomo ---- */
+.motor{margin:14px 0 0;padding:14px 16px;border:1px solid var(--card-line);background:oklch(0% 0 0 / .2);display:grid;gap:10px;animation:cae .35s var(--spring)}
+.motor h5{margin:0;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.motor p{margin:0;font-size:14.5px;color:var(--soft)} .motor p b{color:var(--ink);font-weight:500}
+.pensando::after{content:"…";display:inline-block;margin-left:2px;animation:late 1.2s ease-in-out infinite}
+@keyframes late{50%{opacity:.25}}
+#ey .chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--gold);border:1px solid var(--gold-dim);padding:3px 7px;margin-left:10px;white-space:nowrap}
+.lect{background:var(--surface);border:1px solid var(--line);padding:18px 20px;display:grid;gap:12px}
+body.gl .lect{background:oklch(18% 0.006 90 / .72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.lect pre{margin:0;white-space:pre-wrap;font-family:var(--body);font-size:15.5px;line-height:1.6;color:var(--ink)}
+button:disabled{opacity:.5;cursor:default}
+@media (prefers-reduced-motion:reduce){.pensando::after{animation:none}.motor{animation:none}}
+/* ---- marcador: la semana en tres números ---- */
+.marcador{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 12px}
+.marcador .m{background:var(--surface);padding:12px 14px;min-width:0;display:block;text-align:left}
+body.gl .marcador .m{background:oklch(18% 0.006 90 / .8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.marcador button.m{all:unset;box-sizing:border-box;display:block;cursor:pointer;background:var(--surface);padding:12px 14px;min-width:0}
+.marcador button.m:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.marcador b{display:block;font:700 clamp(24px,3.4vw,34px)/1 var(--display);font-variant-numeric:tabular-nums;color:var(--ink)}
+.marcador b small{font:400 13px var(--mono);color:var(--faint);letter-spacing:.04em}
+.marcador span{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.marcador .mal b{color:var(--amber)} .marcador .bien b{color:var(--gold)}
+@media (max-width:560px){.marcador .m,.marcador button.m{padding:10px}.marcador span{font-size:9px;letter-spacing:.08em}}
+/* ---- pasos que caducan ---- */
+.caduca{display:inline-block;align-self:flex-start;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);border:1px solid oklch(76% 0.13 70 / .5);padding:3px 7px}
+.pr.viejo{border-color:oklch(76% 0.13 70 / .55)}
+.verdad{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px;color:var(--soft);padding:12px 14px;border-left:2px solid var(--amber);background:oklch(76% 0.13 70 / .06)}
+/* ---- agente: le cuentas qué has hecho y lo lleva al panel ---- */
+.agente{border:1px solid var(--card-line);background:var(--surface);padding:16px 18px;margin:0 0 12px;display:grid;gap:10px}
+body.gl .agente{background:oklch(18% 0.02 275 / .74);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.agente h5{margin:0;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.agente form{display:grid;gap:8px}
+.agente textarea{width:100%;min-width:0;font:inherit;font-size:15px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:10px 11px;min-height:52px;resize:vertical}
+.agente .vivo{font-size:14.5px;color:var(--soft);white-space:pre-wrap}
+.agente .vivo:empty{display:none}
+.agente .cambio{border-top:1px solid var(--line);padding:10px 0 0;font-size:14.5px;color:var(--soft);display:grid;gap:4px}
+.agente .cambio b{color:var(--ink);font-weight:500} .agente .cambio s{color:var(--faint)}
+.agente .cambio i{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim)}
+.cbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin:0 0 10px}
+/* ---- móvil: nada flota encima del contenido ---- */
+@media (hover:none),(max-width:640px){.cmdk{display:none}}
 </style>
 
 <canvas id="oro" aria-hidden="true"></canvas>
@@ -267,6 +308,7 @@ body.gl .pieza{background:oklch(18% 0.006 90 / .78)}
 <div class="wrap">
 <header><div class="marca">HERA<span>UNA COSA A LA VEZ</span></div><div class="fecha" id="fecha"></div></header>
 
+<div class="marcador" id="marcador" aria-live="polite"></div>
 <div class="ahora" id="ahora">
   <p class="eyebrow"><span id="ey">Ahora mismo</span><span id="eyn"></span></p>
   <h1 id="titulo">Cargando el plan…</h1>
@@ -278,10 +320,12 @@ body.gl .pieza{background:oklch(18% 0.006 90 / .78)}
   <div class="meta" id="meta"></div>
   <div class="alimenta" id="alimenta" hidden></div>
   <div class="acciones" id="acc"></div>
+  <div class="motor" id="motor" hidden></div>
   <div class="cierre" id="cierre" hidden></div>
   <div class="correo" id="pide" hidden><div class="cab"><p class="donde" id="pidest">Claude está escribiendo…</p></div><pre id="pidet"></pre><div class="acciones" style="padding:12px 16px;border-top:1px solid var(--line)"><button class="small" id="pideC">Copiar</button><button class="small" id="pideS">Parar</button></div></div>
 </div>
 
+<div class="agente" id="agente"></div>
 <div class="rescate"><details><summary>Si no arrancas</summary>
   <p><b>La versión de dos minutos:</b> <span id="minima"></span></p>
   <p>Empezar cuesta más que seguir. <b>Veinticinco minutos cuentan como día trabajado.</b></p>
@@ -289,19 +333,20 @@ body.gl .pieza{background:oklch(18% 0.006 90 / .78)}
 </details></div>
 
 <section><h2>Constelación</h2><p class="h2sub">Tus proyectos no van por separado. Toca uno y verás de qué se alimenta y a quién alimenta.</p>
-<div class="const" id="const"><span class="ayuda">Arrastra · toca un astro · toca un hilo</span><span class="chispa" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button class="small" id="hman">+ Tender un hilo</button><button class="small" id="chispa">✦ Que Claude proponga</button></span><svg id="csvg" aria-label="Mapa de conexiones entre proyectos"></svg><div class="ficha" id="ficha" hidden></div></div></section>
+<div class="cbar"><button class="small" id="hman">+ Tender un hilo</button><button class="small" id="chispa">✦ Que Claude proponga</button></div><div class="const" id="const"><span class="ayuda">Arrastra · toca un astro · toca un hilo</span><svg id="csvg" aria-label="Mapa de conexiones entre proyectos"></svg><div class="ficha" id="ficha" hidden></div></div></section>
 <section><h2>Moodboard</h2><p class="h2sub">Imágenes, frases y colores que te llaman. Cada pieza va a un proyecto, y la constelación los enciende juntos.</p>
 <form class="mnuevo" id="mform"><input type="text" id="mt" placeholder="Una frase, una cita, una palabra…"><select id="mp"></select><input type="color" id="mc" value="#c8b48a" aria-label="Color"><button class="small" type="button" id="mcol">+ Color</button><button class="lima" type="submit">+ Frase</button></form>
 <div class="acciones" style="margin:-4px 0 14px"><label class="small" id="mfl" style="font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--card-line);padding:11px 14px;cursor:pointer">+ Imagen<input type="file" id="mf" accept="image/*" multiple hidden></label><span class="cifra" id="mest"></span></div>
 <div class="mood" id="mood"></div></section>
 <section><h2>Lo que ya has conseguido</h2><p class="h2sub">No es lo que falta. Es lo que ya existe porque lo hiciste tú.</p><div class="logros" id="logros"></div></section>
 <section><h2>Tu racha</h2><p class="h2sub">Bloques cerrados, día a día. La línea solo puede subir si empiezas.</p><div class="racha" id="racha"></div></section>
+<section><h2>Lectura de la semana</h2><p class="h2sub">Claude lee tu semana en datos, no en sensaciones. El domingo y el lunes se escribe sola.</p><div class="lect" id="lect"></div></section>
 <section><h2>El día</h2><div class="seg" id="seg" role="group" aria-label="Vista"><span class="pill" id="segp"></span><button id="sgH" aria-pressed="true">Hoy</button><button id="sgS" aria-pressed="false">Semana</button></div><p class="h2sub" id="diasub"></p><div class="bloques" id="bloques"></div><div class="semana" id="semana" hidden></div></section>
 <div class="mrz" id="mrz" aria-label="Registro del día, legible por máquina"></div>
 <section><h2>Proyectos</h2><p class="h2sub">Cada bloque que cierras alimenta a su proyecto. Toca uno para abrirlo: su paso, su historial, lo que le llega de los demás y lo que tú le añades.</p><div class="stats" id="stats"></div><div class="proys" id="proys"></div></section>
 
 <section><h2>Ocio · lo que lees</h2><p class="h2sub">Leer también es trabajo de fondo. Lo que subrayas aquí vuelve a tus proyectos.</p><div class="ocio" id="ocio"></div></section>
-<footer>El plan lo carga Claude desde el hilo y esta página se actualiza sola. <span class="est" id="est">…</span></footer>
+<footer>Este panel se mueve solo: si falta plan, Claude lo monta con el estado real de tus proyectos; cada bloque que cierras actualiza el paso de su proyecto; cada semana te la lee. <span class="est" id="est">…</span></footer>
 </div>
 <dialog id="pd" aria-label="Proyecto"></dialog>
 <button class="cmdk" id="cmdk" aria-label="Comandos">⌘K · Comandos</button>
@@ -400,9 +445,24 @@ const K='unacosa-panel-v2';
 try{const r=JSON.parse(localStorage.getItem(K)||'{}');PLAN=r.plan||{};INFO=r.info||INFO;prog=r.prog||{};ok=r.ok||{};post=r.post||{};}catch(_){}
 function local(){try{localStorage.setItem(K,JSON.stringify({plan:PLAN,info:INFO,prog,ok,post}));}catch(_){}}
 function est(t,l){$('est').textContent=t;$('est').classList.toggle('local',!!l);}
-async function guarda(){local();if(!pref){est('· guardado solo en este dispositivo',true);return;}
-  try{await pref.set({dias:prog,upd:new Date().toISOString()});await cref.set({ok,post,upd:new Date().toISOString()});est('· guardado a salvo');}
-  catch(e){est('· sin conexión, guardado en el dispositivo',true);}}
+/* Guarda solo el día que cambió, una escritura detrás de otra: el móvil y el ordenador ya no se pisan */
+let gq=Promise.resolve();
+function guarda(f,cola){local();if(!pref){est('· guardado solo en este dispositivo',true);return gq;}
+  const dia=f||hoy(),u=new Date().toISOString();
+  gq=gq.then(async()=>{
+    try{await pref.update({dias:{[dia]:prog[dia]||{h:{},s:{}}},upd:u});if(cola)await cref.update({ok,post,upd:u});est('· guardado a salvo');}
+    catch(e){
+      if(e&&e.code==='invalid_argument'){try{await pref.set({dias:prog,upd:u});if(cola)await cref.set({ok,post,upd:u});est('· guardado a salvo');return;}catch(_){}}
+      est('· no se pudo guardar'+(e&&e.code?' ('+e.code+')':'')+'. Queda en este dispositivo.',true);}});
+  return gq;}
+/* Lo que llega de otro dispositivo se mezcla: lo hecho no se deshace por llegar tarde */
+const RANGO=v=>v===true?3:v==='saltado'?2:v?1:0;
+function mezclaDia(a,x){a=a||{};x=x||{};
+  if((a.v||0)!==(x.v||0))return JSON.parse(JSON.stringify((a.v||0)>(x.v||0)?a:x));
+  const h=Object.assign({},a.h||{});Object.keys(x.h||{}).forEach(k=>{if(RANGO(x.h[k])>RANGO(h[k]))h[k]=x.h[k];});
+  const s=Object.assign({},a.s||{});Object.keys(x.s||{}).forEach(k=>{const v=x.s[k];if(v&&(!s[k]||v<s[k]))s[k]=v;});
+  const o={h,s,n:Object.assign({},a.n||{},x.n||{}),q:Object.assign({},a.q||{},x.q||{})};if(a.v||x.v)o.v=a.v||x.v;return o;}
+function mezclaProg(r){Object.keys(r||{}).forEach(f=>{prog[f]=mezclaDia(r[f],prog[f]);});}
 const D=()=>(prog[hoy()]=prog[hoy()]||{h:{},s:{}});
 function colaIdx(){for(let k=0;k<C.length;k++)if(!ok[k]&&!post[k])return k;for(let k=0;k<C.length;k++)if(!ok[k])return k;return -1;}
 function copiar(t,btn,lbl){const f=()=>{btn.textContent='Copiado ✓';setTimeout(()=>btn.textContent=lbl,1700)};
@@ -411,23 +471,25 @@ function viejo(t){const e=document.createElement('textarea');e.value=t;document.
 
 function pinta(){
   const d=new Date(); $('fecha').textContent=NOM[d.getDay()]+' '+d.toLocaleDateString('es-ES',{day:'numeric',month:'long'});
-  if(cargado&&!(PLAN[hoy()]||[]).length)autoPlan();
   const B=PLAN[hoy()]||[], P=D();CURX=null;
   let i=-1; for(let k=0;k<B.length;k++) if(!P.h[k]){i=k;break;}
   $('correo').innerHTML='';$('hechosi').hidden=true;
   if(!B.length){
     $('ey').textContent='Hoy';$('eyn').textContent='';
     $('titulo').textContent='Hoy no hay plan cargado.';
-    $('porque').textContent='Dímelo en el hilo y lo cargo. Mientras, lo que siempre vale: un correo de la cola.';
-    $('meta').innerHTML='';$('acc').innerHTML='';$('minima').textContent='Abre la cola y manda el primero.';
+    $('porque').textContent=MOTOR.ocupado===hoy()?'Claude está montando los bloques de hoy con el estado real de tus proyectos…':'Pulsa y Claude monta los bloques de hoy con lo que sabe de tus proyectos. Mientras, lo que siempre vale: un correo de la cola.';
+    $('meta').innerHTML='';$('acc').innerHTML=MOTOR.ocupado===hoy()?'':'<button class="lima" id="bP">✦ Que Claude monte el día</button>';$('minima').textContent='Abre la cola y manda el primero.';
+    if($('bP'))$('bP').onclick=()=>autoplan(hoy(),true);
   }else if(i===-1){
     $('ey').textContent='Día cumplido';$('eyn').textContent=B.length+' de '+B.length;
     $('titulo').textContent='Los '+B.length+' bloques de hoy están hechos.';
-    $('porque').textContent='Cierra. No abras nada más. Mañana ya está cargado y no tienes que decidir nada.';
+    const mB=PLAN[manana()]||[];
+    $('porque').textContent=mB.length?'Cierra. No abras nada más. Mañana ya está montado: '+mB.length+' bloques, empezando por «'+limpio(mB[0].t)+'». No tienes que decidir nada.':MOTOR.fallo[manana()]?'Cierra. No abras nada más. Mañana se monta solo cuando vuelvas a abrir esto.':'Cierra. No abras nada más. Claude está montando mañana para que no tengas que decidir nada.';
+    if(!mB.length)autoplan(manana());
     $('meta').innerHTML='';$('acc').innerHTML='';$('reloj').classList.remove('on');$('empuje').classList.remove('on');ORO.energia(1);
   }else{
     const x=B[i];
-    $('ey').textContent='Ahora mismo · '+x.b;$('eyn').textContent=(i+1)+' de '+B.length;
+    $('ey').innerHTML=esc('Ahora mismo · '+x.b)+(x.auto?'<span class="chip">PLAN DE CLAUDE</span>':'');$('eyn').textContent=(i+1)+' de '+B.length;
     $('titulo').innerHTML=b2(x.t);
     $('porque').innerHTML=b2(x.q||'');
     if(x.h){$('hechosi').hidden=false;$('hechosit').innerHTML=b2(x.h);}
@@ -448,8 +510,9 @@ function pinta(){
     if($('bN'))$('bN').onclick=()=>{try{Notification.requestPermission().then(()=>pinta());}catch(_){}};
     if($('bV'))$('bV').onclick=()=>dictar(i,$('bV'));
     if($('bE'))$('bE').onclick=()=>{ORO.ondear($('bE'));P.s[i]=Date.now();guarda();conTransicion(pinta);};
-    if($('bH'))$('bH').onclick=()=>morfa($('bH'),()=>{P.h[i]=true;PEND={d:hoy(),k:i,node:ALIAS[x.f]!==undefined?ALIAS[x.f]:x.f,t:x.t,q:0};guarda();conTransicion(pinta);});
+    if($('bH'))$('bH').onclick=()=>morfa($('bH'),()=>{P.h[i]=true;PEND={d:hoy(),k:i,node:ALIAS[x.f]!==undefined?ALIAS[x.f]:x.f,t:x.t,q:0};guarda();evoluciona(x,i,PEND);conTransicion(pinta);});
     $('bS').onclick=()=>{P.h[i]='saltado';guarda();conTransicion(pinta);scrollTo({top:0});};
+    if(x.auto&&!empezado){const bR=document.createElement('button');bR.className='small';bR.id='bR';bR.textContent='✦ Rehacer el plan';bR.onclick=()=>autoplan(hoy(),true);$('acc').insertBefore(bR,$('bS'));}
     reloj();CURX=x;
   }
   $('diasub').textContent=B.length?(B.length+' bloques. Uno a la vez, en este orden. Vas por el '+(i===-1?B.length:i+1)+'.'):'';
@@ -487,8 +550,8 @@ function pintaCorreo(){
     '<button class="lima" id="cE">Enviado ✓</button><button class="small" id="cA">Este no, el siguiente</button></div></div>';
   if($('cD'))$('cD').onclick=()=>copiar(c.m,$('cD'),'Copiar');
   if($('cM'))$('cM').onclick=()=>copiar('Asunto: '+c.s+'\n\n'+c.b,$('cM'),'Copiar el correo entero');
-  $('cE').onclick=()=>{ORO.ondear($('cE'));ok[i]=true;const B=PLAN[hoy()]||[];const P=D();for(let k=0;k<B.length;k++)if(B[k].cola&&!P.h[k]){P.h[k]=true;break;}guarda();pinta();scrollTo({top:0});};
-  $('cA').onclick=()=>{post[i]=true;guarda();pinta();};
+  $('cE').onclick=()=>{ORO.ondear($('cE'));ok[i]=true;const B=PLAN[hoy()]||[];const P=D();for(let k=0;k<B.length;k++)if(B[k].cola&&!P.h[k]){P.h[k]=true;break;}guarda(hoy(),true);pinta();scrollTo({top:0});};
+  $('cA').onclick=()=>{post[i]=true;guarda(hoy(),true);pinta();};
 }
 /* Voz: dicta dónde lo dejas, sin teclear (Web Speech API) */
 const VOZ=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -712,7 +775,7 @@ function pintaAlimenta(){const el=$('alimenta');if(!el)return;if(!CURX){el.hidde
   $('alF').onsubmit=e=>{e.preventDefault();const t=$('alI').value.trim();if(!t)return;MOOD.unshift({t,p:k});gM();pintaMood();anima();pintaAlimenta();setTimeout(()=>{const i=$('alI');if(i)i.focus();},30);};}
 /* ---------- interfaz de proyectos: panel, historial, cierre que realimenta ---------- */
 const CAL=['','a medias','sólido','de lo mejor'],QS=['','◔','●','✦'];let iref=null,PEND=null;
-function gInfo(){local();if(iref)try{iref.update({proyectos:INFO.proyectos});}catch(_){}}
+function gInfo(){local();if(iref)try{Promise.resolve(iref.update({proyectos:INFO.proyectos,logros:INFO.logros||[]})).catch(()=>{});}catch(_){}}
 function mapea(x,nom){return ALIAS[x.f]===nom||x.f===nom;}
 function histProy(nom){const o=[];Object.keys(prog).sort().forEach(f=>{const B=PLAN[f]||[],P=prog[f]||{};B.forEach((x,k)=>{if(P.h&&P.h[k]===true&&mapea(x,nom))o.push({f,x,q:(P.q||{})[k],n:(P.n||{})[k]});});});return o;}
 const dif=f=>{const a=new Date();a.setHours(0,0,0,0);return Math.round((a-new Date(f+'T00:00:00'))/864e5);};
@@ -722,22 +785,23 @@ function pintaProyectos(){const ps=INFO.proyectos||[],ini=(()=>{const d=new Date
   $('stats').innerHTML=[[tot,'bloques esta semana'],[tc.size+' / '+ps.length,'proyectos tocados'],[HILOS.length,'hilos tendidos'],[MOOD.length+((OCIO&&OCIO.notas)||[]).length,'ideas guardadas']].map(a=>'<div class="stat"><b>'+a[0]+'</b><span>'+a[1]+'</span></div>').join('');
   $('proys').innerHTML=ps.map(p=>{const h=histProy(p.n),ar=Array(14).fill(0);h.forEach(e=>{const i=13-dif(e.f);if(i>=0&&i<14)ar[i]++;});
     const last=h.length?dif(h[h.length-1].f):null,qs=h.filter(e=>e.q).map(e=>e.q),qa=qs.length?Math.round(qs.reduce((a,b)=>a+b,0)/qs.length):0;
-    const nh=HILOS.filter(x=>x.a===p.n||x.b===p.n).length,ni=MOOD.filter(m=>m.p===p.n).length;
-    return '<article class="pr pcard" tabindex="0" role="button" data-n="'+esc(p.n)+'" aria-label="Abrir '+esc(p.n)+'"><div class="pr-top"><h3><span class="id">'+esc(p.id)+'</span>'+esc(p.n)+'</h3><span class="estado '+esc(p.e)+'">'+esc(p.el)+'</span></div><p class="paso">'+b2(p.paso)+'</p><div class="barras" title="Bloques cerrados, últimos 14 días">'+ar.map(v=>'<i class="'+(v?'on':'')+'" style="height:'+(4+v*12)+'px"></i>').join('')+'</div><div class="pie2"><span class="'+(last!==null&&last>7?'viejo':'')+'">'+(last===null?'Sin bloques aún':last===0?'Hoy':'Hace '+last+' d')+'</span><span>'+h.length+' bloques'+(qa?' · '+QS[qa]:'')+'</span><span>'+nh+' hilos · '+ni+' ideas</span></div></article>';}).join('');
-  $('proys').querySelectorAll('.pcard').forEach(c=>{c.onclick=()=>abreProyecto(c.dataset.n);c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();abreProyecto(c.dataset.n);}};});}
+    const nh=HILOS.filter(x=>x.a===p.n||x.b===p.n).length,ni=MOOD.filter(m=>m.p===p.n).length,cad=caducidad(p);
+    return '<article class="pr pcard'+(cad?' viejo':'')+'" tabindex="0" role="button" data-n="'+esc(p.n)+'" aria-label="Abrir '+esc(p.n)+'"><div class="pr-top"><h3><span class="id">'+esc(p.id)+'</span>'+esc(p.n)+'</h3><span class="estado '+esc(p.e)+'">'+esc(p.el)+'</span></div><p class="paso">'+b2(p.paso)+'</p>'+(cad?'<span class="caduca">'+esc(cad.txt)+'</span>':'')+'<div class="barras" title="Bloques cerrados, últimos 14 días">'+ar.map(v=>'<i class="'+(v?'on':'')+'" style="height:'+(4+v*12)+'px"></i>').join('')+'</div><div class="pie2"><span class="'+(last!==null&&last>7?'viejo':'')+'">'+(last===null?'Sin bloques aún':last===0?'Hoy':'Hace '+last+' d')+'</span><span>'+h.length+' bloques'+(qa?' · '+QS[qa]:'')+'</span><span>'+nh+' hilos · '+ni+' ideas</span></div></article>';}).join('');
+  $('proys').querySelectorAll('.pcard').forEach(c=>{c.onclick=()=>abreProyecto(c.dataset.n);c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();abreProyecto(c.dataset.n);}};});marcador();}
 function proxBloque(nom){const f0=hoy();for(const f of Object.keys(PLAN).sort()){if(f<f0)continue;const B=PLAN[f],P=prog[f]||{h:{}};for(let k=0;k<B.length;k++)if(mapea(B[k],nom)&&!(P.h&&P.h[k]))return {f,x:B[k]};}return null;}
-function abreProyecto(nom){const d=$('pd'),i=(INFO.proyectos||[]).findIndex(p=>p.n===nom);if(i<0)return;const p=INFO.proyectos[i];
+function abreProyecto(nom){const d=$('pd'),i=(INFO.proyectos||[]).findIndex(p=>p.n===nom);if(i<0)return;const p=INFO.proyectos[i],cadP=caducidad(p);
   const h=histProy(nom).reverse().slice(0,12),pb=proxBloque(nom),de=HILOS.filter(x=>x.b===nom),a=HILOS.filter(x=>x.a===nom),pz=MOOD.filter(m=>m.p===nom);
   const otros=(INFO.proyectos||[]).filter(x=>x.n!==nom).map(x=>'<option value="'+esc(x.n)+'">'+esc(x.n)+'</option>').join('')+'<option value="libro">'+esc(nomN('libro'))+'</option>';
   d.innerHTML='<div class="pdi"><div class="top"><div><span class="id" style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase">'+esc(p.id)+'</span><h3>'+esc(p.n)+'</h3></div><button class="small" id="pdX">Cerrar</button></div>'+
-   '<div class="prox"><b>Siguiente bloque en el plan</b><br>'+(pb?esc(fmt(pb.f))+' · '+esc(String(pb.x.t).replace(/\*\*/g,'')):'Ninguno cargado. Pídeselo a Claude en el hilo.')+'</div>'+
-   '<div><h6>Siguiente paso</h6><textarea id="pdP">'+esc(p.paso)+'</textarea><h6 style="margin-top:12px">Dónde lo dejaste</h6><textarea id="pdD">'+esc(p.donde)+'</textarea><div class="acciones" style="margin-top:8px"><button class="lima small" id="pdG">Guardar</button><span class="cifra" id="pdE"></span></div></div>'+
+   '<div class="prox"><b>Siguiente bloque en el plan</b><br>'+(pb?esc(fmt(pb.f))+' · '+esc(String(pb.x.t).replace(/\*\*/g,'')):'Ninguno en el plan todavía.')+'</div>'+
+   '<div><button class="lima small" id="pdC">✦ Siguiente paso con Claude</button><div class="motor" id="pdCo" hidden></div></div>'+
+   (cadP?'<div class="verdad"><span class="caduca">'+esc(cadP.txt)+'</span><span>¿Sigue siendo verdad?</span><button class="small" id="pdV">Sí, sigue igual</button><button class="small" id="pdR">Lo reescribo</button></div>':'')+'<div><h6>Siguiente paso</h6><textarea id="pdP">'+esc(p.paso)+'</textarea><h6 style="margin-top:12px">Dónde lo dejaste</h6><textarea id="pdD">'+esc(p.donde)+'</textarea><div class="acciones" style="margin-top:8px"><button class="lima small" id="pdG">Guardar</button><span class="cifra" id="pdE"></span></div></div>'+
    '<div><h6>Bloques cerrados</h6>'+(h.length?h.map(e=>'<div class="it"><time>'+esc(fmt(e.f))+'</time><span><b>'+esc(String(e.x.t).replace(/\*\*/g,''))+'</b>'+(e.n?'<br>'+esc(e.n):'')+'</span><span class="q">'+(e.q?QS[e.q]:'')+'</span></div>').join(''):'<div class="it">Todavía ninguno. El primero que cierres queda aquí.</div>')+'</div>'+
    '<div><h6>Hilos</h6>'+de.map(x=>'<div class="it"><time>viene de</time><span><b>'+esc(nomN(x.a))+'</b> · '+esc(x.q)+'</span></div>').join('')+a.map(x=>'<div class="it"><time>alimenta a</time><span><b>'+esc(nomN(x.b))+'</b> · '+esc(x.q)+'</span></div>').join('')+((de.length+a.length)?'':'<div class="it">Sin hilos todavía.</div>')+
    '<div class="fil"><select id="pdDir"><option value="a">Alimenta a</option><option value="b">Se alimenta de</option></select><select id="pdT">'+otros+'</select><input class="w" type="text" id="pdQ" placeholder="Qué se lleva uno del otro: una técnica, una imagen, una idea"><button class="small" id="pdH">+ Tender hilo</button></div></div>'+
    '<div><h6>Moodboard de este proyecto</h6><div class="pz" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">'+(pz.map(m=>m.img?'<img src="/_blob/'+esc(m.img)+'" alt="" style="height:80px;border:1px solid var(--card-line)">':m.t?'<span style="font-family:var(--serif);font-size:17px;border:1px solid var(--card-line);padding:8px 10px">'+esc(m.t)+'</span>':'<span style="width:48px;height:48px;background:'+esc(m.c)+'"></span>').join('')||'<span class="cifra">Vacío. Añade una frase o una imagen.</span>')+'</div><div class="fil" style="grid-template-columns:1fr auto"><input type="text" id="pdM" placeholder="Una frase o idea para este proyecto"><button class="small" id="pdMG">Añadir</button></div><label class="small" style="display:inline-block;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--card-line);padding:10px 14px;cursor:pointer">+ Imagen<input type="file" id="pdF" accept="image/*" multiple hidden></label></div></div>';
-  $('pdX').onclick=()=>d.close();
-  $('pdG').onclick=()=>{p.paso=$('pdP').value.trim()||p.paso;p.donde=$('pdD').value.trim();gInfo();pintaProyectos();pinta();$('pdE').textContent='Guardado ✓';};
+  $('pdX').onclick=()=>d.close();$('pdC').onclick=()=>copiloto(nom);if($('pdV'))$('pdV').onclick=()=>{p.pasoDesde=hoy();gInfo();pintaProyectos();abreProyecto(nom);};if($('pdR'))$('pdR').onclick=()=>{const t=$('pdP');t.focus();t.select();};
+  $('pdG').onclick=()=>{ponPaso(p,$('pdP').value);p.donde=$('pdD').value.trim();gInfo();pintaProyectos();pinta();$('pdE').textContent='Guardado ✓';};
   $('pdH').onclick=()=>{const q=$('pdQ').value.trim(),t=$('pdT').value;if(!q)return $('pdQ').focus();HILOS.push($('pdDir').value==='a'?{a:nom,b:t,q}:{a:t,b:nom,q});gH();anima();pintaProyectos();pintaAlimenta();abreProyecto(nom);};
   $('pdMG').onclick=()=>{const t=$('pdM').value.trim();if(!t)return;MOOD.unshift({t,p:nom});gM();pintaMood();anima();pintaProyectos();pintaAlimenta();abreProyecto(nom);};
   $('pdF').onchange=async e=>{const fs=[...e.target.files];ASSETS=ASSETS||await claude.use('assets');if(!ASSETS)return;for(const f of fs){try{const r=await ASSETS.upload(f);MOOD.unshift({img:r.id,p:nom,t:''});}catch(_){}}gM();pintaMood();pintaProyectos();abreProyecto(nom);};
@@ -749,17 +813,10 @@ function pintaCierre(){const el=$('cierre');if(!el)return;if(!PEND){el.hidden=tr
   el.dataset.k=PEND.d+PEND.k;const otros=(INFO.proyectos||[]).filter(p=>p.n!==PEND.node).map(p=>'<option value="'+esc(p.n)+'">'+esc(p.n)+'</option>').join('')+'<option value="libro">'+esc(nomN('libro'))+'</option>';
   el.hidden=false;el.innerHTML='<h5>Bloque cerrado · '+esc(String(PEND.t).replace(/\*\*/g,''))+'</h5><div class="q3"><span>¿Cómo salió?</span>'+[1,2,3].map(v=>'<button class="small" data-q="'+v+'">'+QS[v]+' '+CAL[v]+'</button>').join('')+'</div>'+
    (PEND.node?'<div><div class="q3" style="margin-bottom:6px"><span>¿Qué te llevas de esto a otro proyecto?</span></div><div class="fl"><select id="cT">'+otros+'</select><span></span><input type="text" id="cQ" placeholder="Una técnica, una imagen, una decisión que sirva allí"></div></div>':'')+
-   '<div class="acciones">'+(PEND.node?'<button class="lima small" id="cH">Tender hilo</button>':'')+'<button class="small" id="cX">Nada hoy, seguir</button></div>';
-  el.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const P=prog[PEND.d];P.q=P.q||{};P.q[PEND.k]=+b.dataset.q;PEND.q=+b.dataset.q;guarda();pintaProyectos();pintaCierre();});
+   '<div id="cEvo"></div><div class="acciones">'+(PEND.node?'<button class="lima small" id="cH">Tender hilo</button>':'')+'<button class="small" id="cX">Nada hoy, seguir</button></div>';
+  el.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const P=prog[PEND.d];P.q=P.q||{};P.q[PEND.k]=+b.dataset.q;PEND.q=+b.dataset.q;if(PEND.q===3)sumaLogro(PEND);guarda(PEND.d);pintaProyectos();pintaCierre();});
   if($('cH'))$('cH').onclick=()=>{const q=$('cQ').value.trim();if(!q)return $('cQ').focus();HILOS.push({a:PEND.node,b:$('cT').value,q});gH();anima();pintaProyectos();PEND=null;pintaCierre();pintaAlimenta();};
-  $('cX').onclick=()=>{PEND=null;pintaCierre();};}
-/* Plan automático: si hoy no hay nada cargado, se arma con los 3 proyectos que más tiempo llevan sin tocarse */
-let cargado=false,planRef=null;
-function autoPlan(){const k=hoy(),ps=(INFO.proyectos||[]).filter(p=>p.e!=='e-parado');if(!ps.length)return;
-  const sc=p=>{const h=histProy(p.n);return h.length?dif(h[h.length-1].f):99;};
-  const el=[...ps].sort((a,b)=>sc(b)-sc(a)).slice(0,3);
-  PLAN[k]=el.map((p,i)=>({b:'B'+(i+1),f:p.n,t:p.paso,q:'Plan automático: hoy no había nada cargado. Va primero lo que más tiempo lleva sin tocarse.',h:'Un paso dado en '+p.n+'.',min:'Abre el proyecto y lee la primera línea.',dur:'60 min'}));
-  local();if(planRef)try{planRef.set({dias:PLAN,upd:new Date().toISOString()});}catch(_){}}
+  $('cX').onclick=()=>{PEND=null;pintaCierre();};pintaEvo();}
 let tick=null;
 function reloj(){
   clearInterval(tick);
@@ -783,12 +840,287 @@ function reloj(){
   };
   f(); tick=setInterval(f,1000);
 }
-pinta(); pintaOcio(); seg(); constelacion(); est('· conectando…',true);
+/* ---------- motor autónomo: Claude monta el día, mueve los proyectos y lee la semana ---------- */
+let planRef=null,motRef=null,SAMPLE;
+const MOTOR={ocupado:null,fallo:{},arrancado:false,leyendo:0};
+let MOT={planes:{},sem:null};
+try{const r=JSON.parse(localStorage.getItem(K+'-motor')||'null');if(r)MOT=Object.assign(MOT,r);}catch(_){}
+function gMot(){try{localStorage.setItem(K+'-motor',JSON.stringify(MOT));}catch(_){} if(motRef)try{Promise.resolve(motRef.set(MOT)).catch(()=>{});}catch(_){}}
+async function S(){if(SAMPLE===undefined){try{SAMPLE=(await claude.use('sample'))||null;}catch(_){SAMPLE=null;}}return SAMPLE;}
+const manana=()=>{const d=new Date();d.setDate(d.getDate()+1);return iso(d);};
+const lunes=(off=0)=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7)+off*7);return iso(d);};
+const limpio=s=>String(s==null?'':s).replace(/\*\*/g,'');
+async function guardaPlan(dia){local();if(!planRef)return true;const k=dia||hoy();
+  try{await planRef.update({dias:{[k]:PLAN[k]||[]}});return true;}
+  catch(e){if(e&&e.code==='invalid_argument'){try{await planRef.set({dias:PLAN});return true;}catch(_){}}
+    est('· el plan no se pudo guardar'+(e&&e.code?' ('+e.code+')':'')+'. Recarga y pídelo otra vez.',true);return false;}}
+function errTxt(e){return e&&e.code==='not_granted'?'Sin permiso para Claude en esta vista: pídelo en el hilo.':e&&e.code==='rate_limited'?'Demasiadas peticiones seguidas. Prueba en un minuto.':e&&e.code==='cancelled'?'Parado.':'No ha salido. Vuelve a intentarlo.';}
+function contexto(){
+  const ps=(INFO.proyectos||[]).map(p=>{const h=histProy(p.n),u=h.length?dif(h[h.length-1].f):null;
+    return '- '+p.n+' ['+limpio(p.el||p.e||'')+'] · siguiente paso: '+limpio(p.paso)+' · dónde lo dejó: '+limpio(p.donde||'—')+' · '+h.length+' bloques cerrados'+(u===null?', nunca tocado':', último hace '+u+' d');}).join('\n');
+  const rec=[];Object.keys(prog).sort().slice(-10).forEach(f=>{const B=PLAN[f]||[],P=prog[f]||{};B.forEach((x,k)=>{const st=P.h&&P.h[k];if(!st)return;
+    rec.push(f+' · '+(st===true?'HECHO':'SALTADO')+' · '+limpio(x.f)+' · '+limpio(x.t)+((P.q||{})[k]?' · salió '+CAL[P.q[k]]:'')+((P.n||{})[k]?' · lo dejó en: '+P.n[k]:''));});});
+  const pend=C.filter((_,k)=>!ok[k]).length;
+  return 'PROYECTOS:\n'+(ps||'(ninguno)')+'\n\nÚLTIMOS BLOQUES:\n'+(rec.slice(-25).join('\n')||'(ninguno)')+'\n\nHILOS ENTRE PROYECTOS:\n'+(HILOS.map(h=>h.a+' → '+h.b+': '+h.q).join('\n')||'(ninguno)')+'\n\nCOLA DE CORREOS: '+pend+' de '+C.length+' sin enviar.';}
+function motorCaja(html){const m=$('motor');if(!m)return;m.innerHTML=html||'';m.hidden=!html;}
+
+/* 1 · Claude monta el día (hoy si falta, mañana en cuanto cierras hoy) */
+async function autoplan(dia,manual){
+  if(MOTOR.ocupado)return;
+  if(!manual&&((MOT.planes[dia]&&(PLAN[dia]||[]).length)||MOTOR.fallo[dia]))return;
+  const sample=await S();
+  if(!sample){MOTOR.fallo[dia]=1;if(manual)motorCaja('<p>Claude no está disponible en esta vista. Pídeselo en el hilo.</p>');pinta();return;}
+  const esHoy=dia===hoy(),B0=PLAN[dia]||[],P0=prog[dia]||{h:{},s:{}};
+  let fp=0;while(fp<B0.length&&P0.h&&P0.h[fp])fp++;
+  const keep=B0.slice(0,fp);
+  const t=new Date();let m=Math.ceil((t.getHours()*60+t.getMinutes()+10)/15)*15;if(esHoy&&m<8*60)m=9*60+30;
+  const ini=esHoy?String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'):'09:30';
+  const libres=esHoy?Math.max(0,21*60-m):11*60;
+  if(esHoy&&libres<45){MOTOR.fallo[dia]=1;if(manual)motorCaja('<p>Quedan menos de 45 minutos útiles hoy. Cierra: mañana se monta solo.</p>');return;}
+  const nombres=(INFO.proyectos||[]).map(p=>p.n);
+  MOTOR.ocupado=dia;
+  motorCaja('<h5>Motor</h5><p class="pensando">Claude está leyendo tus proyectos y montando '+(esHoy?'hoy':'mañana')+'</p>');
+  if(esHoy&&!B0.length)pinta();
+  const pr=`Eres el jefe de operaciones de Denno Gamboa (director creativo y escritor, HERA, Madrid). Monta su plan de ${esHoy?'HOY':'MAÑANA'} (${dia}) en bloques de trabajo profundo, uno detrás de otro.
+${contexto()}
+${keep.length?'YA HECHO HOY (no lo repitas):\n'+keep.map(x=>'- '+limpio(x.t)).join('\n')+'\n':''}
+Reglas:
+- Entre 1 y 4 bloques; hay ${Math.floor(libres/60)} h desde las ${ini}. Cada bloque dura 45, 60 o 90 min, con 15 min entre bloques. "b" es la hora de inicio.
+- Ordena por apalancamiento: primero lo que acerca dinero, una puerta o una entrega; después lo creativo. Nunca dos bloques seguidos del mismo proyecto.
+- Prioriza los proyectos vivos que llevan más de 7 días sin tocarse. Si quedan correos en la cola, un bloque puede ser "Encargos" (mandar correos de la cola).
+- "f" es EXACTAMENTE uno de: ${nombres.map(n=>'"'+n+'"').join(', ')}, "Encargos".
+- "t": la tarea concreta en una frase, con UNA palabra clave entre **dobles asteriscos**. "q": por qué hoy, una frase seca. "h": cuándo está hecho, observable. "min": la versión de dos minutos para arrancar.
+- No inventes cifras, nombres ni fechas: si falta un dato, [corchete]. Español de España, sin adjetivos de folleto.
+Responde solo JSON: {"bloques":[{"b":"HH:MM","f":"","t":"","q":"","h":"","dur":"90 min","min":""}]}`;
+  try{
+    const r=await sample.json(pr,{cache:false});
+    const vale=new Set([...nombres,'Encargos']);
+    const nuevos=(r&&Array.isArray(r.bloques)?r.bloques:[]).filter(x=>x&&vale.has(x.f)&&x.t).slice(0,4).map(x=>Object.assign(
+      {b:String(x.b||'').slice(0,5)||'—',f:String(x.f),t:String(x.t),q:String(x.q||''),h:String(x.h||''),dur:/^\d+/.test(String(x.dur||''))?String(x.dur):'90 min',min:String(x.min||''),auto:true},
+      x.f==='Encargos'?{cola:true}:{}));
+    if(!nuevos.length)throw{code:'vacio'};
+    PLAN[dia]=keep.concat(nuevos);
+    if(prog[dia]){const P=prog[dia];[P.h,P.s,P.n,P.q].forEach(o=>{if(o)Object.keys(o).forEach(k=>{if(+k>=fp)o[k]=null;});});P.v=Date.now();}
+    MOTOR.ocupado=null;motorCaja('');
+    if(await guardaPlan(dia)){MOT.planes[dia]=new Date().toISOString();gMot();}
+    else{MOTOR.fallo[dia]=1;motorCaja('<h5>Motor</h5><p>El plan está en esta pantalla, pero no se ha podido guardar. Recarga y pídelo otra vez.</p>');}
+    if(prog[dia])guarda(dia);conTransicion(pinta);
+    if(!esHoy&&!MOTOR.fallo[dia])motorCaja('<h5>Mañana, montado</h5><p>'+nuevos.length+' bloque'+(nuevos.length>1?'s':'')+'. Empieza a las <b>'+esc(nuevos[0].b)+'</b> con <b>'+esc(limpio(nuevos[0].t))+'</b>.</p>');
+  }catch(e){
+    MOTOR.ocupado=null;MOTOR.fallo[dia]=1;
+    motorCaja('<h5>Motor</h5><p>'+esc(e&&e.code==='vacio'?'Claude no ha devuelto un plan usable. Pídelo otra vez.':errTxt(e))+'</p>');pinta();
+  }
+}
+
+/* 2 · Cerrar un bloque mueve su proyecto: nuevo paso y dónde queda */
+async function evoluciona(x,i,pend){
+  const nom=pend.node,p=(INFO.proyectos||[]).find(q=>q.n===nom);if(!p)return;
+  const sample=await S();if(!sample)return;
+  pend.evo={st:'pensando'};if(PEND===pend)pintaEvo();
+  const P=prog[pend.d]||{},nota=(P.n||{})[i]||'';
+  const pr=`Denno acaba de cerrar un bloque de trabajo del proyecto «${p.n}».
+BLOQUE: ${limpio(x.t)}${x.h?'\nESTABA HECHO CUANDO: '+limpio(x.h):''}${nota?'\nDÓNDE LO DEJÓ (dictado por él): '+nota:''}
+ESTADO ANTERIOR · siguiente paso: ${limpio(p.paso)} · dónde lo dejó: ${limpio(p.donde||'—')}
+HISTORIAL RECIENTE: ${histProy(p.n).slice(-5).map(e=>limpio(e.x.t)).join(' | ')||'(nada)'}
+Actualiza el proyecto. "paso": el siguiente paso concreto que toca ahora (una frase, cabe en un bloque de 90 min, con UNA palabra clave entre **dobles asteriscos**). "donde": dónde queda el proyecto tras este bloque (una frase, hechos, no ánimos). No inventes datos: si falta uno, [corchete]. Español de España, seco. Solo JSON: {"paso":"","donde":""}`;
+  try{
+    const r=await sample.json(pr,{cache:false});if(!r||!r.paso)throw{code:'vacio'};
+    const q=(INFO.proyectos||[]).find(z=>z.n===nom)||p;
+    pend.evo={st:'ok',antes:{paso:q.paso,donde:q.donde,pasoDesde:q.pasoDesde},paso:String(r.paso),donde:String(r.donde||q.donde||'')};
+    ponPaso(q,pend.evo.paso);q.donde=pend.evo.donde;q.upd=new Date().toISOString();gInfo();pintaProyectos();
+  }catch(e){pend.evo={st:'err',txt:e&&e.code==='vacio'?'Claude no ha podido mover el proyecto esta vez.':errTxt(e)};}
+  if(PEND===pend)pintaEvo();
+}
+function pintaEvo(){
+  const el=$('cEvo');if(!el)return;if(!PEND||!PEND.evo){el.innerHTML='';return;}const v=PEND.evo;
+  el.innerHTML=v.st==='pensando'?'<div class="q3"><span class="pensando">✦ Claude está moviendo '+esc(PEND.node)+' al siguiente paso</span></div>':
+    v.st==='ok'?'<div class="q3" style="display:block">✦ <b style="color:var(--ink);font-weight:500">'+esc(PEND.node)+'</b> avanza. Siguiente paso: '+b2(v.paso)+' <button class="small" id="cU" style="margin-left:6px">Deshacer</button></div>':
+    '<div class="q3"><span>'+esc(v.txt)+'</span></div>';
+  if($('cU'))$('cU').onclick=()=>{const p=(INFO.proyectos||[]).find(q=>q.n===PEND.node);if(p&&v.antes){p.paso=v.antes.paso;p.donde=v.antes.donde;p.pasoDesde=v.antes.pasoDesde;gInfo();pintaProyectos();}PEND.evo=null;pintaEvo();};
+}
+function sumaLogro(pd){INFO.logros=INFO.logros||[];const k=pd.d+':'+pd.k;if(INFO.logros.some(l=>l.k===k))return;
+  INFO.logros.unshift({k,f:fmt(pd.d)+(pd.node?' · '+pd.node:''),q:'**'+limpio(pd.t)+'**. Salió de lo mejor.'});gInfo();}
+
+/* 3 · Copiloto dentro de cada proyecto */
+async function copiloto(nom){
+  const box=$('pdCo'),btn=$('pdC');if(!box)return;const p=(INFO.proyectos||[]).find(q=>q.n===nom);if(!p)return;
+  box.hidden=false;const sample=await S();
+  if(!sample){box.innerHTML='<p>Claude no está disponible en esta vista.</p>';return;}
+  if(btn)btn.disabled=true;box.innerHTML='<p class="pensando">Claude está leyendo el historial de '+esc(nom)+'</p>';
+  const h=histProy(nom).slice(-8),de=HILOS.filter(x=>x.b===nom),pz=MOOD.filter(m=>m.p===nom&&m.t).slice(0,6);
+  const pr=`Proyecto de Denno Gamboa (HERA, Madrid): «${nom}».
+Siguiente paso anotado: ${limpio(p.paso)}
+Dónde lo dejó: ${limpio(p.donde||'—')}
+Bloques cerrados recientes: ${h.map(e=>e.f+' '+limpio(e.x.t)+(e.n?' (lo dejó en: '+e.n+')':'')+(e.q?' ['+CAL[e.q]+']':'')).join(' | ')||'(ninguno)'}
+Le llega de otros proyectos: ${de.map(x=>x.a+': '+x.q).join(' | ')||'(nada)'}
+Moodboard del proyecto: ${pz.map(m=>m.t).join(' | ')||'(vacío)'}
+Decide el siguiente bloque que más mueve este proyecto. Si el paso anotado es una forma de evitar lo difícil, dilo en "por". No escribas su prosa por él. No inventes datos; si falta uno, [corchete]. Español de España, frases secas.
+Solo JSON: {"t":"la tarea en una frase con UNA palabra clave entre **dobles asteriscos**","por":"por qué este y no otro, una frase","h":"está hecho cuando…","min":"la versión de dos minutos","dur":"60 min o 90 min"}`;
+  try{
+    const r=await sample.json(pr,{cache:false});if(!r||!r.t)throw{code:'vacio'};
+    const bl={b:'Extra',f:nom,t:String(r.t),q:String(r.por||''),h:String(r.h||''),dur:/^\d+/.test(String(r.dur||''))?String(r.dur):'90 min',min:String(r.min||''),auto:true};
+    box.innerHTML='<h5>Siguiente bloque</h5><p>'+b2(bl.t)+'</p>'+(bl.q?'<p>'+b2(bl.q)+'</p>':'')+(bl.h?'<p><b>Hecho cuando:</b> '+esc(limpio(bl.h))+'</p>':'')+
+      '<div class="acciones"><button class="lima small" id="coH">Meter en el plan de hoy</button><button class="small" id="coP">Guardarlo como paso</button><button class="small" id="coO">Otro</button></div>';
+    $('coH').onclick=async()=>{(PLAN[hoy()]=PLAN[hoy()]||[]).push(bl);ponPaso(p,bl.t);gInfo();await guardaPlan(hoy());pinta();$('pd').close();scrollTo({top:0,behavior:'smooth'});};
+    $('coP').onclick=()=>{ponPaso(p,bl.t);gInfo();pintaProyectos();const ta=$('pdP');if(ta)ta.value=bl.t;box.innerHTML='<p>Guardado como siguiente paso.</p>';};
+    $('coO').onclick=()=>copiloto(nom);
+  }catch(e){box.innerHTML='<p>'+esc(e&&e.code==='vacio'?'Sin propuesta clara. Pide otra.':errTxt(e))+'</p>';}
+  if(btn)btn.disabled=false;
+}
+
+/* 4 · Lectura de la semana: sola el domingo (semana en curso) y el lunes (la anterior) */
+function pintaLect(){const el=$('lect');if(!el)return;const s=MOT.sem;
+  el.innerHTML=(s&&s.txt?'<span class="cifra">Semana del '+esc(fmt(s.k))+' · leída el '+esc(new Date(s.at).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'short'}))+'</span><pre>'+esc(s.txt)+'</pre>':'<p class="porque" style="margin:0">Todavía no hay lectura. El domingo se escribe sola; si no quieres esperar, pídela.</p>')+
+    '<div class="acciones"><button class="small" id="lS">✦ Leer esta semana ahora</button><span class="cifra" id="lE"></span></div>';
+  $('lS').onclick=()=>leeSemana(lunes(0),true);}
+async function leeSemana(k,manual){
+  if(MOTOR.leyendo)return;const sample=await S();
+  if(!sample){if(manual&&$('lE'))$('lE').textContent='Claude no está disponible en esta vista.';return;}
+  MOTOR.leyendo=1;const el=$('lect'),fd=new Date(k+'T00:00:00');fd.setDate(fd.getDate()+6);const fin=iso(fd);
+  const lin=Object.keys(PLAN).filter(f=>f>=k&&f<=fin).sort().map(f=>{const B=PLAN[f]||[],P=prog[f]||{};
+    return f+': '+B.map((x,j)=>{const st=P.h&&P.h[j];return limpio(x.f)+' «'+limpio(x.t)+'» '+(st===true?'HECHO'+((P.q||{})[j]?' ('+CAL[P.q[j]]+')':''):st==='saltado'?'SALTADO':'NO HECHO');}).join(' · ');}).join('\n');
+  el.innerHTML='<p class="pensando" style="margin:0;color:var(--soft)">Claude está leyendo tu semana</p>';
+  const pr=`Lee la semana de Denno Gamboa (director creativo y escritor, HERA, Madrid) del ${k} al ${fin}, solo con estos datos:
+${lin||'(sin plan esa semana)'}
+
+${contexto()}
+
+Escribe, en español de España y sin halagos:
+1–3. Tres verdades incómodas, cada una apoyada en un dato de arriba (qué evita, dónde se le va el tiempo, qué proyecto se está muriendo).
+4. El patrón que se repite.
+5. El foco ÚNICO de la semana que entra y el primer bloque concreto para el lunes.
+Máximo 10 líneas, frases secas. No inventes nada que no esté en los datos.`;
+  try{
+    const r=await sample(pr,{cache:false,onText:({text})=>{el.innerHTML='<pre>'+esc(text)+'</pre>';}});
+    MOT.sem={k,txt:r.text,at:new Date().toISOString()};gMot();MOTOR.leyendo=0;pintaLect();
+  }catch(e){MOTOR.leyendo=0;pintaLect();if($('lE'))$('lE').textContent=errTxt(e);}
+}
+function motorArranca(){if(MOTOR.arrancado)return;MOTOR.arrancado=true;pintaLect();
+  if(!(PLAN[hoy()]||[]).length)autoplan(hoy());
+  const d=new Date().getDay();
+  if(d===0&&(!MOT.sem||MOT.sem.k!==lunes(0)))leeSemana(lunes(0));
+  else if(d===1&&(!MOT.sem||MOT.sem.k!==lunes(-1)))leeSemana(lunes(-1));}
+CMD.push(['✦ Montar o rehacer el plan de hoy','',()=>{scrollTo({top:0,behavior:'smooth'});autoplan(hoy(),true);}],
+  ['✦ Montar mañana','',()=>{scrollTo({top:0,behavior:'smooth'});autoplan(manana(),true);}],
+  ['✦ Lectura de la semana','',()=>{$('lect').scrollIntoView({behavior:'smooth'});leeSemana(lunes(0),true);}],
+  ['✦ Contarle a Claude qué he hecho','',()=>{const t=$('agT');if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.focus();}}]);
+
+/* ---------- caducidad: un paso con fecha pasada, o 7 días igual, se nota ---------- */
+function ponPaso(p,nuevo){nuevo=String(nuevo||'').trim();if(nuevo&&nuevo!==p.paso){p.paso=nuevo;p.pasoDesde=hoy();}}
+function fechaEnPaso(s){
+  const m=limpio(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').match(/\b(lunes|martes|miercoles|jueves|viernes|sabado|domingo)\s+(\d{1,2})\b/);if(!m)return null;
+  const wd=['domingo','lunes','martes','miercoles','jueves','viernes','sabado'].indexOf(m[1]),n=+m[2],h=new Date();h.setHours(0,0,0,0);
+  const c=[-1,0,1].map(o=>new Date(h.getFullYear(),h.getMonth()+o,n)).filter(d=>d.getDate()===n&&d.getDay()===wd);
+  return c.length?c.sort((a,b)=>Math.abs(a-h)-Math.abs(b-h))[0]:null;}
+function caducidad(p){if(!p||!p.paso)return null;const h=new Date();h.setHours(0,0,0,0);
+  const f=fechaEnPaso(p.paso),desde=p.pasoDesde?new Date(p.pasoDesde+'T00:00:00'):null;
+  if(f&&f<h&&!(desde&&desde>f))return {txt:'Fecha pasada: '+f.toLocaleDateString('es-ES',{weekday:'long',day:'numeric'})};
+  if(desde){const d=Math.round((h-desde)/864e5);if(d>7)return {txt:'Paso de hace '+d+' días'};}
+  return null;}
+
+/* ---------- marcador: lo que pasó esta semana, sin adornos ---------- */
+const SALIDA=/(correo|mensaje|env[ií]o|enviar|mandar|manda |publicar|publica |candidatura|solicitud|llamar|llamada|visita|propuesta|seguimiento|entrevista)/i;
+function marcador(){const el=$('marcador');if(!el)return;
+  const ini=lunes(0),f0=hoy();let plan=0,hechos=0,fuera=0;
+  Object.keys(PLAN).forEach(f=>{if(f<ini||f>f0)return;const B=PLAN[f]||[],P=prog[f]||{};plan+=B.length;
+    B.forEach((x,k)=>{if(P.h&&P.h[k]===true){hechos++;if(x.cola||SALIDA.test(limpio(x.t)))fuera++;}});});
+  const ps=INFO.proyectos||[],cad=ps.filter(p=>caducidad(p)).length;
+  el.innerHTML='<div class="m '+(hechos?'bien':'mal')+'"><b>'+hechos+' <small>de '+plan+'</small></b><span>bloques esta semana</span></div>'+
+    '<div class="m '+(fuera?'bien':'mal')+'"><b>'+fuera+'</b><span>salieron hacia alguien</span></div>'+
+    '<button class="m '+(cad?'mal':'bien')+'" id="mkC" type="button" aria-label="Ver los proyectos"><b>'+cad+' <small>de '+ps.length+'</small></b><span>pasos caducados</span></button>';
+  $('mkC').onclick=()=>$('proys').scrollIntoView({behavior:'smooth'});}
+
+/* ---------- agente: le cuentas qué has hecho y Claude lo lleva al panel (con tu OK) ---------- */
+const CAMPOS={paso:'siguiente paso',donde:'dónde está',cifra:'cifra',el:'estado'};
+let AG={st:'',txt:'',cambios:[],ctrl:null};
+function agValida(c){const ps=INFO.proyectos||[],B=PLAN[hoy()]||[],nombres=ps.map(p=>p.n);
+  if(c.tipo==='campo'){const p=ps.find(x=>x.n===c.proyecto);if(!p)throw new Error('No existe el proyecto «'+c.proyecto+'». Usa uno de: '+nombres.join(', '));
+    if(!CAMPOS[c.campo])throw new Error('Campo no válido: usa paso, donde, cifra o el');
+    const v=String(c.valor||'').trim();if(!v)throw new Error('Falta el valor');
+    return {tipo:'campo',proyecto:p.n,campo:c.campo,antes:p[c.campo]||'',despues:v};}
+  if(c.tipo==='logro'){const t=String(c.texto||'').trim();if(!t)throw new Error('Falta el texto del logro');
+    return {tipo:'logro',proyecto:nombres.includes(c.proyecto)?c.proyecto:'',texto:t};}
+  if(c.tipo==='hilo'){const vale=[...nombres,'libro'];
+    if(!vale.includes(c.de)||!vale.includes(c.a)||c.de===c.a)throw new Error('El hilo necesita dos proyectos distintos con su nombre exacto');
+    const q=String(c.que||'').trim();if(!q)throw new Error('Falta qué le da uno al otro');
+    return {tipo:'hilo',a:c.de,b:c.a,q};}
+  if(c.tipo==='bloque'){const k=Number(c.indice);if(!(k>=0&&k<B.length))throw new Error('Hoy no hay bloque con índice '+c.indice);
+    return {tipo:'bloque',indice:k,estado:c.estado==='saltado'?'saltado':'hecho',t:B[k].t};}
+  throw new Error('Tipo de cambio desconocido');}
+function agMete(c){const v=agValida(c);
+  const i=AG.cambios.findIndex(x=>x.tipo===v.tipo&&(v.tipo==='campo'?x.proyecto===v.proyecto&&x.campo===v.campo:v.tipo==='bloque'?x.indice===v.indice:false));
+  if(i>=0)AG.cambios[i]=v;else AG.cambios.push(v);pintaAgente();
+  return 'Propuesto. Denno lo verá antes de aplicarlo.';}
+function pintaAgente(){const el=$('agente');if(!el)return;
+  if(!el.dataset.ok){el.dataset.ok='1';
+    el.innerHTML='<h5>Cuéntale a Claude qué has hecho</h5><form id="agF"><textarea id="agT" rows="2" placeholder="Por ejemplo: terminé el párrafo 13 y mandé el seguimiento a Chopard" aria-label="Qué has hecho"></textarea><div class="acciones"><button class="lima small" type="submit" id="agE">✦ Llevarlo al panel</button>'+(VOZ?'<button class="small" type="button" id="agV">🎙 Dictar</button>':'')+'<button class="small" type="button" id="agS" hidden>Parar</button></div></form><div class="vivo" id="agVivo"></div><div id="agC"></div>';
+    $('agF').onsubmit=e=>{e.preventDefault();agente($('agT').value.trim());};
+    if($('agV'))$('agV').onclick=()=>{const r=new VOZ();r.lang='es-ES';$('agV').textContent='🎙 Escuchando…';
+      r.onresult=ev=>{const t=$('agT');t.value+=(t.value?' ':'')+ev.results[0][0].transcript;};
+      r.onend=r.onerror=()=>{if($('agV'))$('agV').textContent='🎙 Dictar';};try{r.start();}catch(_){$('agV').textContent='🎙 Dictar';}};
+    $('agS').onclick=()=>{if(AG.ctrl)AG.ctrl.abort();};}
+  $('agVivo').textContent=AG.txt;$('agVivo').classList.toggle('pensando',AG.st==='pensando');
+  $('agS').hidden=AG.st!=='pensando';$('agE').disabled=AG.st==='pensando';
+  $('agC').innerHTML=AG.cambios.map((c,i)=>'<div class="cambio">'+(
+      c.tipo==='campo'?'<i>'+esc(c.proyecto)+' · '+esc(CAMPOS[c.campo])+'</i>'+(c.antes?'<s>'+esc(limpio(c.antes))+'</s>':'')+'<span>→ '+b2(c.despues)+'</span>':
+      c.tipo==='logro'?'<i>Logro'+(c.proyecto?' · '+esc(c.proyecto):'')+'</i><span>'+b2(c.texto)+'</span>':
+      c.tipo==='hilo'?'<i>Hilo nuevo</i><span><b>'+esc(nomN(c.a))+'</b> → <b>'+esc(nomN(c.b))+'</b> · '+esc(c.q)+'</span>':
+      '<i>Hoy · bloque '+(c.indice+1)+'</i><span>'+esc(limpio(c.t))+' → '+(c.estado==='hecho'?'hecho':'hoy no')+'</span>')+
+      '<button class="small" data-qa="'+i+'" type="button" style="justify-self:start;padding:7px 10px">Quitar</button></div>').join('')+
+    (AG.cambios.length&&AG.st!=='pensando'?'<div class="acciones"><button class="lima small" id="agA" type="button">Aplicar '+AG.cambios.length+' cambio'+(AG.cambios.length>1?'s':'')+'</button><button class="small" id="agX" type="button">Descartar</button></div>':'');
+  $('agC').querySelectorAll('[data-qa]').forEach(b=>b.onclick=()=>{AG.cambios.splice(+b.dataset.qa,1);pintaAgente();});
+  if($('agA'))$('agA').onclick=aplicaAgente;
+  if($('agX'))$('agX').onclick=()=>{AG={st:'',txt:'',cambios:[],ctrl:null};pintaAgente();};}
+async function agente(texto){if(!texto||AG.st==='pensando')return;const sample=await S();
+  if(!sample){AG.txt='Claude no está disponible en esta vista. Abre el panel desde Claude.';pintaAgente();return;}
+  AG={st:'pensando',txt:'Claude está leyendo tu panel',cambios:[],ctrl:new AbortController()};pintaAgente();
+  const ps=INFO.proyectos||[],B=PLAN[hoy()]||[],P=D();
+  const datos='PROYECTOS:\n'+ps.map(p=>'- '+p.n+' · estado: '+limpio(p.el||'')+' · paso: '+limpio(p.paso)+' · cifra: '+limpio(p.cifra||'—')+' · dónde: '+limpio(p.donde||'—')).join('\n')+
+    '\n\nHILOS (lo que un proyecto le da a otro):\n'+(HILOS.map(h=>h.a+' → '+h.b+': '+h.q).join('\n')||'(ninguno)')+
+    '\n\nBLOQUES DE HOY (índice: proyecto · tarea · estado):\n'+(B.map((x,k)=>k+': '+limpio(x.f)+' · '+limpio(x.t)+' · '+(P.h[k]===true?'hecho':P.h[k]==='saltado'?'saltado':'pendiente')).join('\n')||'(sin plan)');
+  const base=`Eres el asistente del panel «Una cosa a la vez» de Denno Gamboa (director creativo y escritor, HERA, Madrid). Denno te cuenta qué ha hecho y tú lo llevas al panel. Nada se aplica hasta que él lo acepte.
+${datos}
+
+LO QUE CUENTA DENNO: «${texto}»
+
+1. Por cada proyecto que toque, propón cómo queda su "paso" (el siguiente paso concreto, una frase que quepa en un bloque, con UNA palabra clave entre **dobles asteriscos**) y, solo si cambian, "donde" y "cifra".
+2. Si terminó algo de verdad, propón un logro: una frase con lo hecho en **negrita**.
+3. Mira los hilos: si lo hecho le llega a un proyecto conectado, propón el cambio en ese otro. Si aparece una conexión nueva entre dos proyectos, propón el hilo.
+4. Si lo que cuenta cierra un bloque de hoy, márcalo.
+Usa los nombres de proyecto exactos. No inventes cifras, fechas ni nombres: si falta un dato, ponlo entre [corchetes]. Español de España, frases secas, sin ánimos ni adjetivos de folleto. Propón solo lo que se desprende de lo que ha contado.`;
+  let lim={};try{lim=(await sample.limits())||{};}catch(_){}
+  try{
+    if(lim.tools){
+      const T={type:'string'};
+      const herr=(name,description,properties,required,tipo)=>({name,description,inputSchema:{type:'object',properties,required},execute:i=>agMete(Object.assign({},i,{tipo}))});
+      await sample(base+'\n\nPropón cada cambio con las herramientas, uno por llamada. Al final, una sola frase que resuma lo que propones.',{signal:AG.ctrl.signal,
+        onText:({text})=>{AG.txt=text;pintaAgente();},
+        tools:[herr('proponer_campo','Propone cambiar un campo de un proyecto del panel: paso, donde, cifra o el (estado). No se aplica hasta que Denno lo acepta. Devuelve una confirmación.',{proyecto:T,campo:{type:'string',enum:['paso','donde','cifra','el']},valor:T},['proyecto','campo','valor'],'campo'),
+          herr('proponer_logro','Propone un logro para la lista de lo conseguido. Úsalo solo si algo se terminó de verdad. Devuelve una confirmación.',{proyecto:T,texto:T},['texto'],'logro'),
+          herr('proponer_hilo','Propone un hilo nuevo: lo que un proyecto le da a otro. "de" y "a" son nombres exactos de proyecto, o "libro". Devuelve una confirmación.',{de:T,a:T,que:T},['de','a','que'],'hilo'),
+          herr('marcar_bloque','Propone marcar un bloque de hoy, por su índice, como hecho o saltado. Devuelve una confirmación.',{indice:{type:'integer'},estado:{type:'string',enum:['hecho','saltado']}},['indice','estado'],'bloque')]});
+    }else{
+      const r=await sample.json(base+'\n\nResponde solo JSON: {"campos":[{"proyecto":"","campo":"paso|donde|cifra|el","valor":""}],"logros":[{"proyecto":"","texto":""}],"hilos":[{"de":"","a":"","que":""}],"bloques":[{"indice":0,"estado":"hecho|saltado"}],"resumen":""}',{signal:AG.ctrl.signal,cache:false});
+      [['campos','campo'],['logros','logro'],['hilos','hilo'],['bloques','bloque']].forEach(([k,t])=>(Array.isArray(r&&r[k])?r[k]:[]).forEach(c=>{try{agMete(Object.assign({},c,{tipo:t}));}catch(_){}}));
+      AG.txt=String((r&&r.resumen)||'');}
+    AG.st='';if(!AG.cambios.length)AG.txt=(AG.txt?AG.txt+'\n\n':'')+'Con esto no hay nada que cambiar en el panel.';
+  }catch(e){AG.st='';AG.txt=(e&&e.text?e.text+'\n\n':'')+(e&&e.code==='cancelled'?'Parado. Lo propuesto hasta ahora sigue abajo.':errTxt(e));}
+  AG.ctrl=null;pintaAgente();}
+function aplicaAgente(){const ps=INFO.proyectos||[];let info=false,hil=false,dia=false;
+  AG.cambios.forEach(c=>{
+    if(c.tipo==='campo'){const p=ps.find(x=>x.n===c.proyecto);if(!p)return;if(c.campo==='paso')ponPaso(p,c.despues);else p[c.campo]=c.despues;info=true;}
+    else if(c.tipo==='logro'){INFO.logros=INFO.logros||[];INFO.logros.unshift({f:fmt(hoy())+(c.proyecto?' · '+c.proyecto:''),q:c.texto});info=true;}
+    else if(c.tipo==='hilo'){HILOS.push({a:c.a,b:c.b,q:c.q});hil=true;}
+    else if(c.tipo==='bloque'){D().h[c.indice]=c.estado==='hecho'?true:'saltado';dia=true;}});
+  if(info)gInfo();if(hil){gH();anima();}if(dia)guarda(hoy());
+  AG={st:'',txt:'Aplicado. El panel ya refleja lo que has contado.',cambios:[],ctrl:null};$('agT').value='';pintaAgente();pinta();}
+
+pinta(); pintaOcio(); seg(); constelacion(); pintaLect(); pintaAgente(); est('· conectando…',true);
 (async()=>{
   try{
-    const db=await claude.use('db'); if(!db){est('· guardado solo en este dispositivo',true);cargado=true;pinta();return;}
-    const plan=db.doc('plan/dias'), info=db.doc('panel/info');iref=info;planRef=plan; pref=db.doc('plan/progreso'); cref=db.doc('cola/estado');
-    oref=db.doc('ocio/lectura');href=db.doc('panel/hilos');mref=db.doc('moodboard/tablero');
+    const db=await claude.use('db'); if(!db){est('· guardado solo en este dispositivo',true);motorArranca();return;}
+    const plan=db.doc('plan/dias'), info=db.doc('panel/info');iref=info; pref=db.doc('plan/progreso'); cref=db.doc('cola/estado');
+    oref=db.doc('ocio/lectura');href=db.doc('panel/hilos');mref=db.doc('moodboard/tablero');planRef=plan;motRef=db.doc('motor/estado');
     Promise.all([href.get(),mref.get()]).then(([h,m])=>{if(h.exists)HILOS=h.data().hilos||[];if(m.exists)MOOD=m.data().piezas||[];gcm();constelacion();});
     href.onSnapshot(x=>{if(x.exists){HILOS=x.data().hilos||[];anima();pintaAlimenta();}},()=>{});
     mref.onSnapshot(x=>{if(x.exists){MOOD=x.data().piezas||[];pintaMood();}},()=>{});
@@ -797,11 +1129,16 @@ pinta(); pintaOcio(); seg(); constelacion(); est('· conectando…',true);
     oref.onSnapshot(s=>{if(s.exists&&document.activeElement.closest&&!document.activeElement.closest('#ocio')){OCIO=s.data();pintaOcio();}},()=>{});
     if(a.exists&&a.data().dias)PLAN=a.data().dias;
     if(b.exists)INFO=b.data();
-    if(c.exists){const r=c.data().dias||{};Object.keys(r).forEach(f=>{const x=prog[f]||{h:{},s:{}};prog[f]={h:Object.assign({},r[f].h||{},x.h),s:Object.assign({},r[f].s||{},x.s),n:Object.assign({},r[f].n||{},x.n||{}),q:Object.assign({},r[f].q||{},x.q||{})};});}
+    if(c.exists)mezclaProg(c.data().dias||{});
     if(d.exists){const r=d.data();Object.keys(r.ok||{}).forEach(k=>{if(r.ok[k])ok[k]=true});Object.keys(r.post||{}).forEach(k=>{if(r.post[k]&&!ok[k])post[k]=true});}
-    cargado=true;local();pinta();pintaOcio();constelacion();est('· plan al día');
+    local();pinta();pintaOcio();constelacion();est('· plan al día');
+    try{const m=await motRef.get();if(m.exists){const v=m.data();MOT.planes=Object.assign({},v.planes||{},MOT.planes);if(v.sem&&(!MOT.sem||v.sem.at>MOT.sem.at))MOT.sem=v.sem;}}catch(_){}
+    motorArranca();
     plan.onSnapshot(s=>{if(s.exists&&s.data().dias){PLAN=s.data().dias;local();pinta();}},()=>{});
     info.onSnapshot(s=>{if(s.exists){INFO=s.data();local();pinta();}},()=>{});
-  }catch(e){est('· guardado solo en este dispositivo',true);cargado=true;pinta();}
+    const ajeno=s=>s.exists&&!(s.metadata&&s.metadata.hasPendingWrites);
+    pref.onSnapshot(s=>{if(ajeno(s)){mezclaProg(s.data().dias||{});local();pinta();}},()=>{});
+    cref.onSnapshot(s=>{if(ajeno(s)){const r=s.data();Object.keys(r.ok||{}).forEach(k=>{if(r.ok[k]){ok[k]=true;delete post[k];}});Object.keys(r.post||{}).forEach(k=>{if(r.post[k]&&!ok[k])post[k]=true});local();pinta();}},()=>{});
+  }catch(e){est('· guardado solo en este dispositivo',true);motorArranca();}
 })();
 </script>
