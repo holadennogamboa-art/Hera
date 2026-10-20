@@ -411,6 +411,7 @@ function viejo(t){const e=document.createElement('textarea');e.value=t;document.
 
 function pinta(){
   const d=new Date(); $('fecha').textContent=NOM[d.getDay()]+' '+d.toLocaleDateString('es-ES',{day:'numeric',month:'long'});
+  if(cargado&&!(PLAN[hoy()]||[]).length)autoPlan();
   const B=PLAN[hoy()]||[], P=D();CURX=null;
   let i=-1; for(let k=0;k<B.length;k++) if(!P.h[k]){i=k;break;}
   $('correo').innerHTML='';$('hechosi').hidden=true;
@@ -752,6 +753,13 @@ function pintaCierre(){const el=$('cierre');if(!el)return;if(!PEND){el.hidden=tr
   el.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const P=prog[PEND.d];P.q=P.q||{};P.q[PEND.k]=+b.dataset.q;PEND.q=+b.dataset.q;guarda();pintaProyectos();pintaCierre();});
   if($('cH'))$('cH').onclick=()=>{const q=$('cQ').value.trim();if(!q)return $('cQ').focus();HILOS.push({a:PEND.node,b:$('cT').value,q});gH();anima();pintaProyectos();PEND=null;pintaCierre();pintaAlimenta();};
   $('cX').onclick=()=>{PEND=null;pintaCierre();};}
+/* Plan automático: si hoy no hay nada cargado, se arma con los 3 proyectos que más tiempo llevan sin tocarse */
+let cargado=false,planRef=null;
+function autoPlan(){const k=hoy(),ps=(INFO.proyectos||[]).filter(p=>p.e!=='e-parado');if(!ps.length)return;
+  const sc=p=>{const h=histProy(p.n);return h.length?dif(h[h.length-1].f):99;};
+  const el=[...ps].sort((a,b)=>sc(b)-sc(a)).slice(0,3);
+  PLAN[k]=el.map((p,i)=>({b:'B'+(i+1),f:p.n,t:p.paso,q:'Plan automático: hoy no había nada cargado. Va primero lo que más tiempo lleva sin tocarse.',h:'Un paso dado en '+p.n+'.',min:'Abre el proyecto y lee la primera línea.',dur:'60 min'}));
+  local();if(planRef)try{planRef.set({dias:PLAN,upd:new Date().toISOString()});}catch(_){}}
 let tick=null;
 function reloj(){
   clearInterval(tick);
@@ -778,8 +786,8 @@ function reloj(){
 pinta(); pintaOcio(); seg(); constelacion(); est('· conectando…',true);
 (async()=>{
   try{
-    const db=await claude.use('db'); if(!db){est('· guardado solo en este dispositivo',true);return;}
-    const plan=db.doc('plan/dias'), info=db.doc('panel/info');iref=info; pref=db.doc('plan/progreso'); cref=db.doc('cola/estado');
+    const db=await claude.use('db'); if(!db){est('· guardado solo en este dispositivo',true);cargado=true;pinta();return;}
+    const plan=db.doc('plan/dias'), info=db.doc('panel/info');iref=info;planRef=plan; pref=db.doc('plan/progreso'); cref=db.doc('cola/estado');
     oref=db.doc('ocio/lectura');href=db.doc('panel/hilos');mref=db.doc('moodboard/tablero');
     Promise.all([href.get(),mref.get()]).then(([h,m])=>{if(h.exists)HILOS=h.data().hilos||[];if(m.exists)MOOD=m.data().piezas||[];gcm();constelacion();});
     href.onSnapshot(x=>{if(x.exists){HILOS=x.data().hilos||[];anima();pintaAlimenta();}},()=>{});
@@ -791,9 +799,9 @@ pinta(); pintaOcio(); seg(); constelacion(); est('· conectando…',true);
     if(b.exists)INFO=b.data();
     if(c.exists){const r=c.data().dias||{};Object.keys(r).forEach(f=>{const x=prog[f]||{h:{},s:{}};prog[f]={h:Object.assign({},r[f].h||{},x.h),s:Object.assign({},r[f].s||{},x.s),n:Object.assign({},r[f].n||{},x.n||{}),q:Object.assign({},r[f].q||{},x.q||{})};});}
     if(d.exists){const r=d.data();Object.keys(r.ok||{}).forEach(k=>{if(r.ok[k])ok[k]=true});Object.keys(r.post||{}).forEach(k=>{if(r.post[k]&&!ok[k])post[k]=true});}
-    local();pinta();pintaOcio();constelacion();est('· plan al día');
+    cargado=true;local();pinta();pintaOcio();constelacion();est('· plan al día');
     plan.onSnapshot(s=>{if(s.exists&&s.data().dias){PLAN=s.data().dias;local();pinta();}},()=>{});
     info.onSnapshot(s=>{if(s.exists){INFO=s.data();local();pinta();}},()=>{});
-  }catch(e){est('· guardado solo en este dispositivo',true);}
+  }catch(e){est('· guardado solo en este dispositivo',true);cargado=true;pinta();}
 })();
 </script>
